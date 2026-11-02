@@ -1,0 +1,54 @@
+@startuml IV_kien_truc
+!pragma layout smetana
+skinparam defaultFontName Arial
+title Kiến trúc tổng thể hệ thống (triển khai bằng Docker Compose)
+
+actor "Khách hàng\n(điện thoại)" as KH
+actor "Nhân viên\n(PC / tablet)" as NV
+
+node "Frontend - React (Vite) + Nginx" as FE {
+  [QR Order Web App\n(route /t/*)] as QR
+  [Web Admin + Màn hình Bar\n(route /admin/*)] as ADM
+}
+
+node "Backend - FastAPI (Uvicorn)" as BE {
+  [REST API Router\n(/api/public, /api/staff)] as API
+  [WebSocket Hub\n(/ws/bar, /ws/order, /ws/menu)] as WS
+  [Auth & RBAC\n(JWT nhân viên, JWT khách)] as AUTH
+  [Customer Service\n(OTP, tích điểm)] as CUS
+  [Mock SMS Service] as SMS
+  [Order Service\n(hàng đợi Bar)] as ORD
+  [Menu / Branch /\nPromotion Service] as MENU
+  [Mock Payment Service] as PAY
+  [Report Service\n(dashboard)] as RPT
+  [Recommendation Service\n(pandas, mlxtend)] as REC
+  [Job định kỳ\n(APScheduler: tổng hợp báo cáo ngày 00:05,\nkhai phá luật kết hợp hằng đêm,\nhủy đơn chờ thanh toán quá 15 phút)] as SCH
+}
+
+database "PostgreSQL 16" as DB
+cloud "OpenWeatherMap API" as WEA
+
+KH --> QR : HTTPS
+NV --> ADM : HTTPS
+QR --> API : REST/JSON
+ADM --> API : REST/JSON + JWT
+QR <--> WS : WebSocket
+ADM <--> WS : WebSocket
+API --> AUTH
+API --> CUS
+API --> ORD
+API --> MENU
+API --> PAY
+API --> REC
+API --> RPT
+RPT --> DB
+CUS --> SMS
+ORD --> CUS : cộng điểm khi\nđơn hoàn tất
+ORD --> WS : publish sự kiện
+REC --> WEA : HTTP (cache 30')
+CUS --> DB
+ORD --> DB
+MENU --> DB
+REC --> DB
+SCH --> DB
+@enduml

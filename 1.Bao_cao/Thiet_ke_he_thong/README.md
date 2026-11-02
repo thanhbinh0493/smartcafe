@@ -1,0 +1,77 @@
+# THIẾT KẾ HỆ THỐNG – SmartCafe: Phần mềm quản lý chuỗi quán cà phê thông minh
+
+Bộ tài liệu cho các giai đoạn **II (Khảo sát) → III (Phân tích) → IV (Thiết kế)** trong [Project_Plan.md](../Project_Plan.md).
+
+## Mục lục
+
+| Mục | Tài liệu | Người thực hiện / Review |
+|:---|:---|:---|
+| II.1 | [Khảo sát quy trình quản lý menu, đặt hàng](II.1_Khao_sat_quy_trinh.md) | D / A |
+| II.2 | [Nghiên cứu công nghệ AI, IoT](II.2_Nghien_cuu_cong_nghe.md) | C / B |
+| III.1 | [Use Case & Sequence Diagram](III.1_Use_Case_Sequence.md) | A / B |
+| III.2 | [Yêu cầu phi chức năng & Data Model](III.2_Yeu_cau_phi_chuc_nang_Data_Model.md) | D / C |
+| IV.1 | [Thiết kế CSDL (ERD, Schema)](IV.1_Thiet_ke_CSDL.md) + [schema.sql](schema.sql) | B / A |
+| IV.2 | [Thiết kế giao diện (wireframe)](IV.2_Thiet_ke_giao_dien.md) | E / D |
+| IV.3 | [Kiến trúc & danh sách API](IV.3_Kien_truc_va_API.md) *(bổ sung)* | B / A |
+
+## Các quyết định đã chốt
+
+Chi tiết từng thay đổi xem trong [biên bản họp](../../4.Tai_lieu_khac/Bien_ban_hop/).
+
+| # | Ngày | Vấn đề | Quyết định |
+|:---|:---|:---|:---|
+| D1 | 28/10 | Tính năng AI | **Gợi ý món**, không làm nhận diện khuôn mặt. *(Cập nhật 01/11: gợi ý theo 2 chế độ, xem D9, D13)* |
+| D2 | 28/10 | Tech stack | **Python FastAPI + React + PostgreSQL** |
+| D3 | 28/10 | Menu đa chi nhánh | **Menu chung** ở trụ sở; chi nhánh được đặt **giá riêng** và bật/tắt **hết hàng** |
+| D4 | 28/10 | Tài khoản khách | **Không bắt buộc**. *(Cập nhật 01/11: chọn chế độ ngay khi quét QR, xem D9)* |
+| D5 | 28/10 | Thanh toán | **Trả trước trên web (giả lập)**. Đơn chỉ xuống Bar sau khi thanh toán thành công |
+| D6 | 28/10 | Khảo sát | Khảo sát **giả định điển hình**, kèm bộ câu hỏi để đối chiếu với quán thật |
+| D7 | 28/10 | Sơ đồ | PlantUML, xuất PNG |
+| D8 | 01/11 | IoT | **Bỏ hẳn IoT** (máy pha có kết nối ít mẫu, khó cập nhật món mới, phần lớn đồ uống pha tay). Đề tài đổi tên thành "...(Tích hợp AI và QR)". Thay bằng **màn hình hàng đợi pha chế**: món + bàn + giờ gọi + ghi chú, **sắp theo giờ gọi**, pha chế bấm Bắt đầu / Xong |
+| D9 | 01/11 | Nhận diện khách | Ngay sau khi quét QR có **2 lựa chọn**: (1) xem menu ngay, ẩn danh; (2) nhập SĐT để **tích điểm** và nhận gợi ý theo sở thích. **Không lưu thông tin thiết bị** (khách có thể đổi điện thoại) |
+| D10 | 01/11 | Khuyến mãi | **Chương trình KM đơn giản**: tên, thời gian, phạm vi toàn chuỗi hoặc 1 chi nhánh, danh sách món + giá KM. Không làm voucher, combo, mua 1 tặng 1 |
+| D11 | 01/11 | Tích điểm | **Chỉ tích và xem điểm**: cộng khi đơn hoàn tất. Chưa làm đổi điểm |
+| D12 | 01/11 | Xác thực SĐT | **OTP giả lập** (6 số, hạn 5 phút, tối đa 5 lần sai); interface sẵn để gắn SMS thật |
+| D13 | 01/11 | Thời tiết | **Giữ làm yếu tố phụ** (10% điểm) trong cả 2 chế độ gợi ý |
+| D14 | 01/11 | Quyền tạo khuyến mãi | **Chỉ Quản trị viên** tạo/sửa KM (toàn chuỗi hoặc 1 chi nhánh). Quản lý chi nhánh không tạo KM, để đơn giản hóa luồng vận hành |
+| D15 | 01/11 | Tỉ lệ tích điểm | **1 điểm / 10.000đ** (trên số tiền thực trả); **1 điểm = 100đ**, tức tỉ lệ hoàn lại 1% |
+| D16 | 01/11 | Món mới | Món tạo trong **30 ngày** gần nhất |
+| D17 | 01/11 | Phân công | Thành viên C nhận thêm: API OTP + tích điểm, script sinh dữ liệu mẫu |
+| D18 | 01/11 | Phiên thành viên | Hết hạn sau **1 giờ** hoặc khi đóng tab (đủ cho một lần ngồi quán và gọi thêm món) |
+| D19 | 01/11 | Kênh gọi món & vai trò thu ngân | **Chỉ nhận order qua quét QR** (thu ngân nhận order tại quầy sẽ không biết khách ngồi bàn nào). Thu ngân **không nằm trong luồng xử lý đơn**, chỉ hỗ trợ khách: tra cứu đơn, hủy & hoàn tiền |
+| D20 | 01/11 | Xác nhận giao đồ | **Pha chế** giao đồ và bấm "Đã giao" (đơn → Hoàn tất, cộng điểm). Luồng xử lý đơn chỉ còn Khách + Pha chế |
+| D21 | 01/11 | Báo cáo bán hàng | **Tự tổng hợp hằng ngày** (job 00:05) vào bảng `daily_sales_reports`; **dashboard đơn giản** (W08): doanh thu mỗi ngày của từng chi nhánh, số đơn, số đơn hủy, giá trị TB/đơn, thời gian chờ TB, tỉ lệ đơn thành viên, doanh thu KM, tỉ lệ món từ gợi ý AI, top 5 món. Ưu tiên nâng lên **Must** |
+| D22 | 01/11 | Tự hủy đơn chưa thanh toán | Vì không triển khai thanh toán thật, chỉ **mô tả** quy tắc: không nhận được thanh toán sau 15 phút thì tự hủy (cài đặt job ở mức Could) |
+| D23 | 01/11 | Tên sản phẩm | **SmartCafe** |
+| D24 | 02/11 | Môi trường chạy & demo | Chạy **local trên laptop** bằng Docker Desktop (WSL2) + Docker Compose; Docker cài tại `D:\Docker` (chương trình `D:\Docker\DockerDesktop`, dữ liệu `D:\Docker\wsl-data`); WSL2 giới hạn 4 GB RAM / 4 nhân. Điện thoại demo truy cập qua cùng mạng Wi-Fi |
+| D25 | 02/11 | Quy trình code & kiểm thử | Code **theo từng luồng nghiệp vụ cốt lõi**; mỗi luồng phải có **test tự động** và **biên bản kiểm thử** đầy đủ trước khi chuyển sang luồng tiếp theo |
+| D26 | 02/11 | Thứ tự code & vị trí | F0 Nền tảng → F1 QR & menu → F2 Đặt món & thanh toán → F3 Màn hình Bar → F4 OTP & tích điểm → F5 Thu ngân hỗ trợ → F6 Quản trị → F7 AI gợi ý → F8 Báo cáo & dashboard. Mã nguồn: `2.San_pham/smartcafe/`; biên bản kiểm thử: `1.Bao_cao/Kiem_thu/` |
+
+## Vấn đề mở (Open Issues) – nơi theo dõi duy nhất
+
+Bảng này là **nơi duy nhất** theo dõi các đề xuất và vấn đề chưa chốt. Khi một mục được chốt thì chuyển trạng thái sang "Đã chốt", ghi mã quyết định (D..), đồng thời ghi CR vào biên bản họp của tuần đó.
+
+| # | Ngày mở | Vấn đề / đề xuất | Phương án thay thế | Người chốt | Trạng thái |
+|:---|:---|:---|:---|:---|:---|
+| P11 | 01/11 | Mốc lập trình mới ở [IV.3 Mục 3](IV.3_Kien_truc_va_API.md) (giai đoạn V bắt đầu 02/11 thay vì 23/10) | Giữ mốc gốc, tăng nhân lực | A | Hoãn – A tự cập nhật timeline thủ công sau (CR-27) |
+| P13 | 02/11 | Khi giá KM **không thấp hơn** giá đang bán (giá chi nhánh / giá chung) thì bán giá thường và **không gắn nhãn KM** (`promotion_id` = NULL, không tính vào "doanh thu KM"). Đã cài đặt ở F1 – xem [biên bản kiểm thử F1](../Kiem_thu/Bien_ban_kiem_thu_F1_QR_Menu.md) Mục 7 | Vẫn gắn nhãn KM dù không rẻ hơn | A | **Đang mở** |
+| P12 | 02/11 | Bản demo dự phòng trên cloud (Azure for Students hoặc Oracle Always Free) phòng khi laptop gặp sự cố lúc nghiệm thu | Chỉ demo local; hoặc dùng laptop thành viên khác | A | **Đang mở** |
+| P1 | 28/10 | IoT giao tiếp bằng HTTP REST | — | — | Hủy (D8) |
+| P2 | 28/10 | Thu ngân không nhận order tại quầy, chỉ xử lý ngoại lệ | Thêm POS tại quầy | A | Đã chốt → D19, D20 |
+| P3 | 28/10 | Báo cáo bán hàng ở mức Could | Nâng lên Must | A | Đã chốt → D21 (dashboard, Must) |
+| P4 | 28/10 | Đơn chưa thanh toán sau 15 phút thì tự hủy | — | A | Đã chốt → D22 (chỉ mô tả) |
+| P5 | 28/10 | Tên thương hiệu "SmartCafe" | — | A | Đã chốt → D23 |
+| P6 | 01/11 | Quản lý chi nhánh được tạo KM cho chi nhánh mình | — | A | Đã chốt → D14 (không cho phép) |
+| P7 | 01/11 | 1 điểm / 10.000đ | — | A | Đã chốt → D15 |
+| P8 | 01/11 | Món mới = tạo trong 30 ngày | — | A | Đã chốt → D16 |
+| P9 | 01/11 | C nhận thêm API OTP, tích điểm, script dữ liệu mẫu | — | A | Đã chốt → D17 |
+| P10 | 01/11 | Phiên thành viên 4 giờ | — | A | Đã chốt → D18 (1 giờ) |
+
+## Sơ đồ
+- Mã nguồn: [diagrams/src/](diagrams/src/) – ảnh: [diagrams/png/](diagrams/png/) (có thể chèn thẳng vào báo cáo Word).
+- Render lại sau khi sửa (cần Java 8+ và [plantuml.jar](https://plantuml.com/download), không cần Graphviz vì sơ đồ dùng layout `smetana`):
+  ```bash
+  cd 1.Bao_cao/Thiet_ke_he_thong/diagrams
+  java -jar plantuml.jar -charset UTF-8 -tpng -o ../png src/*.puml
+  ```
+- Xem trực tiếp trong VS Code: cài extension *PlantUML* (jebbs.plantuml).

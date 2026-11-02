@@ -1,0 +1,249 @@
+@startuml IV_erd
+!pragma layout smetana
+skinparam defaultFontName Arial
+skinparam linetype ortho
+hide circle
+hide methods
+skinparam classFontStyle bold
+title ERD - Cơ sở dữ liệu PostgreSQL (coffee_chain)
+
+entity branches {
+  * id : SERIAL <<PK>>
+  --
+  * code : VARCHAR(20) <<UQ>>
+  * name : VARCHAR(100)
+  * address : VARCHAR(255)
+  phone : VARCHAR(15)
+  latitude : NUMERIC(9,6)
+  longitude : NUMERIC(9,6)
+  * is_active : BOOLEAN
+  * created_at : TIMESTAMPTZ
+}
+
+entity staff {
+  * id : SERIAL <<PK>>
+  --
+  branch_id : INT <<FK>> (NULL = trụ sở)
+  * full_name : VARCHAR(100)
+  * username : VARCHAR(50) <<UQ>>
+  * password_hash : VARCHAR(255)
+  * role : staff_role
+  phone : VARCHAR(15)
+  * is_active : BOOLEAN
+  * created_at : TIMESTAMPTZ
+}
+
+entity categories {
+  * id : SERIAL <<PK>>
+  --
+  * name : VARCHAR(50) <<UQ>>
+  * sort_order : INT
+  * is_active : BOOLEAN
+}
+
+entity menu_items {
+  * id : SERIAL <<PK>>
+  --
+  * category_id : INT <<FK>>
+  * name : VARCHAR(100)
+  description : TEXT
+  * base_price : INT (VND)
+  image_url : VARCHAR(255)
+  * temperature_type : temp_type
+  tags : TEXT[]
+  * is_active : BOOLEAN
+  * is_deleted : BOOLEAN
+  * created_at : TIMESTAMPTZ
+}
+
+entity branch_menu_items {
+  * branch_id : INT <<PK,FK>>
+  * menu_item_id : INT <<PK,FK>>
+  --
+  price_override : INT
+  * is_available : BOOLEAN
+  * updated_at : TIMESTAMPTZ
+}
+
+entity promotions {
+  * id : SERIAL <<PK>>
+  --
+  * name : VARCHAR(100)
+  description : VARCHAR(255)
+  branch_id : INT <<FK>> (NULL = toàn chuỗi)
+  * start_at : TIMESTAMPTZ
+  * end_at : TIMESTAMPTZ
+  * is_active : BOOLEAN
+  * created_by : INT <<FK staff>>
+  * created_at : TIMESTAMPTZ
+}
+
+entity promotion_items {
+  * promotion_id : INT <<PK,FK>>
+  * menu_item_id : INT <<PK,FK>>
+  --
+  * promo_price : INT
+}
+
+entity dining_tables {
+  * id : SERIAL <<PK>>
+  --
+  * branch_id : INT <<FK>>
+  * table_number : VARCHAR(10)
+  * qr_token : VARCHAR(32) <<UQ>>
+  * is_active : BOOLEAN
+  ..
+  UQ(branch_id, table_number)
+}
+
+entity customers {
+  * id : SERIAL <<PK>>
+  --
+  * phone : VARCHAR(15) <<UQ>>
+  name : VARCHAR(100)
+  * loyalty_points : INT
+  * created_at : TIMESTAMPTZ
+  last_verified_at : TIMESTAMPTZ
+}
+
+entity otp_requests {
+  * id : BIGSERIAL <<PK>>
+  --
+  * phone : VARCHAR(15)
+  * code_hash : VARCHAR(255)
+  * attempts : SMALLINT
+  * expires_at : TIMESTAMPTZ
+  verified_at : TIMESTAMPTZ
+  * created_at : TIMESTAMPTZ
+}
+
+entity loyalty_transactions {
+  * id : BIGSERIAL <<PK>>
+  --
+  * customer_id : INT <<FK>>
+  order_id : BIGINT <<FK,UQ>>
+  * points : INT
+  * type : loyalty_type
+  * created_at : TIMESTAMPTZ
+}
+
+entity orders {
+  * id : BIGSERIAL <<PK>>
+  --
+  * order_code : VARCHAR(20) <<UQ>>
+  * access_token : VARCHAR(32) <<UQ>>
+  * branch_id : INT <<FK>>
+  * table_id : INT <<FK>>
+  customer_id : INT <<FK>>
+  * status : order_status
+  * total_amount : INT
+  note : VARCHAR(255)
+  cancel_reason : VARCHAR(255)
+  cancelled_by : INT <<FK staff>>
+  completed_by : INT <<FK staff>>
+  * created_at : TIMESTAMPTZ
+  paid_at, ready_at,
+  completed_at, cancelled_at : TIMESTAMPTZ
+}
+
+entity order_items {
+  * id : BIGSERIAL <<PK>>
+  --
+  * order_id : BIGINT <<FK>>
+  * menu_item_id : INT <<FK>>
+  promotion_id : INT <<FK>>
+  * quantity : SMALLINT
+  * original_price : INT
+  * unit_price : INT
+  note : VARCHAR(255)
+  * status : item_status
+  * is_recommended : BOOLEAN
+  started_at, done_at : TIMESTAMPTZ
+}
+
+entity order_status_history {
+  * id : BIGSERIAL <<PK>>
+  --
+  * order_id : BIGINT <<FK>>
+  from_status : order_status
+  * to_status : order_status
+  * source : change_source
+  staff_id : INT <<FK>>
+  * created_at : TIMESTAMPTZ
+}
+
+entity payments {
+  * id : BIGSERIAL <<PK>>
+  --
+  * order_id : BIGINT <<FK,UQ>>
+  * method : payment_method
+  * amount : INT
+  * status : payment_status
+  * transaction_ref : VARCHAR(40) <<UQ>>
+  * paid_at : TIMESTAMPTZ
+  refunded_at : TIMESTAMPTZ
+}
+
+entity recommendation_logs {
+  * id : BIGSERIAL <<PK>>
+  --
+  * branch_id : INT <<FK>>
+  customer_id : INT <<FK>>
+  order_id : BIGINT <<FK>>
+  * mode : rec_mode
+  * context : JSONB
+  * items : JSONB
+  * created_at : TIMESTAMPTZ
+}
+
+entity daily_sales_reports {
+  * branch_id : INT <<PK,FK>>
+  * report_date : DATE <<PK>>
+  --
+  * order_count : INT
+  * cancelled_count : INT
+  * revenue : BIGINT
+  * avg_order_value : INT
+  avg_wait_seconds : INT
+  * member_order_ratio : NUMERIC(5,4)
+  * promo_revenue : BIGINT
+  * recommended_item_ratio : NUMERIC(5,4)
+  * top_items : JSONB
+  * generated_at : TIMESTAMPTZ
+}
+
+entity association_rules {
+  * id : SERIAL <<PK>>
+  --
+  branch_id : INT <<FK>> (NULL = toàn chuỗi)
+  * antecedent_id : INT <<FK menu_items>>
+  * consequent_id : INT <<FK menu_items>>
+  * support : NUMERIC(6,4)
+  * confidence : NUMERIC(6,4)
+  * lift : NUMERIC(8,4)
+  * computed_at : TIMESTAMPTZ
+}
+
+branches ||--o{ staff
+branches ||--o{ dining_tables
+branches ||--o{ branch_menu_items
+branches |o--o{ promotions
+branches ||--o{ orders
+branches ||--o{ recommendation_logs
+branches ||--o{ daily_sales_reports
+categories ||--o{ menu_items
+menu_items ||--o{ branch_menu_items
+menu_items ||--o{ promotion_items
+menu_items ||--o{ order_items
+menu_items ||--o{ association_rules
+promotions ||--|{ promotion_items
+promotions |o--o{ order_items
+staff ||--o{ promotions
+dining_tables ||--o{ orders
+customers |o--o{ orders
+customers ||--o{ loyalty_transactions
+orders |o--o| loyalty_transactions
+orders ||--|{ order_items
+orders ||--o| payments
+orders ||--o{ order_status_history
+@enduml

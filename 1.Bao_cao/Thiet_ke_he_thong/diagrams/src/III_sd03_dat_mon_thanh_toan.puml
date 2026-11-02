@@ -1,0 +1,36 @@
+@startuml III_sd03_dat_mon_thanh_toan
+skinparam defaultFontName Arial
+autonumber
+title SD03 - Đặt món và thanh toán giả lập (UC04, UC05)
+
+actor "Khách hàng" as KH
+participant "QR Order\nWeb App" as FE
+participant "Backend API" as BE
+participant "Mock Payment\nService" as PAY
+database "PostgreSQL" as DB
+participant "WebSocket Hub" as WS
+participant "Màn hình\nquầy Bar" as BAR
+
+KH -> FE : Thêm món, ghi chú
+note right of FE : Giỏ hàng giữ trong sessionStorage\ncho đến khi đặt
+KH -> FE : Bấm "Đặt món"
+FE -> BE : POST /api/public/orders\n{qr_token, items[], note}\n(Bearer customer_token nếu là thành viên)
+BE -> DB : Kiểm tra món còn bán;\ntính giá bán = KM đang hiệu lực / giá chi nhánh / giá chung
+alt Có món đã hết
+  BE --> FE : 409 ITEM_UNAVAILABLE {item_ids}
+  FE --> KH : Báo món hết, yêu cầu bỏ khỏi giỏ
+else Hợp lệ
+  BE -> DB : INSERT orders (PENDING_PAYMENT, customer_id?),\norder_items (chốt unit_price, original_price, promotion_id)
+  BE --> FE : {order_id, order_code, access_token, total,\nexpected_points (nếu thành viên)}
+  FE --> KH : Màn hình thanh toán (giả lập)\n"Bạn sẽ nhận +10 điểm khi nhận đồ"
+  KH -> FE : Chọn phương thức, bấm "Thanh toán"
+  FE -> BE : POST /api/public/orders/{id}/pay {access_token, method}
+  BE -> PAY : charge(amount) [giả lập]
+  PAY --> BE : SUCCESS, transaction_ref
+  BE -> DB : INSERT payments; orders -> PAID (paid_at = now);\nghi order_status_history
+  BE -> WS : publish(bar:{branch_id}, ORDER_CREATED)
+  WS -> BAR : Thêm món vào cuối hàng đợi + âm báo
+  BE --> FE : 200 {status: PAID}
+  FE --> KH : "Thanh toán thành công", chuyển sang\nmàn hình theo dõi đơn
+end
+@enduml

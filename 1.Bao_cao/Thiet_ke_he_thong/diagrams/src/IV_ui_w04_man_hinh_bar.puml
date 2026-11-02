@@ -1,0 +1,32 @@
+@startsalt IV_ui_w04_man_hinh_bar
+title W04 - Màn hình quầy Bar: hàng đợi pha chế (sắp theo giờ gọi, realtime)
+{+
+  {* <b>SmartCafe Admin | CN Cầu Giấy | Màn hình Bar | Nguyễn Văn P (Pha chế) | 09:42 | [Đăng xuất] }
+  ==
+  {
+    {
+      <b>HÀNG ĐỢI PHA CHẾ (5 món)  -  cũ nhất ở trên
+      {#
+        <b># | <b>Giờ gọi | <b>Chờ | <b>Bàn | <b>Đơn | <b>Món | <b>SL | <b>Ghi chú | <b>Thao tác
+        1 | 09:31 | <b>11' | 03 | CG-0141 | Americano | 1 | . | <b>ĐANG PHA  [Xong]
+        2 | 09:36 | 6' | 05 | CG-0142 | Cà phê sữa đá | 2 | ít đường | <b>ĐANG PHA  [Xong]
+        3 | 09:39 | 3' | 02 | CG-0143 | Bạc xỉu đá | 1 | ít đường | [Bắt đầu]
+        4 | 09:39 | 3' | 02 | CG-0143 | Latte nóng | 1 | . | [Bắt đầu]
+        5 | 09:41 | 1' | 11 | CG-0144 | Matcha đá xay | 2 | thêm kem | [Bắt đầu]
+      }
+    } | {+
+      <b>CÓ THỂ LẤY
+      ==
+      <b>CG-0140 · Bàn 08
+      Cold brew x1
+      [Đã giao]
+      ==
+      <b>CG-0139 · Bàn 12
+      Trà sen x2
+      [Đã giao]
+    }
+  }
+  ==
+  <i>Món chờ quá 10 phút hiển thị màu đỏ. Có âm báo khi có món mới. Thu ngân thấy thêm nút [Hủy đơn].
+}
+@endsalt

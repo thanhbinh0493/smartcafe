@@ -1,0 +1,38 @@
+@startuml II_quy_trinh_hien_trang
+!pragma layout smetana
+skinparam defaultFontName Arial
+skinparam activity {
+  BackgroundColor #FDF6EC
+  BorderColor #8B5E3C
+}
+title Quy trình gọi món HIỆN TRẠNG (trước khi có hệ thống)
+
+|Khách hàng|
+start
+:Vào quán, xếp hàng tại quầy;
+:Xem menu in trên bảng/tờ giấy;
+:Đọc món + yêu cầu (ít đường, nhiều đá);
+
+|Thu ngân|
+:Nghe và nhập món vào máy POS;
+:Thu tiền (tiền mặt / chuyển khoản);
+:In hóa đơn + phát thẻ rung/số thứ tự;
+
+|Pha chế|
+:Nhận phiếu in từ POS;
+:Pha chế theo thứ tự phiếu;
+:Gọi số / rung thẻ khi xong;
+
+|Khách hàng|
+:Nghe gọi số, đến quầy lấy đồ;
+stop
+
+floating note right
+  **Vấn đề:**
+  - Xếp hàng lâu vào giờ cao điểm
+  - Ghi nhầm món / ghi chú
+  - Khách không biết đồ uống đang ở bước nào
+  - Menu in khó cập nhật giá, hết hàng
+  - Không có dữ liệu để gợi ý món
+end note
+@enduml

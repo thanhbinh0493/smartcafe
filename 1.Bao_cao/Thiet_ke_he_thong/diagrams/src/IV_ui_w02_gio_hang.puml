@@ -1,0 +1,26 @@
+@startsalt IV_ui_w02_gio_hang
+title W02 - Giỏ hàng & Thanh toán giả lập (mobile)
+{+
+  {* [<] <b>Giỏ hàng - Bàn 05 }
+  ==
+  {
+    <b>Trà đào cam sả | [-] | 1 | [+] | 36.000đ
+    "Ghi chú: ít đá            " | . | . | . | [Xóa]
+    <b>Cà phê sữa đá | [-] | 2 | [+] | 58.000đ
+    "Ghi chú: ít đường         " | . | . | . | [Xóa]
+  }
+  ==
+  <b>Thường gọi kèm
+  { Bánh croissant - 30.000đ | [ + ] }
+  ==
+  <b>Phương thức thanh toán (giả lập)
+  (X) Ví điện tử
+  () Thẻ ngân hàng
+  ==
+  { Tạm tính: | 103.000đ }
+  { Khuyến mãi: | -9.000đ }
+  { <b>Tổng cộng: | <b>94.000đ }
+  <i>Bạn sẽ nhận +9 điểm khi nhận đồ
+  {* [      THANH TOÁN & GỬI ĐƠN      ] }
+}
+@endsalt

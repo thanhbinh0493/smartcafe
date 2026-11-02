@@ -1,0 +1,40 @@
+@startuml III_sd04_pha_che_man_hinh_bar
+skinparam defaultFontName Arial
+autonumber
+title SD04 - Pha chế theo hàng đợi trên màn hình Bar, cập nhật realtime (UC17, UC18, UC06)
+
+actor "Pha chế" as PC
+participant "Màn hình\nquầy Bar" as BAR
+participant "Backend API" as BE
+database "PostgreSQL" as DB
+participant "WebSocket Hub" as WS
+participant "QR Order\nWeb App" as FE
+actor "Khách hàng" as KH
+
+BAR -> BE : GET /api/staff/branches/{id}/queue
+BE -> DB : order_items (WAITING, PREPARING) của đơn PAID/PREPARING\nJOIN bàn, ORDER BY orders.paid_at, order_items.id
+BE --> BAR : hàng đợi: món, SL, ghi chú, bàn, giờ gọi
+BAR -> WS : subscribe(bar:{branch_id})
+BAR --> PC : Danh sách sắp theo giờ gọi\n(cũ nhất ở trên, hiện số phút đã chờ)
+
+PC -> BAR : Bấm "Bắt đầu" ở món đầu hàng đợi
+BAR -> BE : POST /api/staff/order-items/{id}/start
+BE -> DB : order_item -> PREPARING, started_at;\nnếu đơn đang PAID -> PREPARING (ghi history)
+BE -> WS : publish(bar + order:{id}, ITEM_PREPARING)
+WS -> BAR : cập nhật trạng thái món
+WS -> FE : "Đang pha chế"
+
+PC -> BAR : Pha xong, bấm "Xong"
+BAR -> BE : POST /api/staff/order-items/{id}/done
+BE -> DB : order_item -> DONE, done_at
+alt Tất cả món của đơn đã DONE
+  BE -> DB : order -> READY, ready_at (source = STAFF)
+  BE -> WS : publish(order:{id}, ORDER_READY)
+  WS -> FE : "Có thể lấy"
+  FE --> KH : Thông báo + rung điện thoại
+  WS -> BAR : Chuyển đơn sang cột "Có thể lấy"
+else Còn món chưa xong
+  BE -> WS : publish(order:{id}, ITEM_DONE)
+end
+BE --> BAR : 200 OK
+@enduml

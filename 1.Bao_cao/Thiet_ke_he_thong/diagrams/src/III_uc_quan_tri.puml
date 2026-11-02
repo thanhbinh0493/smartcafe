@@ -1,0 +1,42 @@
+@startuml III_uc_quan_tri
+!pragma layout smetana
+skinparam defaultFontName Arial
+left to right direction
+title Use Case chi tiết - Phân hệ Quản trị (Admin / Quản lý chi nhánh)
+
+actor "Quản trị viên\n(Trụ sở)" as AD
+actor "Quản lý\nchi nhánh" as QL
+
+rectangle "Web Admin" {
+  usecase "UC08. Đăng nhập / Đăng xuất" as UC08
+  usecase "UC09. Quản lý danh mục món" as UC09
+  usecase "UC10. Quản lý món (menu chung)" as UC10
+  usecase "UC11. Quản lý chi nhánh" as UC11
+  usecase "UC12. Quản lý nhân viên\n& phân quyền" as UC12
+  usecase "UC13. Cấu hình menu chi nhánh\n(giá riêng, bật/tắt hết hàng)" as UC13
+  usecase "UC14. Quản lý bàn & in mã QR" as UC14
+  usecase "UC15. Quản lý chương trình\nkhuyến mãi" as UC15
+  usecase "UC16. Xem dashboard\nbán hàng" as UC16
+  usecase "Tổng hợp báo cáo ngày\n(job tự động 00:05)" as UCD
+}
+
+AD --> UC08
+QL --> UC08
+AD --> UC09
+AD --> UC10
+AD --> UC11
+AD --> UC12
+QL --> UC12 : chỉ nhân viên\nchi nhánh mình
+QL --> UC13
+QL --> UC14
+AD --> UC15 : toàn chuỗi /\nmọi chi nhánh
+AD --> UC16
+QL --> UC16 : chỉ chi nhánh mình
+UC16 ..> UCD : <<include>>
+
+note bottom of UC08
+  Mọi use case quản trị
+  yêu cầu đã đăng nhập
+  và đúng vai trò (RBAC)
+end note
+@enduml

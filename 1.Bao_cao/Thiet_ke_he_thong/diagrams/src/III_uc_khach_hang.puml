@@ -1,0 +1,30 @@
+@startuml III_uc_khach_hang
+!pragma layout smetana
+skinparam defaultFontName Arial
+left to right direction
+title Use Case chi tiết - Phân hệ QR Order (Khách hàng)
+
+actor "Khách hàng" as KH
+actor "Khách thành viên" as KTV
+actor "Dịch vụ\nthời tiết" as WEA <<system>>
+KTV -|> KH
+
+rectangle "QR Order Web App" {
+  usecase "UC01. Quét QR &\nchọn chế độ (màn hình chào)" as UC01
+  usecase "UC02. Xác thực SĐT\nbằng OTP (giả lập)" as UC02
+  usecase "UC03. Xem menu & gợi ý món" as UC03
+  usecase "UC04. Quản lý giỏ hàng\n(thêm/sửa/xóa, ghi chú)" as UC04
+  usecase "UC05. Đặt món &\nthanh toán giả lập" as UC05
+  usecase "UC06. Theo dõi trạng thái đơn" as UC06
+  usecase "UC07. Xem điểm tích lũy" as UC07
+}
+
+KH --> UC01
+KH --> UC03
+KH --> UC04
+KH --> UC05
+KH --> UC06
+KTV --> UC07
+UC02 ..> UC01 : <<extend>>\n(chọn "Nhập SĐT")
+UC03 --> WEA
+@enduml

@@ -1,0 +1,66 @@
+﻿
+ RUN  v3.2.7 D:/PTIT/HK3/QLDAPM/QLDAPM_Nhom_8/2.San_pham/smartcafe/frontend
+      Coverage enabled with v8
+
+ ✓ src/lib/format.test.ts > F1-FE-01 formatVND (NFR-U4) > 0 -> 0đ 6ms
+ ✓ src/lib/format.test.ts > F1-FE-01 formatVND (NFR-U4) > 500 -> 500đ 1ms
+ ✓ src/lib/format.test.ts > F1-FE-01 formatVND (NFR-U4) > 45000 -> 45.000đ 1ms
+ ✓ src/lib/format.test.ts > F1-FE-01 formatVND (NFR-U4) > 33600 -> 33.600đ 1ms
+ ✓ src/lib/format.test.ts > F1-FE-01 formatVND (NFR-U4) > 1234567 -> 1.234.567đ 1ms
+ ✓ src/lib/format.test.ts > F1-FE-02 normalizeText (tìm không dấu) > bỏ dấu, đ -> d, chữ thường 1ms
+ ✓ src/pages/qr/MenuPage.test.tsx > F1-FE-08..15 W01 – Menu điện tử (UC03) > F1-FE-08 hiển thị danh mục và món theo thứ tự 282ms
+ ✓ src/pages/qr/MenuPage.test.tsx > F1-FE-08..15 W01 – Menu điện tử (UC03) > F1-FE-09 món KM: giá gốc gạch ngang + giá bán 48ms
+ ✓ src/pages/qr/WelcomePage.test.tsx > F1-FE-03..06 W00 – Màn hình chào (UC01) > F1-FE-03 QR hợp lệ: hiện chi nhánh, bàn và 2 lựa chọn 254ms
+ ✓ src/pages/qr/MenuPage.test.tsx > F1-FE-08..15 W01 – Menu điện tử (UC03) > F1-FE-10 nhãn MỚI và "Tạm hết" 52ms
+ ✓ src/pages/qr/WelcomePage.test.tsx > F1-FE-03..06 W00 – Màn hình chào (UC01) > F1-FE-04 chọn "Xem menu ngay" -> chuyển sang menu ẩn danh 168ms
+ ✓ src/pages/qr/WelcomePage.test.tsx > F1-FE-03..06 W00 – Màn hình chào (UC01) > F1-FE-05 chọn "Nhập số điện thoại" -> chuyển sang màn hình thành viên 60ms
+ ✓ src/pages/qr/MenuPage.test.tsx > F1-FE-08..15 W01 – Menu điện tử (UC03) > F1-FE-11 tab "Khuyến mãi" chỉ hiện món đang KM 169ms
+ ✓ src/pages/qr/WelcomePage.test.tsx > F1-FE-03..06 W00 – Màn hình chào (UC01) > F1-FE-06 QR sai: báo "Mã QR không hợp lệ, vui lòng gọi nhân viên" 41ms
+ ✓ src/pages/qr/WelcomePage.test.tsx > F1-FE-03..06 W00 – Màn hình chào (UC01) > F1-FE-17 mất mạng khi quét QR: báo không kết nối được máy chủ 16ms
+ ✓ src/pages/admin/LoginPage.test.tsx > F0-FE-01..06 A01 – Đăng nhập nhân viên (UC08) > F0-FE-01 BARISTA đăng nhập -> màn hình mặc định /admin/bar 591ms
+ ✓ src/pages/qr/WelcomePage.test.tsx > F1-FE-03..06 W00 – Màn hình chào (UC01) > F1-FE-07 không lưu định danh khách trên thiết bị (NFR-S7) 133ms
+ ✓ src/pages/qr/MenuPage.test.tsx > F1-FE-08..15 W01 – Menu điện tử (UC03) > F1-FE-12 lọc theo danh mục 192ms
+ ✓ src/pages/admin/LoginPage.test.tsx > F0-FE-01..06 A01 – Đăng nhập nhân viên (UC08) > F0-FE-01 CASHIER đăng nhập -> màn hình mặc định /admin/bar 372ms
+ ✓ src/pages/qr/MenuPage.test.tsx > F1-FE-08..15 W01 – Menu điện tử (UC03) > F1-FE-13 tìm món không dấu; không có kết quả thì báo 365ms
+ ✓ src/pages/qr/MenuPage.test.tsx > F1-FE-08..15 W01 – Menu điện tử (UC03) > F1-FE-14 không có món KM thì không hiện tab "Khuyến mãi" 40ms
+ ✓ src/pages/qr/MenuPage.test.tsx > F1-FE-08..15 W01 – Menu điện tử (UC03) > F1-FE-15 lỗi tải menu: báo lỗi và "Thử lại" tải lại thành công 142ms
+ ✓ src/pages/admin/LoginPage.test.tsx > F0-FE-01..06 A01 – Đăng nhập nhân viên (UC08) > F0-FE-01 MANAGER đăng nhập -> màn hình mặc định /admin/dashboard 373ms
+ ✓ src/pages/qr/MenuPage.test.tsx > F1-FE-08..15 W01 – Menu điện tử (UC03) > F1-FE-16 nút "Nhập SĐT tích điểm" trên menu 119ms
+ ✓ src/pages/admin/LoginPage.test.tsx > F0-FE-01..06 A01 – Đăng nhập nhân viên (UC08) > F0-FE-01 ADMIN đăng nhập -> màn hình mặc định /admin/dashboard 384ms
+ ✓ src/pages/admin/LoginPage.test.tsx > F0-FE-01..06 A01 – Đăng nhập nhân viên (UC08) > F0-FE-02 sai mật khẩu: hiện thông báo, không lưu phiên 236ms
+ ✓ src/pages/admin/LoginPage.test.tsx > F0-FE-01..06 A01 – Đăng nhập nhân viên (UC08) > F0-FE-03 chưa đăng nhập mà vào trang admin -> chuyển về đăng nhập 17ms
+ ✓ src/pages/admin/LoginPage.test.tsx > F0-FE-01..06 A01 – Đăng nhập nhân viên (UC08) > F0-FE-04 token hết hạn phía server -> xóa phiên, về đăng nhập 32ms
+ ✓ src/pages/admin/LoginPage.test.tsx > F0-FE-01..06 A01 – Đăng nhập nhân viên (UC08) > F0-FE-05 phiên hết hạn phía client (quá 8 giờ) bị bỏ qua 0ms
+ ✓ src/pages/admin/LoginPage.test.tsx > F0-FE-01..06 A01 – Đăng nhập nhân viên (UC08) > F0-FE-06 đăng xuất xóa phiên 47ms
+
+ Test Files  4 passed (4)
+      Tests  30 passed (30)
+   Start at  23:11:20
+   Duration  6.44s (transform 438ms, setup 2.03s, collect 2.28s, tests 4.16s, environment 7.71s, prepare 1.71s)
+
+ % Coverage report from v8
+-------------------|---------|----------|---------|---------|-------------------
+File               | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s 
+-------------------|---------|----------|---------|---------|-------------------
+All files          |   99.11 |    92.85 |     100 |   99.11 |                   
+ src               |     100 |      100 |     100 |     100 |                   
+  App.tsx          |     100 |      100 |     100 |     100 |                   
+ src/api           |     100 |    81.25 |     100 |     100 |                   
+  auth.ts          |     100 |      100 |     100 |     100 |                   
+  client.ts        |     100 |       75 |     100 |     100 | 33                
+  public.ts        |     100 |      100 |     100 |     100 |                   
+ src/auth          |      92 |    91.66 |     100 |      92 |                   
+  staffSession.ts  |      92 |    91.66 |     100 |      92 | 29-30             
+ src/lib           |     100 |      100 |     100 |     100 |                   
+  format.ts        |     100 |      100 |     100 |     100 |                   
+ src/pages/admin   |   98.34 |    92.59 |     100 |   98.34 |                   
+  AdminLayout.tsx  |   95.74 |    86.66 |     100 |   95.74 | 29-30             
+  ...gSoonPage.tsx |     100 |      100 |     100 |     100 |                   
+  LoginPage.tsx    |     100 |      100 |     100 |     100 |                   
+ src/pages/qr      |     100 |    95.58 |     100 |     100 |                   
+  MenuPage.tsx     |     100 |       96 |     100 |     100 | 96,133            
+  ...olderPage.tsx |     100 |      100 |     100 |     100 |                   
+  QrHeader.tsx     |     100 |      100 |     100 |     100 |                   
+  QrLayout.tsx     |     100 |     92.3 |     100 |     100 | 15                
+  WelcomePage.tsx  |     100 |      100 |     100 |     100 |                   
+-------------------|---------|----------|---------|---------|-------------------

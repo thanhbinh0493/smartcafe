@@ -1,0 +1,30 @@
+@startuml III_uc_van_hanh
+!pragma layout smetana
+skinparam defaultFontName Arial
+left to right direction
+title Use Case chi tiết - Vận hành quầy (Pha chế) và hỗ trợ khách (Thu ngân)
+
+actor "Thu ngân" as TN
+actor "Pha chế" as PC
+
+rectangle "Màn hình quầy Bar (Web Admin)" {
+  usecase "UC17. Xem hàng đợi pha chế\n(món, bàn, giờ gọi - sắp theo giờ gọi)" as UC17
+  usecase "UC18. Cập nhật trạng thái pha\n(Bắt đầu / Xong)" as UC18
+  usecase "UC19. Giao đồ, bấm \"Đã giao\"" as UC19
+  usecase "UC20. Hủy đơn & hoàn tiền\ngiả lập (hỗ trợ khách)" as UC20
+  usecase "Cộng điểm tích lũy" as UCPT
+}
+
+PC --> UC17
+PC --> UC18
+PC --> UC19
+TN --> UC17 : tra cứu\n(chỉ xem)
+TN --> UC20
+UCPT ..> UC19 : <<extend>>\n(đơn của khách thành viên)
+
+note bottom of UC20
+  Thu ngân chỉ hỗ trợ khách hàng,
+  không nằm trong luồng xử lý đơn.
+  Đơn chỉ được tạo qua quét QR.
+end note
+@enduml

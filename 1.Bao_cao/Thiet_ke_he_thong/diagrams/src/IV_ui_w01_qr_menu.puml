@@ -1,0 +1,29 @@
+@startsalt IV_ui_w01_qr_menu
+title W01 - Menu điện tử (mobile) - minh họa chế độ thành viên
+{+
+  {* <b>SmartCafe - CN Cầu Giấy | Bàn 05 }
+  { Xin chào <b>Minh</b> - 120 điểm (≈ 12.000đ) | [Thoát] }
+  ==
+  { "Tìm món...                " | [Tìm] }
+  ==
+  <b>Gợi ý cho bạn
+  {#
+    <b>Cà phê sữa đá | <b>Trà đào cam sả | <b>Bạc xỉu dừa
+    29.000đ | 36.000đ <i>(45.000đ) | 39.000đ
+    <i>Bạn hay gọi | <i>Đang giảm 20% | <i>Món mới, giống món bạn thích
+    [ + Thêm ] | [ + Thêm ] | [ + Thêm ]
+  }
+  <i>Khách ẩn danh thấy: Bán chạy nhất / Đang khuyến mãi / Món mới
+  ==
+  { [Tất cả] | [Khuyến mãi] | [Cà phê] | [Trà] | [Đá xay] | [Bánh] }
+  ==
+  <b>CÀ PHÊ
+  {
+    [IMG] | { <b>Cà phê sữa đá | 29.000đ } | [ + ]
+    [IMG] | { <b>Bạc xỉu dừa  [MỚI] | 39.000đ } | [ + ]
+    [IMG] | { <b>Bạc xỉu nóng | <i>Tạm hết } | [ X ]
+  }
+  ==
+  {* [ Giỏ hàng (3) - 104.000đ          > ] }
+}
+@endsalt

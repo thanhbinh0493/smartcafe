@@ -1,0 +1,27 @@
+@startsalt IV_ui_w00a_xac_thuc_otp
+title W00a - Nhập SĐT và mã OTP (mobile)
+{
+{+
+  {* [<] <b>Thành viên tích điểm }
+  ==
+  Số điện thoại
+  "0912 345 678         "
+  <i>Chỉ dùng để tích điểm và gợi ý món.
+  ==
+  [     Gửi mã OTP     ]
+}
+.
+{+
+  {* [<] <b>Nhập mã xác thực }
+  ==
+  Mã 6 số đã gửi tới 0912 *** 678
+  { "4" | "8" | "2" | "1" | "0" | "7" }
+  <i>Mã hết hạn sau 04:52
+  [Gửi lại mã (sau 45s)]
+  ==
+  {+ <i>[DEMO] Mã OTP giả lập: 482107 }
+  ==
+  [     Xác nhận     ]
+}
+}
+@endsalt

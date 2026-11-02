@@ -1,0 +1,83 @@
+@startuml III_data_model
+!pragma layout smetana
+skinparam defaultFontName Arial
+hide methods
+hide circle
+skinparam classAttributeIconSize 0
+title Mô hình dữ liệu mức khái niệm (Conceptual Data Model)
+
+class "Chi nhánh" as Branch {
+  mã, tên, địa chỉ, tọa độ
+}
+class "Nhân viên" as Staff {
+  họ tên, tài khoản, vai trò
+}
+class "Danh mục" as Category {
+  tên, thứ tự
+}
+class "Món" as MenuItem {
+  tên, mô tả, giá gốc,
+  loại nóng/lạnh, thẻ, ngày tạo
+}
+class "Món tại chi nhánh" as BranchMenuItem {
+  giá riêng, còn hàng
+}
+class "Chương trình KM" as Promotion {
+  tên, thời gian, phạm vi
+}
+class "Món khuyến mãi" as PromotionItem {
+  giá khuyến mãi
+}
+class "Bàn" as Table {
+  số bàn, mã QR
+}
+class "Khách thành viên" as Customer {
+  số điện thoại, tên, điểm
+}
+class "Mã OTP" as Otp {
+  SĐT, mã (băm), hạn, số lần thử
+}
+class "Giao dịch điểm" as Loyalty {
+  số điểm, loại
+}
+class "Đơn hàng" as Order {
+  mã đơn, trạng thái, tổng tiền
+}
+class "Chi tiết đơn" as OrderItem {
+  số lượng, đơn giá, giá gốc,
+  ghi chú, trạng thái pha
+}
+class "Thanh toán" as Payment {
+  phương thức, số tiền, trạng thái
+}
+class "Lịch sử gợi ý" as RecLog {
+  chế độ, ngữ cảnh, danh sách gợi ý
+}
+class "Báo cáo ngày" as Daily {
+  ngày, doanh thu, số đơn,
+  các chỉ số
+}
+class "Luật kết hợp" as Rule {
+  support, confidence, lift
+}
+
+Branch "1" -- "0..*" Staff : làm việc tại >
+Branch "1" -- "0..*" Table : có >
+Branch "1" -- "0..*" BranchMenuItem
+MenuItem "1" -- "0..*" BranchMenuItem
+Category "1" -- "0..*" MenuItem : gồm >
+Branch "0..1" -- "0..*" Promotion : áp dụng tại >
+Promotion "1" *-- "1..*" PromotionItem
+MenuItem "1" -- "0..*" PromotionItem
+Table "1" -- "0..*" Order : phát sinh >
+Customer "0..1" -- "0..*" Order : đặt >
+Customer "1" -- "0..*" Loyalty
+Order "1" -- "0..1" Loyalty : sinh điểm >
+Order "1" *-- "1..*" OrderItem
+OrderItem "0..*" -- "1" MenuItem
+OrderItem "0..*" -- "0..1" Promotion : hưởng KM >
+Order "1" -- "0..1" Payment
+Branch "1" -- "0..*" RecLog
+Branch "1" -- "0..*" Daily : mỗi ngày 1 bản >
+MenuItem "1" -- "0..*" Rule : tiền đề / kết quả
+@enduml

@@ -1,0 +1,57 @@
+@startsalt IV_ui_w08_dashboard
+title W08 - Dashboard bán hàng (Quản trị viên: mọi chi nhánh; Quản lý: chi nhánh mình)
+{+
+  {* <b>SmartCafe Admin | Trần Thị A (Quản trị viên) | [Đăng xuất] }
+  {
+    {+
+      <b>MENU
+      <b>[Tổng quan]
+      [Chi nhánh]
+      [Nhân viên]
+      [Danh mục]
+      [Món]
+      [Khuyến mãi]
+    } | {
+      <b>Báo cáo bán hàng   <i>(tự động tổng hợp lúc 00:05 hằng ngày)
+      { Chi nhánh: | ^Tất cả      ^ | Khoảng: | ^7 ngày qua  ^ }
+      ==
+      <b>Ngày 31/10/2026 (so với ngày trước)
+      {#
+        <b>Doanh thu | <b>Số đơn | <b>Giá trị TB/đơn | <b>Thời gian chờ TB | <b>Đơn thành viên | <b>Món từ gợi ý AI
+        18.450.000đ | 412 | 44.800đ | 6 phút 20s | 41% | 18%
+        <i>+6,2% | <i>+3,5% | <i>+2,6% | <i>-0:40 | <i>+2 điểm % | <i>+1 điểm %
+      }
+      ==
+      <b>Doanh thu theo ngày (biểu đồ đường, mỗi chi nhánh 1 đường)
+      {+
+        .
+        <i>   [ CG ----/\----/----- ]   [ HD --\--/--\---- ]   [ TX ---/--\---/-- ]
+        <i>   25/10   26/10   27/10   28/10   29/10   30/10   31/10
+        .
+      }
+      ==
+      {
+        {
+          <b>So sánh chi nhánh (31/10)
+          {#
+            <b>Chi nhánh | <b>Doanh thu | <b>Số đơn | <b>Hủy | <b>Chờ TB
+            Cầu Giấy | 7.120.000 | 158 | 2 | 6'05
+            Hà Đông | 5.980.000 | 136 | 1 | 7'10
+            Thanh Xuân | 5.350.000 | 118 | 0 | 5'40
+          }
+        } | {
+          <b>Top 5 món (31/10)
+          {#
+            <b># | <b>Món | <b>SL
+            1 | Cà phê sữa đá | 186
+            2 | Trà đào cam sả | 121
+            3 | Bạc xỉu | 97
+            4 | Cold brew | 64
+            5 | Matcha đá xay | 52
+          }
+        }
+      }
+    }
+  }
+}
+@endsalt

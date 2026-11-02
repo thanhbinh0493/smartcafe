@@ -1,0 +1,26 @@
+@startsalt IV_ui_w00_man_hinh_chao
+title W00 - Màn hình chào sau khi quét QR (mobile)
+{+
+  {* <b>SmartCafe - CN Cầu Giấy | Bàn 05 }
+  ==
+  .
+  <b>Chào mừng bạn đến SmartCafe!
+  Bạn muốn gọi món theo cách nào?
+  .
+  {+
+    <b>Thành viên - Tích điểm
+    Nhập số điện thoại để tích điểm
+    và nhận gợi ý theo sở thích của bạn
+    [  Nhập số điện thoại  ]
+  }
+  .
+  {+
+    <b>Xem menu ngay
+    Không cần số điện thoại.
+    Gợi ý món bán chạy, khuyến mãi, món mới
+    [  Xem menu ngay  ]
+  }
+  .
+  <i>Bạn có thể nhập số điện thoại sau tại menu.
+}
+@endsalt

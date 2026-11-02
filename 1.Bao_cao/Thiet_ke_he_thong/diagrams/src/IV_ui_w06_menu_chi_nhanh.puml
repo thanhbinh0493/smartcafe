@@ -1,0 +1,28 @@
+@startsalt IV_ui_w06_menu_chi_nhanh
+title W06 - Web Admin: Cấu hình menu chi nhánh (Quản lý chi nhánh)
+{+
+  {* <b>SmartCafe Admin | CN Cầu Giấy | Lê Văn Q (Quản lý) | [Đăng xuất] }
+  {
+    {+
+      <b>CHI NHÁNH
+      [Tổng quan]
+      <b>[Menu chi nhánh]
+      [Bàn & mã QR]
+      [Nhân viên]
+      [Màn hình Bar]
+      [Báo cáo]
+    } | {
+      <b>Menu chi nhánh Cầu Giấy
+      { "Tìm món...     " | ^Danh mục: Tất cả^ | [X] Chỉ hiện món hết hàng }
+      {#
+        <b>Tên món | <b>Giá chung | <b>Giá chi nhánh | <b>Còn hàng | <b>Thao tác
+        Cà phê sữa đá | 29.000 | "            " | [X] | [Lưu]
+        Trà đào cam sả | 45.000 | "39.000      " | [X] | [Lưu]
+        Bạc xỉu | 35.000 | "            " | [ ] | [Lưu]
+        Matcha đá xay | 55.000 | "            " | [X] | [Lưu]
+      }
+      <i>Để trống "Giá chi nhánh" = dùng giá chung. Bỏ tích "Còn hàng" = khách thấy "Tạm hết".
+    }
+  }
+}
+@endsalt

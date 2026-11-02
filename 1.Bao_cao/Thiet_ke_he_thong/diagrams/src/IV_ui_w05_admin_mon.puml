@@ -1,0 +1,29 @@
+@startsalt IV_ui_w05_admin_mon
+title W05 - Web Admin: Quản lý món (menu chung - Quản trị viên)
+{+
+  {* <b>SmartCafe Admin | Trần Thị A (Quản trị viên) | [Đăng xuất] }
+  {
+    {+
+      <b>MENU
+      [Tổng quan]
+      [Chi nhánh]
+      [Nhân viên]
+      [Danh mục]
+      <b>[Món]
+      [Khuyến mãi]
+      [Báo cáo]
+    } | {
+      { <b>Quản lý món | . | . | [ + Thêm món ] }
+      { "Tìm theo tên...   " | ^Danh mục: Tất cả^ | ^Trạng thái: Đang bán^ }
+      {#
+        <b>Ảnh | <b>Tên món | <b>Danh mục | <b>Giá gốc | <b>Nóng/Lạnh | <b>Trạng thái | <b>Thao tác
+        [IMG] | Cà phê sữa đá | Cà phê | 29.000 | Lạnh | Đang bán | [Sửa] [Ẩn]
+        [IMG] | Trà đào cam sả | Trà | 45.000 | Lạnh | Đang bán | [Sửa] [Ẩn]
+        [IMG] | Latte | Cà phê | 45.000 | Cả hai | Đang bán | [Sửa] [Ẩn]
+        [IMG] | Croissant | Bánh | 30.000 | - | Ngừng bán | [Sửa] [Hiện]
+      }
+      { [<] | 1 | 2 | 3 | [>] }
+    }
+  }
+}
+@endsalt

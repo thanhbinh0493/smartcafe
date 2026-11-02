@@ -1,0 +1,57 @@
+@startuml II_quy_trinh_de_xuat
+!pragma layout smetana
+skinparam defaultFontName Arial
+skinparam activity {
+  BackgroundColor #EEF6EE
+  BorderColor #2E7D32
+}
+title Quy trình gọi món ĐỀ XUẤT (QR Order + AI gợi ý + màn hình Bar)
+
+|Khách hàng|
+start
+:Quét mã QR dán tại bàn;
+:Màn hình chào: chọn 1 trong 2;
+if (Nhập SĐT để tích điểm?) then (có)
+  :Nhập SĐT, nhập mã OTP;
+  |Hệ thống|
+  :Xác thực OTP, tạo phiên thành viên;
+  :Gợi ý theo SỞ THÍCH\n(món hay gọi, món tương tự)\n+ bán chạy, khuyến mãi, thời tiết;
+else (không)
+  |Hệ thống|
+  :Gợi ý món BÁN CHẠY,\nĐANG KHUYẾN MÃI, MÓN MỚI\n(thời tiết là yếu tố phụ);
+endif
+|Khách hàng|
+:Xem menu + gợi ý, thêm món vào giỏ, ghi chú;
+:Thanh toán (giả lập);
+
+|Hệ thống|
+:Tạo đơn, ghi nhận thanh toán;
+:Đưa các món vào HÀNG ĐỢI màn hình Bar\n(sắp theo thời gian gọi);
+
+|Pha chế|
+:Xem món + bàn + giờ gọi trên màn hình Bar;
+:Pha theo thứ tự, bấm "Bắt đầu" rồi "Xong";
+
+|Hệ thống|
+if (Tất cả món của đơn đã xong?) then (có)
+  :Đổi đơn -> "Có thể lấy";
+  :Thông báo realtime cho khách;
+else (chưa)
+endif
+
+|Khách hàng|
+:Đến quầy Bar nhận đồ;
+
+|Pha chế|
+:Giao đồ, bấm "Đã giao" -> "Hoàn tất";
+
+|Hệ thống|
+:Cộng điểm nếu là khách thành viên;
+stop
+floating note right
+  **Thu ngân** không nằm trong luồng xử lý đơn:
+  chỉ hỗ trợ khách (hướng dẫn quét QR,
+  tra cứu đơn, hủy & hoàn tiền khi có sự cố).
+  Mọi đơn đều được gọi qua QR.
+end note
+@enduml

@@ -1,0 +1,41 @@
+@startuml III_sd06_huy_don_nhan_do_tich_diem
+skinparam defaultFontName Arial
+autonumber
+title SD06 - Thu ngân hủy đơn & hoàn tiền khi hỗ trợ khách (UC20); Pha chế giao đồ & cộng điểm (UC19)
+
+actor "Thu ngân" as TN
+actor "Pha chế" as PC
+participant "Web Admin /\nMàn hình Bar" as FE
+participant "Backend API" as BE
+participant "Mock Payment\nService" as PAY
+database "PostgreSQL" as DB
+participant "WebSocket Hub" as WS
+
+== Thu ngân hỗ trợ khách: hủy đơn ==
+TN -> FE : Tra cứu đơn theo mã/bàn, bấm "Hủy", nhập lý do
+FE -> BE : POST /api/staff/orders/{id}/cancel {reason}
+BE -> DB : Lấy đơn
+alt Đơn đã READY / COMPLETED
+  BE --> FE : 409 CANNOT_CANCEL
+else PAID / PREPARING
+  BE -> PAY : refund(transaction_ref) [giả lập]
+  PAY --> BE : REFUNDED
+  BE -> DB : payments.status -> REFUNDED
+  BE -> DB : order -> CANCELLED, order_items -> CANCELLED,\nghi lý do + nhân viên
+  BE -> WS : publish(bar + order:{id}, ORDER_CANCELLED)
+  note right of BE : Không phát sinh điểm vì\nđiểm chỉ cộng khi COMPLETED
+  BE --> FE : 200 OK
+end
+
+== Pha chế giao đồ & cộng điểm ==
+PC -> FE : Đưa đồ cho khách, bấm "Đã giao"\ntrên cột "Có thể lấy" của màn hình Bar
+FE -> BE : POST /api/staff/orders/{id}/complete
+BE -> DB : BEGIN; order -> COMPLETED, completed_at, completed_by
+opt Đơn có customer_id
+  BE -> BE : points = floor(total_amount / 10.000)
+  BE -> DB : INSERT loyalty_transactions (EARN, order_id UNIQUE);\ncustomers.loyalty_points += points
+end
+BE -> DB : COMMIT
+BE -> WS : publish(order:{id}, ORDER_COMPLETED {points_earned})
+BE --> FE : 200 OK
+@enduml

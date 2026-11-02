@@ -1,0 +1,50 @@
+@startuml III_sd05_khuyen_mai_menu_chi_nhanh
+skinparam defaultFontName Arial
+autonumber
+title SD05 - Đăng nhập, cấu hình menu chi nhánh (UC08, UC13) và tạo khuyến mãi (UC15)
+
+actor "Quản lý\nchi nhánh" as QL
+actor "Quản trị viên\n(Trụ sở)" as AD
+participant "Web Admin\n(React)" as FE
+participant "Backend API" as BE
+database "PostgreSQL" as DB
+participant "WebSocket Hub" as WS
+
+== Đăng nhập (chung cho mọi nhân viên) ==
+QL -> FE : Nhập username, mật khẩu
+FE -> BE : POST /api/auth/login
+BE -> DB : Tìm staff theo username
+BE -> BE : bcrypt.verify(password)
+alt Sai thông tin / tài khoản bị khóa
+  BE --> FE : 401 INVALID_CREDENTIALS
+else Đúng
+  BE --> FE : {access_token (JWT: sub, role, branch_id)}
+end
+
+== Quản lý chi nhánh: cấu hình menu chi nhánh ==
+QL -> FE : Tắt "Bạc xỉu" (hết hàng)
+FE -> BE : PATCH /api/staff/branches/{id}/menu/{item_id}\n{is_available: false}
+BE -> BE : Kiểm tra role = MANAGER và branch_id = {id}
+BE -> DB : UPSERT branch_menu_items
+BE -> WS : publish(menu:{branch}, MENU_UPDATED)
+BE --> FE : 200 OK
+
+== Quản trị viên: tạo chương trình khuyến mãi ==
+AD -> FE : Tạo "Tuần lễ trà đào" 02/11-15/11, phạm vi CN Cầu Giấy,\nTrà đào 45.000 -> 36.000
+FE -> BE : POST /api/staff/promotions\n{name, branch_id, start_at, end_at, items:[{menu_item_id, promo_price}]}
+BE -> BE : Kiểm tra role = ADMIN; end_at > start_at;\npromo_price < giá bán hiện tại
+alt Không phải ADMIN
+  BE --> FE : 403 FORBIDDEN
+else Dữ liệu không hợp lệ
+  BE --> FE : 422 PROMOTION_INVALID
+else Hợp lệ
+  BE -> DB : INSERT promotions, promotion_items
+  BE -> WS : publish(menu:{branch hoặc mọi chi nhánh}, MENU_UPDATED)
+  BE --> FE : 201 Created
+end
+note over BE, DB
+  Khuyến mãi tự có hiệu lực / hết hiệu lực
+  theo start_at, end_at (kiểm tra lúc truy vấn),
+  không cần job bật tắt.
+end note
+@enduml

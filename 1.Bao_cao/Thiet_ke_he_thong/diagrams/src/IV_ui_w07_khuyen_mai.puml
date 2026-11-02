@@ -1,0 +1,33 @@
+@startsalt IV_ui_w07_khuyen_mai
+title W07 - Web Admin: Tạo / sửa chương trình khuyến mãi
+{+
+  {* <b>SmartCafe Admin | Trần Thị A (Quản trị viên) | [Đăng xuất] }
+  {
+    {+
+      <b>MENU
+      [Tổng quan]
+      [Chi nhánh]
+      [Danh mục]
+      [Món]
+      <b>[Khuyến mãi]
+      [Nhân viên]
+      [Báo cáo]
+    } | {
+      <b>Tạo chương trình khuyến mãi
+      { Tên chương trình | "Tuần lễ trà đào          " }
+      { Mô tả | "Giảm 20% các món trà đào   " }
+      { Áp dụng tại | ^CN Cầu Giấy^ | <i>(hoặc "Toàn chuỗi") }
+      { Bắt đầu | "02/11/2026 00:00" | Kết thúc | "15/11/2026 23:59" }
+      ==
+      <b>Món áp dụng   [ + Thêm món ]
+      {#
+        <b>Món | <b>Giá bán hiện tại | <b>Giá khuyến mãi | <b>Giảm | .
+        Trà đào cam sả | 45.000 | "36.000    " | 20% | [Xóa]
+        Trà đào đá xay | 55.000 | "44.000    " | 20% | [Xóa]
+      }
+      ==
+      { [X] Kích hoạt | . | [Hủy] | [ Lưu chương trình ] }
+    }
+  }
+}
+@endsalt

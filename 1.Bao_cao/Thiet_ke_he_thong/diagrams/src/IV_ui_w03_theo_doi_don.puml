@@ -1,0 +1,22 @@
+@startsalt IV_ui_w03_theo_doi_don
+title W03 - Theo dõi trạng thái đơn (mobile, cập nhật realtime)
+{+
+  {* <b>Đơn #CG-0142 | Bàn 05 }
+  ==
+  <b>✔ Thanh toán thành công - 94.000đ
+  ==
+  { (X) Đang chờ | --- | (X) Đang pha chế | --- | () Có thể lấy }
+  <i>Bạn đang ở vị trí thứ 2 trong hàng đợi pha chế
+  ==
+  {#
+    <b>Món | <b>Trạng thái
+    Trà đào cam sả x1 | ✔ Xong
+    Cà phê sữa đá x2 | ... Đang pha
+  }
+  ==
+  <i>Bạn sẽ nhận thông báo khi đồ uống sẵn sàng.
+  <i>+9 điểm sẽ được cộng khi bạn nhận đồ.
+  ==
+  [ Gọi thêm món ]
+}
+@endsalt

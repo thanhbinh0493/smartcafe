@@ -1,0 +1,56 @@
+@startuml III_sd01_quet_qr_xac_thuc_otp
+skinparam defaultFontName Arial
+autonumber
+title SD01 - Quét QR, chọn chế độ và xác thực SĐT bằng OTP (UC01, UC02)
+
+actor "Khách hàng" as KH
+participant "QR Order\nWeb App (React)" as FE
+participant "Backend API\n(FastAPI)" as BE
+participant "Mock SMS\nService" as SMS
+database "PostgreSQL" as DB
+
+KH -> FE : Quét QR (URL /t/{qr_token})
+FE -> BE : GET /api/public/tables/{qr_token}
+BE -> DB : Tìm bàn theo qr_token
+alt Mã QR không hợp lệ / bàn bị khóa
+  BE --> FE : 404 TABLE_NOT_FOUND
+  FE --> KH : "Mã QR không hợp lệ, vui lòng gọi nhân viên"
+else Hợp lệ
+  BE --> FE : {branch, table}
+  FE --> KH : Màn hình chào: [Xem menu ngay]\n[Nhập SĐT để tích điểm & nhận gợi ý riêng]
+end
+
+alt Lựa chọn 1: Xem menu ngay
+  KH -> FE : Bấm "Xem menu ngay"
+  FE --> KH : Chuyển sang menu (chế độ ẩn danh, xem SD02)
+else Lựa chọn 2: Nhập SĐT
+  KH -> FE : Nhập SĐT
+  FE -> BE : POST /api/public/otp/request {phone}
+  BE -> DB : Kiểm tra giới hạn gửi\n(60 giây/lần, tối đa 5 lần/giờ)
+  BE -> BE : Sinh mã 6 số, băm mã
+  BE -> DB : INSERT otp_requests (hết hạn sau 5 phút)
+  BE -> SMS : send(phone, code) [giả lập]
+  SMS --> BE : OK (mã ghi ra log / trả về ở chế độ demo)
+  BE --> FE : 200 {expires_in: 300, demo_code?}
+  FE --> KH : Màn hình nhập OTP
+  KH -> FE : Nhập mã OTP
+  FE -> BE : POST /api/public/otp/verify {phone, code}
+  BE -> DB : Lấy OTP mới nhất của SĐT
+  alt Sai mã / hết hạn / quá 5 lần thử
+    BE -> DB : attempts + 1
+    BE --> FE : 400 OTP_INVALID
+    FE --> KH : "Mã không đúng hoặc đã hết hạn"
+  else Đúng
+    BE -> DB : otp.verified_at = now();\ntìm hoặc tạo customers theo SĐT
+    BE --> FE : {customer_token (JWT, 1 giờ),\nname, loyalty_points}
+    note right of FE
+      Token chỉ giữ trong sessionStorage
+      của tab hiện tại, hết hạn sau 1 giờ.
+      Không lưu định danh thiết bị:
+      lần sau (hoặc đổi điện thoại)
+      khách nhập lại SĐT + OTP.
+    end note
+    FE --> KH : "Xin chào, bạn có 120 điểm (≈ 12.000đ)"\nchuyển sang menu (chế độ thành viên)
+  end
+end
+@enduml

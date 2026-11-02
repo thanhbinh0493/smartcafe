@@ -1,0 +1,41 @@
+@startuml III_sd02_xem_menu_goi_y
+skinparam defaultFontName Arial
+autonumber
+title SD02 - Xem menu và gợi ý món theo 2 chế độ (UC03)
+
+actor "Khách hàng" as KH
+participant "QR Order\nWeb App" as FE
+participant "Backend API" as BE
+participant "Recommendation\nService" as AI
+participant "Weather API" as WEA
+database "PostgreSQL" as DB
+
+par Tải menu
+  FE -> BE : GET /api/public/branches/{id}/menu
+  BE -> DB : menu_items + branch_menu_items\n+ khuyến mãi đang hiệu lực
+  BE --> FE : menu (giá bán, giá gốc nếu có KM,\nnhãn "Mới", "Tạm hết")
+else Tải gợi ý
+  FE -> BE : GET /api/public/branches/{id}/recommendations\n(Bearer customer_token nếu có)
+  BE -> AI : recommend(branch, customer_id?)
+  AI -> WEA : Thời tiết theo tọa độ chi nhánh (cache 30 phút)
+  WEA --> AI : nhiệt độ
+  alt Chế độ thành viên (có token hợp lệ, có lịch sử đơn)
+    AI -> DB : Lịch sử món của khách,\nthẻ (tags) của món yêu thích
+    AI -> DB : Bán chạy 7 ngày, KM đang chạy
+    AI -> AI : score = Sở thích + Tương tự\n+ Bán chạy + KM + Thời tiết
+  else Chế độ ẩn danh (hoặc thành viên chưa có lịch sử)
+    AI -> DB : Bán chạy 7 ngày, KM đang chạy, món mới
+    AI -> AI : score = Bán chạy + KM + Món mới + Thời tiết
+  end
+  AI --> BE : top 5 món + lý do
+  BE -> DB : Ghi recommendation_logs (mode, context, items)
+  BE --> FE : danh sách gợi ý
+end
+FE --> KH : Menu + khối gợi ý ("Bạn hay gọi",\n"Đang giảm 20%", "Món mới", "Bán chạy nhất"...)
+
+KH -> FE : Thêm món vào giỏ
+FE -> BE : GET .../recommendations?cart=3,7
+BE -> AI : co_buy(cart)
+AI -> DB : association_rules (antecedent in cart)
+BE --> FE : "Thường gọi kèm" (hiển thị ở giỏ hàng)
+@enduml

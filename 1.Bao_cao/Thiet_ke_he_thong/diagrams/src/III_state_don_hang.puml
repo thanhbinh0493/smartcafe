@@ -1,0 +1,27 @@
+@startuml III_state_don_hang
+!pragma layout smetana
+skinparam defaultFontName Arial
+title Biểu đồ trạng thái Đơn hàng (orders.status)
+
+[*] --> PENDING_PAYMENT : Khách bấm "Đặt món"
+PENDING_PAYMENT : Chờ thanh toán
+PENDING_PAYMENT --> PAID : Thanh toán giả lập thành công
+PENDING_PAYMENT --> CANCELLED : Hệ thống tự hủy khi không\nnhận được thanh toán sau 15 phút
+
+PAID : Đã tiếp nhận, vào hàng đợi Bar\n(khách thấy: "Đang chờ")
+PAID --> PREPARING : Pha chế bấm "Bắt đầu"\nmón đầu tiên
+PAID --> CANCELLED : Thu ngân hủy khi\nhỗ trợ khách (hoàn tiền)
+
+PREPARING : Đang pha chế
+PREPARING --> READY : Pha chế bấm "Xong"\nmón cuối cùng
+PREPARING --> CANCELLED : Thu ngân hủy khi\nhỗ trợ khách (hoàn tiền)
+
+READY : Có thể lấy
+READY --> COMPLETED : Pha chế giao đồ,\nbấm "Đã giao"
+
+COMPLETED : Hoàn tất\n(cộng điểm nếu là thành viên)
+CANCELLED : Đã hủy
+
+COMPLETED --> [*]
+CANCELLED --> [*]
+@enduml

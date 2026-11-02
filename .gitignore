@@ -1,0 +1,20 @@
+# Cài đặt cá nhân của trình soạn thảo
+.vscode/
+.idea/
+
+# File tạm của Microsoft Office khi đang mở tài liệu
+~$*
+
+# File hệ điều hành
+Thumbs.db
+desktop.ini
+.DS_Store
+
+# Công cụ render sơ đồ (tải riêng, không đưa lên kho)
+plantuml.jar
+
+# Python / Node chung (mã nguồn có thêm .gitignore riêng trong 2.San_pham/smartcafe/)
+__pycache__/
+.venv/
+node_modules/
+.env
