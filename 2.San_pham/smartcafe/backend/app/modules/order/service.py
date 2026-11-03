@@ -15,6 +15,7 @@ from app.models import (
     Branch, DiningTable, LoyaltyTransaction, MenuItem, Order, OrderItem, OrderStatusHistory, Payment,
 )
 from app.modules.menu.service import get_branch_menu
+from app.modules.recommend.logs import attach_order
 from app.modules.order.schemas import (
     MAX_QTY_PER_ITEM, CreateOrderRequest, CreateOrderResponse, OrderLineOut, OrderView,
 )
@@ -88,6 +89,8 @@ def create_order(db: Session, req: CreateOrderRequest, customer_id: int | None =
     db.flush()
     db.add(OrderStatusHistory(order_id=order.id, from_status=None, to_status="PENDING_PAYMENT", source="CUSTOMER"))
     db.flush()
+    if req.recommendation_log_id:
+        attach_order(db, req.recommendation_log_id, order)
 
     return CreateOrderResponse(
         order_id=order.id, order_code=order.order_code, access_token=order.access_token, status=order.status,

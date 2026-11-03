@@ -1,0 +1,73 @@
+﻿============================= test session starts =============================
+platform win32 -- Python 3.11.9, pytest-8.4.2, pluggy-1.7.0 -- D:\PTIT\HK3\QLDAPM\QLDAPM_Nhom_8\2.San_pham\smartcafe\backend\.venv\Scripts\python.exe
+rootdir: D:\PTIT\HK3\QLDAPM\QLDAPM_Nhom_8\2.San_pham\smartcafe\backend
+configfile: pytest.ini
+plugins: anyio-4.16.0, cov-7.1.0
+collecting ... collected 54 items
+
+tests/f7/test_recommend.py::test_F7_10_an_danh_ban_chay_7_ngay_tai_chi_nhanh PASSED [  1%]
+tests/f7/test_recommend.py::test_F7_11_khuyen_mai_mon_moi_het_hang_va_mon_trong_gio PASSED [  3%]
+tests/f7/test_recommend.py::test_F7_12_thoi_tiet_la_yeu_to_phu[33-C\xe0 ph\xea s\u1eefa \u0111\xe1-H\u1ee3p tr\u1eddi n\xf3ng] PASSED [  5%]
+tests/f7/test_recommend.py::test_F7_12_thoi_tiet_la_yeu_to_phu[18-C\xe0 ph\xea s\u1eefa n\xf3ng-H\u1ee3p tr\u1eddi l\u1ea1nh] PASSED [  7%]
+tests/f7/test_recommend.py::test_F7_13_thanh_vien_theo_so_thich_va_mon_tuong_tu PASSED [  9%]
+tests/f7/test_recommend.py::test_F7_14_don_gan_day_nang_hon_don_cu PASSED [ 11%]
+tests/f7/test_recommend.py::test_F7_15_thanh_vien_chua_co_don_dung_cong_thuc_an_danh PASSED [ 12%]
+tests/f7/test_recommend.py::test_F7_16_token_sai_hoac_het_han_van_goi_y_an_danh PASSED [ 14%]
+tests/f7/test_recommend.py::test_F7_17_ghi_recommendation_logs PASSED    [ 16%]
+tests/f7/test_recommend.py::test_F7_18_tham_so_cart_khong_hop_le[params0-422] PASSED [ 18%]
+tests/f7/test_recommend.py::test_F7_18_tham_so_cart_khong_hop_le[params1-422] PASSED [ 20%]
+tests/f7/test_recommend.py::test_F7_18_tham_so_cart_khong_hop_le[params2-422] PASSED [ 22%]
+tests/f7/test_recommend.py::test_F7_19_chi_nhanh_khong_ton_tai_hoac_ngung PASSED [ 24%]
+tests/f7/test_recommend.py::test_F7_20_service_loi_van_tra_200_rong_menu_van_chay PASSED [ 25%]
+tests/f7/test_recommend.py::test_F7_21_api_goi_y_nhanh PASSED            [ 27%]
+tests/f7/test_recommend.py::test_F7_22_cac_don_tuong_lai_khong_lam_lech_khi_danh_gia_lai_qua_khu PASSED [ 29%]
+tests/f7/test_training.py::test_F7_23_fp_growth_tim_dung_cap_mon_hay_mua_cung PASSED [ 31%]
+tests/f7/test_training.py::test_F7_24_qua_it_don_hoac_khong_co_cap_thi_khong_hoc PASSED [ 33%]
+tests/f7/test_training.py::test_F7_25_hoc_lai_luat_theo_chi_nhanh_va_toan_chuoi PASSED [ 35%]
+tests/f7/test_training.py::test_F7_26_thuong_goi_kem_trong_gio_hang PASSED [ 37%]
+tests/f7/test_training.py::test_F7_27_job_hang_dem_00_30_gio_viet_nam PASSED [ 38%]
+tests/f7/test_training.py::test_F7_28_dat_don_kem_recommendation_log_id PASSED [ 40%]
+tests/f7/test_training.py::test_F7_29_log_khong_hop_le_thi_bo_qua_don_van_dat_duoc[chi_nhanh_khac] PASSED [ 42%]
+tests/f7/test_training.py::test_F7_29_log_khong_hop_le_thi_bo_qua_don_van_dat_duoc[khach_khac] PASSED [ 44%]
+tests/f7/test_training.py::test_F7_29_log_khong_hop_le_thi_bo_qua_don_van_dat_duoc[khong_ton_tai] PASSED [ 46%]
+tests/f7/test_training.py::test_F7_29_log_khong_hop_le_thi_bo_qua_don_van_dat_duoc[qua_2_gio] PASSED [ 48%]
+tests/f7/test_training.py::test_F7_30_seed_orders_sinh_du_lieu_hop_le PASSED [ 50%]
+tests/f7/test_training.py::test_F7_31_danh_gia_offline_thanh_vien_hon_baseline PASSED [ 51%]
+tests/f7/test_unit.py::test_F7_01_promo_score_bang_muc_giam_chia_50_phan_tram[45000-36000-0.4] PASSED [ 53%]
+tests/f7/test_unit.py::test_F7_01_promo_score_bang_muc_giam_chia_50_phan_tram[40000-20000-1.0] PASSED [ 55%]
+tests/f7/test_unit.py::test_F7_01_promo_score_bang_muc_giam_chia_50_phan_tram[40000-10000-1.0] PASSED [ 57%]
+tests/f7/test_unit.py::test_F7_01_promo_score_bang_muc_giam_chia_50_phan_tram[40000-40000-0.0] PASSED [ 59%]
+tests/f7/test_unit.py::test_F7_01_promo_score_bang_muc_giam_chia_50_phan_tram[40000-45000-0.0] PASSED [ 61%]
+tests/f7/test_unit.py::test_F7_01_promo_score_bang_muc_giam_chia_50_phan_tram[0-0-0.0] PASSED [ 62%]
+tests/f7/test_unit.py::test_F7_02_jaccard_va_chuan_hoa PASSED            [ 64%]
+tests/f7/test_unit.py::test_F7_03_nguong_nhiet_do[35-HOT] PASSED         [ 66%]
+tests/f7/test_unit.py::test_F7_03_nguong_nhiet_do[28-HOT] PASSED         [ 68%]
+tests/f7/test_unit.py::test_F7_03_nguong_nhiet_do[27.9-MILD] PASSED      [ 70%]
+tests/f7/test_unit.py::test_F7_03_nguong_nhiet_do[22.1-MILD] PASSED      [ 72%]
+tests/f7/test_unit.py::test_F7_03_nguong_nhiet_do[22-COLD] PASSED        [ 74%]
+tests/f7/test_unit.py::test_F7_03_nguong_nhiet_do[15-COLD] PASSED        [ 75%]
+tests/f7/test_unit.py::test_F7_04_diem_thoi_tiet[w0-COLD-1] PASSED       [ 77%]
+tests/f7/test_unit.py::test_F7_04_diem_thoi_tiet[w1-HOT-0] PASSED        [ 79%]
+tests/f7/test_unit.py::test_F7_04_diem_thoi_tiet[w2-BOTH-0.5] PASSED     [ 81%]
+tests/f7/test_unit.py::test_F7_04_diem_thoi_tiet[w3-NONE-0.5] PASSED     [ 83%]
+tests/f7/test_unit.py::test_F7_04_diem_thoi_tiet[w4-HOT-1] PASSED        [ 85%]
+tests/f7/test_unit.py::test_F7_04_diem_thoi_tiet[w5-COLD-0] PASSED       [ 87%]
+tests/f7/test_unit.py::test_F7_04_diem_thoi_tiet[w6-COLD-0.5] PASSED     [ 88%]
+tests/f7/test_unit.py::test_F7_04_diem_thoi_tiet[w7-HOT-0.5] PASSED      [ 90%]
+tests/f7/test_unit.py::test_F7_05_thoi_tiet_gia_lap_va_api_co_cache PASSED [ 92%]
+tests/f7/test_unit.py::test_F7_06_ly_do_la_thanh_phan_dong_gop_nhieu_nhat PASSED [ 94%]
+tests/f7/test_unit.py::test_F7_07_top_5_toi_da_2_mon_ban_hay_goi PASSED  [ 96%]
+tests/f7/test_unit.py::test_F7_08_mon_da_goi_khong_gan_nhan_giong_mon_ban_thich PASSED [ 98%]
+tests/f7/test_unit.py::test_F7_09_bang_diem_thi_xep_theo_ban_chay_roi_ma_mon PASSED [100%]
+
+============================== warnings summary ===============================
+.venv\Lib\site-packages\fastapi\testclient.py:1
+  D:\PTIT\HK3\QLDAPM\QLDAPM_Nhom_8\2.San_pham\smartcafe\backend\.venv\Lib\site-packages\fastapi\testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+    from starlette.testclient import TestClient as TestClient  # noqa
+
+tests/f7/test_training.py::test_F7_24_qua_it_don_hoac_khong_co_cap_thi_khong_hoc
+  D:\PTIT\HK3\QLDAPM\QLDAPM_Nhom_8\2.San_pham\smartcafe\backend\.venv\Lib\site-packages\mlxtend\frequent_patterns\association_rules.py:184: RuntimeWarning: invalid value encountered in divide
+    cert_metric = np.where(certainty_denom == 0, 0, certainty_num / certainty_denom)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+======================= 54 passed, 2 warnings in 7.63s ========================

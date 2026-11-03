@@ -22,7 +22,7 @@ Cập nhật mỗi khi một luồng xong. Kết quả kiểm thử chi tiết �
 | F4 | Khách thành viên: OTP giả lập, tích điểm, xem điểm | UC02, UC07 · W00a | ✔ Đạt (03/11) | [F4](../../1.Bao_cao/Kiem_thu/Bien_ban_kiem_thu_F4_OTP_Tich_diem.md) – 84/84 |
 | F5 | Thu ngân hỗ trợ: tra cứu, hủy đơn & hoàn tiền | UC20 · W04 (tra cứu) | ✔ Đạt (03/11) | [F5](../../1.Bao_cao/Kiem_thu/Bien_ban_kiem_thu_F5_Thu_ngan.md) – 53/53 |
 | F6 | Quản trị: danh mục, món, chi nhánh, nhân viên, menu chi nhánh, bàn & QR, khuyến mãi | UC09–UC15 · W05–W07, A03–A06 | ✔ Đạt (03/11) | [F6](../../1.Bao_cao/Kiem_thu/Bien_ban_kiem_thu_F6_Quan_tri.md) – 230/230 |
-| F7 | AI gợi ý món (2 chế độ) + "Thường gọi kèm" | UC03 (phần gợi ý) | Chưa làm | |
+| F7 | AI gợi ý món (2 chế độ) + "Thường gọi kèm" | UC03 (phần gợi ý) | ✔ Đạt (03/11) – nhánh `feature/f7-ai-goi-y` | [F7](../../1.Bao_cao/Kiem_thu/Bien_ban_kiem_thu_F7_AI_goi_y.md) – 71/71 |
 | F8 | Báo cáo ngày (job 00:05) + dashboard | UC16 · W08 | Chưa làm | |
 
 ## 1. Chạy toàn bộ hệ thống (demo)
@@ -48,7 +48,9 @@ docker compose up -d --build    # db + backend + frontend
 | Thu ngân | `tn_cg`, `tn_hd`, `tn_tx` |
 | Pha chế | `pc1_cg`, `pc2_cg`, `pc1_hd`, … |
 
-Dữ liệu mẫu: 3 chi nhánh (CG Cầu Giấy, HD Hà Đông, TX Thanh Xuân) × 20 bàn; 5 danh mục, 35 món (4 món mới); Hà Đông có giá riêng cho Cà phê sữa đá (27.000đ) và Bạc xỉu (30.000đ); Cầu Giấy tạm hết Bạc xỉu nóng; 3 khuyến mãi (toàn chuỗi "Tuần lễ trà trái cây" đang chạy, riêng Cầu Giấy "Mừng khai trương" đang chạy, "Halloween 2026" đã kết thúc).
+**Khách thành viên demo:** SĐT `0901000001` (Cầu Giấy, có ~30 đơn lịch sử – hay gọi Cà phê sữa đá, Bạc xỉu, Bánh croissant bơ); `0901000002` … `0901000300` cũng có lịch sử. Mã OTP hiện ở khung [DEMO].
+
+Dữ liệu mẫu: 3 chi nhánh (CG Cầu Giấy, HD Hà Đông, TX Thanh Xuân) × 20 bàn; 5 danh mục, 35 món (4 món mới); Hà Đông có giá riêng cho Cà phê sữa đá (27.000đ) và Bạc xỉu (30.000đ); Cầu Giấy tạm hết Bạc xỉu nóng; 3 khuyến mãi (toàn chuỗi "Tuần lễ trà trái cây" đang chạy, riêng Cầu Giấy "Mừng khai trương" đang chạy, "Halloween 2026" đã kết thúc). Lịch sử cho AI / dashboard (`seed_orders`, tự nạp lần đầu, ~15 giây): ≈ 5.000 đơn trong 60 ngày, 300 thành viên, luật "thường gọi kèm" đã học. Đánh giá mô hình: `docker compose exec backend python -m scripts.evaluate_recommender`.
 
 ## 2. Phát triển trên máy (không đóng gói)
 ```powershell
@@ -59,6 +61,7 @@ py -3.11 -m venv .venv
 .\.venv\Scripts\pip install -r requirements-dev.txt
 .\.venv\Scripts\alembic upgrade head
 .\.venv\Scripts\python -m scripts.seed_data --if-empty
+.\.venv\Scripts\python -m scripts.seed_orders --if-empty
 .\.venv\Scripts\uvicorn app.main:app --reload   # http://localhost:8000
 
 cd ..\frontend
@@ -93,10 +96,11 @@ backend/
                    customer (OTP giả lập + cổng Mock SMS, customer token 1 giờ, xem điểm /me)
                    support (thu ngân tra cứu đơn, hủy & hoàn tiền giả lập)
                    admin (danh mục, món + ảnh, chi nhánh, nhân viên, menu chi nhánh, bàn & ảnh QR, khuyến mãi)
+                   recommend (gợi ý 2 chế độ, thời tiết, FP-Growth "thường gọi kèm", job hằng đêm)
   app/ws/          WebSocket hub (kênh order:{id}, bar:{branch_id})
   alembic/         migration; 0001 chạy nguyên văn schema.sql thiết kế; 0002 mã đơn UNIQUE theo ngày; 0003 bỏ customers.name (D31)
-  scripts/         seed_data.py (dữ liệu mẫu), smoke_test.py
-  tests/f0 … f6   test theo luồng
+  scripts/         seed_data.py (dữ liệu mẫu), seed_orders.py (đơn lịch sử), evaluate_recommender.py (Hit Rate@5), smoke_test.py
+  tests/f0 … f7   test theo luồng
 frontend/
   src/pages/qr/    W00 màn hình chào, W00a OTP, W01 menu (+ dòng thành viên), W02 giỏ hàng, W03 theo dõi đơn (route /t/:qrToken/...)
   src/auth/        MemberContext (phiên khách thành viên trong sessionStorage, tự hết hạn) · staffSession (phiên nhân viên)

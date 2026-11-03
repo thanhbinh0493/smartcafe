@@ -1,0 +1,8 @@
+﻿[ĐẠT] E2E-53 Khách ẩn danh: khối 'Gợi ý cho bạn' ngay trên menu, 5 thẻ có lý do (bán chạy / KM / món mới / thời tiết) Trà đào cam sả ; Cà phê sữa đá ; Trà dâu tây kem cheese ; Bạc xỉu dừa ; Xoài đá xay
+[ĐẠT] E2E-54 Khối gợi ý cuộn ngang, trang menu không tràn ngang ở 390px 
+[ĐẠT] E2E-55 Khách thành viên demo (OTP): gợi ý theo sở thích – 1–2 'Bạn hay gọi', khác hẳn khách ẩn danh Cà phê sữa đá (Bạn hay gọi) ; Bạc xỉu (Bạn hay gọi) ; Trà đào cam sả (Bán chạy tại chi nhánh) ; Trà vải (Hợp trời nóng) ; Sinh tố xoài (Hợp trời nóng)
+[ĐẠT] E2E-56 Giỏ có Cà phê sữa đá → 'Thường gọi kèm' gợi ý Bánh croissant bơ kèm lý do Bánh croissant bơ | Thường gọi kèm Cà phê sữa đá | 29.000đ
+[ĐẠT] E2E-57 Đặt & thanh toán đơn có món từ gợi ý (thành viên) thành công CG-0027
+ORDER_CODE=CG-0027
+
+Tổng: 5 | Đạt: 5 | Không đạt: 0

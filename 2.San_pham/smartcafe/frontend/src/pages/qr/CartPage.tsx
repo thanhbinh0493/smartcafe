@@ -1,11 +1,13 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import type { ApiError } from '../../api/client'
 import { createOrder, payOrder, type CreatedOrder, type PaymentMethod, type PriceChange } from '../../api/orders'
+import { getRecommendations, lastLog, recToMenuItem, rememberLog, type RecItem } from '../../api/recommend'
 import { isSessionError, POINT_UNIT_VND, useMember } from '../../auth/MemberContext'
 import { MAX_QTY, useCart } from '../../cart/CartContext'
 import { formatVND } from '../../lib/format'
 import QrHeader from './QrHeader'
+import RecCards from './RecCards'
 import { useQr } from './QrLayout'
 
 /** W02 thể hiện popup "Đang xử lý…" khoảng 1,5 giây (thanh toán giả lập). */
@@ -16,7 +18,7 @@ type Notice = { kind: 'error' | 'warn'; text: string; relogin?: boolean } | null
 
 /** W02 – Giỏ hàng & thanh toán giả lập (UC04, UC05, SD03). */
 export default function CartPage() {
-  const { qrToken } = useQr()
+  const { qrToken, info } = useQr()
   const cart = useCart()
   const { member, expire } = useMember()
   const navigate = useNavigate()
@@ -26,6 +28,20 @@ export default function CartPage() {
   const [unavailable, setUnavailable] = useState<number[]>([])
   // Đơn đã tạo nhưng thanh toán thất bại: thử lại trên chính đơn này (UC05 – 5a)
   const [pending, setPending] = useState<CreatedOrder | null>(null)
+  const [alsoBought, setAlsoBought] = useState<RecItem[]>([])
+
+  // "Thường gọi kèm" theo món trong giỏ (luật kết hợp FP-Growth – F7); lỗi thì ẩn khối
+  const cartKey = cart.lines.map((l) => l.menu_item_id).join(',')
+  const memberToken = member?.token
+  useEffect(() => {
+    if (!cartKey) return setAlsoBought([])
+    getRecommendations(info.branch.id, cartKey.split(',').map(Number), memberToken)
+      .then((r) => {
+        setAlsoBought(Array.isArray(r.also_bought) ? r.also_bought : [])
+        rememberLog(qrToken, r.log_id)
+      })
+      .catch(() => setAlsoBought([]))
+  }, [cartKey, info.branch.id, memberToken, qrToken])
 
   // Giỏ đã đổi thì lần thanh toán sau tạo đơn mới
   const changed = () => {
@@ -65,6 +81,7 @@ export default function CartPage() {
           {
           qr_token: qrToken,
           expected_total: cart.total,
+          recommendation_log_id: lastLog(qrToken),
           items: cart.lines.map((l) => ({
             menu_item_id: l.menu_item_id,
             quantity: l.quantity,
@@ -176,6 +193,9 @@ export default function CartPage() {
             )
           })}
         </ul>
+
+        <RecCards title="Thường gọi kèm" testId="also-bought" items={alsoBought}
+          onAdd={(r) => { cart.add(recToMenuItem(r), true); changed() }} />
 
         <fieldset className="rounded-xl bg-white p-3 shadow-sm">
           <legend className="px-1 text-sm font-semibold">Phương thức thanh toán (giả lập)</legend>

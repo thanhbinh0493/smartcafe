@@ -24,6 +24,18 @@ class Settings(BaseSettings):
     public_base_url: str = "http://localhost:8080"  # địa chỉ khách mở khi quét QR (in vào ảnh QR – UC14)
     upload_dir: str = "uploads"                     # thư mục lưu ảnh món (phục vụ ở /api/uploads/...)
     max_image_bytes: int = 2 * 1024 * 1024          # ảnh món tối đa 2 MB
+    # AI gợi ý món (F7 – II.2 Mục 2.3, 2.4; D35)
+    weather_api_key: str = ""                       # OpenWeatherMap; để trống = nhiệt độ giả lập
+    weather_mock_temp_c: float = 31.0               # nhiệt độ giả lập (đổi để demo trời nóng / lạnh)
+    weather_cache_minutes: int = 30
+    rec_popular_days: int = 7                       # "bán chạy" = số lượng bán 7 ngày tại chi nhánh
+    rec_personal_half_life_days: int = 30           # đơn cũ 30 ngày nặng bằng nửa đơn hôm nay
+    rules_window_days: int = 60                     # dữ liệu học luật kết hợp
+    rules_min_support: float = 0.01
+    rules_min_confidence: float = 0.2
+    scheduler_enabled: bool = True                  # job học luật hằng đêm (tắt trong test)
+    rules_job_hour: int = 0                         # 00:30 giờ VN (sau job báo cáo 00:05 của F8)
+    rules_job_minute: int = 30
     cors_origins: list[str] = ["http://localhost:5173", "http://localhost:8080"]
 
 

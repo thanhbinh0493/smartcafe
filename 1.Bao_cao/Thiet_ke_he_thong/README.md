@@ -51,6 +51,10 @@ Chi tiết từng thay đổi xem trong [biên bản họp](../../4.Tai_lieu_kha
 | D29 | 03/11 | Màn hình chi tiết món | **Bỏ popup W01a**: bấm "+" trên menu là thêm món ngay vào giỏ; số lượng và ghi chú từng món chỉnh trong giỏ hàng (W02). Đạt NFR-U2 (đặt 2 món trong 5 lần chạm) |
 | D30 | 03/11 | Hoàn tác món cuối của đơn | Pha chế bấm nhầm "Xong" ở **món cuối cùng** (đơn đã "Có thể lấy") rồi bấm "Hoàn tác" trong thời gian cho phép thì món về "Đang pha" và **đơn quay lại "Đang pha chế"** (READY → PREPARING, ghi lịch sử trạng thái, khách thấy lại "Đang pha"). Đơn đã "Đã giao" (COMPLETED) thì không hoàn tác được |
 | D31 | 03/11 | Thông tin khách thành viên | **Không thu thập tên**: thành viên chỉ định danh bằng **số điện thoại** đã xác thực OTP. Bỏ cột `customers.name`; lời chào trên menu là "Xin chào – X điểm (≈ Yđ)" |
+| D32 | 03/11 | Dữ liệu lịch sử cho AI | Script `seed_orders.py` (≈ 5.000 đơn / 60 ngày / 3 chi nhánh / 300 thành viên, có quy luật cài sẵn) **tự nạp khi khởi động** nếu chưa nạp (như `seed_data`), rồi học luật kết hợp. Có **SĐT demo cố định 0901000001** (Cầu Giấy) đã có lịch sử để demo chế độ thành viên |
+| D33 | 03/11 | Thư viện FP-Growth | Dùng **mlxtend** như II.2 (chấp nhận image backend nặng thêm do pandas / scipy / scikit-learn) |
+| D34 | 03/11 | Gắn đơn với lần gợi ý | Thêm trường tùy chọn `recommendation_log_id` vào `POST /api/public/orders`; backend gán `recommendation_logs.order_id` (cùng chi nhánh, cùng khách, chưa gắn, trong 2 giờ), sai thì bỏ qua – không làm hỏng việc đặt đơn |
+| D35 | 03/11 | Thời tiết | **Mặc định nhiệt độ giả lập** (`WEATHER_MOCK_TEMP_C`, đổi để demo trời nóng / lạnh); có `WEATHER_API_KEY` thì gọi OpenWeatherMap (cache 30 phút), lỗi thì về giả lập |
 
 ## Vấn đề mở (Open Issues) – nơi theo dõi duy nhất
 
@@ -58,6 +62,10 @@ Bảng này là **nơi duy nhất** theo dõi các đề xuất và vấn đề 
 
 | # | Ngày mở | Vấn đề / đề xuất | Phương án thay thế | Người chốt | Trạng thái |
 |:---|:---|:---|:---|:---|:---|
+| P17 | 03/11 | Cách nạp dữ liệu lịch sử cho AI (seed_orders.py) vào CSDL demo – phát sinh khi bắt đầu F7 | Chạy tay bằng lệnh | A | Đã chốt → D32 (tự nạp khi CSDL trống + SĐT demo) |
+| P18 | 03/11 | Thư viện FP-Growth: mlxtend (II.2) làm image nặng thêm ~80–100 MB | Tự viết FP-Growth | A | Đã chốt → D33 (mlxtend) |
+| P19 | 03/11 | Cách gán `recommendation_logs.order_id` (API chưa quy định) | Không gán, chỉ dựa `is_recommended` | A | Đã chốt → D34 (trường `recommendation_log_id`) |
+| P20 | 03/11 | Weather API: nhóm chưa có key OpenWeatherMap | Chỉ giả lập | A | Đã chốt → D35 (giả lập mặc định, key tùy chọn) |
 | P16 | 03/11 | Khách thành viên **nhập tên (tùy chọn)** sau lần xác thực OTP đầu tiên để lời chào thành "Xin chào <tên>" như wireframe W01. Hiện cột `customers.name` có nhưng không màn hình nào cho nhập, nên chào "Xin chào – X điểm". Phát sinh khi code F4 – xem [biên bản kiểm thử F4](../Kiem_thu/Bien_ban_kiem_thu_F4_OTP_Tich_diem.md) Mục 7 | Không thu thập tên (giữ như hiện tại, ít dữ liệu cá nhân hơn – NFR-S7) | A | Đã chốt → D31 (không thu thập tên) |
 | P11 | 01/11 | Mốc lập trình mới ở [IV.3 Mục 3](IV.3_Kien_truc_va_API.md) (giai đoạn V bắt đầu 02/11 thay vì 23/10) | Giữ mốc gốc, tăng nhân lực | A | Hoãn – A tự cập nhật timeline thủ công sau (CR-27) |
 | P15 | 03/11 | Bấm nhầm "Xong" ở **món cuối cùng** (đơn đã chuyển "Có thể lấy") rồi bấm "Hoàn tác" thì **đơn quay lại "Đang pha chế"** (READY → PREPARING, ghi lịch sử, khách thấy lại "Đang pha"). Bổ sung chuyển trạng thái này vào biểu đồ trạng thái đơn. Đã cài đặt ở F3 – xem [biên bản kiểm thử F3](../Kiem_thu/Bien_ban_kiem_thu_F3_Man_hinh_Bar.md) Mục 7 | Không cho hoàn tác khi đơn đã "Có thể lấy" | A | Đã chốt → D30 |

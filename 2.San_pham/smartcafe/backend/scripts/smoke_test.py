@@ -96,6 +96,7 @@ def main() -> int:
             smoke_member(c, a, bid, r_table_code(c, a.qr_token), lines)
             smoke_support(c, a, bid, r_table_code(c, a.qr_token), lines)
             smoke_admin(c, a, bid, r_table_code(c, a.qr_token))
+            smoke_recommend(c, a, bid)
 
     failed = [x for x in RESULTS if not x[2]]
     print(f"\nTổng: {len(RESULTS)} | Đạt: {len(RESULTS) - len(failed)} | Không đạt: {len(failed)}")
@@ -341,6 +342,55 @@ def smoke_admin(c: httpx.Client, a, bid: int, code: str) -> None:
         me = c.get("/api/auth/me", headers={"Authorization": f"Bearer {tok.json()['access_token']}"})
         ok = ok and me.status_code == 401
     check("SM-46", "Quản lý tạo pha chế -> đăng nhập được; khóa -> token cũ bị từ chối ngay", ok, uname)
+
+
+
+def smoke_recommend(c: httpx.Client, a, bid: int) -> None:
+    """F7: gợi ý món 2 chế độ + "thường gọi kèm" trên dữ liệu lịch sử (seed_orders) qua Nginx."""
+    url = f"/api/public/branches/{bid}/recommendations"
+    times = []
+    for _ in range(20):
+        t0 = time.perf_counter()
+        r = c.get(url)
+        times.append((time.perf_counter() - t0) * 1000)
+    anon = r.json()
+    p95 = sorted(times)[18]
+    check("SM-47", "Gợi ý ẩn danh: 5 món kèm lý do, p95 ≤ 500 ms (NFR-P3, 1 người dùng)",
+          r.status_code == 200 and anon["mode"] == "ANONYMOUS" and len(anon["items"]) == 5
+          and all(i["reason"] for i in anon["items"]) and p95 <= 500,
+          f"p95 {p95:.0f} ms – " + ", ".join(f"{i['name']} ({i['reason']})" for i in anon["items"][:3]))
+
+    phone = "0901000001"  # khách demo có lịch sử (D32)
+    otp = c.post("/api/public/otp/request", json={"phone": phone}).json()
+    code = otp.get("demo_code")
+    v = c.post("/api/public/otp/verify", json={"phone": phone, "code": code}) if code else None
+    if v is None or v.status_code != 200:
+        check("SM-48", "Đăng nhập khách demo 0901000001 bằng OTP giả lập", False,
+              str(otp.get("error", {}).get("code", "không có demo_code")))
+        return
+    h = {"Authorization": f"Bearer {v.json()['customer_token']}"}
+    mem = c.get(url, headers=h).json()
+    reasons = [i["reason"] for i in mem["items"]]
+    check("SM-48", "Khách demo: chế độ THÀNH VIÊN, có 'Bạn hay gọi' (tối đa 2), khác gợi ý ẩn danh",
+          mem["mode"] == "MEMBER" and 1 <= reasons.count("Bạn hay gọi") <= 2
+          and [i["menu_item_id"] for i in mem["items"]] != [i["menu_item_id"] for i in anon["items"]],
+          ", ".join(f"{i['name']} ({i['reason']})" for i in mem["items"]))
+
+    menu = {i["name"]: i for cat in c.get(f"/api/public/branches/{bid}/menu").json()["categories"] for i in cat["items"]}
+    sua_da = menu["Cà phê sữa đá"]["id"]
+    co = c.get(url, params={"cart": str(sua_da)}).json()
+    check("SM-49", "Giỏ có Cà phê sữa đá → 'Thường gọi kèm' có Bánh croissant bơ (luật FP-Growth học từ dữ liệu)",
+          "Bánh croissant bơ" in [i["name"] for i in co["also_bought"]],
+          ", ".join(f"{i['name']} ({i['reason']})" for i in co["also_bought"]))
+
+    rec_id = mem["items"][0]["menu_item_id"]
+    body = {"qr_token": a.qr_token, "recommendation_log_id": mem["log_id"],
+            "items": [{"menu_item_id": rec_id, "quantity": 1, "is_recommended": True}]}
+    o = c.post("/api/public/orders", json=body, headers=h)
+    check("SM-50", "Đặt món từ gợi ý kèm recommendation_log_id → 201, có điểm dự kiến", o.status_code == 201
+          and o.json().get("expected_points") is not None, o.json().get("order_code", str(o.status_code)))
+    r = c.get(url, params={"cart": "1,x"})
+    check("SM-51", "Tham số cart sai → 422", r.status_code == 422)
 
 
 if __name__ == "__main__":
