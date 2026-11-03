@@ -36,7 +36,7 @@ Ký hiệu: <u>gạch chân</u> = khóa chính, `#` = khóa ngoại.
 - **promotions**(<u>id</u>, name, description, #branch_id, start_at, end_at, is_active, #created_by, created_at)
 - **promotion_items**(<u>#promotion_id, #menu_item_id</u>, promo_price)
 - **dining_tables**(<u>id</u>, #branch_id, table_number, qr_token, is_active)
-- **customers**(<u>id</u>, phone, name, loyalty_points, created_at, last_verified_at)
+- **customers**(<u>id</u>, phone, loyalty_points, created_at, last_verified_at)
 - **otp_requests**(<u>id</u>, phone, code_hash, attempts, expires_at, verified_at, created_at)
 - **loyalty_transactions**(<u>id</u>, #customer_id, #order_id, points, type, created_at)
 - **orders**(<u>id</u>, order_code, order_date, access_token, #branch_id, #table_id, #customer_id, status, total_amount, note, cancel_reason, #cancelled_by, #completed_by, created_at, paid_at, ready_at, completed_at, cancelled_at)
@@ -93,7 +93,7 @@ Ký hiệu: <u>gạch chân</u> = khóa chính, `#` = khóa ngoại.
 ### 4.4. `customers` / `otp_requests` / `loyalty_transactions` – Thành viên & tích điểm
 | Cột | Kiểu | Ràng buộc | Mô tả |
 |:---|:---|:---|:---|
-| customers.phone | VARCHAR(15) | UNIQUE | Định danh duy nhất của thành viên (không lưu định danh thiết bị) |
+| customers.phone | VARCHAR(15) | UNIQUE | Định danh duy nhất của thành viên (không lưu định danh thiết bị, không thu thập tên – D31) |
 | customers.loyalty_points | INT | ≥ 0 | Tổng điểm hiện có (cache của tổng giao dịch điểm). Giá trị quy đổi = điểm × 100đ |
 | otp_requests.code_hash | VARCHAR(255) | NOT NULL | Mã OTP đã băm, không lưu mã rõ |
 | otp_requests.attempts | SMALLINT | | Số lần nhập sai; ≥ 5 thì mã vô hiệu |

@@ -9,7 +9,6 @@ export const POINT_UNIT_VND = 10_000 // D15: 1 điểm / 10.000đ
 
 export interface Member {
   token: string
-  name: string | null
   phoneMasked: string
   points: number
   expiresAt: number // ms
@@ -68,7 +67,6 @@ export function MemberProvider({ children }: { children: ReactNode }) {
     setExpired(false)
     setMember({
       token: v.customer_token,
-      name: v.name,
       phoneMasked: v.phone_masked,
       points: v.loyalty_points,
       expiresAt: new Date(v.expires_at).getTime(),

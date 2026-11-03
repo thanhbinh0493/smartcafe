@@ -93,7 +93,7 @@
 |:---|:---|
 | Tác nhân | Khách hàng |
 | Hậu điều kiện | Khách trở thành **Khách thành viên** trong phiên hiện tại (customer token **1 giờ**, lưu trong sessionStorage của tab) |
-| Luồng chính | 1. Khách nhập SĐT. 2. Hệ thống kiểm tra định dạng SĐT Việt Nam và giới hạn gửi, sinh mã 6 số, lưu mã đã băm (hết hạn 5 phút), gửi qua Mock SMS. 3. Khách nhập mã. 4. Hệ thống kiểm tra mã, tạo bản ghi `customers` nếu SĐT mới, trả customer token cùng số điểm hiện có. 5. Menu hiện "Xin chào, bạn có X điểm". |
+| Luồng chính | 1. Khách nhập SĐT. 2. Hệ thống kiểm tra định dạng SĐT Việt Nam và giới hạn gửi, sinh mã 6 số, lưu mã đã băm (hết hạn 5 phút), gửi qua Mock SMS. 3. Khách nhập mã. 4. Hệ thống kiểm tra mã, tạo bản ghi `customers` nếu SĐT mới, trả customer token cùng số điểm hiện có. 5. Menu hiện "Xin chào – X điểm (≈ Yđ)". Hệ thống chỉ lưu SĐT, không thu thập tên (D31). |
 | Ngoại lệ | 2a. Gửi lại khi chưa đủ 60 giây hoặc đã quá 5 mã/giờ: báo thời gian chờ. 4a. Sai mã: báo lỗi, tăng số lần thử; sai 5 lần thì mã bị hủy, phải yêu cầu mã mới. 4b. Mã hết hạn: yêu cầu gửi lại. |
 | Ghi chú | Chế độ demo hiện mã trên màn hình (khung "[DEMO]"); không gửi SMS thật. |
 

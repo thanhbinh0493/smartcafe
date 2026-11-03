@@ -50,6 +50,7 @@ Chi tiết từng thay đổi xem trong [biên bản họp](../../4.Tai_lieu_kha
 | D28 | 02/11 | Mã đơn | Giữ mã ngắn `CG-0142` (số thứ tự trong ngày, đếm lại mỗi ngày). Thêm cột `orders.order_date` (ngày tạo đơn, giờ VN) và ràng buộc **UNIQUE (order_code, order_date)** thay cho UNIQUE trên riêng `order_code` (sửa mâu thuẫn giữa UC05 và schema) |
 | D29 | 03/11 | Màn hình chi tiết món | **Bỏ popup W01a**: bấm "+" trên menu là thêm món ngay vào giỏ; số lượng và ghi chú từng món chỉnh trong giỏ hàng (W02). Đạt NFR-U2 (đặt 2 món trong 5 lần chạm) |
 | D30 | 03/11 | Hoàn tác món cuối của đơn | Pha chế bấm nhầm "Xong" ở **món cuối cùng** (đơn đã "Có thể lấy") rồi bấm "Hoàn tác" trong thời gian cho phép thì món về "Đang pha" và **đơn quay lại "Đang pha chế"** (READY → PREPARING, ghi lịch sử trạng thái, khách thấy lại "Đang pha"). Đơn đã "Đã giao" (COMPLETED) thì không hoàn tác được |
+| D31 | 03/11 | Thông tin khách thành viên | **Không thu thập tên**: thành viên chỉ định danh bằng **số điện thoại** đã xác thực OTP. Bỏ cột `customers.name`; lời chào trên menu là "Xin chào – X điểm (≈ Yđ)" |
 
 ## Vấn đề mở (Open Issues) – nơi theo dõi duy nhất
 
@@ -57,7 +58,7 @@ Bảng này là **nơi duy nhất** theo dõi các đề xuất và vấn đề 
 
 | # | Ngày mở | Vấn đề / đề xuất | Phương án thay thế | Người chốt | Trạng thái |
 |:---|:---|:---|:---|:---|:---|
-| P16 | 03/11 | Khách thành viên **nhập tên (tùy chọn)** sau lần xác thực OTP đầu tiên để lời chào thành "Xin chào <tên>" như wireframe W01. Hiện cột `customers.name` có nhưng không màn hình nào cho nhập, nên chào "Xin chào – X điểm". Phát sinh khi code F4 – xem [biên bản kiểm thử F4](../Kiem_thu/Bien_ban_kiem_thu_F4_OTP_Tich_diem.md) Mục 7 | Không thu thập tên (giữ như hiện tại, ít dữ liệu cá nhân hơn – NFR-S7) | A | **Đang mở** |
+| P16 | 03/11 | Khách thành viên **nhập tên (tùy chọn)** sau lần xác thực OTP đầu tiên để lời chào thành "Xin chào <tên>" như wireframe W01. Hiện cột `customers.name` có nhưng không màn hình nào cho nhập, nên chào "Xin chào – X điểm". Phát sinh khi code F4 – xem [biên bản kiểm thử F4](../Kiem_thu/Bien_ban_kiem_thu_F4_OTP_Tich_diem.md) Mục 7 | Không thu thập tên (giữ như hiện tại, ít dữ liệu cá nhân hơn – NFR-S7) | A | Đã chốt → D31 (không thu thập tên) |
 | P11 | 01/11 | Mốc lập trình mới ở [IV.3 Mục 3](IV.3_Kien_truc_va_API.md) (giai đoạn V bắt đầu 02/11 thay vì 23/10) | Giữ mốc gốc, tăng nhân lực | A | Hoãn – A tự cập nhật timeline thủ công sau (CR-27) |
 | P15 | 03/11 | Bấm nhầm "Xong" ở **món cuối cùng** (đơn đã chuyển "Có thể lấy") rồi bấm "Hoàn tác" thì **đơn quay lại "Đang pha chế"** (READY → PREPARING, ghi lịch sử, khách thấy lại "Đang pha"). Bổ sung chuyển trạng thái này vào biểu đồ trạng thái đơn. Đã cài đặt ở F3 – xem [biên bản kiểm thử F3](../Kiem_thu/Bien_ban_kiem_thu_F3_Man_hinh_Bar.md) Mục 7 | Không cho hoàn tác khi đơn đã "Có thể lấy" | A | Đã chốt → D30 |
 | P14 | 03/11 | Gộp W01a (popup chi tiết món) vào W02: bấm "+" trên menu là thêm ngay, số lượng và ghi chú chỉnh trong giỏ hàng – để đạt NFR-U2 (đặt 2 món trong 5 lần chạm; có popup thì ≥ 7). Đã cài đặt ở F2 – xem [biên bản kiểm thử F2](../Kiem_thu/Bien_ban_kiem_thu_F2_Dat_mon_Thanh_toan.md) Mục 7 | Giữ popup W01a đúng wireframe | A | Đã chốt → D29 |

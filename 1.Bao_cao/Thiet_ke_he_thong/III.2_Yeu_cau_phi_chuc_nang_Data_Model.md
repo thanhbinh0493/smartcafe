@@ -74,7 +74,7 @@ Mỗi yêu cầu có **cách kiểm chứng** để Thành viên D đưa vào Te
 | Chương trình KM | Đợt khuyến mãi có thời hạn, toàn chuỗi hoặc 1 chi nhánh | tên, thời gian, phạm vi |
 | Món khuyến mãi | Món thuộc chương trình KM | giá khuyến mãi |
 | Bàn | Bàn tại chi nhánh, gắn 1 mã QR | số bàn, mã QR |
-| Khách thành viên | Khách đã xác thực SĐT bằng OTP | SĐT, tên, tổng điểm |
+| Khách thành viên | Khách đã xác thực SĐT bằng OTP | SĐT, tổng điểm (không thu thập tên – D31) |
 | Mã OTP | Lần gửi mã xác thực | SĐT, mã đã băm, hạn, số lần thử |
 | Giao dịch điểm | Mỗi lần cộng/điều chỉnh điểm | số điểm, loại, đơn liên quan |
 | Đơn hàng | Một lần gọi món tại bàn | mã đơn, trạng thái, tổng tiền, các mốc thời gian |

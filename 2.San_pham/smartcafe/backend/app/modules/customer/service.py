@@ -120,7 +120,7 @@ def verify_otp(db: Session, raw_phone: str, code: str) -> OtpVerifyOut:
     customer.last_verified_at = now
     db.flush()
     token, exp = create_customer_token(customer.id)
-    return OtpVerifyOut(customer_token=token, expires_at=exp, name=customer.name,
+    return OtpVerifyOut(customer_token=token, expires_at=exp,
                         phone_masked=mask_phone(phone), loyalty_points=customer.loyalty_points)
 
 
@@ -132,7 +132,7 @@ def get_me(db: Session, customer: Customer) -> CustomerMe:
         .order_by(LoyaltyTransaction.created_at.desc(), LoyaltyTransaction.id.desc()).limit(5)
     ).all()
     return CustomerMe(
-        name=customer.name, phone_masked=mask_phone(customer.phone), loyalty_points=customer.loyalty_points,
+        phone_masked=mask_phone(customer.phone), loyalty_points=customer.loyalty_points,
         point_value_vnd=s.point_value_vnd, points_value=customer.loyalty_points * s.point_value_vnd,
         recent_transactions=[
             LoyaltyTxOut(order_code=code, points=tx.points, type=tx.type, created_at=tx.created_at) for tx, code in rows

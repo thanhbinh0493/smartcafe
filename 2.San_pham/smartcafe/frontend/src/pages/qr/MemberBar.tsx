@@ -5,7 +5,7 @@ import { getMe } from '../../api/customer'
 import { isSessionError, POINT_VALUE_VND, useMember } from '../../auth/MemberContext'
 import { formatVND } from '../../lib/format'
 
-/** Dòng trạng thái khách trên W01 (UC07): thành viên thấy lời chào + điểm + nút Thoát;
+/** Dòng trạng thái khách trên W01 (UC07): thành viên thấy lời chào + điểm + nút Thoát (không có tên – D31);
  *  khách ẩn danh thấy nút "Nhập SĐT tích điểm" (UC01 – quy tắc). */
 export default function MemberBar() {
   const { member, expired, logout, expire, setPoints } = useMember()
@@ -27,7 +27,7 @@ export default function MemberBar() {
     return (
       <div className="flex items-center justify-between gap-2 bg-white px-4 py-2 text-sm" data-testid="member-bar">
         <span>
-          Xin chào{member.name ? `, ${member.name}` : ''} –{' '}
+          Xin chào –{' '}
           <b className="text-coffee">{member.points} điểm</b>{' '}
           <span className="text-stone-500">(≈ {formatVND(member.points * POINT_VALUE_VND)})</span>
         </span>

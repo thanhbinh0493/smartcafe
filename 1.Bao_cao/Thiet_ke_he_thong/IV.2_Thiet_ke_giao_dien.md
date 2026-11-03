@@ -57,7 +57,7 @@ Sau khi đăng nhập, màn hình mặc định theo vai trò: ADMIN → W08, MA
 
 ### W01 – Menu điện tử
 ![W01](diagrams/png/IV_ui_w01_qr_menu.png)
-- Thành viên: dòng "Xin chào <tên> – X điểm (≈ X×100đ)" và nút Thoát (xóa phiên). Phiên tự hết sau 1 giờ. Khách ẩn danh: thay bằng nút "Nhập SĐT tích điểm".
+- Thành viên: dòng "Xin chào – X điểm (≈ X×100đ)" (không thu thập tên – D31) và nút Thoát (xóa phiên). Phiên tự hết sau 1 giờ. Khách ẩn danh: thay bằng nút "Nhập SĐT tích điểm".
 - Khối **"Gợi ý cho bạn"** dạng thẻ cuộn ngang, mỗi thẻ có lý do gợi ý. Lý do khác nhau theo chế độ (xem chú thích trong ảnh). Món thêm từ khối này được gắn `is_recommended = true`.
 - Món KM hiện giá gốc gạch ngang và giá mới. Có tab danh mục **"Khuyến mãi"** để lọc nhanh. Món mới có nhãn [MỚI]. Món hết hàng hiển thị mờ, "Tạm hết".
 

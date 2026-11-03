@@ -18,7 +18,8 @@ def test_F4_14_xac_thuc_dung_tao_khach_moi(client, db, clock):
     r = verify(client, code)
     assert r.status_code == 200
     body = r.json()
-    assert body["loyalty_points"] == 0 and body["name"] is None and body["phone_masked"] == "0912 *** 678"
+    assert body["loyalty_points"] == 0 and body["phone_masked"] == "0912 *** 678"
+    assert "name" not in body  # chỉ lưu SĐT, không thu thập tên (D31)
     assert body["expires_at"]
     cust = db.scalar(select(Customer).where(Customer.phone == PHONE))
     assert cust is not None and cust.last_verified_at is not None
