@@ -1,0 +1,48 @@
+﻿[ĐẠT] SM-01 Backend sống qua Nginx 
+[ĐẠT] SM-02 Nginx trả SPA cho /admin/login 
+[ĐẠT] SM-03 Nginx trả SPA cho link QR /t/<token> 
+[ĐẠT] SM-04 Đăng nhập tài khoản mẫu admin 
+[ĐẠT] SM-05 /api/auth/me với token vừa cấp 
+[ĐẠT] SM-06 Sai mật khẩu bị từ chối 
+[ĐẠT] SM-07 Quét QR thật -> chi nhánh + bàn {"branch":{"id":1,"code":"CG","name":"SmartCafe Cầu Giấy","address":"122 Xuân Thủy, Cầu Giấy, Hà Nội"},"table":{"id":1,"
+[ĐẠT] SM-08 Menu chi nhánh có đủ 35 món, 5 danh mục 
+[ĐẠT] SM-09 API menu phản hồi < 300 ms (1 request, tham khảo NFR-P2) 15 ms
+[ĐẠT] SM-10 QR giả -> TABLE_NOT_FOUND 
+[ĐẠT] SM-11 Tạo đơn qua Nginx, server tính đúng tổng tiền CG-0020 tổng 86000
+[ĐẠT] SM-12 WebSocket qua Nginx nhận ảnh chụp đơn 
+[ĐẠT] SM-13 Thanh toán giả lập thành công 
+[ĐẠT] SM-14 Trang theo dõi nhận ORDER_PAID realtime ≤ 2 giây (NFR-P4) 107 ms
+[ĐẠT] SM-15 Xem đơn: PAID, có vị trí hàng đợi vị trí 7
+[ĐẠT] SM-16 Sai access_token -> ORDER_NOT_FOUND 
+[ĐẠT] SM-17 Hàng đợi Bar có 2 món của đơn vừa thanh toán 14 món trong hàng đợi
+[ĐẠT] SM-18 Pha chế bấm Bắt đầu -> khách thấy 'Đang pha chế' ≤ 2 giây 58 ms
+[ĐẠT] SM-19 Màn hình Bar khác nhận ITEM_UPDATED qua WebSocket 
+[ĐẠT] SM-20 Xong món cuối -> khách nhận 'Có thể lấy' ≤ 2 giây (NFR-P4) 27 ms
+[ĐẠT] SM-21 Đơn xuất hiện ở cột 'Có thể lấy' 
+[ĐẠT] SM-22 Thu ngân không được bấm 'Đã giao' (403) 
+[ĐẠT] SM-23 Pha chế bấm 'Đã giao' -> đơn hoàn tất, khách nhận ORDER_COMPLETED 
+[ĐẠT] SM-24 Gửi OTP giả lập: hạn 5 phút, chờ 60 giây, có mã [DEMO] 0926 *** 598
+[ĐẠT] SM-25 Gửi lại ngay -> 429 OTP_RATE_LIMITED Vui lòng đợi 60 giây rồi gửi lại mã
+[ĐẠT] SM-26 Sai mã -> OTP_INVALID, còn 4 lần thử 
+[ĐẠT] SM-27 Nhập đúng mã -> customer token, 0 điểm 
+[ĐẠT] SM-28 Xem điểm /api/public/me 0926 *** 598
+[ĐẠT] SM-29 Customer token không gọi được API nhân viên (403) 
+[ĐẠT] SM-30 Đặt món chế độ thành viên: có expected_points CG-0021 tổng 108000, +10 điểm
+[ĐẠT] SM-31 Đã giao -> cộng điểm, /me có giao dịch của đơn +10 điểm, tổng 10
+[ĐẠT] SM-32 Thu ngân tra cứu đơn theo mã: thấy đơn PAID, được phép hủy CG-0022
+[ĐẠT] SM-33 Pha chế không được hủy đơn (403) 
+[ĐẠT] SM-34 Hủy & hoàn tiền -> khách nhận 'Đơn đã hủy' kèm lý do ≤ 2 giây 79 ms
+[ĐẠT] SM-35 Màn hình Bar nhận ORDER_CANCELLED 
+[ĐẠT] SM-36 Món của đơn đã hủy rời hàng đợi Bar 
+[ĐẠT] SM-37 Hủy lần 2 -> 409 CANNOT_CANCEL 
+[ĐẠT] SM-38 Quản lý tắt 'Còn hàng' -> menu khách nhận MENU_UPDATED ≤ 2 giây, món hiện Tạm hết 75 ms
+[ĐẠT] SM-39 Quản lý thêm bàn -> mã QR mới quét được ngay S190
+[ĐẠT] SM-40 Tải ảnh QR để in qua Nginx (PNG) 7610 byte
+[ĐẠT] SM-41 Khóa bàn -> quét QR báo không hợp lệ 
+[ĐẠT] SM-42 Upload ảnh món -> ảnh phục vụ qua Nginx /api/uploads/... 
+[ĐẠT] SM-43 Quản lý không được thêm món menu chung (403) 
+[ĐẠT] SM-44 Tạo KM 1 chi nhánh -> menu khách có giá KM ngay 
+[ĐẠT] SM-45 Tắt KM -> menu khách trở về giá thường 
+[ĐẠT] SM-46 Quản lý tạo pha chế -> đăng nhập được; khóa -> token cũ bị từ chối ngay pc_smokes190
+
+Tổng: 46 | Đạt: 46 | Không đạt: 0

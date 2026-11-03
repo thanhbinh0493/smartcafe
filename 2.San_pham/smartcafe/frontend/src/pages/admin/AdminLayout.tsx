@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react'
-import { Navigate, Outlet, useNavigate } from 'react-router-dom'
+import { NavLink, Navigate, Outlet, useNavigate } from 'react-router-dom'
 import { getMe, type StaffRole } from '../../api/auth'
 import type { ApiError } from '../../api/client'
 import { clearSession, loadSession } from '../../auth/staffSession'
+import { navFor } from './nav'
 
 const ROLE_LABEL: Record<StaffRole, string> = {
   ADMIN: 'Quản trị viên',
@@ -34,6 +35,7 @@ export default function AdminLayout() {
   if (!session) return <Navigate to="/admin/login" replace />
 
   const { staff } = session
+  const nav = navFor(staff.role)
   const logout = () => {
     clearSession()
     navigate('/admin/login', { replace: true })
@@ -51,7 +53,22 @@ export default function AdminLayout() {
           </button>
         </span>
       </header>
-      <main className="p-6">{checked ? <Outlet context={staff} /> : <p>Đang kiểm tra phiên đăng nhập...</p>}</main>
+      <div className="flex">
+        {nav.length > 0 && (
+          <nav aria-label="Menu quản trị" className="min-h-[calc(100vh-52px)] w-48 shrink-0 space-y-1 bg-white p-3 shadow-sm">
+            {nav.map((n) => (
+              <NavLink key={n.to} to={n.to}
+                className={({ isActive }) =>
+                  `block rounded-lg px-3 py-2 text-sm ${isActive ? 'bg-coffee font-semibold text-white' : 'hover:bg-cream'}`}>
+                {n.label}
+              </NavLink>
+            ))}
+          </nav>
+        )}
+        <main className="min-w-0 flex-1 p-6">
+          {checked ? <Outlet context={staff} /> : <p>Đang kiểm tra phiên đăng nhập...</p>}
+        </main>
+      </div>
     </div>
   )
 }

@@ -28,6 +28,8 @@ services:
         condition: service_healthy
     ports:
       - "8000:8000"
+    volumes:
+      - uploads:/app/uploads   # ảnh món upload ở W05 (giữ lại khi build lại container)
 
   frontend:
     build: ./frontend
@@ -38,3 +40,4 @@ services:
 
 volumes:
   db_data:
+  uploads:
