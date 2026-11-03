@@ -1,0 +1,18 @@
+﻿[ĐẠT] SM-01 Backend sống qua Nginx 
+[ĐẠT] SM-02 Nginx trả SPA cho /admin/login 
+[ĐẠT] SM-03 Nginx trả SPA cho link QR /t/<token> 
+[ĐẠT] SM-04 Đăng nhập tài khoản mẫu admin 
+[ĐẠT] SM-05 /api/auth/me với token vừa cấp 
+[ĐẠT] SM-06 Sai mật khẩu bị từ chối 
+[ĐẠT] SM-07 Quét QR thật -> chi nhánh + bàn {"branch":{"id":1,"code":"CG","name":"SmartCafe Cầu Giấy","address":"122 Xuân Thủy, Cầu Giấy, Hà Nội"},"table":{"id":5,"
+[ĐẠT] SM-08 Menu chi nhánh có đủ 35 món, 5 danh mục 
+[ĐẠT] SM-09 API menu phản hồi < 300 ms (1 request, tham khảo NFR-P2) 16 ms
+[ĐẠT] SM-10 QR giả -> TABLE_NOT_FOUND 
+[ĐẠT] SM-11 Tạo đơn qua Nginx, server tính đúng tổng tiền CG-0001 tổng 86000
+[ĐẠT] SM-12 WebSocket qua Nginx nhận ảnh chụp đơn 
+[ĐẠT] SM-13 Thanh toán giả lập thành công 
+[ĐẠT] SM-14 Trang theo dõi nhận ORDER_PAID realtime ≤ 2 giây (NFR-P4) 54 ms
+[ĐẠT] SM-15 Xem đơn: PAID, có vị trí hàng đợi vị trí 1
+[ĐẠT] SM-16 Sai access_token -> ORDER_NOT_FOUND 
+
+Tổng: 16 | Đạt: 16 | Không đạt: 0

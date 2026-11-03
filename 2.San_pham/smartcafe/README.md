@@ -10,14 +10,20 @@ Thiết kế: [1.Bao_cao/Thiet_ke_he_thong/](../../1.Bao_cao/Thiet_ke_he_thong/R
 | Triển khai | Docker Compose (db, backend, frontend/Nginx) |
 | Kiểm thử | pytest + pytest-cov (backend, chạy trên PostgreSQL thật), Vitest + Testing Library (frontend) |
 
-## Tiến độ theo luồng (D26)
-| Luồng | Nội dung | Trạng thái |
-|:---|:---|:---|
-| F0 | Nền tảng: Docker Compose, 18 bảng (Alembic), dữ liệu mẫu, đăng nhập nhân viên + RBAC | ✔ Xong, đã kiểm thử |
-| F1 | Quét QR → màn hình chào (W00) → menu chi nhánh (W01) | ✔ Xong, đã kiểm thử |
-| F2 | Giỏ hàng → đặt món → thanh toán giả lập → theo dõi đơn | Chưa làm |
-| F3 | Màn hình Bar (hàng đợi pha chế, Đã giao) | Chưa làm |
-| F4–F8 | OTP & tích điểm, thu ngân, quản trị, AI gợi ý, báo cáo | Chưa làm |
+## Tiến độ theo luồng (D26) – nơi theo dõi chính
+Cập nhật mỗi khi một luồng xong. Kết quả kiểm thử chi tiết ở [1.Bao_cao/Kiem_thu/](../../1.Bao_cao/Kiem_thu/README.md); vấn đề chờ chốt ở bảng "Vấn đề mở" của [README thiết kế](../../1.Bao_cao/Thiet_ke_he_thong/README.md).
+
+| Luồng | Nội dung | Use case / màn hình | Trạng thái | Biên bản kiểm thử |
+|:---|:---|:---|:---|:---|
+| F0 | Nền tảng: Docker Compose, CSDL (Alembic), dữ liệu mẫu, đăng nhập nhân viên + RBAC | UC08 · A01 | ✔ Đạt (02/11) | [F0](../../1.Bao_cao/Kiem_thu/Bien_ban_kiem_thu_F0_Nen_tang.md) – 48/48 |
+| F1 | Quét QR → màn hình chào → menu chi nhánh | UC01, UC03 · W00, W01 | ✔ Đạt (02/11) | [F1](../../1.Bao_cao/Kiem_thu/Bien_ban_kiem_thu_F1_QR_Menu.md) – 57/57 |
+| F2 | Giỏ hàng → đặt món → thanh toán giả lập → theo dõi đơn (realtime) | UC04–UC06 · W02, W03 | ✔ Đạt (02/11) | [F2](../../1.Bao_cao/Kiem_thu/Bien_ban_kiem_thu_F2_Dat_mon_Thanh_toan.md) – 67/67 |
+| F3 | Màn hình Bar: hàng đợi pha chế, Bắt đầu / Xong / Hoàn tác / Đã giao (cộng điểm) | UC17–UC19 · W04 | ✔ Đạt (03/11) | [F3](../../1.Bao_cao/Kiem_thu/Bien_ban_kiem_thu_F3_Man_hinh_Bar.md) – 76/76 |
+| F4 | Khách thành viên: OTP giả lập, tích điểm, xem điểm | UC02, UC07 · W00a | Chưa làm | |
+| F5 | Thu ngân hỗ trợ: tra cứu, hủy đơn & hoàn tiền | UC20 · W04 (tra cứu) | Chưa làm | |
+| F6 | Quản trị: danh mục, món, chi nhánh, nhân viên, menu chi nhánh, bàn & QR, khuyến mãi | UC09–UC15 · W05–W07, A03–A06 | Chưa làm | |
+| F7 | AI gợi ý món (2 chế độ) + "Thường gọi kèm" | UC03 (phần gợi ý) | Chưa làm | |
+| F8 | Báo cáo ngày (job 00:05) + dashboard | UC16 · W08 | Chưa làm | |
 
 ## 1. Chạy toàn bộ hệ thống (demo)
 Yêu cầu: Docker Desktop đang chạy.
@@ -81,12 +87,16 @@ backend/
   app/core/        cấu hình, kết nối CSDL, JWT + bcrypt, định dạng lỗi thống nhất
   app/models/      SQLAlchemy models (18 bảng theo schema.sql)
   app/modules/     auth (đăng nhập, RBAC) · branch (tra cứu QR) · menu (giá chi nhánh + KM)
-  alembic/         migration; 0001 chạy nguyên văn schema.sql thiết kế
+                   order (đặt món, mã đơn theo ngày, theo dõi) · payment (cổng thanh toán giả lập)
+                   bar (hàng đợi pha chế, Bắt đầu / Xong / Hoàn tác / Đã giao, cộng điểm, /ws/bar)
+  app/ws/          WebSocket hub (kênh order:{id}, bar:{branch_id})
+  alembic/         migration; 0001 chạy nguyên văn schema.sql thiết kế; 0002 mã đơn UNIQUE theo ngày
   scripts/         seed_data.py (dữ liệu mẫu), smoke_test.py
-  tests/f0, f1     test theo luồng
+  tests/f0 … f3   test theo luồng
 frontend/
-  src/pages/qr/    W00 màn hình chào, W01 menu (route /t/:qrToken)
-  src/pages/admin/ A01 đăng nhập, khung Web Admin (route /admin)
+  src/pages/qr/    W00 màn hình chào, W01 menu, W02 giỏ hàng, W03 theo dõi đơn (route /t/:qrToken/...)
+  src/cart/        giỏ hàng (sessionStorage của tab) · src/hooks/useOrderSocket.ts (WebSocket tự kết nối lại)
+  src/pages/admin/ A01 đăng nhập, khung Web Admin (route /admin), W04 màn hình quầy Bar (/admin/bar)
   src/api/         gọi API · src/lib/ định dạng tiền, tìm không dấu
 docker-compose.yml · .env.example
 ```

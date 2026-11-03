@@ -103,7 +103,7 @@
 | Tác nhân | Khách hàng; Dịch vụ thời tiết |
 | Luồng chính | 1. Hệ thống hiển thị menu theo danh mục với **giá bán = giá khuyến mãi (nếu có) / giá chi nhánh / giá chung**. Món đang KM hiện giá gốc gạch ngang, món mới có nhãn "MỚI", món hết hàng hiện "Tạm hết". 2. Hệ thống hiển thị khối "Gợi ý cho bạn" (top 5 kèm lý do): **ẩn danh** thì theo bán chạy, khuyến mãi, món mới, thời tiết; **thành viên** thì theo sở thích, món tương tự, bán chạy, khuyến mãi, thời tiết (công thức ở II.2 Mục 2.3). 3. Ghi `recommendation_logs`. |
 | Ngoại lệ | 2a. Dịch vụ gợi ý lỗi: ẩn khối gợi ý, menu vẫn hoạt động. 2b. Thành viên chưa có đơn nào: dùng gợi ý như khách ẩn danh. |
-| Quy tắc | Menu tự tải lại khi có sự kiện `MENU_UPDATED` (đổi tình trạng món, khuyến mãi mới) |
+| Quy tắc | Menu tự tải lại khi có sự kiện `MENU_UPDATED` (đổi tình trạng món, khuyến mãi mới). Chỉ hiện nhãn KM khi giá KM **thấp hơn** giá đang bán của chi nhánh; nếu không thì hiển thị như món thường (D27) |
 
 ### UC05 – Đặt món & thanh toán giả lập
 | Mục | Nội dung |
@@ -143,7 +143,7 @@
 |:---|:---|
 | Tác nhân | Pha chế (thu ngân chỉ tra cứu, không thao tác) |
 | Luồng chính | 1. Màn hình Bar hiển thị **từng món** chưa xong (WAITING, PREPARING) gồm: số thứ tự, **giờ gọi**, số phút đã chờ, **bàn**, mã đơn, tên món, số lượng, **ghi chú**. **Sắp theo giờ gọi tăng dần** (giờ thanh toán của đơn); các món cùng đơn đứng liền nhau. 2. Pha chế bấm "Bắt đầu": món chuyển PREPARING; nếu đơn đang PAID thì đơn chuyển PREPARING. 3. Pha xong, bấm "Xong": món chuyển DONE và rời hàng đợi. 4. Khi tất cả món của đơn DONE, đơn chuyển READY và hiện ở cột "Có thể lấy"; khách nhận thông báo. |
-| Ngoại lệ | 3a. Bấm nhầm "Xong": có nút "Hoàn tác" trong 10 giây. |
+| Ngoại lệ | 3a. Bấm nhầm "Xong": có nút "Hoàn tác" trong 10 giây; món quay lại PREPARING. Nếu đó là món cuối làm đơn đã chuyển READY thì **đơn quay lại PREPARING** (ghi lịch sử, khách thấy lại "Đang pha") – D30. Đơn đã COMPLETED thì không hoàn tác. |
 | Quy tắc | Món chờ quá 10 phút hiển thị màu đỏ; có âm báo khi có món mới; dữ liệu cập nhật qua WebSocket, không cần tải lại trang. |
 
 ### UC19 – Giao đồ, bấm "Đã giao" (cộng điểm)

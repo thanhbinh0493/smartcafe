@@ -1,0 +1,90 @@
+﻿
+ RUN  v3.2.7 D:/PTIT/HK3/QLDAPM/QLDAPM_Nhom_8/2.San_pham/smartcafe/frontend
+      Coverage enabled with v8
+
+ ✓ src/lib/format.test.ts > F1-FE-01 formatVND (NFR-U4) > 0 -> 0đ 6ms
+ ✓ src/lib/format.test.ts > F1-FE-01 formatVND (NFR-U4) > 500 -> 500đ 1ms
+ ✓ src/lib/format.test.ts > F1-FE-01 formatVND (NFR-U4) > 45000 -> 45.000đ 1ms
+ ✓ src/lib/format.test.ts > F1-FE-01 formatVND (NFR-U4) > 33600 -> 33.600đ 1ms
+ ✓ src/lib/format.test.ts > F1-FE-01 formatVND (NFR-U4) > 1234567 -> 1.234.567đ 0ms
+ ✓ src/lib/format.test.ts > F1-FE-02 normalizeText (tìm không dấu) > bỏ dấu, đ -> d, chữ thường 1ms
+ ✓ src/pages/qr/WelcomePage.test.tsx > F1-FE-03..06 W00 – Màn hình chào (UC01) > F1-FE-03 QR hợp lệ: hiện chi nhánh, bàn và 2 lựa chọn 425ms
+ ✓ src/pages/qr/MenuPage.test.tsx > F1-FE-08..15 W01 – Menu điện tử (UC03) > F1-FE-08 hiển thị danh mục và món theo thứ tự 479ms
+ ✓ src/pages/qr/MenuPage.test.tsx > F1-FE-08..15 W01 – Menu điện tử (UC03) > F1-FE-09 món KM: giá gốc gạch ngang + giá bán 81ms
+ ✓ src/pages/qr/OrderPage.test.tsx > F2-FE-10..17 W03 – Theo dõi đơn (UC06) > F2-FE-10 hiển thị đơn: mã, bàn, đã thanh toán, tiến trình, vị trí hàng đợi, từng món 465ms
+ ✓ src/pages/qr/OrderPage.test.tsx > F2-FE-10..17 W03 – Theo dõi đơn (UC06) > F2-FE-11 mở WebSocket đúng kênh /ws/order/77?token=tok 72ms
+ ✓ src/pages/qr/OrderPage.test.tsx > F2-FE-10..17 W03 – Theo dõi đơn (UC06) > F2-FE-12 sự kiện mang đủ dữ liệu đơn -> cập nhật ngay; sự kiện lẻ -> tải lại qua REST 101ms
+ ✓ src/pages/qr/WelcomePage.test.tsx > F1-FE-03..06 W00 – Màn hình chào (UC01) > F1-FE-04 chọn "Xem menu ngay" -> chuyển sang menu ẩn danh 247ms
+ ✓ src/pages/qr/MenuPage.test.tsx > F1-FE-08..15 W01 – Menu điện tử (UC03) > F1-FE-10 nhãn MỚI và "Tạm hết" 79ms
+ ✓ src/pages/qr/OrderPage.test.tsx > F2-FE-10..17 W03 – Theo dõi đơn (UC06) > F2-FE-13 đơn chuyển "Có thể lấy": banner xanh + rung điện thoại 90ms
+ ✓ src/pages/qr/OrderPage.test.tsx > F2-FE-10..17 W03 – Theo dõi đơn (UC06) > F2-FE-14 đơn bị hủy: "Đơn đã hủy – đã hoàn tiền" và lý do 67ms
+ ✓ src/pages/qr/WelcomePage.test.tsx > F1-FE-03..06 W00 – Màn hình chào (UC01) > F1-FE-05 chọn "Nhập số điện thoại" -> chuyển sang màn hình thành viên 109ms
+ ✓ src/pages/qr/WelcomePage.test.tsx > F1-FE-03..06 W00 – Màn hình chào (UC01) > F1-FE-06 QR sai: báo "Mã QR không hợp lệ, vui lòng gọi nhân viên" 29ms
+ ✓ src/pages/qr/WelcomePage.test.tsx > F1-FE-03..06 W00 – Màn hình chào (UC01) > F1-FE-17 mất mạng khi quét QR: báo không kết nối được máy chủ 46ms
+ ✓ src/pages/admin/LoginPage.test.tsx > F0-FE-01..06 A01 – Đăng nhập nhân viên (UC08) > F0-FE-01 BARISTA đăng nhập -> màn hình mặc định /admin/bar 871ms
+ ✓ src/pages/qr/CartPage.test.tsx > F2-FE-01..02 W01 – thêm món vào giỏ (UC04) > F2-FE-01 bấm "+" tăng số lượng, hiện thanh giỏ hàng; món tạm hết không có nút thêm 896ms
+ ✓ src/pages/qr/MenuPage.test.tsx > F1-FE-08..15 W01 – Menu điện tử (UC03) > F1-FE-11 tab "Khuyến mãi" chỉ hiện món đang KM 265ms
+ ✓ src/pages/qr/WelcomePage.test.tsx > F1-FE-03..06 W00 – Màn hình chào (UC01) > F1-FE-07 không lưu định danh khách trên thiết bị (NFR-S7) 133ms
+ ✓ src/pages/qr/CartPage.test.tsx > F2-FE-01..02 W01 – thêm món vào giỏ (UC04) > F2-FE-02 giỏ giữ trong sessionStorage của tab, không ghi localStorage (NFR-S7) 205ms
+ ✓ src/pages/qr/MenuPage.test.tsx > F1-FE-08..15 W01 – Menu điện tử (UC03) > F1-FE-12 lọc theo danh mục 239ms
+ ✓ src/pages/admin/LoginPage.test.tsx > F0-FE-01..06 A01 – Đăng nhập nhân viên (UC08) > F0-FE-01 CASHIER đăng nhập -> màn hình mặc định /admin/bar 395ms
+ ✓ src/pages/qr/MenuPage.test.tsx > F1-FE-08..15 W01 – Menu điện tử (UC03) > F1-FE-13 tìm món không dấu; không có kết quả thì báo 462ms
+ ✓ src/pages/qr/MenuPage.test.tsx > F1-FE-08..15 W01 – Menu điện tử (UC03) > F1-FE-14 không có món KM thì không hiện tab "Khuyến mãi" 54ms
+ ✓ src/pages/admin/LoginPage.test.tsx > F0-FE-01..06 A01 – Đăng nhập nhân viên (UC08) > F0-FE-01 MANAGER đăng nhập -> màn hình mặc định /admin/dashboard 348ms
+ ✓ src/pages/qr/MenuPage.test.tsx > F1-FE-08..15 W01 – Menu điện tử (UC03) > F1-FE-15 lỗi tải menu: báo lỗi và "Thử lại" tải lại thành công 64ms
+ ✓ src/pages/qr/CartPage.test.tsx > F2-FE-03..09 W02 – Giỏ hàng & thanh toán (UC04, UC05) > F2-FE-03 hiển thị tạm tính, khuyến mãi, tổng; tăng/giảm/xóa món 725ms
+ ✓ src/pages/qr/MenuPage.test.tsx > F1-FE-08..15 W01 – Menu điện tử (UC03) > F1-FE-16 nút "Nhập SĐT tích điểm" trên menu 103ms
+ ✓ src/pages/qr/OrderPage.test.tsx > F2-FE-10..17 W03 – Theo dõi đơn (UC06) > F2-FE-15 rớt kết nối: báo đang kết nối lại và tự kết nối lại (NFR-R3) 1105ms
+ ✓ src/pages/admin/LoginPage.test.tsx > F0-FE-01..06 A01 – Đăng nhập nhân viên (UC08) > F0-FE-01 ADMIN đăng nhập -> màn hình mặc định /admin/dashboard 340ms
+ ✓ src/pages/admin/LoginPage.test.tsx > F0-FE-01..06 A01 – Đăng nhập nhân viên (UC08) > F0-FE-02 sai mật khẩu: hiện thông báo, không lưu phiên 312ms
+ ✓ src/pages/admin/LoginPage.test.tsx > F0-FE-01..06 A01 – Đăng nhập nhân viên (UC08) > F0-FE-03 chưa đăng nhập mà vào trang admin -> chuyển về đăng nhập 22ms
+ ✓ src/pages/admin/LoginPage.test.tsx > F0-FE-01..06 A01 – Đăng nhập nhân viên (UC08) > F0-FE-04 token hết hạn phía server -> xóa phiên, về đăng nhập 48ms
+ ✓ src/pages/admin/LoginPage.test.tsx > F0-FE-01..06 A01 – Đăng nhập nhân viên (UC08) > F0-FE-05 phiên hết hạn phía client (quá 8 giờ) bị bỏ qua 1ms
+ ✓ src/pages/admin/LoginPage.test.tsx > F0-FE-01..06 A01 – Đăng nhập nhân viên (UC08) > F0-FE-06 đăng xuất xóa phiên 62ms
+ ✓ src/pages/qr/OrderPage.test.tsx > F2-FE-10..17 W03 – Theo dõi đơn (UC06) > F2-FE-16 sai token: báo không tìm thấy đơn; WebSocket bị từ chối thì không thử lại 1235ms
+ ✓ src/pages/qr/OrderPage.test.tsx > F2-FE-10..17 W03 – Theo dõi đơn (UC06) > F2-FE-17 "Gọi thêm món" quay lại menu 100ms
+ ✓ src/pages/qr/CartPage.test.tsx > F2-FE-03..09 W02 – Giỏ hàng & thanh toán (UC04, UC05) > F2-FE-04 mỗi món tối đa 20 ly 1465ms
+ ✓ src/pages/qr/CartPage.test.tsx > F2-FE-03..09 W02 – Giỏ hàng & thanh toán (UC04, UC05) > F2-FE-05 đặt & thanh toán thành công -> sang trang theo dõi đơn, xóa giỏ 620ms
+ ✓ src/pages/qr/CartPage.test.tsx > F2-FE-03..09 W02 – Giỏ hàng & thanh toán (UC04, UC05) > F2-FE-06 món vừa hết: báo lỗi, đánh dấu món, chặn thanh toán tới khi bỏ món 456ms
+ ✓ src/pages/qr/CartPage.test.tsx > F2-FE-03..09 W02 – Giỏ hàng & thanh toán (UC04, UC05) > F2-FE-07 giá thay đổi: cập nhật giá mới, báo khách xác nhận lại rồi gửi đúng tổng mới 435ms
+ ✓ src/pages/qr/CartPage.test.tsx > F2-FE-03..09 W02 – Giỏ hàng & thanh toán (UC04, UC05) > F2-FE-08 thanh toán thất bại: báo lỗi, "Thử thanh toán lại" dùng lại đơn cũ 419ms
+ ✓ src/pages/qr/CartPage.test.tsx > F2-FE-03..09 W02 – Giỏ hàng & thanh toán (UC04, UC05) > F2-FE-09 hiện "Đang xử lý thanh toán..." trong lúc chờ 429ms
+
+ Test Files  6 passed (6)
+      Tests  47 passed (47)
+   Start at  23:59:19
+   Duration  11.34s (transform 793ms, setup 4.19s, collect 6.18s, tests 14.15s, environment 13.53s, prepare 2.71s)
+
+ % Coverage report from v8
+-------------------|---------|----------|---------|---------|-------------------
+File               | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s 
+-------------------|---------|----------|---------|---------|-------------------
+All files          |   99.03 |    92.47 |     100 |   99.03 |                   
+ src               |     100 |      100 |     100 |     100 |                   
+  App.tsx          |     100 |      100 |     100 |     100 |                   
+ src/api           |     100 |    84.21 |     100 |     100 |                   
+  auth.ts          |     100 |      100 |     100 |     100 |                   
+  client.ts        |     100 |       75 |     100 |     100 | 33                
+  orders.ts        |     100 |      100 |     100 |     100 |                   
+  public.ts        |     100 |      100 |     100 |     100 |                   
+ src/auth          |      92 |    91.66 |     100 |      92 |                   
+  staffSession.ts  |      92 |    91.66 |     100 |      92 | 29-30             
+ src/cart          |   96.55 |     91.3 |     100 |   96.55 |                   
+  CartContext.tsx  |   96.55 |     91.3 |     100 |   96.55 | 40-41,54          
+ src/hooks         |   97.43 |    83.33 |     100 |   97.43 |                   
+  ...rderSocket.ts |   97.43 |    83.33 |     100 |   97.43 | 36                
+ src/lib           |     100 |      100 |     100 |     100 |                   
+  format.ts        |     100 |      100 |     100 |     100 |                   
+ src/pages/admin   |   98.34 |    92.59 |     100 |   98.34 |                   
+  AdminLayout.tsx  |   95.74 |    86.66 |     100 |   95.74 | 29-30             
+  ...gSoonPage.tsx |     100 |      100 |     100 |     100 |                   
+  LoginPage.tsx    |     100 |      100 |     100 |     100 |                   
+ src/pages/qr      |   99.82 |    94.37 |     100 |   99.82 |                   
+  CartPage.tsx     |     100 |    92.68 |     100 |     100 | 11,81,84          
+  MenuPage.tsx     |     100 |    96.61 |     100 |     100 | 100,150           
+  OrderPage.tsx    |   99.15 |    92.85 |     100 |   99.15 | 84                
+  ...olderPage.tsx |     100 |      100 |     100 |     100 |                   
+  QrHeader.tsx     |     100 |      100 |     100 |     100 |                   
+  QrLayout.tsx     |     100 |     92.3 |     100 |     100 | 16                
+  WelcomePage.tsx  |     100 |      100 |     100 |     100 |                   
+-------------------|---------|----------|---------|---------|-------------------

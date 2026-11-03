@@ -46,6 +46,10 @@ Chi tiết từng thay đổi xem trong [biên bản họp](../../4.Tai_lieu_kha
 | D24 | 02/11 | Môi trường chạy & demo | Chạy **local trên laptop** bằng Docker Desktop (WSL2) + Docker Compose; Docker cài tại `D:\Docker` (chương trình `D:\Docker\DockerDesktop`, dữ liệu `D:\Docker\wsl-data`); WSL2 giới hạn 4 GB RAM / 4 nhân. Điện thoại demo truy cập qua cùng mạng Wi-Fi |
 | D25 | 02/11 | Quy trình code & kiểm thử | Code **theo từng luồng nghiệp vụ cốt lõi**; mỗi luồng phải có **test tự động** và **biên bản kiểm thử** đầy đủ trước khi chuyển sang luồng tiếp theo |
 | D26 | 02/11 | Thứ tự code & vị trí | F0 Nền tảng → F1 QR & menu → F2 Đặt món & thanh toán → F3 Màn hình Bar → F4 OTP & tích điểm → F5 Thu ngân hỗ trợ → F6 Quản trị → F7 AI gợi ý → F8 Báo cáo & dashboard. Mã nguồn: `2.San_pham/smartcafe/`; biên bản kiểm thử: `1.Bao_cao/Kiem_thu/` |
+| D27 | 02/11 | Nhãn khuyến mãi | Chỉ gắn nhãn KM (giá gốc gạch ngang, `promotion_id`, tính vào doanh thu KM) khi giá KM **thấp hơn** giá đang bán (giá chi nhánh / giá chung). Nếu không thấp hơn thì bán giá thường, **không hiện nhãn KM**, tránh khách hiểu nhầm |
+| D28 | 02/11 | Mã đơn | Giữ mã ngắn `CG-0142` (số thứ tự trong ngày, đếm lại mỗi ngày). Thêm cột `orders.order_date` (ngày tạo đơn, giờ VN) và ràng buộc **UNIQUE (order_code, order_date)** thay cho UNIQUE trên riêng `order_code` (sửa mâu thuẫn giữa UC05 và schema) |
+| D29 | 03/11 | Màn hình chi tiết món | **Bỏ popup W01a**: bấm "+" trên menu là thêm món ngay vào giỏ; số lượng và ghi chú từng món chỉnh trong giỏ hàng (W02). Đạt NFR-U2 (đặt 2 món trong 5 lần chạm) |
+| D30 | 03/11 | Hoàn tác món cuối của đơn | Pha chế bấm nhầm "Xong" ở **món cuối cùng** (đơn đã "Có thể lấy") rồi bấm "Hoàn tác" trong thời gian cho phép thì món về "Đang pha" và **đơn quay lại "Đang pha chế"** (READY → PREPARING, ghi lịch sử trạng thái, khách thấy lại "Đang pha"). Đơn đã "Đã giao" (COMPLETED) thì không hoàn tác được |
 
 ## Vấn đề mở (Open Issues) – nơi theo dõi duy nhất
 
@@ -54,7 +58,9 @@ Bảng này là **nơi duy nhất** theo dõi các đề xuất và vấn đề 
 | # | Ngày mở | Vấn đề / đề xuất | Phương án thay thế | Người chốt | Trạng thái |
 |:---|:---|:---|:---|:---|:---|
 | P11 | 01/11 | Mốc lập trình mới ở [IV.3 Mục 3](IV.3_Kien_truc_va_API.md) (giai đoạn V bắt đầu 02/11 thay vì 23/10) | Giữ mốc gốc, tăng nhân lực | A | Hoãn – A tự cập nhật timeline thủ công sau (CR-27) |
-| P13 | 02/11 | Khi giá KM **không thấp hơn** giá đang bán (giá chi nhánh / giá chung) thì bán giá thường và **không gắn nhãn KM** (`promotion_id` = NULL, không tính vào "doanh thu KM"). Đã cài đặt ở F1 – xem [biên bản kiểm thử F1](../Kiem_thu/Bien_ban_kiem_thu_F1_QR_Menu.md) Mục 7 | Vẫn gắn nhãn KM dù không rẻ hơn | A | **Đang mở** |
+| P15 | 03/11 | Bấm nhầm "Xong" ở **món cuối cùng** (đơn đã chuyển "Có thể lấy") rồi bấm "Hoàn tác" thì **đơn quay lại "Đang pha chế"** (READY → PREPARING, ghi lịch sử, khách thấy lại "Đang pha"). Bổ sung chuyển trạng thái này vào biểu đồ trạng thái đơn. Đã cài đặt ở F3 – xem [biên bản kiểm thử F3](../Kiem_thu/Bien_ban_kiem_thu_F3_Man_hinh_Bar.md) Mục 7 | Không cho hoàn tác khi đơn đã "Có thể lấy" | A | Đã chốt → D30 |
+| P14 | 03/11 | Gộp W01a (popup chi tiết món) vào W02: bấm "+" trên menu là thêm ngay, số lượng và ghi chú chỉnh trong giỏ hàng – để đạt NFR-U2 (đặt 2 món trong 5 lần chạm; có popup thì ≥ 7). Đã cài đặt ở F2 – xem [biên bản kiểm thử F2](../Kiem_thu/Bien_ban_kiem_thu_F2_Dat_mon_Thanh_toan.md) Mục 7 | Giữ popup W01a đúng wireframe | A | Đã chốt → D29 |
+| P13 | 02/11 | Khi giá KM **không thấp hơn** giá đang bán (giá chi nhánh / giá chung) thì bán giá thường và **không gắn nhãn KM** (`promotion_id` = NULL, không tính vào "doanh thu KM"). Đã cài đặt ở F1 – xem [biên bản kiểm thử F1](../Kiem_thu/Bien_ban_kiem_thu_F1_QR_Menu.md) Mục 7 | Vẫn gắn nhãn KM dù không rẻ hơn | A | Đã chốt → D27 |
 | P12 | 02/11 | Bản demo dự phòng trên cloud (Azure for Students hoặc Oracle Always Free) phòng khi laptop gặp sự cố lúc nghiệm thu | Chỉ demo local; hoặc dùng laptop thành viên khác | A | **Đang mở** |
 | P1 | 28/10 | IoT giao tiếp bằng HTTP REST | — | — | Hủy (D8) |
 | P2 | 28/10 | Thu ngân không nhận order tại quầy, chỉ xử lý ngoại lệ | Thêm POS tại quầy | A | Đã chốt → D19, D20 |

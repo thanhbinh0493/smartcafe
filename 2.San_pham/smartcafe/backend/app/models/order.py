@@ -1,6 +1,6 @@
-from datetime import datetime
+from datetime import date, datetime
 
-from sqlalchemy import BigInteger, Boolean, DateTime, ForeignKey, Integer, SmallInteger, String, func
+from sqlalchemy import BigInteger, Boolean, Date, DateTime, ForeignKey, Integer, SmallInteger, String, func
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.core.db import Base
@@ -11,7 +11,8 @@ class Order(Base):
     __tablename__ = "orders"
 
     id: Mapped[int] = mapped_column(BigInteger, primary_key=True)
-    order_code: Mapped[str] = mapped_column(String(20), unique=True)
+    order_code: Mapped[str] = mapped_column(String(20))
+    order_date: Mapped[date] = mapped_column(Date)  # UNIQUE (order_code, order_date) – D28
     access_token: Mapped[str] = mapped_column(String(32), unique=True)
     branch_id: Mapped[int] = mapped_column(ForeignKey("branches.id"))
     table_id: Mapped[int] = mapped_column(ForeignKey("dining_tables.id"))

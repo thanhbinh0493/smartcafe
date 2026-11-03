@@ -39,7 +39,7 @@ Ký hiệu: <u>gạch chân</u> = khóa chính, `#` = khóa ngoại.
 - **customers**(<u>id</u>, phone, name, loyalty_points, created_at, last_verified_at)
 - **otp_requests**(<u>id</u>, phone, code_hash, attempts, expires_at, verified_at, created_at)
 - **loyalty_transactions**(<u>id</u>, #customer_id, #order_id, points, type, created_at)
-- **orders**(<u>id</u>, order_code, access_token, #branch_id, #table_id, #customer_id, status, total_amount, note, cancel_reason, #cancelled_by, #completed_by, created_at, paid_at, ready_at, completed_at, cancelled_at)
+- **orders**(<u>id</u>, order_code, order_date, access_token, #branch_id, #table_id, #customer_id, status, total_amount, note, cancel_reason, #cancelled_by, #completed_by, created_at, paid_at, ready_at, completed_at, cancelled_at)
 - **order_items**(<u>id</u>, #order_id, #menu_item_id, #promotion_id, quantity, original_price, unit_price, note, status, is_recommended, started_at, done_at)
 - **order_status_history**(<u>id</u>, #order_id, from_status, to_status, source, #staff_id, created_at)
 - **payments**(<u>id</u>, #order_id, method, amount, status, transaction_ref, paid_at, refunded_at)
@@ -105,7 +105,8 @@ Ký hiệu: <u>gạch chân</u> = khóa chính, `#` = khóa ngoại.
 | Cột | Kiểu | Ràng buộc | Mô tả |
 |:---|:---|:---|:---|
 | id | BIGSERIAL | PK | |
-| order_code | VARCHAR(20) | UNIQUE | `CG-0142`, hiển thị cho khách và Bar |
+| order_code | VARCHAR(20) | NOT NULL | `CG-0142` = mã chi nhánh + số thứ tự trong ngày (đếm lại từ 0001 mỗi ngày), hiển thị cho khách và Bar |
+| order_date | DATE | NOT NULL | Ngày tạo đơn theo giờ Việt Nam. **UNIQUE (order_code, order_date)**: mã đơn không trùng trong cùng ngày (D28). Dùng cho tra cứu đơn trong ngày và báo cáo |
 | access_token | VARCHAR(32) | UNIQUE | Token cho trang theo dõi đơn |
 | branch_id / table_id | INT | FK | Lấy từ `qr_token` |
 | customer_id | INT | FK, NULL | NULL = đơn ẩn danh |

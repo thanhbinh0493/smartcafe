@@ -1,0 +1,151 @@
+﻿============================= test session starts =============================
+platform win32 -- Python 3.11.9, pytest-8.4.2, pluggy-1.7.0 -- D:\PTIT\HK3\QLDAPM\QLDAPM_Nhom_8\2.San_pham\smartcafe\backend\.venv\Scripts\python.exe
+cachedir: .pytest_cache
+rootdir: D:\PTIT\HK3\QLDAPM\QLDAPM_Nhom_8\2.San_pham\smartcafe\backend
+configfile: pytest.ini
+testpaths: tests
+plugins: anyio-4.16.0, cov-7.1.0
+collecting ... collected 98 items
+
+tests/f0/test_app.py::test_F0_29_health PASSED                           [  1%]
+tests/f0/test_app.py::test_F0_30_swagger_co_tai_lieu_api PASSED          [  2%]
+tests/f0/test_app.py::test_F0_31_route_khong_ton_tai_tra_loi_dung_dinh_dang PASSED [  3%]
+tests/f0/test_auth_api.py::test_F0_15_dang_nhap_thanh_cong_tra_token_va_thong_tin PASSED [  4%]
+tests/f0/test_auth_api.py::test_F0_16_admin_dang_nhap_khong_co_chi_nhanh PASSED [  5%]
+tests/f0/test_auth_api.py::test_F0_17_sai_mat_khau_va_sai_ten_cung_mot_thong_bao PASSED [  6%]
+tests/f0/test_auth_api.py::test_F0_18_tai_khoan_bi_khoa_khong_dang_nhap_duoc PASSED [  7%]
+tests/f0/test_auth_api.py::test_F0_19_du_lieu_dang_nhap_rong_tra_loi_validation_dung_dinh_dang PASSED [  8%]
+tests/f0/test_auth_api.py::test_F0_20_me_tra_thong_tin_nguoi_dang_nhap PASSED [  9%]
+tests/f0/test_auth_api.py::test_F0_21_me_khong_co_token PASSED           [ 10%]
+tests/f0/test_auth_api.py::test_F0_22_me_token_rac PASSED                [ 11%]
+tests/f0/test_auth_api.py::test_F0_23_me_token_het_han PASSED            [ 12%]
+tests/f0/test_auth_api.py::test_F0_24_token_khach_khong_goi_duoc_api_nhan_vien PASSED [ 13%]
+tests/f0/test_auth_api.py::test_F0_25_tai_khoan_bi_khoa_sau_khi_da_co_token PASSED [ 14%]
+tests/f0/test_migration.py::test_F0_01_upgrade_tao_du_18_bang_va_9_enum PASSED [ 15%]
+tests/f0/test_migration.py::test_F0_02_downgrade_xoa_sach_roi_upgrade_lai_duoc PASSED [ 16%]
+tests/f0/test_migration.py::test_F0_03_rang_buoc_admin_khong_thuoc_chi_nhanh PASSED [ 17%]
+tests/f0/test_migration.py::test_F0_04_rang_buoc_gia_khong_am PASSED     [ 18%]
+tests/f0/test_rbac.py::test_F0_26_require_roles_theo_ma_tran_rbac[BARISTA-200] PASSED [ 19%]
+tests/f0/test_rbac.py::test_F0_26_require_roles_theo_ma_tran_rbac[MANAGER-200] PASSED [ 20%]
+tests/f0/test_rbac.py::test_F0_26_require_roles_theo_ma_tran_rbac[CASHIER-403] PASSED [ 21%]
+tests/f0/test_rbac.py::test_F0_26_require_roles_theo_ma_tran_rbac[ADMIN-403] PASSED [ 22%]
+tests/f0/test_rbac.py::test_F0_27_nhan_vien_chi_truy_cap_chi_nhanh_cua_minh PASSED [ 23%]
+tests/f0/test_rbac.py::test_F0_28_admin_truy_cap_moi_chi_nhanh PASSED    [ 24%]
+tests/f0/test_security.py::test_F0_10_bam_va_kiem_tra_mat_khau PASSED    [ 25%]
+tests/f0/test_security.py::test_F0_11_hash_hong_khong_gay_loi PASSED     [ 26%]
+tests/f0/test_security.py::test_F0_12_jwt_nhan_vien_chua_dung_thong_tin_va_het_han_8_gio PASSED [ 27%]
+tests/f0/test_security.py::test_F0_13_jwt_sai_chu_ky_bi_tu_choi PASSED   [ 28%]
+tests/f0/test_security.py::test_F0_14_jwt_het_han_bi_tu_choi PASSED      [ 29%]
+tests/f0/test_seed.py::test_F0_05_seed_dung_so_luong_theo_thiet_ke PASSED [ 30%]
+tests/f0/test_seed.py::test_F0_06_seed_phan_bo_vai_tro_nhan_vien PASSED  [ 31%]
+tests/f0/test_seed.py::test_F0_07_seed_qr_token_ngau_nhien_du_dai_va_khong_trung PASSED [ 32%]
+tests/f0/test_seed.py::test_F0_08_seed_mat_khau_duoc_bam_bcrypt PASSED   [ 33%]
+tests/f0/test_seed.py::test_F0_09_seed_co_3_den_4_mon_moi PASSED         [ 34%]
+tests/f1/test_menu_api.py::test_F1_07_gia_chung_khi_chi_nhanh_khong_cau_hinh PASSED [ 35%]
+tests/f1/test_menu_api.py::test_F1_08_gia_rieng_chi_ap_dung_cho_chi_nhanh_do PASSED [ 36%]
+tests/f1/test_menu_api.py::test_F1_09_mon_tam_het_van_hien_nhung_danh_dau PASSED [ 37%]
+tests/f1/test_menu_api.py::test_F1_10_an_mon_ngung_ban_mon_da_xoa_va_danh_muc_tat PASSED [ 38%]
+tests/f1/test_menu_api.py::test_F1_11_nhan_mon_moi_30_ngay[0-True] PASSED [ 39%]
+tests/f1/test_menu_api.py::test_F1_11_nhan_mon_moi_30_ngay[29-True] PASSED [ 40%]
+tests/f1/test_menu_api.py::test_F1_11_nhan_mon_moi_30_ngay[31-False] PASSED [ 41%]
+tests/f1/test_menu_api.py::test_F1_11_nhan_mon_moi_30_ngay[120-False] PASSED [ 42%]
+tests/f1/test_menu_api.py::test_F1_12_km_toan_chuoi_ap_dung_moi_chi_nhanh PASSED [ 43%]
+tests/f1/test_menu_api.py::test_F1_13_km_rieng_chi_nhanh_khong_anh_huong_chi_nhanh_khac PASSED [ 44%]
+tests/f1/test_menu_api.py::test_F1_14_km_het_han_chua_bat_dau_hoac_bi_tat_khong_ap_dung[start0-end0-True] PASSED [ 45%]
+tests/f1/test_menu_api.py::test_F1_14_km_het_han_chua_bat_dau_hoac_bi_tat_khong_ap_dung[start1-end1-True] PASSED [ 46%]
+tests/f1/test_menu_api.py::test_F1_14_km_het_han_chua_bat_dau_hoac_bi_tat_khong_ap_dung[start2-end2-False] PASSED [ 47%]
+tests/f1/test_menu_api.py::test_F1_15_nhieu_km_cung_luc_lay_gia_thap_nhat PASSED [ 48%]
+tests/f1/test_menu_api.py::test_F1_16_km_ket_hop_gia_chi_nhanh_lay_gia_thap_hon PASSED [ 50%]
+tests/f1/test_menu_api.py::test_F1_17_danh_muc_theo_thu_tu_mon_theo_ten PASSED [ 51%]
+tests/f1/test_menu_api.py::test_F1_22_sap_xep_ten_mon_theo_tieng_viet PASSED [ 52%]
+tests/f1/test_menu_api.py::test_F1_18_chi_nhanh_khong_ton_tai_hoac_ngung_hoat_dong PASSED [ 53%]
+tests/f1/test_menu_api.py::test_F1_19_menu_rong PASSED                   [ 54%]
+tests/f1/test_menu_seed.py::test_F1_20_quet_qr_ban_bat_ky_roi_mo_menu PASSED [ 55%]
+tests/f1/test_menu_seed.py::test_F1_21_gia_tren_du_lieu_mau_dung_kich_ban PASSED [ 56%]
+tests/f1/test_pricing_unit.py::test_F1_06_apply_promo[45000-None-None-expected0] PASSED [ 57%]
+tests/f1/test_pricing_unit.py::test_F1_06_apply_promo[45000-36000-7-expected1] PASSED [ 58%]
+tests/f1/test_pricing_unit.py::test_F1_06_apply_promo[45000-45000-7-expected2] PASSED [ 59%]
+tests/f1/test_pricing_unit.py::test_F1_06_apply_promo[27000-29000-7-expected3] PASSED [ 60%]
+tests/f1/test_pricing_unit.py::test_F1_06_apply_promo[45000-0-7-expected4] PASSED [ 61%]
+tests/f1/test_table_lookup.py::test_F1_01_qr_hop_le_tra_chi_nhanh_va_ban PASSED [ 62%]
+tests/f1/test_table_lookup.py::test_F1_02_qr_khong_ton_tai PASSED        [ 63%]
+tests/f1/test_table_lookup.py::test_F1_03_ban_bi_khoa PASSED             [ 64%]
+tests/f1/test_table_lookup.py::test_F1_04_chi_nhanh_ngung_hoat_dong PASSED [ 65%]
+tests/f1/test_table_lookup.py::test_F1_05_khong_lo_qr_token_trong_phan_hoi PASSED [ 66%]
+tests/f2/test_concurrency.py::test_F2_29_dat_don_dong_thoi_khong_trung_ma PASSED [ 67%]
+tests/f2/test_create_order.py::test_F2_01_tao_don_thanh_cong PASSED      [ 68%]
+tests/f2/test_create_order.py::test_F2_02_bo_qua_gia_client_gui_len PASSED [ 69%]
+tests/f2/test_create_order.py::test_F2_03_dung_gia_rieng_cua_chi_nhanh PASSED [ 70%]
+tests/f2/test_create_order.py::test_F2_04_mon_tam_het PASSED             [ 71%]
+tests/f2/test_create_order.py::test_F2_05_mon_ngung_ban_hoac_khong_ton_tai PASSED [ 72%]
+tests/f2/test_create_order.py::test_F2_06_qr_sai_hoac_ban_khoa PASSED    [ 73%]
+tests/f2/test_create_order.py::test_F2_07_du_lieu_khong_hop_le[sl0] PASSED [ 74%]
+tests/f2/test_create_order.py::test_F2_07_du_lieu_khong_hop_le[sl21] PASSED [ 75%]
+tests/f2/test_create_order.py::test_F2_07_du_lieu_khong_hop_le[gio_rong] PASSED [ 76%]
+tests/f2/test_create_order.py::test_F2_07_du_lieu_khong_hop_le[ghi_chu_mon_256] PASSED [ 77%]
+tests/f2/test_create_order.py::test_F2_07_du_lieu_khong_hop_le[ghi_chu_don_256] PASSED [ 78%]
+tests/f2/test_create_order.py::test_F2_08_tong_so_luong_mot_mon_toi_da_20 PASSED [ 79%]
+tests/f2/test_create_order.py::test_F2_09_tong_tien_khop_thi_tao_don PASSED [ 80%]
+tests/f2/test_create_order.py::test_F2_10_km_vua_het_han_bao_gia_thay_doi PASSED [ 81%]
+tests/f2/test_create_order.py::test_F2_11_ghi_nhan_mon_tu_goi_y PASSED   [ 82%]
+tests/f2/test_order_code.py::test_F2_12_ma_don_tang_dan_rieng_tung_chi_nhanh PASSED [ 83%]
+tests/f2/test_order_code.py::test_F2_13_ma_don_dem_lai_moi_ngay PASSED   [ 84%]
+tests/f2/test_order_code.py::test_F2_14_csdl_chan_trung_ma_trong_cung_ngay PASSED [ 85%]
+tests/f2/test_order_seed.py::test_F2_28_dat_va_thanh_toan_tren_du_lieu_mau PASSED [ 86%]
+tests/f2/test_payment.py::test_F2_15_thanh_toan_thanh_cong PASSED        [ 87%]
+tests/f2/test_payment.py::test_F2_16_thanh_toan_that_bai_so_tien_duoi_999 PASSED [ 88%]
+tests/f2/test_payment.py::test_F2_17_thu_lai_sau_khi_that_bai PASSED     [ 89%]
+tests/f2/test_payment.py::test_F2_18_khong_thanh_toan_hai_lan PASSED     [ 90%]
+tests/f2/test_payment.py::test_F2_19_sai_access_token PASSED             [ 91%]
+tests/f2/test_payment.py::test_F2_20_phuong_thuc_khong_hop_le PASSED     [ 92%]
+tests/f2/test_payment.py::test_F2_21_mock_gateway_quy_tac_999 PASSED     [ 93%]
+tests/f2/test_tracking.py::test_F2_22_xem_don PASSED                     [ 94%]
+tests/f2/test_tracking.py::test_F2_23_vi_tri_trong_hang_doi PASSED       [ 95%]
+tests/f2/test_tracking.py::test_F2_24_websocket_sai_token_bi_tu_choi PASSED [ 96%]
+tests/f2/test_tracking.py::test_F2_25_websocket_nhan_anh_chup_va_su_kien_thanh_toan PASSED [ 97%]
+tests/f2/test_tracking.py::test_F2_26_man_hinh_bar_nhan_su_kien_mon_moi PASSED [ 98%]
+tests/f2/test_tracking.py::test_F2_27_hub_bo_ket_noi_da_ngat PASSED      [100%]
+
+=============================== tests coverage ================================
+_______________ coverage: platform win32, python 3.11.9-final-0 _______________
+
+Name                              Stmts   Miss  Cover
+-----------------------------------------------------
+app\__init__.py                       0      0   100%
+app\core\__init__.py                  0      0   100%
+app\core\config.py                   15      0   100%
+app\core\db.py                       13      4    69%
+app\core\errors.py                   25      0   100%
+app\core\security.py                 20      0   100%
+app\main.py                          21      0   100%
+app\models\__init__.py                6      0   100%
+app\models\analytics.py              41      0   100%
+app\models\branch.py                 37      0   100%
+app\models\customer.py               30      0   100%
+app\models\enums.py                  19      0   100%
+app\models\menu.py                   50      0   100%
+app\models\order.py                  60      0   100%
+app\modules\__init__.py               0      0   100%
+app\modules\auth\__init__.py          0      0   100%
+app\modules\auth\deps.py             34      0   100%
+app\modules\auth\router.py           28      0   100%
+app\modules\auth\schemas.py          19      0   100%
+app\modules\branch\__init__.py        0      0   100%
+app\modules\branch\router.py         26      0   100%
+app\modules\menu\__init__.py          0      0   100%
+app\modules\menu\router.py           38      0   100%
+app\modules\menu\service.py          34      0   100%
+app\modules\order\__init__.py         0      0   100%
+app\modules\order\router.py          53      0   100%
+app\modules\order\schemas.py         61      0   100%
+app\modules\order\service.py         93      0   100%
+app\modules\payment\__init__.py       0      0   100%
+app\modules\payment\gateway.py       20      0   100%
+app\ws\__init__.py                    0      0   100%
+app\ws\hub.py                        26      0   100%
+scripts\__init__.py                   0      0   100%
+scripts\seed_data.py                 66     21    68%
+scripts\smoke_test.py                72     72     0%
+-----------------------------------------------------
+TOTAL                               907     97    89%
+============================= 98 passed in 18.35s =============================

@@ -123,7 +123,7 @@ cd frontend; npx vitest run src/lib src/pages/qr
 | BUG-F1-01 | Trung bình | Món sắp sai thứ tự tiếng Việt: "Cold brew" đứng trước "Cà phê muối", "Trà vải" trước "Trà đào cam sả" | Kiểm tra trực quan ảnh chụp W01 (test F1-17 dùng tên ASCII nên không bắt được) | Image `postgres:16-alpine` dùng musl: collation `en_US.utf8` thực chất so sánh theo byte, chữ có dấu (à, đ…) xếp sau z | `ORDER BY ... m.name COLLATE "vi-VN-x-icu"` (collation ICU có sẵn trong PostgreSQL 16) | Thêm test hồi quy **F1-22** (chạy trước khi sửa: không đạt; sau khi sửa: đạt); 65/65 test backend đạt; chụp lại W01 đúng thứ tự | Đã đóng |
 
 ## 7. Tồn tại / ghi chú
-- **Cách hiểu quy tắc giá cần PM xác nhận:** khi giá KM **không thấp hơn** giá đang bán (giá chi nhánh hoặc giá chung), hệ thống bán theo giá thường và **không gắn nhãn KM / `promotion_id`** (F1-06c, F1-06d, F1-16). Giá bán vẫn đúng công thức `LEAST` của D10; khác biệt chỉ ở việc có hiện "đang khuyến mãi" hay không (ảnh hưởng chỉ số "doanh thu KM" của dashboard F8).
+- **Quy tắc gắn nhãn KM – PM đã xác nhận (P13 → D27, CR-31):** khi giá KM **không thấp hơn** giá đang bán (giá chi nhánh hoặc giá chung), hệ thống bán theo giá thường và **không gắn nhãn KM / `promotion_id`** (F1-06c, F1-06d, F1-16), tránh khách hiểu nhầm. Giá bán vẫn đúng công thức `LEAST` của D10.
 - Khi 2 KM cùng mức giá thấp nhất, hệ thống chọn KM có `id` nhỏ hơn để kết quả ổn định.
 - Ảnh món chưa có (dữ liệu mẫu để trống `image_url`), giao diện hiện biểu tượng thay thế. Upload ảnh làm ở F6.
 - Chưa đo NFR-P1 (tải trang ≤ 2 giây trên 4G bằng Lighthouse) và NFR-P2 với 50 người dùng đồng thời – sẽ đo ở giai đoạn kiểm thử hiệu năng (VI). Gói JS sau nén gzip hiện 58 KB.

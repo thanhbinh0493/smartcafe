@@ -6,7 +6,7 @@ from sqlalchemy.orm import Session
 
 from app.core.security import hash_password
 from app.models import (
-    Branch, BranchMenuItem, Category, DiningTable, MenuItem, Promotion, PromotionItem, Staff,
+    Branch, BranchMenuItem, Category, Customer, DiningTable, MenuItem, Promotion, PromotionItem, Staff,
 )
 
 PASSWORD = "secret123"
@@ -78,3 +78,10 @@ def promo(
     db.add(p)
     db.flush()
     return p
+
+
+def customer(db: Session, phone: str = "0912345678", points: int = 0) -> Customer:
+    c = Customer(phone=phone, name=None, loyalty_points=points)
+    db.add(c)
+    db.flush()
+    return c

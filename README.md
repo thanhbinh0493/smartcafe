@@ -11,7 +11,7 @@
 
 Thời gian thực hiện: 21/09/2026 → 21/12/2026. Nhân sự: A (PM, BA) · B (Backend) · C (AI) · D (Tester/QA) · E (Frontend).
 
-## Đang ở giai đoạn nào (cập nhật 02/11/2026)
+## Đang ở giai đoạn nào (cập nhật 03/11/2026)
 | Giai đoạn | Trạng thái |
 |:---|:---|
 | Khởi tạo, xác định phạm vi | ✔ Xong |
@@ -19,7 +19,11 @@ Thời gian thực hiện: 21/09/2026 → 21/12/2026. Nhân sự: A (PM, BA) · 
 | Lập trình (V) – theo 9 luồng F0 → F8 | **Đang làm** |
 | ├ F0 Nền tảng (Docker Compose, CSDL, dữ liệu mẫu, đăng nhập nhân viên, phân quyền) | ✔ Xong, đã kiểm thử – Đạt |
 | ├ F1 Quét QR → màn hình chào → menu chi nhánh | ✔ Xong, đã kiểm thử – Đạt |
-| └ F2 Đặt món & thanh toán · F3 Màn hình Bar · F4 OTP & tích điểm · F5 Thu ngân · F6 Quản trị · F7 AI gợi ý · F8 Báo cáo & dashboard | Chưa làm |
+| ├ F2 Đặt món → thanh toán giả lập → theo dõi đơn | ✔ Xong, đã kiểm thử – Đạt |
+| ├ F3 Màn hình Bar (hàng đợi pha chế, giao đồ, cộng điểm) | ✔ Xong, đã kiểm thử – Đạt |
+| └ F4 OTP & tích điểm · F5 Thu ngân · F6 Quản trị · F7 AI gợi ý · F8 Báo cáo & dashboard | Chưa làm |
 | Kiểm thử tổng thể, triển khai, nghiệm thu | Chưa làm |
+
+Tiến độ chi tiết từng luồng: [2.San_pham/smartcafe/README.md](2.San_pham/smartcafe/README.md#tiến-độ-theo-luồng-d26--nơi-theo-dõi-chính).
 
 Timeline chi tiết của giai đoạn lập trình đang được PM cập nhật lại.

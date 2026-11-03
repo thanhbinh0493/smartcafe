@@ -4,10 +4,12 @@
     (lấy token: docker compose exec backend python -m scripts.seed_data --print-qr)
 """
 import argparse
+import json
 import sys
 import time
 
 import httpx
+from websockets.sync.client import connect as ws_connect
 
 RESULTS: list[tuple[str, str, bool, str]] = []
 
@@ -58,9 +60,102 @@ def main() -> int:
     r = c.get("/api/public/tables/qr-gia-mao")
     check("SM-10", "QR giả -> TABLE_NOT_FOUND", r.status_code == 404 and r.json()["error"]["code"] == "TABLE_NOT_FOUND")
 
+    # ---- F2: đặt món & thanh toán giả lập ----
+    if ok:
+        items = {i["name"]: i for cat in m.json()["categories"] for i in cat["items"]}
+        lines = [items["Cà phê sữa đá"], items["Trà đào cam sả"]]
+        expected = lines[0]["sell_price"] * 2 + lines[1]["sell_price"]
+        body = {"qr_token": a.qr_token, "expected_total": expected, "items": [
+            {"menu_item_id": lines[0]["id"], "quantity": 2, "note": "ít đường"},
+            {"menu_item_id": lines[1]["id"], "quantity": 1}]}
+        r = c.post("/api/public/orders", json=body)
+        o = r.json() if r.status_code == 201 else {}
+        check("SM-11", "Tạo đơn qua Nginx, server tính đúng tổng tiền", r.status_code == 201 and o.get("total") == expected,
+              f"{o.get('order_code')} tổng {o.get('total')}")
+        if o:
+            ws_url = a.base_url.replace("http", "ws", 1) + f"/ws/order/{o['order_id']}?token={o['access_token']}"
+            with ws_connect(ws_url, open_timeout=5) as ws:
+                snap = json.loads(ws.recv(timeout=5))
+                check("SM-12", "WebSocket qua Nginx nhận ảnh chụp đơn", snap["type"] == "ORDER_SNAPSHOT"
+                      and snap["data"]["status"] == "PENDING_PAYMENT")
+                t0 = time.perf_counter()
+                p = c.post(f"/api/public/orders/{o['order_id']}/pay",
+                           json={"access_token": o["access_token"], "method": "MOCK_EWALLET"})
+                check("SM-13", "Thanh toán giả lập thành công", p.status_code == 200 and p.json()["status"] == "PAID")
+                evt = json.loads(ws.recv(timeout=5))
+                ms = (time.perf_counter() - t0) * 1000
+                check("SM-14", "Trang theo dõi nhận ORDER_PAID realtime ≤ 2 giây (NFR-P4)",
+                      evt["type"] == "ORDER_PAID" and evt["data"]["status"] == "PAID" and ms <= 2000, f"{ms:.0f} ms")
+            v = c.get(f"/api/public/orders/{o['order_id']}", params={"token": o["access_token"]})
+            check("SM-15", "Xem đơn: PAID, có vị trí hàng đợi", v.status_code == 200 and v.json()["status"] == "PAID"
+                  and v.json()["queue_position"] >= 1, f"vị trí {v.json().get('queue_position')}")
+            v = c.get(f"/api/public/orders/{o['order_id']}", params={"token": "doan-mo"})
+            check("SM-16", "Sai access_token -> ORDER_NOT_FOUND", v.status_code == 404)
+            smoke_bar(c, a, bid, r_table_code(c, a.qr_token), o)
+
     failed = [x for x in RESULTS if not x[2]]
     print(f"\nTổng: {len(RESULTS)} | Đạt: {len(RESULTS) - len(failed)} | Không đạt: {len(failed)}")
     return 1 if failed else 0
+
+
+def r_table_code(c: httpx.Client, qr_token: str) -> str:
+    return c.get(f"/api/public/tables/{qr_token}").json()["branch"]["code"].lower()
+
+
+def recv_until(ws, type_: str, timeout: float = 5) -> dict:
+    """Đọc message tới khi gặp đúng loại sự kiện (bỏ qua các sự kiện khác như QUEUE_POSITION)."""
+    end = time.perf_counter() + timeout
+    while True:
+        msg = json.loads(ws.recv(timeout=max(0.1, end - time.perf_counter())))
+        if msg["type"] == type_:
+            return msg
+
+
+def smoke_bar(c: httpx.Client, a, bid: int, code: str, o: dict) -> None:
+    """F3: pha chế xử lý đơn vừa đặt trên màn hình Bar; khách nhận trạng thái realtime."""
+    r = c.post("/api/auth/login", json={"username": f"pc1_{code}", "password": a.password})
+    if r.status_code != 200:
+        check("SM-17", f"Đăng nhập pha chế pc1_{code}", False, str(r.status_code))
+        return
+    tok = r.json()["access_token"]
+    h = {"Authorization": f"Bearer {tok}"}
+    q = c.get(f"/api/staff/branches/{bid}/queue", headers=h)
+    mine = [i for i in q.json()["items"] if i["order_id"] == o["order_id"]]
+    check("SM-17", "Hàng đợi Bar có 2 món của đơn vừa thanh toán", q.status_code == 200 and len(mine) == 2,
+          f"{len(q.json()['items'])} món trong hàng đợi")
+
+    base_ws = a.base_url.replace("http", "ws", 1)
+    with ws_connect(f"{base_ws}/ws/bar/{bid}?token={tok}", open_timeout=5) as bar_ws, \
+            ws_connect(f"{base_ws}/ws/order/{o['order_id']}?token={o['access_token']}", open_timeout=5) as cust_ws:
+        recv_until(cust_ws, "ORDER_SNAPSHOT")
+        t0 = time.perf_counter()
+        s = c.post(f"/api/staff/order-items/{mine[0]['id']}/start", headers=h)
+        evt = recv_until(cust_ws, "ITEM_PREPARING")
+        ms = (time.perf_counter() - t0) * 1000
+        check("SM-18", "Pha chế bấm Bắt đầu -> khách thấy 'Đang pha chế' ≤ 2 giây",
+              s.status_code == 200 and evt["data"]["status"] == "PREPARING" and ms <= 2000, f"{ms:.0f} ms")
+        upd = recv_until(bar_ws, "ITEM_UPDATED")
+        check("SM-19", "Màn hình Bar khác nhận ITEM_UPDATED qua WebSocket", upd["data"]["item_id"] == mine[0]["id"])
+
+        c.post(f"/api/staff/order-items/{mine[1]['id']}/start", headers=h)
+        c.post(f"/api/staff/order-items/{mine[0]['id']}/done", headers=h)
+        t0 = time.perf_counter()
+        d = c.post(f"/api/staff/order-items/{mine[1]['id']}/done", headers=h)
+        evt = recv_until(cust_ws, "ORDER_READY")
+        ms = (time.perf_counter() - t0) * 1000
+        check("SM-20", "Xong món cuối -> khách nhận 'Có thể lấy' ≤ 2 giây (NFR-P4)",
+              d.status_code == 200 and d.json()["order_status"] == "READY" and ms <= 2000, f"{ms:.0f} ms")
+        ready = c.get(f"/api/staff/branches/{bid}/orders", params={"status": "READY"}, headers=h).json()
+        check("SM-21", "Đơn xuất hiện ở cột 'Có thể lấy'", any(x["id"] == o["order_id"] for x in ready))
+
+        tn = c.post("/api/auth/login", json={"username": f"tn_{code}", "password": a.password}).json()["access_token"]
+        r = c.post(f"/api/staff/orders/{o['order_id']}/complete", headers={"Authorization": f"Bearer {tn}"})
+        check("SM-22", "Thu ngân không được bấm 'Đã giao' (403)", r.status_code == 403)
+
+        r = c.post(f"/api/staff/orders/{o['order_id']}/complete", headers=h)
+        evt = recv_until(cust_ws, "ORDER_COMPLETED")
+        check("SM-23", "Pha chế bấm 'Đã giao' -> đơn hoàn tất, khách nhận ORDER_COMPLETED",
+              r.status_code == 200 and r.json()["status"] == "COMPLETED" and evt["data"]["status"] == "COMPLETED")
 
 
 if __name__ == "__main__":

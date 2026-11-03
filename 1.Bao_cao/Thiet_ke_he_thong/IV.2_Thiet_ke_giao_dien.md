@@ -23,7 +23,7 @@
 | W00 | Màn hình chào: chọn "Nhập SĐT" hoặc "Xem menu ngay" | UC01 |
 | W00a | Nhập SĐT và mã OTP | UC02 |
 | W01 | Menu điện tử + khối gợi ý (+ tên và điểm nếu là thành viên) | UC03, UC07 |
-| W01a | Chi tiết món (popup: số lượng, ghi chú) | UC04 |
+| ~~W01a~~ | ~~Chi tiết món (popup: số lượng, ghi chú)~~ – **bỏ theo D29**: bấm "+" trên W01 là thêm ngay, số lượng và ghi chú chỉnh ở W02 | UC04 |
 | W02 | Giỏ hàng & thanh toán giả lập | UC04, UC05 |
 | W03 | Theo dõi trạng thái đơn | UC06 |
 
