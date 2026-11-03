@@ -97,6 +97,7 @@ def main() -> int:
             smoke_support(c, a, bid, r_table_code(c, a.qr_token), lines)
             smoke_admin(c, a, bid, r_table_code(c, a.qr_token))
             smoke_recommend(c, a, bid)
+            smoke_report(c, a, bid)
 
     failed = [x for x in RESULTS if not x[2]]
     print(f"\nTổng: {len(RESULTS)} | Đạt: {len(RESULTS) - len(failed)} | Không đạt: {len(failed)}")
@@ -391,6 +392,38 @@ def smoke_recommend(c: httpx.Client, a, bid: int) -> None:
           and o.json().get("expected_points") is not None, o.json().get("order_code", str(o.status_code)))
     r = c.get(url, params={"cart": "1,x"})
     check("SM-51", "Tham số cart sai → 422", r.status_code == 422)
+
+
+
+def smoke_report(c: httpx.Client, a, bid: int) -> None:
+    """F8: dashboard W08 đọc daily_sales_reports (đã bù khi khởi động cho các ngày lịch sử của seed_orders)."""
+    def login(u):
+        return {"Authorization": f"Bearer {c.post('/api/auth/login', json={'username': u, 'password': a.password}).json()['access_token']}"}
+
+    ha = login("admin")
+    from datetime import date, timedelta
+    to = date.today() - timedelta(days=1)
+    t0 = time.perf_counter()
+    r = c.get("/api/staff/reports/daily", params={"from": str(to - timedelta(days=29)), "to": str(to)}, headers=ha)
+    ms = (time.perf_counter() - t0) * 1000
+    j = r.json() if r.status_code == 200 else {}
+    days = {p["report_date"] for p in j.get("series", [])}
+    check("SM-52", "Dashboard 30 ngày × 3 chi nhánh có đủ số liệu, phản hồi ≤ 2 giây (NFR-P6)",
+          r.status_code == 200 and len(days) == 30 and len({p["branch_id"] for p in j["series"]}) == 3
+          and j["latest"]["revenue"] > 0 and ms <= 2000,
+          f"{ms:.0f} ms, hôm qua {j.get('latest', {}).get('revenue')}đ / {j.get('latest', {}).get('order_count')} đơn")
+    hq = login(f"ql_{r_table_code(c, a.qr_token)}")
+    mine = c.get("/api/staff/reports/daily", headers=hq).json()
+    other = c.get("/api/staff/reports/daily", params={"branch_id": bid + 1}, headers=hq)
+    check("SM-53", "Quản lý: chỉ số liệu chi nhánh mình; xem chi nhánh khác → 403",
+          mine.get("branch_id") == bid and other.status_code == 403)
+    t0 = time.perf_counter()
+    rb = c.post("/api/staff/reports/daily/rebuild", json={"date": str(to)}, headers=ha)
+    ms = (time.perf_counter() - t0) * 1000
+    check("SM-54", "Quản trị viên tính lại báo cáo hôm qua (job chạy lại được – UPSERT)",
+          rb.status_code == 200 and rb.json()["branches"] == 3, f"{ms:.0f} ms")
+    bad = c.post("/api/staff/reports/daily/rebuild", json={"date": str(date.today())}, headers=ha)
+    check("SM-55", "Không tính báo cáo cho ngày chưa kết thúc (hôm nay) → 422", bad.status_code == 422)
 
 
 if __name__ == "__main__":

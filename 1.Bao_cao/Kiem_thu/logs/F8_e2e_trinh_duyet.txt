@@ -1,0 +1,8 @@
+﻿[ĐẠT] E2E-58 Quản trị viên đăng nhập → mặc định W08: thẻ chỉ số ngày gần nhất khớp số liệu API Doanh thu  5.610.000đ  +39,8%
+[ĐẠT] E2E-59 Biểu đồ doanh thu 3 đường (3 chi nhánh), bảng so sánh 3 chi nhánh, top 5 món đường 3, chi nhánh 3, top 5
+[ĐẠT] E2E-60 W08 không tràn ngang ở 1366px 
+[ĐẠT] E2E-61 Chọn Hà Đông + 30 ngày → 1 đường, bảng còn 1 chi nhánh, trục ngày phủ 30 ngày 15 nhãn trục ngày
+[ĐẠT] E2E-62 Quản trị viên bấm 'Tính lại hôm qua' → báo đã tính lại 3 chi nhánh 
+[ĐẠT] E2E-63 Quản lý Cầu Giấy (tablet 1024px): chỉ số liệu chi nhánh mình, không có ô chọn chi nhánh / nút tính lại, không tràn ngang 
+
+Tổng: 6 | Đạt: 6 | Không đạt: 0

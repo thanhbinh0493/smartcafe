@@ -28,6 +28,7 @@ from app.models import (
     OrderStatusHistory, Payment, Staff,
 )
 from app.modules.recommend.training import rebuild_rules
+from app.modules.report.service import catch_up
 
 VN = ZoneInfo("Asia/Ho_Chi_Minh")
 DEMO_PHONE = "0901000001"
@@ -187,7 +188,9 @@ def seed_orders(db: Session, now: datetime | None = None, p: Params | None = Non
         db.get(Customer, cid).loyalty_points = pts
     db.flush()
     rules = rebuild_rules(db, now)
-    return {"customers": len(customers), "orders": len(orders), "order_items": len(item_rows), "rules": sum(rules.values())}
+    reports = catch_up(db, now, days=p.days)  # IV.1 Mục 7: dashboard có sẵn số liệu các ngày lịch sử
+    return {"customers": len(customers), "orders": len(orders), "order_items": len(item_rows),
+            "rules": sum(rules.values()), "daily_reports": reports}
 
 
 CHUNK = 1000

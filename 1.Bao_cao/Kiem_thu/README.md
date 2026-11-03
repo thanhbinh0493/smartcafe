@@ -13,6 +13,7 @@ Theo quyết định **D25** (CR-28): mỗi luồng code phải có **test tự 
 | F5 – Thu ngân hỗ trợ khách | [Bien_ban_kiem_thu_F5_Thu_ngan.md](Bien_ban_kiem_thu_F5_Thu_ngan.md) | 03/11/2026 | 53 | 53 | 0 | 1 (đã sửa) | Đạt |
 | F6 – Quản trị | [Bien_ban_kiem_thu_F6_Quan_tri.md](Bien_ban_kiem_thu_F6_Quan_tri.md) | 03/11/2026 | 230 | 230 | 0 | 1 (đã sửa) | Đạt |
 | F7 – AI gợi ý món | [Bien_ban_kiem_thu_F7_AI_goi_y.md](Bien_ban_kiem_thu_F7_AI_goi_y.md) | 03/11/2026 | 71 | 71 | 0 | 4 (đã sửa) | Đạt |
+| F8 – Báo cáo ngày & dashboard | [Bien_ban_kiem_thu_F8_Bao_cao_Dashboard.md](Bien_ban_kiem_thu_F8_Bao_cao_Dashboard.md) | 03/11/2026 | 41 | 41 | 0 | 1 (đã sửa) | Đạt |
 
 *Tổng TC = số ca kiểm thử đã chạy (test tự động backend + frontend + kiểm thử khói); mỗi bộ tham số của một test được tính là 1 ca.*
 

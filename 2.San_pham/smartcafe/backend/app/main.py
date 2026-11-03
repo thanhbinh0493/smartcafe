@@ -17,6 +17,7 @@ from app.modules.menu.router import router as menu_router
 from app.modules.menu.router import ws_router as menu_ws_router
 from app.modules.order.router import router as order_router
 from app.modules.recommend.router import router as recommend_router
+from app.modules.report.router import router as report_router
 from app.modules.recommend.scheduler import start_scheduler
 from app.modules.support.router import router as support_router
 
@@ -58,6 +59,7 @@ def create_app() -> FastAPI:
     app.include_router(support_router)
     app.include_router(menu_ws_router)
     app.include_router(recommend_router)
+    app.include_router(report_router)
     for module in (catalog, branches, staff, promotions):  # F6 – quản trị
         app.include_router(module.router)
 

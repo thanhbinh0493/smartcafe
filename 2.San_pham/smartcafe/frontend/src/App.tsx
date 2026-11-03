@@ -5,7 +5,7 @@ import BarPage from './pages/admin/BarPage'
 import BranchesPage from './pages/admin/BranchesPage'
 import BranchMenuPage from './pages/admin/BranchMenuPage'
 import CategoriesPage from './pages/admin/CategoriesPage'
-import ComingSoonPage from './pages/admin/ComingSoonPage'
+import DashboardPage from './pages/admin/DashboardPage'
 import LoginPage from './pages/admin/LoginPage'
 import MenuItemsPage from './pages/admin/MenuItemsPage'
 import { RequireRole } from './pages/admin/nav'
@@ -38,7 +38,7 @@ export default function App() {
       <Route path="/admin/login" element={<LoginPage />} />
       <Route path="/admin" element={<AdminLayout />}>
         <Route index element={<Navigate to="/admin/login" replace />} />
-        <Route path="dashboard" element={<ComingSoonPage title="Dashboard bán hàng (W08)" flow="F8" />} />
+        <Route path="dashboard" element={<RequireRole roles={ADMIN_MANAGER}><DashboardPage /></RequireRole>} />
         <Route path="bar" element={<BarPage />} />
         {/* F6 – Quản trị (UC09–UC15); quyền theo ma trận RBAC (III.1) */}
         <Route path="branches" element={<RequireRole roles={ADMIN}><BranchesPage /></RequireRole>} />

@@ -22,8 +22,8 @@ Cập nhật mỗi khi một luồng xong. Kết quả kiểm thử chi tiết �
 | F4 | Khách thành viên: OTP giả lập, tích điểm, xem điểm | UC02, UC07 · W00a | ✔ Đạt (03/11) | [F4](../../1.Bao_cao/Kiem_thu/Bien_ban_kiem_thu_F4_OTP_Tich_diem.md) – 84/84 |
 | F5 | Thu ngân hỗ trợ: tra cứu, hủy đơn & hoàn tiền | UC20 · W04 (tra cứu) | ✔ Đạt (03/11) | [F5](../../1.Bao_cao/Kiem_thu/Bien_ban_kiem_thu_F5_Thu_ngan.md) – 53/53 |
 | F6 | Quản trị: danh mục, món, chi nhánh, nhân viên, menu chi nhánh, bàn & QR, khuyến mãi | UC09–UC15 · W05–W07, A03–A06 | ✔ Đạt (03/11) | [F6](../../1.Bao_cao/Kiem_thu/Bien_ban_kiem_thu_F6_Quan_tri.md) – 230/230 |
-| F7 | AI gợi ý món (2 chế độ) + "Thường gọi kèm" | UC03 (phần gợi ý) | ✔ Đạt (03/11) – nhánh `feature/f7-ai-goi-y` | [F7](../../1.Bao_cao/Kiem_thu/Bien_ban_kiem_thu_F7_AI_goi_y.md) – 71/71 |
-| F8 | Báo cáo ngày (job 00:05) + dashboard | UC16 · W08 | Chưa làm | |
+| F7 | AI gợi ý món (2 chế độ) + "Thường gọi kèm" | UC03 (phần gợi ý) | ✔ Đạt (03/11) | [F7](../../1.Bao_cao/Kiem_thu/Bien_ban_kiem_thu_F7_AI_goi_y.md) – 71/71 |
+| F8 | Báo cáo ngày (job 00:05) + dashboard | UC16 · W08 | ✔ Đạt (03/11) | [F8](../../1.Bao_cao/Kiem_thu/Bien_ban_kiem_thu_F8_Bao_cao_Dashboard.md) – 41/41 |
 
 ## 1. Chạy toàn bộ hệ thống (demo)
 Yêu cầu: Docker Desktop đang chạy.
@@ -97,10 +97,11 @@ backend/
                    support (thu ngân tra cứu đơn, hủy & hoàn tiền giả lập)
                    admin (danh mục, món + ảnh, chi nhánh, nhân viên, menu chi nhánh, bàn & ảnh QR, khuyến mãi)
                    recommend (gợi ý 2 chế độ, thời tiết, FP-Growth "thường gọi kèm", job hằng đêm)
+                   report (báo cáo ngày – job 00:05 + bù ngày thiếu khi khởi động, API dashboard)
   app/ws/          WebSocket hub (kênh order:{id}, bar:{branch_id})
   alembic/         migration; 0001 chạy nguyên văn schema.sql thiết kế; 0002 mã đơn UNIQUE theo ngày; 0003 bỏ customers.name (D31)
   scripts/         seed_data.py (dữ liệu mẫu), seed_orders.py (đơn lịch sử), evaluate_recommender.py (Hit Rate@5), smoke_test.py
-  tests/f0 … f7   test theo luồng
+  tests/f0 … f8   test theo luồng
 frontend/
   src/pages/qr/    W00 màn hình chào, W00a OTP, W01 menu (+ dòng thành viên), W02 giỏ hàng, W03 theo dõi đơn (route /t/:qrToken/...)
   src/auth/        MemberContext (phiên khách thành viên trong sessionStorage, tự hết hạn) · staffSession (phiên nhân viên)
