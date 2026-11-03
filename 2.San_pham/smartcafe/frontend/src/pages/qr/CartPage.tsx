@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import type { ApiError } from '../../api/client'
 import { createOrder, payOrder, type CreatedOrder, type PaymentMethod, type PriceChange } from '../../api/orders'
+import { isSessionError, POINT_UNIT_VND, useMember } from '../../auth/MemberContext'
 import { MAX_QTY, useCart } from '../../cart/CartContext'
 import { formatVND } from '../../lib/format'
 import QrHeader from './QrHeader'
@@ -11,12 +12,13 @@ import { useQr } from './QrLayout'
 export const PROCESSING_MS = import.meta.env.MODE === 'test' ? 0 : 1500
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms))
 
-type Notice = { kind: 'error' | 'warn'; text: string } | null
+type Notice = { kind: 'error' | 'warn'; text: string; relogin?: boolean } | null
 
 /** W02 – Giỏ hàng & thanh toán giả lập (UC04, UC05, SD03). */
 export default function CartPage() {
   const { qrToken } = useQr()
   const cart = useCart()
+  const { member, expire } = useMember()
   const navigate = useNavigate()
   const [method, setMethod] = useState<PaymentMethod>('MOCK_EWALLET')
   const [busy, setBusy] = useState(false)
@@ -59,7 +61,8 @@ export default function CartPage() {
     try {
       let order = pending
       if (!order) {
-        order = await createOrder({
+        order = await createOrder(
+          {
           qr_token: qrToken,
           expected_total: cart.total,
           items: cart.lines.map((l) => ({
@@ -68,7 +71,9 @@ export default function CartPage() {
             note: l.note.trim() || undefined,
             is_recommended: l.is_recommended,
           })),
-        })
+          },
+          member?.token,
+        )
         setPending(order)
       }
       await sleep(PROCESSING_MS)
@@ -77,7 +82,15 @@ export default function CartPage() {
       navigate(`../orders/${order.order_id}?token=${encodeURIComponent(order.access_token)}`, { relative: 'path' })
     } catch (e) {
       const err = e as ApiError
-      if (err.code === 'ITEM_UNAVAILABLE') {
+      if (isSessionError(err.code, err.status)) {
+        // Phiên thành viên hết hạn: không âm thầm đặt đơn ẩn danh, để khách chọn (UC06 – phiên thành viên)
+        expire()
+        setNotice({
+          kind: 'warn',
+          relogin: true,
+          text: 'Phiên thành viên đã hết hạn (1 giờ). Bấm thanh toán lại để đặt món không tích điểm, hoặc nhập lại số điện thoại.',
+        })
+      } else if (err.code === 'ITEM_UNAVAILABLE') {
         setUnavailable((err.details.item_ids as number[]) ?? [])
         setNotice({ kind: 'error', text: err.message })
       } else if (err.code === 'PRICE_CHANGED') {
@@ -194,6 +207,11 @@ export default function CartPage() {
             <dt>Tổng cộng</dt>
             <dd data-testid="cart-total">{formatVND(cart.total)}</dd>
           </div>
+          {member && (
+            <p className="pt-1 text-coffee" data-testid="cart-points">
+              Bạn sẽ nhận +{Math.floor(cart.total / POINT_UNIT_VND)} điểm khi nhận đồ
+            </p>
+          )}
         </dl>
 
         {notice && (
@@ -202,6 +220,11 @@ export default function CartPage() {
             className={`rounded-lg p-3 text-sm ${notice.kind === 'error' ? 'bg-red-50 text-red-700' : 'bg-amber-50 text-amber-800'}`}
           >
             {notice.text}
+            {notice.relogin && (
+              <Link to="../otp" relative="path" className="ml-1 font-semibold underline">
+                Nhập lại SĐT
+              </Link>
+            )}
           </p>
         )}
       </main>

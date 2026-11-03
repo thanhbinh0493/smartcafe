@@ -50,6 +50,7 @@ export interface OrderView {
   cancelled_at: string | null
   cancel_reason: string | null
   points_earned?: number | null // chỉ có khi đơn hoàn tất và là khách thành viên
+  expected_points?: number | null // điểm sẽ nhận (chỉ đơn của khách thành viên)
   items: OrderLine[]
 }
 
@@ -61,8 +62,9 @@ export interface PriceChange {
   is_promo: boolean
 }
 
-export const createOrder = (body: CreateOrderInput) =>
-  request<CreatedOrder>('/api/public/orders', { method: 'POST', body: JSON.stringify(body) })
+/** customerToken: phiên khách thành viên (F4) – đơn được gắn khách để cộng điểm khi hoàn tất */
+export const createOrder = (body: CreateOrderInput, customerToken?: string | null) =>
+  request<CreatedOrder>('/api/public/orders', { method: 'POST', body: JSON.stringify(body), token: customerToken })
 
 export const payOrder = (orderId: number, accessToken: string, method: PaymentMethod) =>
   request<{ order_id: number; status: OrderStatus; paid_at: string; transaction_ref: string }>(

@@ -45,14 +45,14 @@ Tiền tố: `/api/public/*` dùng cho khách (một số endpoint nhận thêm 
 | Method | Endpoint | Mô tả | UC |
 |:---|:---|:---|:---|
 | GET | `/api/public/tables/{qr_token}` | Lấy chi nhánh và bàn từ mã QR | UC01 |
-| POST | `/api/public/otp/request` | `{phone}`: gửi OTP giả lập, trả `{expires_in, resend_after, demo_code?}` | UC02 |
-| POST | `/api/public/otp/verify` | `{phone, code}`: trả `{customer_token, name, loyalty_points}` | UC02 |
-| GET | `/api/public/me` | *(customer token)* Tên, SĐT (che), tổng điểm, giá trị quy đổi (điểm × 100đ), 5 giao dịch điểm gần nhất | UC07 |
+| POST | `/api/public/otp/request` | `{phone}` (chấp nhận dấu cách, chấm, +84): gửi OTP giả lập, trả `{expires_in, resend_after, phone_masked, demo_code?}`. SĐT sai → 422 `VALIDATION_ERROR`; gửi lại trước 60 giây / quá 5 mã một giờ → 429 `OTP_RATE_LIMITED` kèm `retry_after` (giây) | UC02 |
+| POST | `/api/public/otp/verify` | `{phone, code}`: trả `{customer_token, expires_at, name, phone_masked, loyalty_points}`. Sai → 400 `OTP_INVALID`, `details = {reason: WRONG \| LOCKED \| EXPIRED \| NOT_FOUND, attempts_left}` | UC02 |
+| GET | `/api/public/me` | *(customer token)* `{name, phone_masked, loyalty_points, point_value_vnd, points_value, recent_transactions:[{order_code, points, type, created_at}]}` (5 giao dịch gần nhất). Không có / sai / hết hạn token → 401 `UNAUTHORIZED` / `TOKEN_EXPIRED` | UC07 |
 | GET | `/api/public/branches/{id}/menu` | Menu theo danh mục: giá thường, giá bán (đã KM), nhãn mới, tình trạng | UC03 |
 | GET | `/api/public/branches/{id}/recommendations?cart=1,5` | *(customer token tùy chọn)* Top 5 gợi ý kèm lý do; nếu có `cart` thì trả thêm "thường gọi kèm" | UC03 |
-| POST | `/api/public/orders` | *(customer token tùy chọn)* Tạo đơn `{qr_token, items:[{menu_item_id, quantity, note, is_recommended}], note?, expected_total?}`, trả `{order_id, order_code, access_token, status, subtotal, discount, total, expected_points, items}`. Nếu `expected_total` (tổng khách đang thấy) khác tổng server tính → 409 `PRICE_CHANGED` kèm giá mới | UC05 |
+| POST | `/api/public/orders` | *(customer token tùy chọn)* Tạo đơn `{qr_token, items:[{menu_item_id, quantity, note, is_recommended}], note?, expected_total?}`, trả `{order_id, order_code, access_token, status, subtotal, discount, total, expected_points, items}`. Nếu `expected_total` (tổng khách đang thấy) khác tổng server tính → 409 `PRICE_CHANGED` kèm giá mới. Gửi customer token đã hết hạn / không hợp lệ → 401 (không tự đặt ẩn danh, để khách không mất điểm mà không biết) | UC05 |
 | POST | `/api/public/orders/{id}/pay` | Thanh toán giả lập `{access_token, method}` | UC05 |
-| GET | `/api/public/orders/{id}?token=` | Trạng thái đơn, từng món, vị trí trong hàng đợi | UC06 |
+| GET | `/api/public/orders/{id}?token=` | Trạng thái đơn, từng món, vị trí trong hàng đợi; đơn của khách thành viên có `expected_points` (sẽ nhận) và `points_earned` (đã cộng, khi hoàn tất) | UC06 |
 
 ### 2.2. Nhân viên (staff, JWT)
 | Method | Endpoint | Mô tả | Vai trò |

@@ -1,0 +1,14 @@
+﻿[ĐẠT] E2E-24 W00a: gửi mã -> hiện SĐT đã che, khung [DEMO], đếm ngược, khóa gửi lại 0972 *** 713
+[ĐẠT] E2E-34 W00a không tràn ngang ở 390px 
+[ĐẠT] E2E-25 Nhập sai mã -> báo 'còn 4 lần thử', xóa các ô 
+[ĐẠT] E2E-26 Nhập đúng mã -> menu thành viên 'Xin chào – 0 điểm' Xin chào – 0 điểm (≈ 0đ) Thoát
+[ĐẠT] E2E-27 Phiên chỉ ở sessionStorage của tab; không localStorage, không cookie (NFR-S7) 
+[ĐẠT] E2E-28 Giỏ hàng hiện 'Bạn sẽ nhận +10 điểm khi nhận đồ' tổng 108000đ
+[ĐẠT] E2E-29 W03 hiện 'sẽ nhận +X điểm khi nhận đồ' 
+[ĐẠT] E2E-30 Pha chế bấm 'Đã giao' -> điện thoại hiện 'Bạn được cộng X điểm' (realtime) 
+[ĐẠT] E2E-31 Quay lại menu: điểm cập nhật ngay Xin chào – 10 điểm (≈ 1.000đ) Thoát
+[ĐẠT] E2E-32 Tab mới (cùng điện thoại) ở chế độ ẩn danh – không lưu định danh thiết bị 
+[ĐẠT] E2E-33 Bấm 'Thoát' -> về chế độ khách vãng lai, xóa phiên 
+[ĐẠT] E2E-35 Đang có món trong giỏ vẫn chuyển sang thành viên được, giỏ giữ nguyên 
+
+Tổng: 12 | Đạt: 12 | Không đạt: 0

@@ -19,7 +19,7 @@ Cập nhật mỗi khi một luồng xong. Kết quả kiểm thử chi tiết �
 | F1 | Quét QR → màn hình chào → menu chi nhánh | UC01, UC03 · W00, W01 | ✔ Đạt (02/11) | [F1](../../1.Bao_cao/Kiem_thu/Bien_ban_kiem_thu_F1_QR_Menu.md) – 57/57 |
 | F2 | Giỏ hàng → đặt món → thanh toán giả lập → theo dõi đơn (realtime) | UC04–UC06 · W02, W03 | ✔ Đạt (02/11) | [F2](../../1.Bao_cao/Kiem_thu/Bien_ban_kiem_thu_F2_Dat_mon_Thanh_toan.md) – 67/67 |
 | F3 | Màn hình Bar: hàng đợi pha chế, Bắt đầu / Xong / Hoàn tác / Đã giao (cộng điểm) | UC17–UC19 · W04 | ✔ Đạt (03/11) | [F3](../../1.Bao_cao/Kiem_thu/Bien_ban_kiem_thu_F3_Man_hinh_Bar.md) – 76/76 |
-| F4 | Khách thành viên: OTP giả lập, tích điểm, xem điểm | UC02, UC07 · W00a | Chưa làm | |
+| F4 | Khách thành viên: OTP giả lập, tích điểm, xem điểm | UC02, UC07 · W00a | ✔ Đạt (03/11) – nhánh `feature/f4-otp-tich-diem` | [F4](../../1.Bao_cao/Kiem_thu/Bien_ban_kiem_thu_F4_OTP_Tich_diem.md) – 84/84 |
 | F5 | Thu ngân hỗ trợ: tra cứu, hủy đơn & hoàn tiền | UC20 · W04 (tra cứu) | Chưa làm | |
 | F6 | Quản trị: danh mục, món, chi nhánh, nhân viên, menu chi nhánh, bàn & QR, khuyến mãi | UC09–UC15 · W05–W07, A03–A06 | Chưa làm | |
 | F7 | AI gợi ý món (2 chế độ) + "Thường gọi kèm" | UC03 (phần gợi ý) | Chưa làm | |
@@ -36,6 +36,7 @@ docker compose up -d --build    # db + backend + frontend
 - Lần chạy đầu, backend tự tạo bảng (`alembic upgrade head`) và nạp dữ liệu mẫu (chỉ khi CSDL còn trống).
 - Lấy link QR của các bàn: `docker compose exec backend python -m scripts.seed_data --print-qr`
 - Điện thoại cùng Wi-Fi: thay `localhost` bằng IP LAN của laptop (xem `ipconfig`), VD `http://192.168.1.10:8080/t/<token>`. In link QR kèm IP: thêm `--base-url http://<IP>:8080`.
+- **Khách thành viên (F4):** ở màn hình chào chọn "Nhập số điện thoại", nhập SĐT di động bất kỳ (VD `0912 345 678`); mã OTP giả lập hiện ở khung **[DEMO]** (`OTP_DEMO_MODE=true`). Tắt DEMO thì lấy mã trong log: `docker compose logs backend | findstr "Mock SMS"`. Mỗi SĐT gửi lại sau 60 giây, tối đa 5 mã/giờ.
 - Xóa sạch dữ liệu để nạp lại: `docker compose down -v` rồi `up -d` lại.
 
 **Tài khoản nhân viên mẫu** (mật khẩu chung `smartcafe123`, đổi bằng `SEED_STAFF_PASSWORD`):
@@ -89,12 +90,14 @@ backend/
   app/modules/     auth (đăng nhập, RBAC) · branch (tra cứu QR) · menu (giá chi nhánh + KM)
                    order (đặt món, mã đơn theo ngày, theo dõi) · payment (cổng thanh toán giả lập)
                    bar (hàng đợi pha chế, Bắt đầu / Xong / Hoàn tác / Đã giao, cộng điểm, /ws/bar)
+                   customer (OTP giả lập + cổng Mock SMS, customer token 1 giờ, xem điểm /me)
   app/ws/          WebSocket hub (kênh order:{id}, bar:{branch_id})
   alembic/         migration; 0001 chạy nguyên văn schema.sql thiết kế; 0002 mã đơn UNIQUE theo ngày
   scripts/         seed_data.py (dữ liệu mẫu), smoke_test.py
-  tests/f0 … f3   test theo luồng
+  tests/f0 … f4   test theo luồng
 frontend/
-  src/pages/qr/    W00 màn hình chào, W01 menu, W02 giỏ hàng, W03 theo dõi đơn (route /t/:qrToken/...)
+  src/pages/qr/    W00 màn hình chào, W00a OTP, W01 menu (+ dòng thành viên), W02 giỏ hàng, W03 theo dõi đơn (route /t/:qrToken/...)
+  src/auth/        MemberContext (phiên khách thành viên trong sessionStorage, tự hết hạn) · staffSession (phiên nhân viên)
   src/cart/        giỏ hàng (sessionStorage của tab) · src/hooks/useOrderSocket.ts (WebSocket tự kết nối lại)
   src/pages/admin/ A01 đăng nhập, khung Web Admin (route /admin), W04 màn hình quầy Bar (/admin/bar)
   src/api/         gọi API · src/lib/ định dạng tiền, tìm không dấu

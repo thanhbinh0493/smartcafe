@@ -5,6 +5,8 @@ from sqlalchemy.orm import Session
 
 from app.core.db import get_db
 from app.core.errors import AppError
+from app.models import Customer
+from app.modules.customer.deps import get_optional_customer
 from app.modules.order import service
 from app.modules.order.schemas import CreateOrderRequest, CreateOrderResponse, OrderView, PayRequest, PayResponse
 from app.modules.payment.gateway import PaymentGateway, get_payment_gateway
@@ -14,8 +16,13 @@ router = APIRouter(tags=["public"])
 
 
 @router.post("/api/public/orders", response_model=CreateOrderResponse, status_code=201)
-def create_order(body: CreateOrderRequest, db: Session = Depends(get_db)) -> CreateOrderResponse:
-    res = service.create_order(db, body)
+def create_order(
+    body: CreateOrderRequest,
+    db: Session = Depends(get_db),
+    customer: Customer | None = Depends(get_optional_customer),
+) -> CreateOrderResponse:
+    """Có customer token (khách thành viên, F4) thì gắn customer_id để cộng điểm khi đơn hoàn tất."""
+    res = service.create_order(db, body, customer.id if customer else None)
     db.commit()
     return res
 

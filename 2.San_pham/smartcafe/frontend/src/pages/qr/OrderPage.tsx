@@ -97,6 +97,11 @@ export default function OrderPage() {
             Đồ uống đã sẵn sàng – mời bạn đến quầy nhận
           </div>
         )}
+        {order.expected_points != null && order.expected_points > 0 && ['PAID', 'PREPARING', 'READY'].includes(s) && (
+          <p className="rounded-xl bg-coffee/10 p-3 text-sm text-coffee" data-testid="expected-points">
+            Đơn thành viên: bạn sẽ nhận +{order.expected_points} điểm khi nhận đồ.
+          </p>
+        )}
         {s === 'COMPLETED' && (
           <div className="rounded-xl bg-stone-100 p-3 font-medium">
             <p>Bạn đã nhận đồ. Cảm ơn bạn!</p>
