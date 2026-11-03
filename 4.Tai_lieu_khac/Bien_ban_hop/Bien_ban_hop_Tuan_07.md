@@ -33,6 +33,7 @@ Tuần 07 (02/11/2026 – 08/11/2026). Hình thức: họp nhóm. Thư ký: Thà
 | CR-41 | 03/11/2026 | Bắt đầu giai đoạn VI – Kiểm thử hệ thống: kịch bản xuyên luồng F1 → F8 trên nhiều thiết bị + kiểm thử toàn bộ yêu cầu phi chức năng (hiệu năng, bảo mật, độ tin cậy, khả dụng, bảo trì); bộ test case lưu **Markdown** trong `1.Bao_cao/Kiem_thu/` như các biên bản luồng (cuối kỳ xuất .docx); bổ sung script sao lưu / khôi phục CSDL (NFR-R5) | Đã xong F0 → F8; theo Project_Plan giai đoạn VI | Kế hoạch + biên bản kiểm thử hệ thống; `system_test/`, `backend/tests/st/`, `scripts/backup_db.ps1`; D, B, E | A |
 | CR-42 | 03/11/2026 | Chốt P23: **cache trong tiến trình cho API đọc của khách** (menu, quét QR, nhãn đơn, bán chạy, luật FP-Growth), xóa ngay khi quản trị đổi dữ liệu (D38) | Kiểm thử tải: backend 1 tiến trình dùng hết 1 lõi CPU, p95 ~1 giây với 50 khách; giữ kiến trúc 1 tiến trình (WebSocket hub trong bộ nhớ) | README thiết kế (D38, P23), IV.3; module menu, branch, order, recommend, admin; biên bản kiểm thử hệ thống; B, C | A |
 | CR-43 | 03/11/2026 | Chốt P24: **mô hình tải của NFR-P2 / P3** = 50 khách đồng thời, mỗi khách thao tác 3–5 giây một lần; giữ ngưỡng p95 ≤ 300 / 500 ms; mức 0,5–1,5 giây/lần chỉ là kiểm thử quá tải tham khảo (yêu cầu không lỗi) (D39) | Sau khi cache vẫn chưa đạt ở mô hình 1 giây/lần (~180 request/giây); mô hình 3–5 giây/lần sát thực tế và vẫn gấp nhiều lần tải 3 chi nhánh × 60 đơn/giờ | README thiết kế (D39, P24), III.2 (NFR-P2, P3); `st_hieu_nang.py`; biên bản kiểm thử hệ thống; D | A |
+| CR-44 | 03/11/2026 | Duyệt kết quả giai đoạn VI – Kiểm thử hệ thống (66/66 đạt, hồi quy 664/664), gộp vào `main` (local). Chốt P12: **chỉ demo trên laptop, không làm bản dự phòng trên cloud** (D40). Bắt đầu giai đoạn VII – viết Hướng dẫn sử dụng có ảnh chụp màn hình cho từng vai trò; chụp xong thì dừng môi trường demo | Giai đoạn VI đạt điều kiện; giảm việc không cần thiết, dự phòng bằng sao lưu CSDL (NFR-R5) | README thiết kế (D40, P12); biên bản + kế hoạch kiểm thử hệ thống; `1.Bao_cao/Huong_dan_su_dung/`; `system_test/chup_anh_hdsd.py`; README gốc, README mã nguồn; D, A | A |
 
 ## 4. HÌNH ẢNH / VIDEOS
 (Bổ sung ảnh chụp buổi họp nếu có.)
@@ -58,14 +59,15 @@ Tuần 07 (02/11/2026 – 08/11/2026). Hình thức: họp nhóm. Thư ký: Thà
 - Thông qua CR-41: bắt đầu giai đoạn VI – kiểm thử hệ thống, test case lưu Markdown.
 - Thông qua CR-42: cache trong tiến trình cho API đọc của khách (D38).
 - Thông qua CR-43: mô hình tải NFR-P2 / P3 là 50 khách, 3–5 giây/thao tác (D39).
-- Vấn đề còn mở: P12 (bản demo dự phòng trên cloud).
+- Thông qua CR-44: giai đoạn VI được duyệt, gộp vào `main`; chỉ demo trên laptop, không làm cloud (D40); bắt đầu giai đoạn VII – Hướng dẫn sử dụng.
+- Không còn vấn đề mở trong bảng Vấn đề mở.
 
 **Việc cần làm:**
 | Việc | Người phụ trách | Hạn |
 |:---|:---|:---|
 | Khởi động lại máy, cập nhật WSL, chạy thử Docker (`hello-world`) | A | 03/11/2026 |
 | Các thành viên tự cài Docker Desktop trên máy mình để phát triển | B, C, E | 05/11/2026 |
-| Chốt P12 (có làm bản demo dự phòng trên cloud không) | A | 08/11/2026 |
+| Chốt P12 (có làm bản demo dự phòng trên cloud không) – đã xong: không làm (CR-44) | A | 03/11/2026 |
 | Cập nhật timeline thủ công (Project_Plan.md, IV.3 Mục 3) | A | Chưa ấn định |
 | Code F0 (nền tảng) + F1 (QR & menu) kèm test và biên bản kiểm thử | B, E (D lập biên bản) | 08/11/2026 |
 | Review biên bản kiểm thử F0, F1 trước khi sang F2 | A, D | 08/11/2026 |
@@ -81,6 +83,8 @@ Tuần 07 (02/11/2026 – 08/11/2026). Hình thức: họp nhóm. Thư ký: Thà
 | Code F8 (báo cáo ngày + dashboard W08) kèm test + biên bản kiểm thử – đã xong, duyệt (CR-40) | B, E (D lập biên bản) | 03/11/2026 |
 | Chốt P21, P22 – đã xong (CR-40) | A | 03/11/2026 |
 | Kiểm thử hệ thống (giai đoạn VI) + biên bản; sửa lỗi phát hiện (BUG-ST-01…06) kèm test hồi quy | D, B, E | 03/11/2026 |
-| Review biên bản kiểm thử hệ thống, duyệt kết thúc giai đoạn VI | A | 08/11/2026 |
+| Review biên bản kiểm thử hệ thống, duyệt kết thúc giai đoạn VI – đã xong (CR-44) | A | 03/11/2026 |
+| Viết Hướng dẫn sử dụng (giai đoạn VII) kèm ảnh chụp màn hình | D | 03/11/2026 |
+| Review Hướng dẫn sử dụng, thử lại các bước trên máy demo | A, cả nhóm | 08/11/2026 |
 | Sao lưu CSDL bằng `scripts/backup_db.ps1` trước mỗi buổi demo (NFR-R5) | D | Trước mỗi buổi demo |
 | Review công thức + trọng số gợi ý, tinh chỉnh theo kết quả Hit Rate@5 (biên bản F7 Mục 4.7) | C | 10/11/2026 |

@@ -24,7 +24,7 @@ Cập nhật mỗi khi một luồng xong. Kết quả kiểm thử chi tiết �
 | F6 | Quản trị: danh mục, món, chi nhánh, nhân viên, menu chi nhánh, bàn & QR, khuyến mãi | UC09–UC15 · W05–W07, A03–A06 | ✔ Đạt (03/11) | [F6](../../1.Bao_cao/Kiem_thu/Bien_ban_kiem_thu_F6_Quan_tri.md) – 230/230 |
 | F7 | AI gợi ý món (2 chế độ) + "Thường gọi kèm" | UC03 (phần gợi ý) | ✔ Đạt (03/11) | [F7](../../1.Bao_cao/Kiem_thu/Bien_ban_kiem_thu_F7_AI_goi_y.md) – 71/71 |
 | F8 | Báo cáo ngày (job 00:05) + dashboard | UC16 · W08 | ✔ Đạt (03/11) | [F8](../../1.Bao_cao/Kiem_thu/Bien_ban_kiem_thu_F8_Bao_cao_Dashboard.md) – 41/41 |
-| VI | Kiểm thử hệ thống: kịch bản xuyên luồng, hiệu năng, bảo mật, giao diện & độ tin cậy, vận hành | Toàn hệ thống · NFR | Chờ duyệt – nhánh `feature/vi-kiem-thu-he-thong` | [Hệ thống](../../1.Bao_cao/Kiem_thu/Bien_ban_kiem_thu_He_thong.md) |
+| VI | Kiểm thử hệ thống: kịch bản xuyên luồng, hiệu năng, bảo mật, giao diện & độ tin cậy, vận hành | Toàn hệ thống · NFR | ✔ Đạt (03/11) | [Hệ thống](../../1.Bao_cao/Kiem_thu/Bien_ban_kiem_thu_He_thong.md) |
 
 ## 1. Chạy toàn bộ hệ thống (demo)
 Yêu cầu: Docker Desktop đang chạy.

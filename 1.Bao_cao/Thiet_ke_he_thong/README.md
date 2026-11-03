@@ -59,6 +59,7 @@ Chi tiết từng thay đổi xem trong [biên bản họp](../../4.Tai_lieu_kha
 | D37 | 03/11 | Số liệu "Tất cả chi nhánh" trên dashboard | Dashboard **chỉ đọc bảng `daily_sales_reports`**: tỉ lệ món từ gợi ý toàn chuỗi = trung bình theo số đơn của các chi nhánh; top 5 món toàn chuỗi gộp từ top 5 từng chi nhánh (chấp nhận gần đúng) |
 | D38 | 03/11 | Hiệu năng API đọc của khách | **Cache trong tiến trình** (backend vẫn 1 tiến trình, WebSocket hub trong bộ nhớ): menu chi nhánh (60 giây, hết hạn sớm đúng lúc KM bắt đầu / kết thúc), kết quả quét QR, tên chi nhánh / số bàn / tên món, số liệu "bán chạy" (60 giây), luật FP-Growth (tới lần học lại). **Xóa ngay** khi quản trị đổi menu / giá / còn hàng / KM / chi nhánh / bàn. Tạo đơn luôn tính giá trực tiếp từ CSDL (NFR-S6) |
 | D39 | 03/11 | Mô hình tải của NFR-P2 / P3 | "50 người dùng đồng thời" = 50 khách cùng mở web, **mỗi khách thao tác 3–5 giây một lần** (≈ 50 request/giây, gấp nhiều lần tải 3 chi nhánh × 60 đơn/giờ). Giữ ngưỡng p95 ≤ 300 ms / ≤ 500 ms. Mức 0,5–1,5 giây/lần (≈ 3,5 lần tải chuẩn) chỉ là kiểm thử quá tải tham khảo: yêu cầu không lỗi |
+| D40 | 03/11 | Môi trường demo / nghiệm thu | **Chỉ demo trên laptop của PM** (Docker Desktop, D24); **không làm bản dự phòng trên cloud**. Dự phòng bằng sao lưu CSDL (`scripts/backup_db.ps1`) trước mỗi buổi demo |
 
 ## Vấn đề mở (Open Issues) – nơi theo dõi duy nhất
 
@@ -79,7 +80,7 @@ Bảng này là **nơi duy nhất** theo dõi các đề xuất và vấn đề 
 | P15 | 03/11 | Bấm nhầm "Xong" ở **món cuối cùng** (đơn đã chuyển "Có thể lấy") rồi bấm "Hoàn tác" thì **đơn quay lại "Đang pha chế"** (READY → PREPARING, ghi lịch sử, khách thấy lại "Đang pha"). Bổ sung chuyển trạng thái này vào biểu đồ trạng thái đơn. Đã cài đặt ở F3 – xem [biên bản kiểm thử F3](../Kiem_thu/Bien_ban_kiem_thu_F3_Man_hinh_Bar.md) Mục 7 | Không cho hoàn tác khi đơn đã "Có thể lấy" | A | Đã chốt → D30 |
 | P14 | 03/11 | Gộp W01a (popup chi tiết món) vào W02: bấm "+" trên menu là thêm ngay, số lượng và ghi chú chỉnh trong giỏ hàng – để đạt NFR-U2 (đặt 2 món trong 5 lần chạm; có popup thì ≥ 7). Đã cài đặt ở F2 – xem [biên bản kiểm thử F2](../Kiem_thu/Bien_ban_kiem_thu_F2_Dat_mon_Thanh_toan.md) Mục 7 | Giữ popup W01a đúng wireframe | A | Đã chốt → D29 |
 | P13 | 02/11 | Khi giá KM **không thấp hơn** giá đang bán (giá chi nhánh / giá chung) thì bán giá thường và **không gắn nhãn KM** (`promotion_id` = NULL, không tính vào "doanh thu KM"). Đã cài đặt ở F1 – xem [biên bản kiểm thử F1](../Kiem_thu/Bien_ban_kiem_thu_F1_QR_Menu.md) Mục 7 | Vẫn gắn nhãn KM dù không rẻ hơn | A | Đã chốt → D27 |
-| P12 | 02/11 | Bản demo dự phòng trên cloud (Azure for Students hoặc Oracle Always Free) phòng khi laptop gặp sự cố lúc nghiệm thu | Chỉ demo local; hoặc dùng laptop thành viên khác | A | **Đang mở** |
+| P12 | 02/11 | Bản demo dự phòng trên cloud (Azure for Students hoặc Oracle Always Free) phòng khi laptop gặp sự cố lúc nghiệm thu | Chỉ demo local; hoặc dùng laptop thành viên khác | A | Đã chốt → D40 (chỉ demo trên laptop, không làm cloud) |
 | P1 | 28/10 | IoT giao tiếp bằng HTTP REST | — | — | Hủy (D8) |
 | P2 | 28/10 | Thu ngân không nhận order tại quầy, chỉ xử lý ngoại lệ | Thêm POS tại quầy | A | Đã chốt → D19, D20 |
 | P3 | 28/10 | Báo cáo bán hàng ở mức Could | Nâng lên Must | A | Đã chốt → D21 (dashboard, Must) |

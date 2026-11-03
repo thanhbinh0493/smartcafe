@@ -21,7 +21,7 @@
 |:---|:---|
 | Toàn bộ hệ thống chạy bằng `docker compose` (db, backend, frontend/Nginx) trên laptop demo (D24), truy cập qua cổng 8080 như người dùng thật | Cổng thanh toán / SMS thật (giả lập theo D12, D16) |
 | Kịch bản xuyên luồng UC01–UC20 trên nhiều thiết bị cùng lúc | Điện thoại thật (dùng giả lập điện thoại 390×844 của Playwright; Safari iOS kiểm bằng nhân WebKit) |
-| 29 yêu cầu phi chức năng của III.2 | Bản demo dự phòng trên cloud (P12 còn mở) |
+| 29 yêu cầu phi chức năng của III.2 | Bản demo dự phòng trên cloud (không làm – D40) |
 | Hồi quy: pytest, Vitest, kiểm thử khói SM-01…55 | Kiểm thử bảo mật xâm nhập chuyên sâu (fuzzing, quét lỗ hổng tự động) |
 
 ## 4. Chiến lược & cấp độ kiểm thử
