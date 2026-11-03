@@ -24,6 +24,7 @@ Cập nhật mỗi khi một luồng xong. Kết quả kiểm thử chi tiết �
 | F6 | Quản trị: danh mục, món, chi nhánh, nhân viên, menu chi nhánh, bàn & QR, khuyến mãi | UC09–UC15 · W05–W07, A03–A06 | ✔ Đạt (03/11) | [F6](../../1.Bao_cao/Kiem_thu/Bien_ban_kiem_thu_F6_Quan_tri.md) – 230/230 |
 | F7 | AI gợi ý món (2 chế độ) + "Thường gọi kèm" | UC03 (phần gợi ý) | ✔ Đạt (03/11) | [F7](../../1.Bao_cao/Kiem_thu/Bien_ban_kiem_thu_F7_AI_goi_y.md) – 71/71 |
 | F8 | Báo cáo ngày (job 00:05) + dashboard | UC16 · W08 | ✔ Đạt (03/11) | [F8](../../1.Bao_cao/Kiem_thu/Bien_ban_kiem_thu_F8_Bao_cao_Dashboard.md) – 41/41 |
+| VI | Kiểm thử hệ thống: kịch bản xuyên luồng, hiệu năng, bảo mật, giao diện & độ tin cậy, vận hành | Toàn hệ thống · NFR | Chờ duyệt – nhánh `feature/vi-kiem-thu-he-thong` | [Hệ thống](../../1.Bao_cao/Kiem_thu/Bien_ban_kiem_thu_He_thong.md) |
 
 ## 1. Chạy toàn bộ hệ thống (demo)
 Yêu cầu: Docker Desktop đang chạy.
@@ -85,10 +86,14 @@ cd backend
 ```
 Quy ước đặt tên test: `test_F<luồng>_<số>_<mô tả>` (backend), `F<luồng>-FE-<số>` (frontend) – trùng mã test case trong biên bản kiểm thử.
 
+**Kiểm thử hệ thống (giai đoạn VI)** trên bản chạy `docker compose`: xem [system_test/README.md](system_test/README.md) (`bash system_test/chay_tat_ca.sh` chạy lại toàn bộ trên CSDL sạch).
+
+**Sao lưu CSDL trước buổi demo (NFR-R5):** `powershell -ExecutionPolicy Bypass -File scripts\backup_db.ps1` → `backups\smartcafe_<ngày_giờ>.dump`; khôi phục: `scripts\restore_db.ps1 -File <file>` rồi `docker compose restart backend`.
+
 ## 4. Cấu trúc thư mục
 ```
 backend/
-  app/core/        cấu hình, kết nối CSDL, JWT + bcrypt, định dạng lỗi thống nhất
+  app/core/        cấu hình, kết nối CSDL, JWT + bcrypt, định dạng lỗi thống nhất, cache trong tiến trình (D38)
   app/models/      SQLAlchemy models (18 bảng theo schema.sql)
   app/modules/     auth (đăng nhập, RBAC) · branch (tra cứu QR) · menu (giá chi nhánh + KM)
                    order (đặt món, mã đơn theo ngày, theo dõi) · payment (cổng thanh toán giả lập)
@@ -101,7 +106,9 @@ backend/
   app/ws/          WebSocket hub (kênh order:{id}, bar:{branch_id})
   alembic/         migration; 0001 chạy nguyên văn schema.sql thiết kế; 0002 mã đơn UNIQUE theo ngày; 0003 bỏ customers.name (D31)
   scripts/         seed_data.py (dữ liệu mẫu), seed_orders.py (đơn lịch sử), evaluate_recommender.py (Hit Rate@5), smoke_test.py
-  tests/f0 … f8   test theo luồng
+  tests/f0 … f8   test theo luồng · tests/st   test hồi quy của kiểm thử hệ thống (giai đoạn VI)
+system_test/      kiểm thử hệ thống trên bản chạy docker compose (Playwright + Edge, httpx)
+scripts/          backup_db.ps1 / restore_db.ps1 (sao lưu, khôi phục CSDL – NFR-R5)
 frontend/
   src/pages/qr/    W00 màn hình chào, W00a OTP, W01 menu (+ dòng thành viên), W02 giỏ hàng, W03 theo dõi đơn (route /t/:qrToken/...)
   src/auth/        MemberContext (phiên khách thành viên trong sessionStorage, tự hết hạn) · staffSession (phiên nhân viên)

@@ -7,6 +7,7 @@ import logging
 
 from apscheduler.schedulers.background import BackgroundScheduler
 
+from app.core import cache
 from app.core.config import get_settings
 from app.core.db import SessionLocal
 from app.modules.recommend.training import rebuild_rules
@@ -21,6 +22,7 @@ def rules_job() -> None:
         with SessionLocal() as db:
             rebuild_rules(db)
             db.commit()
+        cache.invalidate("rules")          # sau commit: lần gợi ý sau đọc luật mới
     except Exception:  # job lỗi không được làm sập backend; lần sau chạy lại
         log.exception("Job học luật kết hợp lỗi")
 

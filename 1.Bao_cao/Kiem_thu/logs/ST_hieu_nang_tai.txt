@@ -1,0 +1,15 @@
+Chạy 50 người dùng ảo trong 60 giây, nghỉ 3–5 giây/lượt...
+   Quét QR p95 67 ms (n=757), Menu p95 52 ms (n=757), Gợi ý p95 90 ms (n=757), Xem đơn p95 70 ms (n=757)
+[ĐẠT] ST-30 50 người dùng đồng thời (nghỉ 3–5 giây/lượt): không lỗi (mọi request trả 200) 3028 request trong 65 s ≈ 47 req/s; lỗi: 0 []
+[ĐẠT] ST-31 NFR-P2: API đọc (quét QR, menu, xem đơn) p95 ≤ 300 ms p95 63 ms, max 148 ms
+[ĐẠT] ST-32 NFR-P3: API gợi ý món (ẩn danh + thành viên, có/không giỏ hàng) p95 ≤ 500 ms p95 90 ms, max 160 ms
+Quá tải tham khảo: 50 người dùng, nghỉ 0,5–1,5 giây/lượt, 60 giây...
+[ĐẠT] ST-38 Quá tải tham khảo (50 người, nghỉ 0,5–1,5 giây ≈ gấp 3,5 lần tải chuẩn): không lỗi, không rớt kết nối (chỉ chậm hơn) 9704 request ≈ 157 req/s; p95 đọc 191 ms, gợi ý 209 ms; lỗi 0
+[ĐẠT] ST-33 20 khách cùng bấm đặt món 1 lúc ở 1 chi nhánh: cả 20 đơn tạo được, mã đơn không trùng 20 đơn, 20 mã khác nhau (CG-0022 … CG-0041); mã lỗi: []
+Tạo 180 đơn (60 đơn/chi nhánh) rải trong 60 giây...
+[ĐẠT] ST-34 NFR-P5: 180 đơn (60/chi nhánh × 3) tạo + thanh toán thành công, p95 tạo+trả ≤ 1 giây 180 đơn {'CG': 60, 'HD': 60, 'TX': 60}, p95 173 ms; lỗi []
+[ĐẠT] ST-35 Hàng đợi Bar có đủ mọi đơn đã thanh toán; pha chế xử lý hết (Bắt đầu → Xong → Đã giao) thì hàng đợi trống thiếu []; còn 0 món; xử lý 203 đơn trong 22 s
+[ĐẠT] ST-36 NFR-P6: API dashboard 30 ngày × 3 chi nhánh p95 ≤ 2 giây (20 lần) p95 17 ms, 90 điểm dữ liệu
+[ĐẠT] ST-37 NFR-P6: job tổng hợp 1 ngày (3 chi nhánh) ≤ 1 phút; tính lại cả 60 ngày cũng ≤ 1 phút 1 ngày: 86 ms (qua API); 60 ngày × 3 chi nhánh = 180 dòng: 0.93 s (chạy thử rồi rollback)
+
+Tổng: 9 | Đạt: 9 | Không đạt: 0

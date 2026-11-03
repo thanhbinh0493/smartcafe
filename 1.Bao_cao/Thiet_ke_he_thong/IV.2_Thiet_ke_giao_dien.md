@@ -77,6 +77,7 @@ Sau khi đăng nhập, màn hình mặc định theo vai trò: ADMIN → W08, MA
 ![W04](diagrams/png/IV_ui_w04_man_hinh_bar.png)
 - **Bảng hàng đợi** gồm các cột: số thứ tự, **giờ gọi**, số phút đã chờ, **bàn**, mã đơn, **món**, số lượng, **ghi chú**, thao tác. Món **cũ nhất ở trên cùng**; các món cùng đơn đứng liền nhau.
 - Mỗi dòng có nút **[Bắt đầu]**, bấm xong đổi thành "ĐANG PHA [Xong]". Bấm "Xong" thì dòng biến mất, có nút "Hoàn tác" trong 10 giây.
+- Chữ hàng đợi và cột "Có thể lấy" cỡ 18px (NFR-U3). Mất kết nối realtime: góc phải hiện "● Mất kết nối" kèm dải cảnh báo, hàng đợi tự tải lại mỗi 10 giây (NFR-R2).
 - Cột phải **"Có thể lấy"**: các đơn đã xong hết món; **pha chế** giao đồ rồi bấm [Đã giao]. Thu ngân mở màn hình này ở chế độ tra cứu: khung **"Hỗ trợ khách"** ở trên cùng (tìm đơn theo mã/bàn, nút [Hủy đơn] với đơn đang chờ / đang pha, hộp xác nhận có lý do bắt buộc và số tiền hoàn), không có nút Bắt đầu/Xong/Đã giao. Quản lý chi nhánh có cả thao tác pha chế và khung hỗ trợ khách (ở dưới).
 - Món chờ quá 10 phút hiển thị màu đỏ. Có âm báo khi có món mới.
 

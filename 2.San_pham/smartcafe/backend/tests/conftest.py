@@ -68,6 +68,15 @@ def db(engine) -> Iterator[Session]:
         conn.close()
 
 
+@pytest.fixture(autouse=True)
+def _clear_cache():
+    """Mỗi test có dữ liệu riêng (savepoint) nên cache trong tiến trình (D38) phải trống."""
+    from app.core import cache
+    cache.invalidate()
+    yield
+    cache.invalidate()
+
+
 @pytest.fixture
 def client(db: Session) -> Iterator[TestClient]:
     app.dependency_overrides[get_db] = lambda: db

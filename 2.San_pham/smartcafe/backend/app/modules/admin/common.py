@@ -6,6 +6,7 @@ from fastapi import BackgroundTasks
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 
+from app.core import cache
 from app.core.errors import AppError
 from app.ws.hub import hub
 
@@ -47,6 +48,8 @@ def publish_menu_updated(background: BackgroundTasks, branch_id: int | None, rea
     """MENU_UPDATED trên /ws/menu/{branch_id} (UC03): menu khách tự tải lại.
     branch_id = None: thay đổi toàn chuỗi (menu chung, KM toàn chuỗi) → gửi mọi chi nhánh."""
     data = {"branch_id": branch_id, "reason": reason}
+    cache.invalidate_public()                    # D38: xóa cache menu / gợi ý / bàn ngay (đã commit)
+    background.add_task(cache.invalidate_public)  # và lần nữa ngay trước khi báo khách tải lại
     if branch_id is None:
         background.add_task(hub.publish_prefix, "menu:", "MENU_UPDATED", data)
     else:

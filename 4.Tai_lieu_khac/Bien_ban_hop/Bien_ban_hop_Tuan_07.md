@@ -30,6 +30,9 @@ Tuần 07 (02/11/2026 – 08/11/2026). Hình thức: họp nhóm. Thư ký: Thà
 | CR-38 | 03/11/2026 | Chốt P17–P20 cho F7: dữ liệu lịch sử `seed_orders` **tự nạp khi khởi động** + SĐT demo 0901000001 (D32); FP-Growth dùng **mlxtend** (D33); thêm `recommendation_log_id` vào API đặt đơn (D34); thời tiết **giả lập mặc định**, API key tùy chọn (D35) | Theo phương án khuyến nghị: demo được ngay chế độ thành viên, đúng II.2, đo được hiệu quả gợi ý, không phụ thuộc mạng / key khi demo | README thiết kế (D32–D35, P17–P20), II.2 Mục 2.3–2.5, IV.3; `start.sh`, Dockerfile / requirements, `.env.example`; module recommend, API đặt đơn; C, B, E | A |
 | CR-39 | 03/11/2026 | Duyệt kết quả F7 – AI gợi ý món (71/71 đạt), gộp F7 vào `main` (local) và code F8 – Báo cáo ngày & dashboard. Phát sinh 2 đề xuất chờ chốt: P21 (bù báo cáo khi khởi động), P22 (cách gộp số liệu "Tất cả chi nhánh") | F7 đạt đủ điều kiện theo D25; laptop demo thường tắt lúc 00:05 | Nhánh `main`, `feature/f8-bao-cao`; README thiết kế (P21, P22), IV.1, IV.2, IV.3; module report, W08; biên bản kiểm thử F8; B, E, D | A |
 | CR-40 | 03/11/2026 | Chốt P21: **tự tính bù báo cáo ngày còn thiếu khi backend khởi động** (D36). Chốt P22: dashboard "Tất cả chi nhánh" **giữ cách gộp từ bảng báo cáo** (tỉ lệ món từ gợi ý trung bình theo số đơn, top 5 gộp từ top 5 từng chi nhánh) (D37). Duyệt kết quả F8 (41/41 đạt), gộp F8 vào `main` (local) – hoàn tất giai đoạn Lập trình F0 → F8 | Laptop demo thường tắt lúc 00:05; giữ dashboard chỉ đọc bảng báo cáo, sai lệch nhỏ chấp nhận được | README thiết kế (D36, D37, P21, P22), IV.1; biên bản kiểm thử F8 Mục 7–8; README gốc, README mã nguồn; nhánh `main`; B, E | A |
+| CR-41 | 03/11/2026 | Bắt đầu giai đoạn VI – Kiểm thử hệ thống: kịch bản xuyên luồng F1 → F8 trên nhiều thiết bị + kiểm thử toàn bộ yêu cầu phi chức năng (hiệu năng, bảo mật, độ tin cậy, khả dụng, bảo trì); bộ test case lưu **Markdown** trong `1.Bao_cao/Kiem_thu/` như các biên bản luồng (cuối kỳ xuất .docx); bổ sung script sao lưu / khôi phục CSDL (NFR-R5) | Đã xong F0 → F8; theo Project_Plan giai đoạn VI | Kế hoạch + biên bản kiểm thử hệ thống; `system_test/`, `backend/tests/st/`, `scripts/backup_db.ps1`; D, B, E | A |
+| CR-42 | 03/11/2026 | Chốt P23: **cache trong tiến trình cho API đọc của khách** (menu, quét QR, nhãn đơn, bán chạy, luật FP-Growth), xóa ngay khi quản trị đổi dữ liệu (D38) | Kiểm thử tải: backend 1 tiến trình dùng hết 1 lõi CPU, p95 ~1 giây với 50 khách; giữ kiến trúc 1 tiến trình (WebSocket hub trong bộ nhớ) | README thiết kế (D38, P23), IV.3; module menu, branch, order, recommend, admin; biên bản kiểm thử hệ thống; B, C | A |
+| CR-43 | 03/11/2026 | Chốt P24: **mô hình tải của NFR-P2 / P3** = 50 khách đồng thời, mỗi khách thao tác 3–5 giây một lần; giữ ngưỡng p95 ≤ 300 / 500 ms; mức 0,5–1,5 giây/lần chỉ là kiểm thử quá tải tham khảo (yêu cầu không lỗi) (D39) | Sau khi cache vẫn chưa đạt ở mô hình 1 giây/lần (~180 request/giây); mô hình 3–5 giây/lần sát thực tế và vẫn gấp nhiều lần tải 3 chi nhánh × 60 đơn/giờ | README thiết kế (D39, P24), III.2 (NFR-P2, P3); `st_hieu_nang.py`; biên bản kiểm thử hệ thống; D | A |
 
 ## 4. HÌNH ẢNH / VIDEOS
 (Bổ sung ảnh chụp buổi họp nếu có.)
@@ -52,6 +55,9 @@ Tuần 07 (02/11/2026 – 08/11/2026). Hình thức: họp nhóm. Thư ký: Thà
 - Code tiếp các luồng F3 → F8 trên máy, chưa đẩy lên GitHub cho tới khi PM yêu cầu.
 - Thông qua CR-39: F7 được duyệt, gộp vào `main`, code F8.
 - Thông qua CR-40: tự bù báo cáo khi khởi động (D36), giữ cách gộp số liệu "Tất cả chi nhánh" (D37); F8 được duyệt, gộp vào `main` – hoàn tất lập trình F0 → F8.
+- Thông qua CR-41: bắt đầu giai đoạn VI – kiểm thử hệ thống, test case lưu Markdown.
+- Thông qua CR-42: cache trong tiến trình cho API đọc của khách (D38).
+- Thông qua CR-43: mô hình tải NFR-P2 / P3 là 50 khách, 3–5 giây/thao tác (D39).
 - Vấn đề còn mở: P12 (bản demo dự phòng trên cloud).
 
 **Việc cần làm:**
@@ -74,4 +80,7 @@ Tuần 07 (02/11/2026 – 08/11/2026). Hình thức: họp nhóm. Thư ký: Thà
 | Code F7 (AI gợi ý món 2 chế độ + "Thường gọi kèm") kèm test + biên bản kiểm thử – đã xong, duyệt (CR-39) | C, B, E (D lập biên bản) | 03/11/2026 |
 | Code F8 (báo cáo ngày + dashboard W08) kèm test + biên bản kiểm thử – đã xong, duyệt (CR-40) | B, E (D lập biên bản) | 03/11/2026 |
 | Chốt P21, P22 – đã xong (CR-40) | A | 03/11/2026 |
+| Kiểm thử hệ thống (giai đoạn VI) + biên bản; sửa lỗi phát hiện (BUG-ST-01…06) kèm test hồi quy | D, B, E | 03/11/2026 |
+| Review biên bản kiểm thử hệ thống, duyệt kết thúc giai đoạn VI | A | 08/11/2026 |
+| Sao lưu CSDL bằng `scripts/backup_db.ps1` trước mỗi buổi demo (NFR-R5) | D | Trước mỗi buổi demo |
 | Review công thức + trọng số gợi ý, tinh chỉnh theo kết quả Hit Rate@5 (biên bản F7 Mục 4.7) | C | 10/11/2026 |

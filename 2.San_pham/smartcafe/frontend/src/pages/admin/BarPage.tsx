@@ -20,6 +20,7 @@ import SupportPanel from './SupportPanel'
 export const UNDO_MS = 10_000 // nút "Hoàn tác" hiện 10 giây (UC18 – 3a)
 const LATE_MS = 10 * 60_000 // món chờ quá 10 phút hiển thị màu đỏ
 const TICK_MS = 15_000
+export const POLL_MS = 10_000 // NFR-R2: mất WebSocket thì tải lại hàng đợi qua REST mỗi 10 giây (BUG-ST-04)
 
 interface UndoEntry {
   itemId: number
@@ -53,6 +54,7 @@ function BarScreen({ staff, branchId, branchName }: { staff: StaffMe; branchId: 
   const [undos, setUndos] = useState<UndoEntry[]>([])
   const [now, setNow] = useState(Date.now())
   const clockOffset = useRef(0) // giờ server - giờ máy, để tính số phút đã chờ cho đúng
+  const everOnline = useRef(false)
 
   const reload = useCallback(async () => {
     try {
@@ -87,6 +89,15 @@ function BarScreen({ staff, branchId, branchName }: { staff: StaffMe; branchId: 
     },
     () => void reload(), // kết nối (lại) xong: tải lại để không lỡ sự kiện lúc mất mạng
   )
+  if (connected) everOnline.current = true
+  const offline = !connected && everOnline.current
+
+  // NFR-R2: trong lúc mất kết nối realtime vẫn tự tải lại hàng đợi qua REST để không lỡ đơn mới
+  useEffect(() => {
+    if (connected) return
+    const t = setInterval(() => void reload(), POLL_MS)
+    return () => clearInterval(t)
+  }, [connected, reload])
 
   const run = async (key: string, fn: () => Promise<void>) => {
     setBusy((b) => new Set(b).add(key))
@@ -138,9 +149,14 @@ function BarScreen({ staff, branchId, branchName }: { staff: StaffMe; branchId: 
       <div className="flex flex-wrap items-center justify-between gap-2">
         <h1 className="text-xl font-bold text-coffee">Hàng đợi pha chế – {branchName}</h1>
         <span className={`text-sm ${connected ? 'text-green-700' : 'text-amber-700'}`} data-testid="bar-connection">
-          {connected ? '● Trực tuyến' : '● Đang kết nối lại...'}
+          {connected ? '● Trực tuyến' : offline ? '● Mất kết nối' : '● Đang kết nối...'}
         </span>
       </div>
+      {offline && (
+        <p className="rounded-xl bg-amber-50 p-3 text-lg font-semibold text-amber-800" data-testid="bar-offline">
+          Mất kết nối realtime – đang thử kết nối lại. Hàng đợi vẫn tự tải lại mỗi 10 giây.
+        </p>
+      )}
       {!canAct && (
         <p className="rounded-xl bg-stone-100 p-3 text-sm">
           Thu ngân: xem hàng đợi và hỗ trợ khách (tra cứu, hủy đơn & hoàn tiền); không thao tác Bắt đầu / Xong / Đã giao.
@@ -185,7 +201,7 @@ function BarScreen({ staff, branchId, branchName }: { staff: StaffMe; branchId: 
           ) : items.length === 0 ? (
             <p className="p-3 text-stone-500">Không có món nào đang chờ.</p>
           ) : (
-            <table className="w-full text-sm">
+            <table className="w-full text-lg" data-testid="queue-table">
               <thead className="bg-coffee/10 text-left">
                 <tr>
                   <th className="p-2">#</th>
@@ -235,7 +251,7 @@ function BarScreen({ staff, branchId, branchName }: { staff: StaffMe; branchId: 
                             </button>
                           ) : (
                             <span className="flex items-center gap-2">
-                              <span className="text-xs font-semibold text-amber-700">ĐANG PHA</span>
+                              <span className="text-base font-semibold text-amber-700">ĐANG PHA</span>
                               <button
                                 onClick={() => act(it, 'done')}
                                 disabled={busy.has(`i${it.id}`)}
@@ -265,7 +281,7 @@ function BarScreen({ staff, branchId, branchName }: { staff: StaffMe; branchId: 
                 {o.order_code} · Bàn {o.table_number}
                 {o.is_member && <span className="ml-2 text-xs font-normal text-coffee">(thành viên)</span>}
               </p>
-              <ul className="text-sm">
+              <ul className="text-lg">
                 {o.items.map((i) => (
                   <li key={i.id}>
                     {i.name} ×{i.quantity}

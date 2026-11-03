@@ -20,7 +20,7 @@ from app.modules.auth.deps import ensure_branch_access, require_roles
 from app.modules.bar import service
 from app.modules.bar.schemas import BarOrderOut, CompleteOut, ItemActionOut, QueueOut
 from app.modules.order.service import build_order_view
-from app.ws.hub import hub
+from app.ws.hub import hub, reject
 
 router = APIRouter(tags=["bar"])
 
@@ -132,7 +132,7 @@ async def bar_socket(websocket: WebSocket, branch_id: int, token: str = "", db: 
 
     code = await run_in_threadpool(check)
     if code:
-        await websocket.close(code=code)
+        await reject(websocket, code)
         return
     await websocket.accept()
     channel = f"bar:{branch_id}"

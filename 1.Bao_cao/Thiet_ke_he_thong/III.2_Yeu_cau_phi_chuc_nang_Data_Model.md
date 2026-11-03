@@ -15,8 +15,8 @@ Mỗi yêu cầu có **cách kiểm chứng** để Thành viên D đưa vào Te
 | Mã | Yêu cầu | Cách kiểm chứng |
 |:---|:---|:---|
 | NFR-P1 | Trang menu QR tải xong (First Contentful Paint) ≤ **2 giây** trên mạng 4G | Chrome DevTools, Lighthouse giả lập "Fast 4G" |
-| NFR-P2 | API đọc (menu, đơn) phản hồi ≤ **300 ms** (p95) với 50 người dùng đồng thời | Locust / k6, 50 virtual users |
-| NFR-P3 | API gợi ý món phản hồi ≤ **500 ms** (p95), kể cả khi gọi Weather API (có cache) | Locust |
+| NFR-P2 | API đọc (quét QR, menu, đơn) phản hồi ≤ **300 ms** (p95) với 50 người dùng đồng thời – mỗi người thao tác 3–5 giây một lần (D39) | Script tải `system_test/st_hieu_nang.py` (asyncio + httpx, tương đương Locust / k6), 50 người dùng ảo |
+| NFR-P3 | API gợi ý món phản hồi ≤ **500 ms** (p95) cùng mô hình tải NFR-P2, kể cả khi gọi Weather API (có cache) | `st_hieu_nang.py` |
 | NFR-P4 | Món mới xuất hiện trên hàng đợi Bar và thay đổi trạng thái hiển thị trên màn hình khách trong ≤ **2 giây** | Đo thời gian từ lúc gọi API tới lúc UI cập nhật |
 | NFR-P5 | Chịu được **60 đơn/giờ/chi nhánh** × 3 chi nhánh (giả định khảo sát II.1) | Script tạo đơn tự động |
 | NFR-P6 | Dashboard (W08) hiển thị ≤ **2 giây** với 30 ngày × 3 chi nhánh; job tổng hợp báo cáo ngày chạy xong ≤ **1 phút** | Đo trên dữ liệu seed |

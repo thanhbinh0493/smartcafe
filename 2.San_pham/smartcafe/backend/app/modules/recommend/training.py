@@ -15,6 +15,7 @@ from mlxtend.frequent_patterns import association_rules, fpgrowth
 from sqlalchemy import delete, select
 from sqlalchemy.orm import Session
 
+from app.core import cache
 from app.core.config import get_settings
 from app.models import AssociationRule, Branch, Order, OrderItem
 
@@ -84,5 +85,6 @@ def rebuild_rules(db: Session, now: datetime | None = None) -> dict[str, int]:
                    for m in mined)
         counts["ALL" if bid is None else codes.get(bid, str(bid))] = len(mined)
     db.flush()
+    cache.invalidate("rules")
     log.info("Đã học lại luật kết hợp: %s", counts)
     return counts

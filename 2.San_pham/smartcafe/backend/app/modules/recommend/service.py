@@ -20,9 +20,10 @@ from datetime import datetime, timedelta, timezone
 from sqlalchemy import and_, func, or_, select
 from sqlalchemy.orm import Session
 
+from app.core import cache
 from app.core.config import get_settings
 from app.models import AssociationRule, Branch, Order, OrderItem
-from app.modules.menu.service import PricedItem, get_branch_menu
+from app.modules.menu.service import PricedItem, cached_branch_menu, get_branch_menu
 from app.modules.recommend.weather import Weather, get_weather, weather_score
 
 TOP_N = 5
@@ -162,12 +163,7 @@ def co_buy(db: Session, branch_id: int, cart: list[int], menu: dict[int, PricedI
     Ưu tiên luật của chi nhánh; luật toàn chuỗi dùng khi chi nhánh chưa có luật cho cặp món đó."""
     if not cart:
         return []
-    rules = db.scalars(
-        select(AssociationRule).where(
-            AssociationRule.antecedent_id.in_(cart),
-            or_(AssociationRule.branch_id == branch_id, AssociationRule.branch_id.is_(None)),
-        )
-    ).all()
+    rules = [r for r in branch_rules(db, branch_id) if r.antecedent_id in cart]
     best: dict[int, tuple[bool, float, AssociationRule]] = {}
     for r in rules:
         it = menu.get(r.consequent_id)
@@ -187,13 +183,37 @@ def co_buy(db: Session, branch_id: int, cart: list[int], menu: dict[int, PricedI
     return out
 
 
+POPULAR_TTL = 60.0   # số liệu bán chạy 30 ngày: trễ tối đa 1 phút là chấp nhận được (D38)
+RULES_TTL = 600.0    # luật chỉ đổi khi học lại (00:30) – rebuild_rules xóa cache
+
+
+@dataclass(frozen=True)
+class RuleRow:
+    branch_id: int | None
+    antecedent_id: int
+    consequent_id: int
+    confidence: float
+    lift: float
+
+
+def branch_rules(db: Session, branch_id: int) -> list[RuleRow]:
+    """Luật của chi nhánh + luật toàn chuỗi (cache tới lần học lại)."""
+    def load():
+        rows = db.scalars(select(AssociationRule).where(
+            or_(AssociationRule.branch_id == branch_id, AssociationRule.branch_id.is_(None)))).all()
+        return [RuleRow(r.branch_id, r.antecedent_id, r.consequent_id, float(r.confidence), float(r.lift))
+                for r in rows], RULES_TTL
+    return cache.get("rules", branch_id, load)
+
+
 def recommend(db: Session, branch: Branch, customer_id: int | None = None, cart: list[int] | None = None,
               now: datetime | None = None, weather: Weather | None = None, mode: str | None = None) -> Result:
+    live = now is None            # gọi từ API: dùng cache; test truyền `now` cố định thì tính trực tiếp
     now = now or datetime.now(timezone.utc)
     cart = cart or []
     w = weather or get_weather(branch.id, float(branch.latitude) if branch.latitude is not None else None,
                                float(branch.longitude) if branch.longitude is not None else None)
-    menu = get_branch_menu(db, branch.id)
+    menu = cached_branch_menu(db, branch.id) if live else get_branch_menu(db, branch.id)
     menu_by_id = {it.id: it for it in menu}
     candidates = [it for it in menu if it.is_available and it.id not in cart]
 
@@ -201,6 +221,8 @@ def recommend(db: Session, branch: Branch, customer_id: int | None = None, cart:
     fallback = bool(customer_id) and not personal
     if mode is None:
         mode = "MEMBER" if personal else "ANONYMOUS"
-    comps = components(menu, popular_counts(db, branch.id, now), personal or None, w)
+    popular = (cache.get("popular", branch.id, lambda: (popular_counts(db, branch.id, now), POPULAR_TTL)) if live
+               else popular_counts(db, branch.id, now))
+    comps = components(menu, popular, personal or None, w)
     return Result(mode=mode, items=rank(candidates, comps, mode, w), also_bought=co_buy(db, branch.id, cart, menu_by_id, w),
                   weather=w, member_fallback=fallback)

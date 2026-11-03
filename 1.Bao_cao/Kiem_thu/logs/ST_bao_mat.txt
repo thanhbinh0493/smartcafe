@@ -1,0 +1,17 @@
+[ĐẠT] ST-40 NFR-S1: mật khẩu mọi nhân viên lưu dạng băm bcrypt, cost ≥ 10, không có mật khẩu rõ 13 tài khoản, cost [12]
+[ĐẠT] ST-41 NFR-S2: JWT nhân viên hết hạn sau 8 giờ; JWT khách thành viên (role CUSTOMER) sau 1 giờ nhân viên 8 giờ, khách 60 phút
+[ĐẠT] ST-42 NFR-S2: API nhân viên từ chối (401) khi không có token / token rác / sửa payload / alg=none 24 lần thử, mã trả về [401]
+[ĐẠT] ST-43 NFR-S2: token khách thành viên không gọi được API nhân viên mã trả về [403]
+[ĐẠT] ST-44 NFR-S2: ma trận RBAC – sai vai trò hoặc khác chi nhánh bị chặn 403 (12 thao tác) 12/12 bị chặn
+[ĐẠT] ST-45 NFR-S2: WebSocket Bar / theo dõi đơn từ chối kết nối trái phép (mã đóng 4401 / 4403 / 4404 tới được client – hồi quy BUG-ST-01) Bar không token: 4401; Bar token rác: 4401; Pha chế CG vào Bar HD: 4403; Đơn sai access_token: 4404
+[ĐẠT] ST-46 NFR-S3: qr_token bàn & access_token đơn ≥ 128 bit (≥ 22 ký tự token_urlsafe), không trùng 60 QR, 15 đơn hôm nay, độ dài nhỏ nhất 22
+[ĐẠT] ST-47 NFR-S3: đổi ID đơn trên URL (đơn của người khác) với access_token của mình → không xem / không trả hộ được xem: [404, 404, 404], thanh toán: 404
+[ĐẠT] ST-48 NFR-S4: OTP 6 số, chỉ lưu dạng băm (HMAC-SHA256), hết hạn 5 phút lưu: 4e285946abcd…
+[ĐẠT] ST-49 NFR-S4: gửi lại trong 60 giây bị chặn (429); sai 5 lần thì mã bị hủy, nhập đúng cũng không vào được gửi lại: 429; còn lại: [4, 3, 2, 1, 0]; mã đúng: LOCKED
+[ĐẠT] ST-50 NFR-S4: phản hồi gửi OTP giống hệt nhau giữa SĐT đã là thành viên và SĐT mới (không lộ thành viên) thành viên ('demo_code', 'expires_in', 'phone_masked', 'resend_after', 300, 60) | mới ('demo_code', 'expires_in', 'phone_masked', 'resend_after', 300, 60)
+[ĐẠT] ST-51 NFR-S5: thử SQL injection ở tìm kiếm đơn, mã QR, SĐT, đăng nhập → không lỗi 500, không lộ dữ liệu, CSDL nguyên vẹn 20 request, mã trả về [200, 400, 401, 404, 422], bảng orders còn 5009 dòng
+[ĐẠT] ST-52 NFR-S5: dữ liệu đặt món sai kiểu / ngoài giới hạn bị từ chối (4xx) có thông báo, không tạo đơn số lượng 0: 422; số lượng âm: 422; số lượng 1000: 422; số lượng là chữ: 422; giỏ rỗng: 422; món không tồn tại: 409; ghi chú 5.000 ký tự: 422
+[ĐẠT] ST-53 NFR-S6: client gửi tổng tiền / đơn giá giả → server bỏ qua, luôn tính lại theo giá menu expected_total=1000 → 409 PRICE_CHANGED; unit_price=1 → tổng 50000 (đúng 50000)
+[ĐẠT] ST-54 NFR-S7: chỉ lưu SĐT sau khi xác thực OTP thành công; không cookie, không cột định danh thiết bị trước xác thực 0 dòng, sau 1; cột thiết bị: []; Set-Cookie: []
+
+Tổng: 15 | Đạt: 15 | Không đạt: 0

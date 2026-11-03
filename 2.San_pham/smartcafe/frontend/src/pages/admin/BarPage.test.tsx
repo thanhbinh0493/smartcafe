@@ -6,6 +6,7 @@ import type { BarOrder, QueueItem } from '../../api/bar'
 import { saveSession } from '../../auth/staffSession'
 import { playBeep } from '../../lib/beep'
 import { errorBody, FakeWebSocket, installFakeWebSocket, mockFetch, renderApp } from '../../test/utils'
+import { POLL_MS } from './BarPage'
 
 vi.mock('../../lib/beep', () => ({ playBeep: vi.fn(), unlockAudio: vi.fn() }))
 
@@ -205,17 +206,41 @@ describe('F3-FE-01..12 W04 – Màn hình quầy Bar (UC17–UC19)', () => {
     expect(FakeWebSocket.instances).toHaveLength(0)
   })
 
-  it('F3-FE-12 rớt mạng → báo "Đang kết nối lại", tự kết nối lại và tải lại hàng đợi; bị từ chối (4401) thì không thử lại', async () => {
+  it('F3-FE-12 rớt mạng → báo "Mất kết nối", tự kết nối lại và tải lại hàng đợi; bị từ chối (4401) thì không thử lại', async () => {
     const { fetchMock } = await openBar()
     const loads = () => fetchMock.mock.calls.filter(([u]) => String(u).endsWith('/queue')).length
     const before = loads()
     act(() => FakeWebSocket.last().drop())
-    expect(screen.getByTestId('bar-connection')).toHaveTextContent('Đang kết nối lại')
+    expect(screen.getByTestId('bar-connection')).toHaveTextContent('Mất kết nối')
     await waitFor(() => expect(FakeWebSocket.instances).toHaveLength(2), { timeout: 3000 })
     await waitFor(() => expect(screen.getByTestId('bar-connection')).toHaveTextContent('Trực tuyến'))
     expect(loads()).toBeGreaterThan(before)
     act(() => FakeWebSocket.last().drop(4401))
     await new Promise((r) => setTimeout(r, 1200))
     expect(FakeWebSocket.instances).toHaveLength(2)
+  })
+})
+
+describe('ST-FE-01..02 Hồi quy kiểm thử hệ thống (giai đoạn VI) – màn hình Bar', () => {
+  it('ST-FE-01 (hồi quy BUG-ST-04, NFR-R2) mất WebSocket → cảnh báo "Mất kết nối", tải lại hàng đợi qua REST mỗi 10 giây, đơn mới vẫn hiện', async () => {
+    vi.useFakeTimers({ shouldAdvanceTime: true })
+    const { fetchMock, state } = await openBar()
+    const loads = () => fetchMock.mock.calls.filter(([u]) => String(u).endsWith('/queue')).length
+    expect(screen.queryByTestId('bar-offline')).not.toBeInTheDocument()
+    act(() => FakeWebSocket.last().drop(4401))             // bị từ chối: không kết nối lại WebSocket nữa
+    expect(screen.getByTestId('bar-offline')).toHaveTextContent('Mất kết nối realtime')
+    const before = loads()
+    state.items = [...state.items, q(4, 12, 'CG-0003', 'Trà gừng', '2026-11-03T01:11:00Z')]
+    await act(async () => { await vi.advanceTimersByTimeAsync(POLL_MS + 100) })
+    expect(loads()).toBe(before + 1)
+    expect(await screen.findByTestId('queue-row-4')).toBeInTheDocument()   // đơn mới hiện dù không có WebSocket
+    await act(async () => { await vi.advanceTimersByTimeAsync(POLL_MS) })
+    expect(loads()).toBe(before + 2)
+  })
+
+  it('ST-FE-02 (hồi quy BUG-ST-03, NFR-U3) chữ hàng đợi và cột "Có thể lấy" cỡ ≥ 18px (text-lg)', async () => {
+    await openBar()
+    expect(screen.getByTestId('queue-table')).toHaveClass('text-lg')
+    expect(within(screen.getByTestId('ready-9')).getByRole('list')).toHaveClass('text-lg')
   })
 })
