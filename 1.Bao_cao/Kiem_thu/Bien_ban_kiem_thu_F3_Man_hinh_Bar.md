@@ -5,7 +5,7 @@
 |:---|:---|
 | Dự án | SmartCafe – Phần mềm quản lý chuỗi quán cà phê thông minh (Nhóm 8) |
 | Luồng | **F3 – Màn hình Bar**: UC17 (xem hàng đợi), UC18 (Bắt đầu / Xong / Hoàn tác), UC19 (Đã giao, cộng điểm) – sơ đồ SD04, SD06 (phần giao đồ) |
-| Phiên bản | 0.3.0 – nhánh `feature/f2-dat-mon` (chưa commit, theo yêu cầu PM code tiếp các luồng rồi mới đẩy lên Git), mã nguồn `2.San_pham/smartcafe/` |
+| Phiên bản | 0.3.0 – nhánh `feature/f2-dat-mon`, đã gộp vào `main` ngày 03/11/2026 (CR-34), mã nguồn `2.San_pham/smartcafe/` |
 | Ngày kiểm thử | 03/11/2026 |
 | Người lập biên bản | Thành viên A (PM) |
 | Người review | Thành viên D (Tester/QA) – *chờ review* |

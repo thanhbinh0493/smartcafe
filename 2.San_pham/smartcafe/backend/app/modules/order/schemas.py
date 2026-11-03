@@ -76,4 +76,5 @@ class OrderView(BaseModel):
     cancelled_at: datetime | None
     cancel_reason: str | None
     points_earned: int | None = None  # điểm đã cộng khi đơn hoàn tất (chỉ khách thành viên)
+    expected_points: int | None = None  # điểm sẽ nhận khi đơn hoàn tất (chỉ đơn của khách thành viên, F4)
     items: list[OrderLineOut]

@@ -6,7 +6,7 @@ import LoginPage from './pages/admin/LoginPage'
 import CartPage from './pages/qr/CartPage'
 import MenuPage from './pages/qr/MenuPage'
 import OrderPage from './pages/qr/OrderPage'
-import OtpPlaceholderPage from './pages/qr/OtpPlaceholderPage'
+import OtpPage from './pages/qr/OtpPage'
 import QrLayout from './pages/qr/QrLayout'
 import WelcomePage from './pages/qr/WelcomePage'
 
@@ -17,7 +17,7 @@ export default function App() {
       <Route path="/t/:qrToken" element={<QrLayout />}>
         <Route index element={<WelcomePage />} />
         <Route path="menu" element={<MenuPage />} />
-        <Route path="otp" element={<OtpPlaceholderPage />} />
+        <Route path="otp" element={<OtpPage />} />
         <Route path="cart" element={<CartPage />} />
         <Route path="orders/:orderId" element={<OrderPage />} />
       </Route>

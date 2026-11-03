@@ -4,13 +4,14 @@ import type { ApiError } from '../../api/client'
 import { getMenu, type Menu, type MenuItem } from '../../api/public'
 import { MAX_QTY, useCart } from '../../cart/CartContext'
 import { formatVND, normalizeText } from '../../lib/format'
+import MemberBar from './MemberBar'
 import QrHeader from './QrHeader'
 import { useQr } from './QrLayout'
 
 const ALL = 'all'
 const PROMO = 'promo'
 
-/** W01 – Menu điện tử (UC03) + thêm món vào giỏ (UC04). Khối gợi ý món sẽ được thêm ở F7. */
+/** W01 – Menu điện tử (UC03) + thêm món vào giỏ (UC04) + dòng thành viên (UC07). Khối gợi ý món sẽ được thêm ở F7. */
 export default function MenuPage() {
   const { info } = useQr()
   const cart = useCart()
@@ -50,12 +51,7 @@ export default function MenuPage() {
   return (
     <div className="mx-auto min-h-screen max-w-md pb-24">
       <QrHeader />
-      <div className="flex items-center justify-between gap-2 bg-white px-4 py-2 text-sm">
-        <span className="text-stone-600">Khách vãng lai</span>
-        <Link to="../otp" relative="path" className="rounded-full border border-coffee px-3 py-1 font-medium text-coffee">
-          Nhập SĐT tích điểm
-        </Link>
-      </div>
+      <MemberBar />
 
       <div className="sticky top-12 z-10 space-y-2 bg-cream px-4 pb-2 pt-3">
         <input

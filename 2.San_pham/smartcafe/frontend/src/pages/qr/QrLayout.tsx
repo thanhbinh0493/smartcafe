@@ -2,6 +2,7 @@ import { createContext, useContext, useEffect, useState } from 'react'
 import { Outlet, useParams } from 'react-router-dom'
 import { ApiError } from '../../api/client'
 import { getTable, type TableInfo } from '../../api/public'
+import { MemberProvider } from '../../auth/MemberContext'
 import { CartProvider } from '../../cart/CartContext'
 
 interface QrContextValue {
@@ -53,9 +54,11 @@ export default function QrLayout() {
   }
   return (
     <QrContext.Provider value={{ qrToken, info }}>
-      <CartProvider qrToken={qrToken}>
-        <Outlet />
-      </CartProvider>
+      <MemberProvider>
+        <CartProvider qrToken={qrToken}>
+          <Outlet />
+        </CartProvider>
+      </MemberProvider>
     </QrContext.Provider>
   )
 }

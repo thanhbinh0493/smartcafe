@@ -5,6 +5,7 @@
 """
 import argparse
 import json
+import random
 import sys
 import time
 
@@ -92,6 +93,7 @@ def main() -> int:
             v = c.get(f"/api/public/orders/{o['order_id']}", params={"token": "doan-mo"})
             check("SM-16", "Sai access_token -> ORDER_NOT_FOUND", v.status_code == 404)
             smoke_bar(c, a, bid, r_table_code(c, a.qr_token), o)
+            smoke_member(c, a, bid, r_table_code(c, a.qr_token), lines)
 
     failed = [x for x in RESULTS if not x[2]]
     print(f"\nTổng: {len(RESULTS)} | Đạt: {len(RESULTS) - len(failed)} | Không đạt: {len(failed)}")
@@ -156,6 +158,54 @@ def smoke_bar(c: httpx.Client, a, bid: int, code: str, o: dict) -> None:
         evt = recv_until(cust_ws, "ORDER_COMPLETED")
         check("SM-23", "Pha chế bấm 'Đã giao' -> đơn hoàn tất, khách nhận ORDER_COMPLETED",
               r.status_code == 200 and r.json()["status"] == "COMPLETED" and evt["data"]["status"] == "COMPLETED")
+
+
+def smoke_member(c: httpx.Client, a, bid: int, code: str, lines: list[dict]) -> None:
+    """F4: khách nhập SĐT + OTP giả lập, đặt món ở chế độ thành viên, nhận đồ thì được cộng điểm."""
+    phone = "09" + "".join(random.choices("0123456789", k=8))  # SĐT mới mỗi lần chạy (tránh giới hạn gửi mã)
+    r = c.post("/api/public/otp/request", json={"phone": phone})
+    sent = r.json() if r.status_code == 200 else {}
+    check("SM-24", "Gửi OTP giả lập: hạn 5 phút, chờ 60 giây, có mã [DEMO]", r.status_code == 200
+          and sent["expires_in"] == 300 and sent["resend_after"] == 60 and len(sent.get("demo_code") or "") == 6,
+          sent.get("phone_masked", str(r.status_code)))
+    if not sent:
+        return
+    r = c.post("/api/public/otp/request", json={"phone": phone})
+    check("SM-25", "Gửi lại ngay -> 429 OTP_RATE_LIMITED", r.status_code == 429
+          and r.json()["error"]["code"] == "OTP_RATE_LIMITED", r.json()["error"]["message"])
+    bad = f"{(int(sent['demo_code']) + 1) % 1_000_000:06d}"
+    r = c.post("/api/public/otp/verify", json={"phone": phone, "code": bad})
+    check("SM-26", "Sai mã -> OTP_INVALID, còn 4 lần thử", r.status_code == 400
+          and r.json()["error"]["details"] == {"reason": "WRONG", "attempts_left": 4})
+    r = c.post("/api/public/otp/verify", json={"phone": phone, "code": sent["demo_code"]})
+    ok = r.status_code == 200
+    check("SM-27", "Nhập đúng mã -> customer token, 0 điểm", ok and r.json()["loyalty_points"] == 0)
+    if not ok:
+        return
+    h = {"Authorization": f"Bearer {r.json()['customer_token']}"}
+    me = c.get("/api/public/me", headers=h)
+    check("SM-28", "Xem điểm /api/public/me", me.status_code == 200 and me.json()["loyalty_points"] == 0,
+          me.json().get("phone_masked", ""))
+    r = c.get(f"/api/staff/branches/{bid}/queue", headers=h)
+    check("SM-29", "Customer token không gọi được API nhân viên (403)", r.status_code == 403)
+
+    body = {"qr_token": a.qr_token, "items": [{"menu_item_id": lines[1]["id"], "quantity": 3}]}
+    o = c.post("/api/public/orders", json=body, headers=h).json()
+    expected = (lines[1]["sell_price"] * 3) // 10_000
+    check("SM-30", "Đặt món chế độ thành viên: có expected_points", o.get("expected_points") == expected,
+          f"{o.get('order_code')} tổng {o.get('total')}, +{o.get('expected_points')} điểm")
+    c.post(f"/api/public/orders/{o['order_id']}/pay", json={"access_token": o["access_token"], "method": "MOCK_CARD"})
+    tok = c.post("/api/auth/login", json={"username": f"pc1_{code}", "password": a.password}).json()["access_token"]
+    sh = {"Authorization": f"Bearer {tok}"}
+    for it in o["items"]:
+        c.post(f"/api/staff/order-items/{it['id']}/start", headers=sh)
+        c.post(f"/api/staff/order-items/{it['id']}/done", headers=sh)
+    r = c.post(f"/api/staff/orders/{o['order_id']}/complete", headers=sh)
+    me = c.get("/api/public/me", headers=h).json()
+    tx = me["recent_transactions"][0] if me["recent_transactions"] else {}
+    check("SM-31", "Đã giao -> cộng điểm, /me có giao dịch của đơn", r.status_code == 200
+          and r.json()["points_earned"] == expected and me["loyalty_points"] == expected
+          and tx.get("order_code") == o["order_code"], f"+{expected} điểm, tổng {me['loyalty_points']}")
 
 
 if __name__ == "__main__":

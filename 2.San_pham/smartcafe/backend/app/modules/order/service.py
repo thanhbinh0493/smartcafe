@@ -164,6 +164,7 @@ def build_order_view(db: Session, order: Order) -> OrderView:
         completed_at=order.completed_at, cancelled_at=order.cancelled_at, cancel_reason=order.cancel_reason,
         points_earned=(db.scalar(select(LoyaltyTransaction.points).where(LoyaltyTransaction.order_id == order.id)) or 0)
         if order.customer_id and order.status == "COMPLETED" else None,
+        expected_points=order.total_amount // 10_000 if order.customer_id else None,
         items=[_line(i, names.get(i.menu_item_id, "")) for i in items],
     )
 
