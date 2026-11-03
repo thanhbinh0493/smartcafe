@@ -23,7 +23,7 @@ Cập nhật mỗi khi một luồng xong. Kết quả kiểm thử chi tiết �
 | F5 | Thu ngân hỗ trợ: tra cứu, hủy đơn & hoàn tiền | UC20 · W04 (tra cứu) | ✔ Đạt (03/11) | [F5](../../1.Bao_cao/Kiem_thu/Bien_ban_kiem_thu_F5_Thu_ngan.md) – 53/53 |
 | F6 | Quản trị: danh mục, món, chi nhánh, nhân viên, menu chi nhánh, bàn & QR, khuyến mãi | UC09–UC15 · W05–W07, A03–A06 | ✔ Đạt (03/11) | [F6](../../1.Bao_cao/Kiem_thu/Bien_ban_kiem_thu_F6_Quan_tri.md) – 230/230 |
 | F7 | AI gợi ý món (2 chế độ) + "Thường gọi kèm" | UC03 (phần gợi ý) | ✔ Đạt (03/11) | [F7](../../1.Bao_cao/Kiem_thu/Bien_ban_kiem_thu_F7_AI_goi_y.md) – 71/71 |
-| F8 | Báo cáo ngày (job 00:05) + dashboard | UC16 · W08 | ✔ Đạt (03/11) – nhánh `feature/f8-bao-cao` | [F8](../../1.Bao_cao/Kiem_thu/Bien_ban_kiem_thu_F8_Bao_cao_Dashboard.md) – 41/41 |
+| F8 | Báo cáo ngày (job 00:05) + dashboard | UC16 · W08 | ✔ Đạt (03/11) | [F8](../../1.Bao_cao/Kiem_thu/Bien_ban_kiem_thu_F8_Bao_cao_Dashboard.md) – 41/41 |
 
 ## 1. Chạy toàn bộ hệ thống (demo)
 Yêu cầu: Docker Desktop đang chạy.

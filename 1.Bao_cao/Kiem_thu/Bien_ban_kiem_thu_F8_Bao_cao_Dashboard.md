@@ -127,9 +127,9 @@ Log: [logs/F8_e2e_trinh_duyet.txt](logs/F8_e2e_trinh_duyet.txt). Ảnh chụp:
 - *F8-08 lần đầu đỏ do chính test: job "bù khi khởi động" chạy ngay rồi tự xóa khỏi danh sách job (và có thể chạm CSDL test thật) – đã sửa test để thay job này bằng hàm giả và kiểm tra nó đã được gọi.*
 
 ## 7. Tồn tại / ghi chú
-- **Đề xuất chờ PM chốt (đã cài, ghi ở bảng Vấn đề mở – P21, P22):**
-  - **P21 – Bù báo cáo khi khởi động:** thiết kế chỉ có job 00:05, nhưng laptop demo thường tắt lúc đó nên dashboard sẽ trống. Đã cài: khi backend khởi động, tự tính các ngày đã kết thúc còn thiếu trong 60 ngày (không tính lại ngày đã có). Phương án khác: chỉ job 00:05 + quản trị viên bấm "Tính lại".
-  - **P22 – Số liệu "Tất cả chi nhánh":** bảng chỉ lưu theo từng chi nhánh, nên khi gộp, *tỉ lệ món từ gợi ý* lấy trung bình theo số đơn (gần đúng) và *top 5 món* gộp từ top 5 của từng chi nhánh (có thể sót món đứng thứ 6 ở cả 3 chi nhánh). Phương án khác: tính top món toàn chuỗi trực tiếp từ `order_items` (dashboard không còn "chỉ đọc bảng báo cáo").
+- **Đề xuất đã được PM chốt giữ nguyên như đã cài (CR-40):**
+  - **P21 – Bù báo cáo khi khởi động:** thiết kế chỉ có job 00:05, nhưng laptop demo thường tắt lúc đó nên dashboard sẽ trống. Đã cài: khi backend khởi động, tự tính các ngày đã kết thúc còn thiếu trong 60 ngày (không tính lại ngày đã có). Phương án khác: chỉ job 00:05 + quản trị viên bấm "Tính lại". → **Đã chốt D36.**
+  - **P22 – Số liệu "Tất cả chi nhánh":** bảng chỉ lưu theo từng chi nhánh, nên khi gộp, *tỉ lệ món từ gợi ý* lấy trung bình theo số đơn (gần đúng) và *top 5 món* gộp từ top 5 của từng chi nhánh (có thể sót món đứng thứ 6 ở cả 3 chi nhánh). Phương án khác: tính top món toàn chuỗi trực tiếp từ `order_items` (dashboard không còn "chỉ đọc bảng báo cáo"). → **Đã chốt D37** (giữ cách gộp).
 - Thời gian chờ TB tính trên đơn không hủy (IV.1 tính trên mọi đơn có `ready_at`; đơn hủy không có `ready_at` nên kết quả như nhau).
 - Quản trị viên có nút "Tính lại hôm qua" (gọi API rebuild) – tiện khi demo; chọn ngày khác thì dùng API.
 - Số liệu "Doanh thu KM" của các ngày lịch sử bằng 0 vì `seed_orders` sinh đơn giá thường (D32); chỉ các đơn thật đặt khi KM đang chạy mới có doanh thu KM.
@@ -137,7 +137,7 @@ Log: [logs/F8_e2e_trinh_duyet.txt](logs/F8_e2e_trinh_duyet.txt). Ảnh chụp:
 - API bổ sung so với IV.3: dữ liệu trả về của dashboard, ràng buộc khoảng ngày – đã cập nhật [IV.3](../Thiet_ke_he_thong/IV.3_Kien_truc_va_API.md).
 
 ## 8. Kết luận
-**Luồng F8: ĐẠT.** 41/41 ca kiểm thử đạt, hồi quy F0 → F7 629/629 đạt; 1 lỗi (mức Thấp) đã sửa, có test hồi quy. **Hoàn tất toàn bộ 9 luồng F0 → F8** theo D26; chờ PM duyệt và chốt P21, P22.
+**Luồng F8: ĐẠT.** 41/41 ca kiểm thử đạt, hồi quy F0 → F7 629/629 đạt; 1 lỗi (mức Thấp) đã sửa, có test hồi quy. **Hoàn tất toàn bộ 9 luồng F0 → F8** theo D26; PM đã duyệt và chốt P21 → D36, P22 → D37 (CR-40); F8 gộp vào `main`.
 
 | Vai trò | Họ tên | Ngày | Ký xác nhận |
 |:---|:---|:---|:---|

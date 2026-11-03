@@ -16,7 +16,7 @@ Thời gian thực hiện: 21/09/2026 → 21/12/2026. Nhân sự: A (PM, BA) · 
 |:---|:---|
 | Khởi tạo, xác định phạm vi | ✔ Xong |
 | Phân tích & thiết kế hệ thống (II–IV: quy trình, công nghệ, use case, sequence, CSDL 18 bảng, giao diện, kiến trúc & API) | ✔ Xong |
-| Lập trình (V) – theo 9 luồng F0 → F8 | **Đang làm** |
+| Lập trình (V) – theo 9 luồng F0 → F8 | ✔ Xong (03/11) |
 | ├ F0 Nền tảng (Docker Compose, CSDL, dữ liệu mẫu, đăng nhập nhân viên, phân quyền) | ✔ Xong, đã kiểm thử – Đạt |
 | ├ F1 Quét QR → màn hình chào → menu chi nhánh | ✔ Xong, đã kiểm thử – Đạt |
 | ├ F2 Đặt món → thanh toán giả lập → theo dõi đơn | ✔ Xong, đã kiểm thử – Đạt |

@@ -29,6 +29,7 @@ Tuần 07 (02/11/2026 – 08/11/2026). Hình thức: họp nhóm. Thư ký: Thà
 | CR-37 | 03/11/2026 | Duyệt kết quả F6 – Quản trị (230/230 đạt), gộp F6 vào `main` (local) và bắt đầu code F7 – AI gợi ý món (2 chế độ + "Thường gọi kèm") | F6 đạt đủ điều kiện theo D25 | Nhánh `main`, `feature/f7-ai-goi-y`; IV.2, IV.3 (API quản trị); biên bản kiểm thử F7; C, B, E, D | A |
 | CR-38 | 03/11/2026 | Chốt P17–P20 cho F7: dữ liệu lịch sử `seed_orders` **tự nạp khi khởi động** + SĐT demo 0901000001 (D32); FP-Growth dùng **mlxtend** (D33); thêm `recommendation_log_id` vào API đặt đơn (D34); thời tiết **giả lập mặc định**, API key tùy chọn (D35) | Theo phương án khuyến nghị: demo được ngay chế độ thành viên, đúng II.2, đo được hiệu quả gợi ý, không phụ thuộc mạng / key khi demo | README thiết kế (D32–D35, P17–P20), II.2 Mục 2.3–2.5, IV.3; `start.sh`, Dockerfile / requirements, `.env.example`; module recommend, API đặt đơn; C, B, E | A |
 | CR-39 | 03/11/2026 | Duyệt kết quả F7 – AI gợi ý món (71/71 đạt), gộp F7 vào `main` (local) và code F8 – Báo cáo ngày & dashboard. Phát sinh 2 đề xuất chờ chốt: P21 (bù báo cáo khi khởi động), P22 (cách gộp số liệu "Tất cả chi nhánh") | F7 đạt đủ điều kiện theo D25; laptop demo thường tắt lúc 00:05 | Nhánh `main`, `feature/f8-bao-cao`; README thiết kế (P21, P22), IV.1, IV.2, IV.3; module report, W08; biên bản kiểm thử F8; B, E, D | A |
+| CR-40 | 03/11/2026 | Chốt P21: **tự tính bù báo cáo ngày còn thiếu khi backend khởi động** (D36). Chốt P22: dashboard "Tất cả chi nhánh" **giữ cách gộp từ bảng báo cáo** (tỉ lệ món từ gợi ý trung bình theo số đơn, top 5 gộp từ top 5 từng chi nhánh) (D37). Duyệt kết quả F8 (41/41 đạt), gộp F8 vào `main` (local) – hoàn tất giai đoạn Lập trình F0 → F8 | Laptop demo thường tắt lúc 00:05; giữ dashboard chỉ đọc bảng báo cáo, sai lệch nhỏ chấp nhận được | README thiết kế (D36, D37, P21, P22), IV.1; biên bản kiểm thử F8 Mục 7–8; README gốc, README mã nguồn; nhánh `main`; B, E | A |
 
 ## 4. HÌNH ẢNH / VIDEOS
 (Bổ sung ảnh chụp buổi họp nếu có.)
@@ -50,7 +51,8 @@ Tuần 07 (02/11/2026 – 08/11/2026). Hình thức: họp nhóm. Thư ký: Thà
 - Thông qua CR-38: dữ liệu lịch sử tự nạp + SĐT demo (D32), mlxtend (D33), `recommendation_log_id` (D34), thời tiết giả lập mặc định (D35).
 - Code tiếp các luồng F3 → F8 trên máy, chưa đẩy lên GitHub cho tới khi PM yêu cầu.
 - Thông qua CR-39: F7 được duyệt, gộp vào `main`, code F8.
-- Vấn đề còn mở: P12 (bản demo dự phòng trên cloud), P21 (bù báo cáo khi khởi động), P22 (gộp số liệu "Tất cả chi nhánh").
+- Thông qua CR-40: tự bù báo cáo khi khởi động (D36), giữ cách gộp số liệu "Tất cả chi nhánh" (D37); F8 được duyệt, gộp vào `main` – hoàn tất lập trình F0 → F8.
+- Vấn đề còn mở: P12 (bản demo dự phòng trên cloud).
 
 **Việc cần làm:**
 | Việc | Người phụ trách | Hạn |
@@ -70,6 +72,6 @@ Tuần 07 (02/11/2026 – 08/11/2026). Hình thức: họp nhóm. Thư ký: Thà
 | Code F5 (thu ngân tra cứu, hủy đơn & hoàn tiền giả lập) kèm test + biên bản kiểm thử – đã xong, duyệt (CR-36) | B, E (D lập biên bản) | 03/11/2026 |
 | Code F6 (quản trị: danh mục, món, chi nhánh, nhân viên, menu chi nhánh, bàn & QR, khuyến mãi) kèm test + biên bản kiểm thử – đã xong, duyệt (CR-37) | B, E (D lập biên bản) | 03/11/2026 |
 | Code F7 (AI gợi ý món 2 chế độ + "Thường gọi kèm") kèm test + biên bản kiểm thử – đã xong, duyệt (CR-39) | C, B, E (D lập biên bản) | 03/11/2026 |
-| Code F8 (báo cáo ngày + dashboard W08) kèm test + biên bản kiểm thử | B, E (D lập biên bản) | 08/11/2026 |
-| Chốt P21, P22 | A | 08/11/2026 |
+| Code F8 (báo cáo ngày + dashboard W08) kèm test + biên bản kiểm thử – đã xong, duyệt (CR-40) | B, E (D lập biên bản) | 03/11/2026 |
+| Chốt P21, P22 – đã xong (CR-40) | A | 03/11/2026 |
 | Review công thức + trọng số gợi ý, tinh chỉnh theo kết quả Hit Rate@5 (biên bản F7 Mục 4.7) | C | 10/11/2026 |
