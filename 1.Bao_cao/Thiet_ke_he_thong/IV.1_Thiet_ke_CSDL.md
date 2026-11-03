@@ -144,7 +144,7 @@ Bảng được job hằng đêm **xóa và ghi lại** sau khi chạy FP-Growth
 | recommended_item_ratio | NUMERIC | Tỉ lệ dòng món có `is_recommended = true` |
 | top_items | JSONB | Top 5 món theo số lượng `[{menu_item_id, name, qty}]` |
 
-Job `build_daily_report(date)` chạy 00:05 hằng ngày, UPSERT theo khóa chính nên có thể chạy lại để tính lại một ngày.
+Job `build_daily_report(date)` chạy 00:05 hằng ngày, UPSERT theo khóa chính nên có thể chạy lại để tính lại một ngày. Ngày không có đơn vẫn có 1 dòng toàn 0. *(Đề xuất P21, đã cài ở F8: khi backend khởi động, tự tính bù các ngày đã kết thúc còn thiếu trong 60 ngày.)*
 
 ## 5. Chuẩn hóa
 - Các bảng đạt **3NF**: mọi thuộc tính không khóa phụ thuộc đầy đủ và trực tiếp vào khóa chính.

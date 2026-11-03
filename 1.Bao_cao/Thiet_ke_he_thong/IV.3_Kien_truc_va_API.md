@@ -78,8 +78,8 @@ Tiền tố: `/api/public/*` dùng cho khách (một số endpoint nhận thêm 
 | POST | `/api/staff/order-items/{id}/undo` | Hoàn tác "Xong" (nút hiện 10 giây; server chấp nhận tới 15 giây để bù trễ mạng, quá hạn → 409 `UNDO_EXPIRED`). Hoàn tác món cuối của đơn READY thì đơn → PREPARING (D30) | BARISTA, MANAGER |
 | POST | `/api/staff/orders/{id}/complete` | Pha chế xác nhận "Đã giao", **cộng điểm**; trả `{order_id, status, completed_at, points_earned}` (`points_earned` = null với khách ẩn danh) | BARISTA, MANAGER |
 | POST | `/api/staff/orders/{id}/cancel` | `{reason}` (5–255 ký tự): hủy và hoàn tiền giả lập (hỗ trợ khách), chỉ đơn PAID / PREPARING; trả đơn đã hủy như kết quả tra cứu. Trạng thái khác → 409 `CANNOT_CANCEL` (`details.order_status`); cổng thanh toán từ chối hoàn tiền → 502 `REFUND_FAILED`, không đổi gì | CASHIER, MANAGER |
-| GET | `/api/staff/reports/daily?branch_id=&from=&to=` | Dữ liệu dashboard từ `daily_sales_reports` (chỉ số theo ngày, top món) | ADMIN, MANAGER (chi nhánh mình) |
-| POST | `/api/staff/reports/daily/rebuild` | `{date, branch_id?}`: chạy lại job tổng hợp cho 1 ngày | ADMIN |
+| GET | `/api/staff/reports/daily?branch_id=&from=&to=` | Dữ liệu dashboard từ `daily_sales_reports`: `{from_date, to_date, branch_id, latest_date, latest, previous, period, branches:[{branch_id, code, name, kpi}], series:[{report_date, branch_id, revenue, order_count}], top_items, generated_at}`; `kpi` = doanh thu, số đơn, đơn hủy, TB/đơn, chờ TB, tỉ lệ thành viên, doanh thu KM, tỉ lệ món từ gợi ý. Mặc định 7 ngày đến hôm qua, `to` ≥ hôm nay bị cắt về hôm qua, tối đa 92 ngày; không có `branch_id` = tất cả chi nhánh (chỉ ADMIN) | ADMIN, MANAGER (chi nhánh mình) |
+| POST | `/api/staff/reports/daily/rebuild` | `{date, branch_id?}`: chạy lại job tổng hợp cho 1 ngày đã kết thúc (hôm nay / tương lai → 422); trả `{report_date, branches}` | ADMIN |
 
 ### 2.3. WebSocket
 | Kênh | Người nghe | Sự kiện |

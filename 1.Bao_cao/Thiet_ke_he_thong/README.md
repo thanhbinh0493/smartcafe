@@ -62,6 +62,8 @@ Bảng này là **nơi duy nhất** theo dõi các đề xuất và vấn đề 
 
 | # | Ngày mở | Vấn đề / đề xuất | Phương án thay thế | Người chốt | Trạng thái |
 |:---|:---|:---|:---|:---|:---|
+| P21 | 03/11 | **Bù báo cáo ngày khi backend khởi động**: tự tính các ngày đã kết thúc còn thiếu trong 60 ngày (laptop demo thường tắt lúc 00:05 nên job không chạy, dashboard sẽ trống). Đã cài ở F8 – xem [biên bản kiểm thử F8](../Kiem_thu/Bien_ban_kiem_thu_F8_Bao_cao_Dashboard.md) Mục 7 | Chỉ job 00:05 + quản trị viên bấm "Tính lại" | A | **Đang mở** |
+| P22 | 03/11 | Dashboard "Tất cả chi nhánh" gộp từ bảng theo chi nhánh: tỉ lệ món từ gợi ý lấy trung bình theo số đơn (gần đúng), top 5 món gộp từ top 5 từng chi nhánh. Đã cài ở F8 – xem [biên bản kiểm thử F8](../Kiem_thu/Bien_ban_kiem_thu_F8_Bao_cao_Dashboard.md) Mục 7 | Tính top món toàn chuỗi trực tiếp từ `order_items` | A | **Đang mở** |
 | P17 | 03/11 | Cách nạp dữ liệu lịch sử cho AI (seed_orders.py) vào CSDL demo – phát sinh khi bắt đầu F7 | Chạy tay bằng lệnh | A | Đã chốt → D32 (tự nạp khi CSDL trống + SĐT demo) |
 | P18 | 03/11 | Thư viện FP-Growth: mlxtend (II.2) làm image nặng thêm ~80–100 MB | Tự viết FP-Growth | A | Đã chốt → D33 (mlxtend) |
 | P19 | 03/11 | Cách gán `recommendation_logs.order_id` (API chưa quy định) | Không gán, chỉ dựa `is_recommended` | A | Đã chốt → D34 (trường `recommendation_log_id`) |

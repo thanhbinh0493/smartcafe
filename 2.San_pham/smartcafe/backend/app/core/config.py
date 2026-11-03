@@ -36,6 +36,9 @@ class Settings(BaseSettings):
     scheduler_enabled: bool = True                  # job học luật hằng đêm (tắt trong test)
     rules_job_hour: int = 0                         # 00:30 giờ VN (sau job báo cáo 00:05 của F8)
     rules_job_minute: int = 30
+    # Báo cáo ngày (F8 – D21): job 00:05 giờ VN tổng hợp ngày hôm trước
+    report_job_hour: int = 0
+    report_job_minute: int = 5
     cors_origins: list[str] = ["http://localhost:5173", "http://localhost:8080"]
 
 

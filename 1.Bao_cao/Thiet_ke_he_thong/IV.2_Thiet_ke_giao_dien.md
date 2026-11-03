@@ -100,7 +100,7 @@ Sau khi đăng nhập, màn hình mặc định theo vai trò: ADMIN → W08, MA
 - Màn hình "Tổng quan" mặc định của Quản trị viên và Quản lý chi nhánh. Dữ liệu lấy từ `daily_sales_reports`, **tự cập nhật lúc 00:05 hằng ngày**.
 - Bộ lọc: chi nhánh (Quản lý chỉ thấy chi nhánh mình), khoảng thời gian 7 / 30 ngày.
 - Thẻ chỉ số của ngày gần nhất kèm % thay đổi so với ngày trước; biểu đồ đường doanh thu theo ngày (mỗi chi nhánh 1 đường); bảng so sánh chi nhánh; top 5 món.
-- Thư viện biểu đồ gợi ý: Recharts (React).
+- Thư viện biểu đồ: Recharts (React). Màu mỗi chi nhánh cố định; mũi tên thay đổi xanh = tốt hơn, đỏ = xấu hơn (thời gian chờ giảm là tốt). Quản trị viên có nút "Tính lại hôm qua".
 
 ## 4. Hướng dẫn chuyển sang Figma (cho Thành viên E)
 1. Frame mobile 390×844 (iPhone 14) cho W00–W03. Frame desktop 1440×900 cho Web Admin. Màn hình Bar dùng 1280×800 (tablet ngang).

@@ -1,0 +1,37 @@
+﻿============================= test session starts =============================
+platform win32 -- Python 3.11.9, pytest-8.4.2, pluggy-1.7.0 -- D:\PTIT\HK3\QLDAPM\QLDAPM_Nhom_8\2.San_pham\smartcafe\backend\.venv\Scripts\python.exe
+rootdir: D:\PTIT\HK3\QLDAPM\QLDAPM_Nhom_8\2.San_pham\smartcafe\backend
+configfile: pytest.ini
+plugins: anyio-4.16.0, cov-7.1.0
+collecting ... collected 22 items
+
+tests/f8/test_api.py::test_F8_10_quan_tri_vien_xem_tat_ca_chi_nhanh_7_ngay PASSED [  4%]
+tests/f8/test_api.py::test_F8_11_loc_chi_nhanh_va_khoang_30_ngay PASSED  [  9%]
+tests/f8/test_api.py::test_F8_12_quan_ly_chi_xem_chi_nhanh_minh PASSED   [ 13%]
+tests/f8/test_api.py::test_F8_13_khoang_thoi_gian_khong_hop_le[params0-from] PASSED [ 18%]
+tests/f8/test_api.py::test_F8_13_khoang_thoi_gian_khong_hop_le[params1-from] PASSED [ 22%]
+tests/f8/test_api.py::test_F8_14_chi_gom_ngay_da_ket_thuc_va_chi_nhanh_khong_ton_tai PASSED [ 27%]
+tests/f8/test_api.py::test_F8_15_quan_tri_vien_chay_lai_bao_cao PASSED   [ 31%]
+tests/f8/test_api.py::test_F8_16_chay_lai_khong_hop_le[admin-body0-422] PASSED [ 36%]
+tests/f8/test_api.py::test_F8_16_chay_lai_khong_hop_le[admin-body1-422] PASSED [ 40%]
+tests/f8/test_api.py::test_F8_16_chay_lai_khong_hop_le[admin-body2-422] PASSED [ 45%]
+tests/f8/test_api.py::test_F8_16_chay_lai_khong_hop_le[admin-body3-404] PASSED [ 50%]
+tests/f8/test_api.py::test_F8_16_chay_lai_khong_hop_le[ql-body4-403] PASSED [ 54%]
+tests/f8/test_api.py::test_F8_17_dashboard_30_ngay_3_chi_nhanh_duoi_2_giay PASSED [ 59%]
+tests/f8/test_build.py::test_F8_01_tinh_du_chi_so_cua_ngay PASSED        [ 63%]
+tests/f8/test_build.py::test_F8_02_ngay_theo_gio_viet_nam PASSED         [ 68%]
+tests/f8/test_build.py::test_F8_03_bo_don_chua_thanh_toan_chi_nhanh_khac_ngay_khong_co_don PASSED [ 72%]
+tests/f8/test_build.py::test_F8_04_chay_lai_cap_nhat_dung_mot_dong PASSED [ 77%]
+tests/f8/test_build.py::test_F8_05_top_5_mon PASSED                      [ 81%]
+tests/f8/test_build.py::test_F8_06_bu_ngay_con_thieu PASSED              [ 86%]
+tests/f8/test_build.py::test_F8_07_gop_chi_so_nhieu_dong PASSED          [ 90%]
+tests/f8/test_build.py::test_F8_08_job_00_05_va_bu_khi_khoi_dong PASSED  [ 95%]
+tests/f8/test_build.py::test_F8_09_hieu_nang_job_va_seed PASSED          [100%]
+
+============================== warnings summary ===============================
+.venv\Lib\site-packages\fastapi\testclient.py:1
+  D:\PTIT\HK3\QLDAPM\QLDAPM_Nhom_8\2.San_pham\smartcafe\backend\.venv\Lib\site-packages\fastapi\testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+    from starlette.testclient import TestClient as TestClient  # noqa
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+======================== 22 passed, 1 warning in 8.44s ========================
