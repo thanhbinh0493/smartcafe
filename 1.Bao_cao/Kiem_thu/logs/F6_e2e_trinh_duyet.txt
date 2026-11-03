@@ -1,0 +1,11 @@
+﻿[ĐẠT] E2E-44 Quản trị viên: menu đủ 8 mục quản trị; Quản lý: 5 mục chi nhánh Tổng quan | Chi nhánh | Nhân viên | Danh mục | Món | Menu chi nhánh | Bàn & mã QR | Khuyến mãi
+[ĐẠT] E2E-45 W05 thêm món kèm ảnh: lưu được, ảnh upload hiện trong danh sách (qua Nginx) 
+[ĐẠT] E2E-46 W06 tắt 'Còn hàng' Bạc xỉu -> điện thoại khách hiện 'Tạm hết' ngay (MENU_UPDATED) 
+[ĐẠT] E2E-47 W07 giá KM ≥ giá bán bị chặn; tạo KM -> điện thoại khách thấy giá KM + giá gốc gạch ngang ngay 
+[ĐẠT] E2E-48 A06 thêm bàn -> xem & tải ảnh QR (PNG); mở đường dẫn trong QR vào đúng bàn mới http://localhost:8080/t/eIX_a-CU-ikgB5AlNLuMrA
+[ĐẠT] E2E-49 Khóa bàn -> quét lại QR báo 'Mã QR không hợp lệ, vui lòng gọi nhân viên' 
+[ĐẠT] E2E-50 A04 quản lý chỉ gán Thu ngân/Pha chế; pha chế mới đăng nhập được; khóa -> mở lại bị đẩy về đăng nhập Thu ngân / Pha chế
+[ĐẠT] E2E-51 Quản lý gõ URL /admin/promotions -> 'Bạn không có quyền truy cập màn hình này.' 
+[ĐẠT] E2E-52 A03 không sửa được mã chi nhánh; 7 màn hình quản trị không tràn ngang ở 1366px 
+
+Tổng: 9 | Đạt: 9 | Không đạt: 0

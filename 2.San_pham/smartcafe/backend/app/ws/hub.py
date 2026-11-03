@@ -1,6 +1,7 @@
 """WebSocket Hub trong bộ nhớ (IV.3 Mục 1: chạy 1 instance nên chưa cần Redis pub/sub).
 
-Kênh: "order:{order_id}" (trang theo dõi đơn của khách), "bar:{branch_id}" (màn hình Bar – F3).
+Kênh: "order:{order_id}" (trang theo dõi đơn của khách), "bar:{branch_id}" (màn hình Bar – F3),
+"menu:{branch_id}" (menu khách – MENU_UPDATED khi quản trị đổi món, giá, tình trạng, KM – F6).
 Message: {"type": "...", "data": {...}, "ts": "2026-11-20T08:15:00Z"} (IV.3 Mục 2.3).
 """
 from collections import defaultdict
@@ -37,6 +38,11 @@ class Hub:
                 await ws.send_json(msg)
             except Exception:  # client đã ngắt: bỏ khỏi kênh, client sẽ tự kết nối lại (NFR-R3)
                 self.unsubscribe(channel, ws)
+
+    async def publish_prefix(self, prefix: str, type_: str, data: dict[str, Any]) -> None:
+        """Gửi tới mọi kênh bắt đầu bằng `prefix` (VD "menu:" khi đổi menu chung / KM toàn chuỗi)."""
+        for channel in [c for c in self._channels if c.startswith(prefix)]:
+            await self.publish(channel, type_, data)
 
 
 hub = Hub()

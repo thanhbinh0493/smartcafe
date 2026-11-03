@@ -59,17 +59,17 @@ Tiền tố: `/api/public/*` dùng cho khách (một số endpoint nhận thêm 
 |:---|:---|:---|:---|
 | POST | `/api/auth/login` | Đăng nhập, trả JWT | Tất cả |
 | GET | `/api/auth/me` | Thông tin người dùng hiện tại | Tất cả |
-| GET/POST/PUT/DELETE | `/api/staff/categories[/{id}]` | CRUD danh mục | ADMIN |
-| GET/POST/PUT/DELETE | `/api/staff/menu-items[/{id}]` | CRUD món (xóa mềm) | ADMIN |
-| POST | `/api/staff/menu-items/{id}/image` | Upload ảnh món | ADMIN |
-| GET/POST/PUT | `/api/staff/branches[/{id}]` | CRUD chi nhánh | ADMIN |
-| GET/POST/PUT | `/api/staff/staff[/{id}]` | CRUD nhân viên, khóa tài khoản | ADMIN, MANAGER |
+| GET/POST/PUT/DELETE | `/api/staff/categories[/{id}]` | CRUD danh mục `{name (1–50, không trùng, không phân biệt hoa thường), sort_order, is_active}`; GET kèm `item_count`. Xóa chỉ khi danh mục chưa từng có món, còn món → 409 `CATEGORY_IN_USE` (hãy ẩn danh mục) | ADMIN (MANAGER chỉ GET) |
+| GET/POST/PUT/DELETE | `/api/staff/menu-items[/{id}]` | CRUD món `{category_id, name, description, base_price (0–10 triệu), temperature_type, tags (≤ 10 thẻ, ≤ 30 ký tự), is_active}`; GET `?category_id=&status=all\|active\|hidden`; xóa mềm (`is_deleted`), đơn cũ giữ nguyên. Tên trùng món chưa xóa → 409 `DUPLICATE_VALUE` | ADMIN (MANAGER chỉ GET) |
+| POST | `/api/staff/menu-items/{id}/image` | Upload ảnh món (multipart `file`): JPG / PNG / WEBP theo nội dung file, ≤ 2 MB (413 / 422 `INVALID_IMAGE`); lưu volume `uploads`, phục vụ tại `/api/uploads/menu/...`, xóa ảnh cũ | ADMIN |
+| GET/POST/PUT | `/api/staff/branches[/{id}]` | CRUD chi nhánh `{code (2–10 chữ/số, viết hoa, không sửa được), name, address, phone, latitude, longitude, is_active}`; GET kèm `table_count`, `staff_count`. Ngừng hoạt động: QR các bàn báo không hợp lệ | ADMIN (MANAGER chỉ GET chi nhánh mình) |
+| GET/POST/PUT | `/api/staff/staff[/{id}]` | CRUD nhân viên `{username (3–50, a-z0-9_.), full_name, password (≥ 8, khi sửa để trống = giữ), role, branch_id, phone, is_active}`; khóa có hiệu lực ngay. MANAGER chỉ chi nhánh mình, chỉ CASHIER / BARISTA. Tự khóa / tự đổi vai trò, chi nhánh → 409 `CANNOT_MODIFY_SELF` | ADMIN, MANAGER |
 | GET | `/api/staff/branches/{id}/menu` | Menu chi nhánh (giá chung, giá riêng, tình trạng) | ADMIN, MANAGER |
-| PATCH | `/api/staff/branches/{id}/menu/{item_id}` | `{price_override, is_available}` | MANAGER |
-| GET/POST/PUT | `/api/staff/branches/{id}/tables[/{tid}]` | Quản lý bàn | MANAGER |
-| GET | `/api/staff/tables/{tid}/qr.png` | Ảnh QR để in | MANAGER |
+| PATCH | `/api/staff/branches/{id}/menu/{item_id}` | `{price_override (null = giá chung), is_available}`: UPSERT, đẩy `MENU_UPDATED` cho chi nhánh | ADMIN, MANAGER (chi nhánh mình) |
+| GET/POST/PUT | `/api/staff/branches/{id}/tables[/{tid}]` | Quản lý bàn `{table_number (1–10 chữ/số/-), is_active}`; tạo bàn sinh `qr_token` ngẫu nhiên, trả `qr_url`; đổi số bàn giữ mã QR | ADMIN, MANAGER (chi nhánh mình) |
+| GET | `/api/staff/tables/{tid}/qr.png` | Ảnh QR để in (URL `PUBLIC_BASE_URL/t/{qr_token}` + dòng "CG · Bàn 05") | ADMIN, MANAGER (chi nhánh mình) |
 | GET | `/api/staff/promotions?status=running\|upcoming\|ended&branch_id=` | Danh sách KM | ADMIN |
-| POST/PUT | `/api/staff/promotions[/{id}]` | Tạo/sửa KM `{name, description, branch_id, start_at, end_at, is_active, items:[{menu_item_id, promo_price}]}` | ADMIN |
+| GET/POST/PUT | `/api/staff/promotions[/{id}]` | Tạo/sửa KM `{name, description, branch_id, start_at, end_at (có múi giờ), is_active, items:[{menu_item_id, promo_price}] (1–50 món)}`; trả kèm `status`, `current_price`, `discount_percent`. Giá KM phải < giá chi nhánh (KM 1 chi nhánh) / giá chung (toàn chuỗi), `end_at` > `start_at` và > hiện tại → 422 `PROMOTION_INVALID`; KM đã kết thúc → 409 `PROMOTION_ENDED`; không có xóa (chỉ tắt) | ADMIN |
 | GET | `/api/staff/branches/{id}/queue` | **Hàng đợi pha chế**: các món WAITING/PREPARING của đơn đã thanh toán, sắp theo giờ gọi (`paid_at`), kèm bàn, ghi chú món + ghi chú đơn; trả thêm `server_time` để tính số phút đã chờ | Nhân viên CN (ADMIN xem mọi CN) |
 | GET | `/api/staff/branches/{id}/orders?status=READY` | Đơn "Có thể lấy" | Nhân viên CN |
 | GET | `/api/staff/orders/search?code=&table=` | Thu ngân tra cứu đơn để hỗ trợ khách, trong chi nhánh của mình: đơn đã thanh toán **trong ngày** + đơn ngày trước **còn dở** (PAID / PREPARING / READY); `code` khớp một phần, không phân biệt hoa thường; `table` = số bàn; mới thanh toán trước, tối đa 50. Mỗi đơn có món, thanh toán (`status`, `transaction_ref`, `refunded_at`), `is_member`, `can_cancel`, lý do hủy + người hủy | CASHIER, MANAGER |
@@ -86,7 +86,7 @@ Tiền tố: `/api/public/*` dùng cho khách (một số endpoint nhận thêm 
 |:---|:---|:---|
 | `/ws/bar/{branch_id}?token=<JWT>` | Màn hình Bar | `QUEUE_ITEM_ADDED`, `ITEM_UPDATED {item_id, item_status, order_id, order_status}`, `ORDER_READY`, `ORDER_COMPLETED {order_id}`, `ORDER_CANCELLED {order_id, order_code}`. JWT sai/hết hạn/bị khóa: đóng mã 4401; khác chi nhánh: 4403. Kết nối (lại) xong client tự tải lại hàng đợi qua REST |
 | `/ws/order/{order_id}?token=<access_token>` | Khách | `ORDER_SNAPSHOT` (gửi ngay khi kết nối / kết nối lại), `ORDER_PAID`, `ITEM_PREPARING`, `ITEM_DONE`, `QUEUE_POSITION`, `ORDER_READY`, `ORDER_COMPLETED` (dữ liệu đơn có `points_earned`), `ORDER_CANCELLED`; các sự kiện của đơn mang toàn bộ dữ liệu đơn như `GET /api/public/orders/{id}`, riêng `QUEUE_POSITION` chỉ gồm `{order_id, queue_position}`. Sai mã đơn / token: đóng kết nối mã 4404 |
-| `/ws/menu/{branch_id}` | QR Web App | `MENU_UPDATED` (tình trạng món, khuyến mãi) |
+| `/ws/menu/{branch_id}` | QR Web App | `MENU_UPDATED {branch_id (null = toàn chuỗi), reason: CATEGORY \| MENU_ITEM \| BRANCH \| BRANCH_MENU \| PROMOTION}` – menu khách tự tải lại. Công khai; chi nhánh không tồn tại / ngừng hoạt động: đóng mã 4404 |
 
 Định dạng message: `{"type": "ORDER_READY", "data": {...}, "ts": "2026-11-20T08:15:00Z"}`.
 
@@ -94,7 +94,7 @@ Tiền tố: `/api/public/*` dùng cho khách (một số endpoint nhận thêm 
 ```json
 { "error": { "code": "ITEM_UNAVAILABLE", "message": "Món 'Bạc xỉu' đã tạm hết", "details": {"item_ids": [12]} } }
 ```
-Mã lỗi chính: `VALIDATION_ERROR`, `TABLE_NOT_FOUND`, `BRANCH_NOT_FOUND`, `ORDER_NOT_FOUND`, `ITEM_NOT_FOUND`, `UNDO_EXPIRED`, `ITEM_UNAVAILABLE`, `QUANTITY_LIMIT`, `PRICE_CHANGED`, `UNAUTHORIZED`, `TOKEN_EXPIRED`, `ACCOUNT_LOCKED`, `OTP_INVALID`, `OTP_RATE_LIMITED`, `INVALID_CREDENTIALS`, `FORBIDDEN`, `INVALID_STATE_TRANSITION`, `CANNOT_CANCEL`, `PAYMENT_FAILED`, `REFUND_FAILED`, `PROMOTION_INVALID`.
+Mã lỗi chính: `VALIDATION_ERROR`, `TABLE_NOT_FOUND`, `BRANCH_NOT_FOUND`, `ORDER_NOT_FOUND`, `ITEM_NOT_FOUND`, `UNDO_EXPIRED`, `ITEM_UNAVAILABLE`, `QUANTITY_LIMIT`, `PRICE_CHANGED`, `UNAUTHORIZED`, `TOKEN_EXPIRED`, `ACCOUNT_LOCKED`, `OTP_INVALID`, `OTP_RATE_LIMITED`, `INVALID_CREDENTIALS`, `FORBIDDEN`, `INVALID_STATE_TRANSITION`, `CANNOT_CANCEL`, `PAYMENT_FAILED`, `REFUND_FAILED`, `PROMOTION_INVALID`, `PROMOTION_ENDED`, `DUPLICATE_VALUE` (`details.field`), `CATEGORY_IN_USE`, `CANNOT_MODIFY_SELF`, `INVALID_IMAGE`, `CATEGORY_NOT_FOUND`, `MENU_ITEM_NOT_FOUND`, `STAFF_NOT_FOUND`, `PROMOTION_NOT_FOUND`.
 
 ## 3. Mốc tích hợp đề xuất cho giai đoạn V
 | Tuần | Mốc | Người |

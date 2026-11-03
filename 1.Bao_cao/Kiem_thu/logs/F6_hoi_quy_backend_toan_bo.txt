@@ -1,0 +1,74 @@
+﻿........................................................................ [ 17%]
+........................................................................ [ 35%]
+........................................................................ [ 53%]
+........................................................................ [ 71%]
+........................................................................ [ 88%]
+.............................................                            [100%]
+============================== warnings summary ===============================
+.venv\Lib\site-packages\fastapi\testclient.py:1
+  D:\PTIT\HK3\QLDAPM\QLDAPM_Nhom_8\2.San_pham\smartcafe\backend\.venv\Lib\site-packages\fastapi\testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+    from starlette.testclient import TestClient as TestClient  # noqa
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=============================== tests coverage ================================
+_______________ coverage: platform win32, python 3.11.9-final-0 _______________
+
+Name                               Stmts   Miss  Cover
+------------------------------------------------------
+app\__init__.py                        0      0   100%
+app\core\__init__.py                   0      0   100%
+app\core\config.py                    24      0   100%
+app\core\db.py                        13      0   100%
+app\core\errors.py                    25      0   100%
+app\core\security.py                  31      0   100%
+app\main.py                           46      0   100%
+app\models\__init__.py                 6      0   100%
+app\models\analytics.py               41      0   100%
+app\models\branch.py                  37      0   100%
+app\models\customer.py                29      0   100%
+app\models\enums.py                   19      0   100%
+app\models\menu.py                    50      0   100%
+app\models\order.py                   60      0   100%
+app\modules\__init__.py                0      0   100%
+app\modules\admin\__init__.py          0      0   100%
+app\modules\admin\branches.py        147      0   100%
+app\modules\admin\catalog.py         138      0   100%
+app\modules\admin\common.py           33      1    97%
+app\modules\admin\promotions.py      110      0   100%
+app\modules\admin\schemas.py         166      0   100%
+app\modules\admin\staff.py            71      0   100%
+app\modules\auth\__init__.py           0      0   100%
+app\modules\auth\deps.py              34      0   100%
+app\modules\auth\router.py            28      0   100%
+app\modules\auth\schemas.py           19      0   100%
+app\modules\bar\__init__.py            0      0   100%
+app\modules\bar\router.py            100      0   100%
+app\modules\bar\schemas.py            44      0   100%
+app\modules\bar\service.py           107      0   100%
+app\modules\branch\__init__.py         0      0   100%
+app\modules\branch\router.py          26      0   100%
+app\modules\customer\__init__.py       0      0   100%
+app\modules\customer\deps.py          28      0   100%
+app\modules\customer\phone.py         12      0   100%
+app\modules\customer\router.py        26      0   100%
+app\modules\customer\schemas.py       28      0   100%
+app\modules\customer\service.py       81      0   100%
+app\modules\customer\sms.py           11      0   100%
+app\modules\menu\__init__.py           0      0   100%
+app\modules\menu\router.py            58      0   100%
+app\modules\menu\service.py           34      0   100%
+app\modules\order\__init__.py          0      0   100%
+app\modules\order\router.py           55      0   100%
+app\modules\order\schemas.py          63      0   100%
+app\modules\order\service.py          93      0   100%
+app\modules\payment\__init__.py        0      0   100%
+app\modules\payment\gateway.py        20      0   100%
+app\modules\support\__init__.py        0      0   100%
+app\modules\support\router.py         23      0   100%
+app\modules\support\schemas.py        42      0   100%
+app\modules\support\service.py        43      0   100%
+app\ws\__init__.py                     0      0   100%
+app\ws\hub.py                         29      0   100%
+------------------------------------------------------
+TOTAL                               2050      1    99%
+405 passed, 1 warning in 53.21s

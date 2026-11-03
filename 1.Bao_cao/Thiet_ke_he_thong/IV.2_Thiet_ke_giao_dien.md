@@ -86,7 +86,9 @@ Sau khi đăng nhập, màn hình mặc định theo vai trò: ADMIN → W08, MA
 
 ### W06 – Menu chi nhánh (Quản lý chi nhánh)
 ![W06](diagrams/png/IV_ui_w06_menu_chi_nhanh.png)
-- Cho phép chỉnh trực tiếp trên bảng (inline edit). Bật/tắt "Còn hàng" có hiệu lực ngay trên menu khách qua sự kiện `MENU_UPDATED`.
+- Cho phép chỉnh trực tiếp trên bảng (inline edit), nút [Lưu] từng dòng chỉ bật khi có thay đổi. Bật/tắt "Còn hàng" có hiệu lực ngay trên menu khách qua sự kiện `MENU_UPDATED`. Quản trị viên có thêm ô chọn chi nhánh.
+
+**A03 – A06** (không có wireframe riêng, theo bố cục W05): A03 bảng chi nhánh + form (mã không sửa được, ngừng hoạt động phải xác nhận); A04 bảng nhân viên + form (Quản lý chỉ thấy chi nhánh mình, chỉ gán Thu ngân / Pha chế; không tự khóa mình); A05 bảng danh mục + form; A06 bảng bàn: thêm bàn, đổi số / khóa bàn, [Xem QR] (tải PNG) và [In tất cả mã QR]. Menu bên trái theo vai trò; mở màn hình không đúng quyền bằng URL thì báo "Bạn không có quyền truy cập màn hình này."
 
 ### W07 – Khuyến mãi
 ![W07](diagrams/png/IV_ui_w07_khuyen_mai.png)

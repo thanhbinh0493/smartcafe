@@ -10,6 +10,7 @@ type Handler = (url: string, init?: RequestInit) => { status: number; body: unkn
 export function mockFetch(handler: Handler) {
   const fn = vi.fn(async (url: string, init?: RequestInit) => {
     const { status, body } = handler(url, init)
+    if (status === 204) return new Response(null, { status }) // 204 không được có nội dung
     return new Response(JSON.stringify(body), { status, headers: { 'Content-Type': 'application/json' } })
   })
   vi.stubGlobal('fetch', fn)

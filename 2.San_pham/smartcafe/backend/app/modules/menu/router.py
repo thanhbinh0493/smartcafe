@@ -1,5 +1,6 @@
 """UC03 – Xem menu theo chi nhánh (phần gợi ý món làm ở F7)."""
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, WebSocket, WebSocketDisconnect
+from fastapi.concurrency import run_in_threadpool
 from pydantic import BaseModel
 from sqlalchemy.orm import Session
 
@@ -7,6 +8,7 @@ from app.core.db import get_db
 from app.core.errors import AppError
 from app.models import Branch
 from app.modules.menu.service import get_branch_menu
+from app.ws.hub import hub
 
 router = APIRouter(prefix="/api/public", tags=["public"])
 
@@ -56,3 +58,29 @@ def branch_menu(branch_id: int, db: Session = Depends(get_db)) -> MenuResponse:
             )
         )
     return MenuResponse(branch_id=branch_id, categories=list(categories.values()))
+
+
+# Kênh realtime menu khách (UC03 – Quy tắc): MENU_UPDATED khi quản trị đổi món, giá, tình trạng, khuyến mãi (F6).
+# Công khai (menu là thông tin công khai); không nhận dữ liệu từ client.
+ws_router = APIRouter(tags=["public"])
+
+
+@ws_router.websocket("/ws/menu/{branch_id}")
+async def menu_socket(websocket: WebSocket, branch_id: int, db: Session = Depends(get_db)):
+    def exists() -> bool:
+        b = db.get(Branch, branch_id)
+        return b is not None and b.is_active
+
+    if not await run_in_threadpool(exists):
+        await websocket.close(code=4404)
+        return
+    await websocket.accept()
+    channel = f"menu:{branch_id}"
+    hub.subscribe(channel, websocket)
+    try:
+        while True:
+            await websocket.receive_text()
+    except WebSocketDisconnect:
+        pass
+    finally:
+        hub.unsubscribe(channel, websocket)

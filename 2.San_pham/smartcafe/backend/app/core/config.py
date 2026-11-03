@@ -20,6 +20,10 @@ class Settings(BaseSettings):
     otp_max_attempts: int = 5           # tối đa 5 lần nhập sai / mã
     point_value_vnd: int = 100          # D15: 1 điểm = 100đ
     seed_staff_password: str = "smartcafe123"
+    # Quản trị (F6)
+    public_base_url: str = "http://localhost:8080"  # địa chỉ khách mở khi quét QR (in vào ảnh QR – UC14)
+    upload_dir: str = "uploads"                     # thư mục lưu ảnh món (phục vụ ở /api/uploads/...)
+    max_image_bytes: int = 2 * 1024 * 1024          # ảnh món tối đa 2 MB
     cors_origins: list[str] = ["http://localhost:5173", "http://localhost:8080"]
 
 

@@ -95,6 +95,7 @@ def main() -> int:
             smoke_bar(c, a, bid, r_table_code(c, a.qr_token), o)
             smoke_member(c, a, bid, r_table_code(c, a.qr_token), lines)
             smoke_support(c, a, bid, r_table_code(c, a.qr_token), lines)
+            smoke_admin(c, a, bid, r_table_code(c, a.qr_token))
 
     failed = [x for x in RESULTS if not x[2]]
     print(f"\nTổng: {len(RESULTS)} | Đạt: {len(RESULTS) - len(failed)} | Không đạt: {len(failed)}")
@@ -244,6 +245,102 @@ def smoke_support(c: httpx.Client, a, bid: int, code: str, lines: list[dict]) ->
     check("SM-36", "Món của đơn đã hủy rời hàng đợi Bar", all(i["order_id"] != o["order_id"] for i in q))
     r = c.post(f"/api/staff/orders/{o['order_id']}/cancel", json={"reason": "Khách đổi ý"}, headers=h)
     check("SM-37", "Hủy lần 2 -> 409 CANNOT_CANCEL", r.status_code == 409 and r.json()["error"]["code"] == "CANNOT_CANCEL")
+
+
+
+PNG_MAGIC = bytes([0x89, 0x50, 0x4E, 0x47])
+
+
+def tiny_png() -> bytes:
+    import io as _io
+
+    from PIL import Image
+    buf = _io.BytesIO()
+    Image.new("RGB", (8, 8), (111, 78, 55)).save(buf, format="PNG")
+    return buf.getvalue()
+
+
+def smoke_admin(c: httpx.Client, a, bid: int, code: str) -> None:
+    """F6: quản trị trên hệ thống thật. Mọi thay đổi được trả lại như cũ (hoặc tạo ở trạng thái ẩn / khóa)
+    để chạy lại smoke test nhiều lần vẫn đúng (SM-08 đếm 35 món)."""
+    base_ws = a.base_url.replace("http", "ws", 1)
+    adm = c.post("/api/auth/login", json={"username": "admin", "password": a.password}).json()["access_token"]
+    ql = c.post("/api/auth/login", json={"username": f"ql_{code}", "password": a.password}).json()["access_token"]
+    ha, hq = {"Authorization": f"Bearer {adm}"}, {"Authorization": f"Bearer {ql}"}
+
+    menu = c.get(f"/api/staff/branches/{bid}/menu", headers=hq).json()
+    row = next(r for r in menu if r["name"] == "Bạc xỉu")
+    with ws_connect(f"{base_ws}/ws/menu/{bid}", open_timeout=5) as ws:
+        t0 = time.perf_counter()
+        r = c.patch(f"/api/staff/branches/{bid}/menu/{row['menu_item_id']}", headers=hq,
+                    json={"price_override": row["price_override"], "is_available": False})
+        evt = recv_until(ws, "MENU_UPDATED")
+        ms = (time.perf_counter() - t0) * 1000
+        pub = {i["name"]: i for cat in c.get(f"/api/public/branches/{bid}/menu").json()["categories"] for i in cat["items"]}
+        check("SM-38", "Quản lý tắt 'Còn hàng' -> menu khách nhận MENU_UPDATED ≤ 2 giây, món hiện Tạm hết",
+              r.status_code == 200 and evt["data"]["branch_id"] == bid and pub["Bạc xỉu"]["is_available"] is False
+              and ms <= 2000, f"{ms:.0f} ms")
+        c.patch(f"/api/staff/branches/{bid}/menu/{row['menu_item_id']}", headers=hq,
+                json={"price_override": row["price_override"], "is_available": row["is_available"]})
+        recv_until(ws, "MENU_UPDATED")
+
+    num = f"S{random.randint(100, 999)}"
+    r = c.post(f"/api/staff/branches/{bid}/tables", headers=hq, json={"table_number": num})
+    t = r.json() if r.status_code == 201 else {}
+    scan = c.get(f"/api/public/tables/{t.get('qr_token', 'x')}")
+    check("SM-39", "Quản lý thêm bàn -> mã QR mới quét được ngay", r.status_code == 201 and scan.status_code == 200
+          and scan.json()["table"]["table_number"] == num, num)
+    png = c.get(f"/api/staff/tables/{t.get('id', 0)}/qr.png", headers=hq)
+    check("SM-40", "Tải ảnh QR để in qua Nginx (PNG)", png.status_code == 200 and png.content[:4] == PNG_MAGIC,
+          f"{len(png.content)} byte")
+    if t:
+        c.put(f"/api/staff/branches/{bid}/tables/{t['id']}", headers=hq, json={"table_number": num, "is_active": False})
+        check("SM-41", "Khóa bàn -> quét QR báo không hợp lệ", c.get(f"/api/public/tables/{t['qr_token']}").status_code == 404)
+
+    cats = c.get("/api/staff/categories", headers=ha).json()
+    r = c.post("/api/staff/menu-items", headers=ha, json={"category_id": cats[0]["id"], "name": f"Món thử {num}",
+                                                         "base_price": 10000, "is_active": False})
+    m = r.json() if r.status_code == 201 else {}
+    up = c.post(f"/api/staff/menu-items/{m.get('id', 0)}/image", headers=ha, files={"file": ("a.png", tiny_png(), "image/png")})
+    img = c.get(up.json()["image_url"]) if up.status_code == 200 else None
+    check("SM-42", "Upload ảnh món -> ảnh phục vụ qua Nginx /api/uploads/...", img is not None and img.status_code == 200
+          and img.headers.get("content-type") == "image/png")
+    if m:
+        c.delete(f"/api/staff/menu-items/{m['id']}", headers=ha)
+
+    r = c.post("/api/staff/menu-items", headers=hq, json={"category_id": cats[0]["id"], "name": "X", "base_price": 1})
+    check("SM-43", "Quản lý không được thêm món menu chung (403)", r.status_code == 403)
+
+    tra = next(r for r in menu if r["name"] == "Trà đào cam sả")
+    now = time.time()
+    iso = lambda t: time.strftime("%Y-%m-%dT%H:%M:%S+00:00", time.gmtime(t))  # noqa: E731
+    body = {"name": "KM smoke test", "branch_id": bid, "start_at": iso(now - 60), "end_at": iso(now + 3600),
+            "items": [{"menu_item_id": tra["menu_item_id"], "promo_price": 1000}]}
+    with ws_connect(f"{base_ws}/ws/menu/{bid}", open_timeout=5) as ws:
+        r = c.post("/api/staff/promotions", headers=ha, json=body)
+        p = r.json() if r.status_code == 201 else {}
+        recv_until(ws, "MENU_UPDATED")
+        pub = {i["name"]: i for cat in c.get(f"/api/public/branches/{bid}/menu").json()["categories"] for i in cat["items"]}
+        check("SM-44", "Tạo KM 1 chi nhánh -> menu khách có giá KM ngay", pub["Trà đào cam sả"]["sell_price"] == 1000
+              and pub["Trà đào cam sả"]["promotion_id"] == p.get("id"))
+        if p:
+            c.put(f"/api/staff/promotions/{p['id']}", headers=ha, json={**body, "is_active": False})
+            recv_until(ws, "MENU_UPDATED")
+    pub = {i["name"]: i for cat in c.get(f"/api/public/branches/{bid}/menu").json()["categories"] for i in cat["items"]}
+    check("SM-45", "Tắt KM -> menu khách trở về giá thường", pub["Trà đào cam sả"]["sell_price"] != 1000)
+
+    uname = f"pc_smoke{num.lower()}"
+    r = c.post("/api/staff/staff", headers=hq, json={"username": uname, "full_name": "Pha chế thử", "password": "matkhau123",
+                                                   "role": "BARISTA"})
+    s = r.json() if r.status_code == 201 else {}
+    tok = c.post("/api/auth/login", json={"username": uname, "password": "matkhau123"})
+    ok = r.status_code == 201 and tok.status_code == 200
+    if s:
+        c.put(f"/api/staff/staff/{s['id']}", headers=hq, json={"full_name": s["full_name"], "phone": None, "role": "BARISTA",
+                                                               "branch_id": s["branch_id"], "is_active": False})
+        me = c.get("/api/auth/me", headers={"Authorization": f"Bearer {tok.json()['access_token']}"})
+        ok = ok and me.status_code == 401
+    check("SM-46", "Quản lý tạo pha chế -> đăng nhập được; khóa -> token cũ bị từ chối ngay", ok, uname)
 
 
 if __name__ == "__main__":

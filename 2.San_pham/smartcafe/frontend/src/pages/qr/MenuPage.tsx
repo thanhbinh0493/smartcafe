@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import type { ApiError } from '../../api/client'
 import { getMenu, type Menu, type MenuItem } from '../../api/public'
 import { MAX_QTY, useCart } from '../../cart/CartContext'
+import { useSocket } from '../../hooks/useOrderSocket'
 import { formatVND, normalizeText } from '../../lib/format'
 import MemberBar from './MemberBar'
 import QrHeader from './QrHeader'
@@ -28,6 +29,14 @@ export default function MenuPage() {
   }, [info.branch.id])
 
   useEffect(load, [load])
+
+  // Quản trị đổi món / giá / tình trạng / khuyến mãi → MENU_UPDATED: tải lại menu, không cần F5 (UC03 – Quy tắc)
+  useSocket(`/ws/menu/${info.branch.id}`, (msg) => {
+    if (msg.type === 'MENU_UPDATED')
+      getMenu(info.branch.id)
+        .then(setMenu)
+        .catch(() => {})
+  })
 
   const sections = useMemo(() => {
     if (!menu) return []

@@ -14,3 +14,10 @@ body {
   color: #2b1d14;
   font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
 }
+
+/* In mã QR bàn (A06): chỉ in tờ mã QR, ẩn khung Web Admin phía sau */
+@media print {
+  body * { visibility: hidden; }
+  .print-area, .print-area * { visibility: visible; }
+  .print-area { position: absolute; inset: 0; overflow: visible; }
+}
