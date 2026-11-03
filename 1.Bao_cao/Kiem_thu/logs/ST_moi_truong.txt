@@ -1,0 +1,5 @@
+backend-1  | [seed] Đã nạp: {'branches': 3, 'tables': 60, 'staff': 13, 'categories': 5, 'menu_items': 35, 'promotions': 3}
+backend-1  | [seed_orders] Đã nạp: {'customers': 300, 'orders': 5004, 'order_items': 7020, 'rules': 32, 'daily_reports': 180}
+backend smartcafe-backend Up 23 seconds
+db postgres:16-alpine Up 28 seconds (healthy)
+frontend smartcafe-frontend Up 23 seconds

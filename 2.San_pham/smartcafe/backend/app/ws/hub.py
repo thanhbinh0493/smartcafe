@@ -11,6 +11,14 @@ from typing import Any
 from fastapi import WebSocket
 
 
+async def reject(websocket: WebSocket, code: int) -> None:
+    """Từ chối kết nối mà client vẫn nhận được mã đóng (4401 / 4403 / 4404).
+    Đóng trước khi accept thì uvicorn trả HTTP 403 ở bước bắt tay, trình duyệt chỉ thấy mã 1006 và cứ thử
+    kết nối lại mãi (BUG-ST-01), nên phải accept rồi mới close."""
+    await websocket.accept()
+    await websocket.close(code=code)
+
+
 def make_message(type_: str, data: dict[str, Any]) -> dict[str, Any]:
     ts = datetime.now(timezone.utc).isoformat(timespec="seconds").replace("+00:00", "Z")
     return {"type": type_, "data": data, "ts": ts}

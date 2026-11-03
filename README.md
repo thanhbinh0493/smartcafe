@@ -26,7 +26,8 @@ Thời gian thực hiện: 21/09/2026 → 21/12/2026. Nhân sự: A (PM, BA) · 
 | ├ F6 Quản trị: danh mục, món, chi nhánh, nhân viên, menu chi nhánh, bàn & QR, khuyến mãi | ✔ Xong, đã kiểm thử – Đạt |
 | ├ F7 AI gợi ý món (2 chế độ + "thường gọi kèm") | ✔ Xong, đã kiểm thử – Đạt |
 | └ F8 Báo cáo ngày & dashboard bán hàng | ✔ Xong, đã kiểm thử – Đạt |
-| Kiểm thử tổng thể, triển khai, nghiệm thu | Chưa làm |
+| Kiểm thử hệ thống (VI) – kịch bản xuyên luồng + toàn bộ yêu cầu phi chức năng | **Chờ PM duyệt** – [biên bản](1.Bao_cao/Kiem_thu/Bien_ban_kiem_thu_He_thong.md) |
+| Hướng dẫn sử dụng, triển khai, nghiệm thu | Chưa làm |
 
 Tiến độ chi tiết từng luồng: [2.San_pham/smartcafe/README.md](2.San_pham/smartcafe/README.md#tiến-độ-theo-luồng-d26--nơi-theo-dõi-chính).
 

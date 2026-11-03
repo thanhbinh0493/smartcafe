@@ -48,13 +48,21 @@ export default function MenuPage() {
   useEffect(loadRecs, [loadRecs])
 
   // Quản trị đổi món / giá / tình trạng / khuyến mãi → MENU_UPDATED: tải lại menu, không cần F5 (UC03 – Quy tắc)
-  useSocket(`/ws/menu/${info.branch.id}`, (msg) => {
-    if (msg.type === 'MENU_UPDATED')
-      getMenu(info.branch.id)
-        .then(setMenu)
-        .catch(() => {})
-    if (msg.type === 'MENU_UPDATED') loadRecs()
-  })
+  const refresh = useCallback(() => {
+    getMenu(info.branch.id)
+      .then(setMenu)
+      .catch(() => {})
+    loadRecs()
+  }, [info.branch.id, loadRecs])
+  useSocket(
+    `/ws/menu/${info.branch.id}`,
+    (msg) => {
+      if (msg.type === 'MENU_UPDATED') refresh()
+    },
+    // Mỗi lần kết nối (lại) xong: tải lại để không lỡ thay đổi lúc mất mạng / trước khi kịp mở kết nối
+    // (NFR-R3, BUG-ST-05)
+    refresh,
+  )
 
   const sections = useMemo(() => {
     if (!menu) return []

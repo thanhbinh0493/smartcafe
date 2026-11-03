@@ -1,0 +1,8 @@
+[ĐẠT] ST-80 NFR-M1: Swagger /docs tự sinh; backend chia module theo nghiệp vụ (auth, customer, menu, branch, order, payment, recommend …) 38 đường dẫn API, nhóm ['admin – chi nhánh', 'admin – khuyến mãi', 'admin – menu chung', 'admin – nhân viên', 'auth', 'bar', 'public', 'report', 'support', 'system']; module ['admin', 'auth', 'bar', 'branch', 'customer', 'menu', 'order', 'payment', 'recommend', 'report', 'support']
+[ĐẠT] ST-81 NFR-M2: CSDL đang ở đúng phiên bản migration mới nhất của Alembic (1 head) current: 0003 (head) | heads: 0003 (head)
+[ĐẠT] ST-82 NFR-R5: scripts/backup_db.ps1 sao lưu CSDL (pg_dump); khôi phục bản sao lưu vào CSDL tạm → số dòng 11 bảng chính khớp CSDL gốc smartcafe_20261103_194057.dump (854 KB); orders 5227 → 5227; lệch: {}
+[ĐẠT] ST-83 NFR-M4: SMS và cổng thanh toán đi qua interface (Protocol) – bản giả lập là 1 cài đặt, thay bằng dịch vụ thật không sửa nghiệp vụ
+[ĐẠT] ST-84 NFR-M5: chạy toàn hệ thống bằng docker compose (db, backend, frontend đang chạy); .env.example có các biến cấu hình chính 19 biến trong .env.example; biến cấu hình chưa có trong .env.example: ['CORS_ORIGINS', 'MAX_IMAGE_BYTES', 'REC_PERSONAL_HALF_LIFE_DAYS', 'REC_POPULAR_DAYS', 'REPORT_JOB_HOUR', 'REPORT_JOB_MINUTE', 'RULES_JOB_HOUR', 'RULES_JOB_MINUTE', 'RULES_MIN_CONFIDENCE', 'RULES_MIN_SUPPORT', 'RULES_WINDOW_DAYS', 'UPLOAD_DIR', 'WEATHER_CACHE_MINUTES']
+Bảng có dữ liệu: 5227 đơn
+
+Tổng: 5 | Đạt: 5 | Không đạt: 0

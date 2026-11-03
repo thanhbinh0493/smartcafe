@@ -11,6 +11,8 @@
 - **Mô hình:** Client – Server, backend là **modular monolith** (một ứng dụng FastAPI chia module). Lựa chọn này phù hợp nhóm 5 người trong 4 tuần, không cần tách microservice.
 - **Recommendation Service** chạy trong cùng tiến trình với backend, vì cùng là Python và chung CSDL.
 - **WebSocket Hub:** quản lý các kênh trong bộ nhớ (in-memory). Chỉ chạy 1 instance backend nên chưa cần Redis pub/sub (ghi vào hướng mở rộng).
+- **Cache trong tiến trình (D38):** menu chi nhánh, kết quả quét QR, tên chi nhánh / số bàn / tên món, số liệu bán chạy, luật FP-Growth (`app/core/cache.py`). Mọi API quản trị làm đổi dữ liệu khách nhìn thấy đều xóa cache (cùng chỗ phát `MENU_UPDATED`); tạo đơn không dùng cache. Đo ở [biên bản kiểm thử hệ thống](../Kiem_thu/Bien_ban_kiem_thu_He_thong.md): 1 tiến trình phục vụ ~100–140 request/giây; muốn hơn thì chạy nhiều tiến trình và chuyển hub sang Redis pub/sub hoặc PostgreSQL LISTEN/NOTIFY (hướng mở rộng).
+- **Frontend tách gói:** trang QR của khách chỉ tải phần QR Order (~76 KB gzip); Web Admin và Dashboard (thư viện biểu đồ) tải riêng khi nhân viên mở (NFR-P1).
 - **Xác thực 2 loại token:** JWT nhân viên (role ADMIN/MANAGER/CASHIER/BARISTA, 8 giờ) và JWT khách thành viên (role CUSTOMER, `sub = customer_id`, **1 giờ**, phía client chỉ giữ trong sessionStorage).
 
 ### 1.1. Cấu trúc thư mục đề xuất (thư mục `2.San_pham/smartcafe/`)
@@ -84,9 +86,9 @@ Tiền tố: `/api/public/*` dùng cho khách (một số endpoint nhận thêm 
 ### 2.3. WebSocket
 | Kênh | Người nghe | Sự kiện |
 |:---|:---|:---|
-| `/ws/bar/{branch_id}?token=<JWT>` | Màn hình Bar | `QUEUE_ITEM_ADDED`, `ITEM_UPDATED {item_id, item_status, order_id, order_status}`, `ORDER_READY`, `ORDER_COMPLETED {order_id}`, `ORDER_CANCELLED {order_id, order_code}`. JWT sai/hết hạn/bị khóa: đóng mã 4401; khác chi nhánh: 4403. Kết nối (lại) xong client tự tải lại hàng đợi qua REST |
+| `/ws/bar/{branch_id}?token=<JWT>` | Màn hình Bar | `QUEUE_ITEM_ADDED`, `ITEM_UPDATED {item_id, item_status, order_id, order_status}`, `ORDER_READY`, `ORDER_COMPLETED {order_id}`, `ORDER_CANCELLED {order_id, order_code}`. JWT sai/hết hạn/bị khóa: đóng mã 4401; khác chi nhánh: 4403 (server accept rồi mới close để trình duyệt nhận được mã – BUG-ST-01). Kết nối (lại) xong client tự tải lại hàng đợi qua REST; trong lúc mất kết nối màn hình Bar hiện "Mất kết nối" và tải lại hàng đợi qua REST mỗi 10 giây (NFR-R2) |
 | `/ws/order/{order_id}?token=<access_token>` | Khách | `ORDER_SNAPSHOT` (gửi ngay khi kết nối / kết nối lại), `ORDER_PAID`, `ITEM_PREPARING`, `ITEM_DONE`, `QUEUE_POSITION`, `ORDER_READY`, `ORDER_COMPLETED` (dữ liệu đơn có `points_earned`), `ORDER_CANCELLED`; các sự kiện của đơn mang toàn bộ dữ liệu đơn như `GET /api/public/orders/{id}`, riêng `QUEUE_POSITION` chỉ gồm `{order_id, queue_position}`. Sai mã đơn / token: đóng kết nối mã 4404 |
-| `/ws/menu/{branch_id}` | QR Web App | `MENU_UPDATED {branch_id (null = toàn chuỗi), reason: CATEGORY \| MENU_ITEM \| BRANCH \| BRANCH_MENU \| PROMOTION}` – menu khách tự tải lại. Công khai; chi nhánh không tồn tại / ngừng hoạt động: đóng mã 4404 |
+| `/ws/menu/{branch_id}` | QR Web App | `MENU_UPDATED {branch_id (null = toàn chuỗi), reason: CATEGORY \| MENU_ITEM \| BRANCH \| BRANCH_MENU \| PROMOTION}` – menu khách tự tải lại; mỗi lần kết nối (lại) client cũng tải lại menu để không lỡ thay đổi lúc mất mạng (BUG-ST-05). Công khai; chi nhánh không tồn tại / ngừng hoạt động: đóng mã 4404 |
 
 Định dạng message: `{"type": "ORDER_READY", "data": {...}, "ts": "2026-11-20T08:15:00Z"}`.
 

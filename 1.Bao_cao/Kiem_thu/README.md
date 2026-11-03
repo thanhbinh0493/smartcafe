@@ -15,10 +15,13 @@ Theo quyết định **D25** (CR-28): mỗi luồng code phải có **test tự 
 | F7 – AI gợi ý món | [Bien_ban_kiem_thu_F7_AI_goi_y.md](Bien_ban_kiem_thu_F7_AI_goi_y.md) | 03/11/2026 | 71 | 71 | 0 | 4 (đã sửa) | Đạt |
 | F8 – Báo cáo ngày & dashboard | [Bien_ban_kiem_thu_F8_Bao_cao_Dashboard.md](Bien_ban_kiem_thu_F8_Bao_cao_Dashboard.md) | 03/11/2026 | 41 | 41 | 0 | 1 (đã sửa) | Đạt |
 
+**Giai đoạn VI – Kiểm thử hệ thống** (sau khi xong F0 → F8): [Kế hoạch](Ke_hoach_kiem_thu_He_thong.md) · [Biên bản](Bien_ban_kiem_thu_He_thong.md).
+
 *Tổng TC = số ca kiểm thử đã chạy (test tự động backend + frontend + kiểm thử khói); mỗi bộ tham số của một test được tính là 1 ca.*
 
 ## 2. Quy ước
 - **Mã test case:** `F<luồng>-<số>` cho backend (hàm `test_F<luồng>_<số>_...` trong `backend/tests/f<luồng>/`), `F<luồng>-FE-<số>` cho frontend (tên trong `describe/it` của file `*.test.tsx`), `SM-<số>` cho kiểm thử khói (`backend/scripts/smoke_test.py`). Mỗi dòng trong biên bản trỏ tới đúng test tự động tương ứng.
+- **Kiểm thử hệ thống (giai đoạn VI):** `ST-<số>` – script trong `2.San_pham/smartcafe/system_test/` (ST-01…38, 40…54, 60…72, 80…84) và test hồi quy `backend/tests/st/` (ST-55, ST-90…95); `ST-FE-<số>` cho Vitest; lỗi `BUG-ST-<số>`.
 - **Mã lỗi:** `BUG-F<luồng>-<số>`. Mức độ: **Nghiêm trọng** (sai dữ liệu / mất tiền / lộ thông tin), **Cao** (chặn chức năng hoặc chặn chạy hệ thống), **Trung bình** (sai hiển thị / trải nghiệm), **Thấp** (cảnh báo, thẩm mỹ).
 - **Cấp độ kiểm thử:** Đơn vị (hàm thuần) · Tích hợp (API + PostgreSQL thật) · Giao diện (component React với API giả lập) · Hệ thống (kiểm thử khói qua Nginx trên bản chạy `docker compose`) · Đầu-cuối trên trình duyệt (`E2E-xx`, Playwright + Edge giả lập điện thoại 390×844, từ F2) · Kiểm tra trực quan (ảnh chụp).
 - **Hồi quy:** mỗi luồng mới chạy lại toàn bộ test của các luồng trước và ghi kết quả trong Mục 5 của biên bản.

@@ -30,7 +30,7 @@ function authBackend(role: StaffMe['role'] = 'BARISTA', meStatus = 200) {
 }
 
 async function fillAndSubmit(password: string) {
-  await userEvent.type(screen.getByLabelText('Tên đăng nhập'), 'pc1_cg')
+  await userEvent.type(await screen.findByLabelText('Tên đăng nhập'), 'pc1_cg') // Web Admin tải lazy (BUG-ST-02)
   await userEvent.type(screen.getByLabelText('Mật khẩu'), password)
   await userEvent.click(screen.getByRole('button', { name: 'Đăng nhập' }))
 }

@@ -8,8 +8,9 @@ from collections import Counter
 from datetime import date
 
 from sqlalchemy import func, select, text
-from sqlalchemy.orm import Session
+from sqlalchemy.orm import Session, selectinload
 
+from app.core import cache
 from app.core.errors import AppError
 from app.models import (
     Branch, DiningTable, LoyaltyTransaction, MenuItem, Order, OrderItem, OrderStatusHistory, Payment,
@@ -105,6 +106,8 @@ def get_order_for_customer(db: Session, order_id: int, access_token: str, *, loc
     stmt = select(Order).where(Order.id == order_id)
     if lock:
         stmt = stmt.with_for_update()
+    else:
+        stmt = stmt.options(selectinload(Order.items))   # xem đơn: tải món luôn (D38)
     order = db.scalar(stmt)
     if order is None or not secrets.compare_digest(order.access_token, access_token):
         raise AppError(404, "ORDER_NOT_FOUND", "Không tìm thấy đơn hàng")
@@ -150,17 +153,24 @@ def queue_position(db: Session, order: Order) -> int | None:
     return ahead + 1
 
 
+def _labels(db: Session, order: Order) -> tuple[str, str, dict[int, str]]:
+    """Tên chi nhánh, số bàn, tên món – ít khi đổi; cache tới khi quản trị sửa (invalidate_public, D38)."""
+    branch_name = cache.get("branch_name", order.branch_id, lambda: (db.get(Branch, order.branch_id).name, 300.0))
+    table_no = cache.get("table_number", order.table_id, lambda: (db.get(DiningTable, order.table_id).table_number, 300.0))
+    names = cache.get("item_names", None, lambda: (dict(db.execute(select(MenuItem.id, MenuItem.name)).all()), 300.0))
+    missing = [i.menu_item_id for i in order.items if i.menu_item_id not in names]
+    if missing:                                           # món vừa thêm sau lần nạp cache
+        names = {**names, **dict(db.execute(select(MenuItem.id, MenuItem.name).where(MenuItem.id.in_(missing))).all())}
+    return branch_name, table_no, names
+
+
 def build_order_view(db: Session, order: Order) -> OrderView:
-    branch = db.get(Branch, order.branch_id)
-    table = db.get(DiningTable, order.table_id)
-    names = dict(db.execute(
-        select(MenuItem.id, MenuItem.name).where(MenuItem.id.in_([i.menu_item_id for i in order.items]))
-    ).all())
+    branch_name, table_no, names = _labels(db, order)
     items = sorted(order.items, key=lambda i: i.id)
     subtotal = sum(i.original_price * i.quantity for i in items)
     return OrderView(
         id=order.id, order_code=order.order_code, order_date=order.order_date, status=order.status,
-        branch_name=branch.name, table_number=table.table_number,
+        branch_name=branch_name, table_number=table_no,
         subtotal=subtotal, discount=subtotal - order.total_amount, total=order.total_amount,
         queue_position=queue_position(db, order),
         created_at=order.created_at, paid_at=order.paid_at, ready_at=order.ready_at,

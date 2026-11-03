@@ -1,0 +1,13 @@
+[ĐẠT] ST-01 UC15→UC02: quản trị viên tạo khuyến mãi → điện thoại khách đang mở menu thấy giá KM ngay (không tải lại) KM 201, giá KM 26000
+[ĐẠT] ST-02 UC13→UC02/UC03: quản lý tắt 'Còn hàng' Bạc xỉu → khách thấy hết hàng ngay, gợi ý AI không còn món này
+[ĐẠT] ST-03 UC02→UC04: đơn ẩn danh có món KM (đúng giá KM, gắn promotion_id), món từ gợi ý (is_recommended, gắn recommendation_log), tổng tiền giỏ = tổng server CG-0001: [('Trà đào cam sả', '26000', '', 'KM'), ('Xoài đá xay', '49000', 'gợi ý', ''), ('Bánh mousse chanh dây', '39000', 'gợi ý', '')]; tổng 114000; log gợi ý gắn đơn: 1
+[ĐẠT] ST-04 UC17–UC19→UC06: pha chế Bắt đầu / Xong / Đã giao trên Bar → khách thấy 'Đang pha chế' → 'Có thể lấy' realtime; lịch sử trạng thái đầy đủ ['Đang pha chế', 'Có thể lấy']; lịch sử ['PENDING_PAYMENT', 'PAID', 'PREPARING', 'READY', 'COMPLETED']
+[ĐẠT] ST-05 UC01/UC07→UC02→UC19: thành viên xác thực OTP, menu có 'Bạn hay gọi', đặt món, nhận đồ thì được cộng điểm (1 điểm/10.000đ) realtime đúng 1 lần CG-0002 50000đ → +5 điểm; điểm 133 → 138
+[ĐẠT] ST-06 NFR-R4: bấm 'Đã giao' lần 2 cho cùng đơn → bị từ chối, không cộng điểm 2 lần 409 INVALID_STATE_TRANSITION
+[ĐẠT] ST-07 UC20: thu ngân hủy đơn & hoàn tiền → món rời hàng đợi Bar, điện thoại khách báo đã hoàn tiền; thanh toán chuyển REFUNDED CG-0003: [['REFUNDED']]
+[ĐẠT] ST-08 UC13/UC15: bật lại 'Còn hàng', tắt KM → điện thoại khách trở lại giá thường, đặt lại được Bạc xỉu
+[ĐẠT] ST-09 UC16: job báo cáo ngày (chạy thử cho hôm nay rồi rollback) khớp dữ liệu đơn: số đơn, đơn hủy, doanh thu; doanh thu KM, tỉ lệ thành viên, tỉ lệ món từ gợi ý > 0 nhờ các đơn của kịch bản {"order_count": 2.0, "cancelled_count": 1.0, "revenue": 164000.0, "promo_revenue": 76000.0, "member_order_ratio": 0.5, "recommended_item_ratio": 0.5}
+[ĐẠT] ST-10 UC16: đối soát mọi dòng daily_sales_reports với bảng orders (số đơn, đơn hủy, doanh thu) – không lệch 180 dòng (2026-09-04 → 2026-11-02), lệch: []
+(bắt đầu kịch bản 19:34:28)
+
+Tổng: 10 | Đạt: 10 | Không đạt: 0

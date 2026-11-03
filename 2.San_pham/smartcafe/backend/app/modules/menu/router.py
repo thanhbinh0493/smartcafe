@@ -1,5 +1,5 @@
 """UC03 – Xem menu theo chi nhánh (phần gợi ý món làm ở F7)."""
-from fastapi import APIRouter, Depends, WebSocket, WebSocketDisconnect
+from fastapi import APIRouter, Depends, Response, WebSocket, WebSocketDisconnect
 from fastapi.concurrency import run_in_threadpool
 from pydantic import BaseModel
 from sqlalchemy.orm import Session
@@ -7,8 +7,9 @@ from sqlalchemy.orm import Session
 from app.core.db import get_db
 from app.core.errors import AppError
 from app.models import Branch
-from app.modules.menu.service import get_branch_menu
-from app.ws.hub import hub
+from app.core import cache
+from app.modules.menu.service import cached_branch_menu, menu_ttl
+from app.ws.hub import hub, reject
 
 router = APIRouter(prefix="/api/public", tags=["public"])
 
@@ -40,13 +41,19 @@ class MenuResponse(BaseModel):
 
 
 @router.get("/branches/{branch_id}/menu", response_model=MenuResponse)
-def branch_menu(branch_id: int, db: Session = Depends(get_db)) -> MenuResponse:
+def branch_menu(branch_id: int, db: Session = Depends(get_db)) -> Response:
     branch = db.get(Branch, branch_id)
     if branch is None or not branch.is_active:
         raise AppError(404, "BRANCH_NOT_FOUND", "Chi nhánh không tồn tại hoặc đã ngừng hoạt động")
 
+    body = cache.get("menu_response", branch_id,
+                     lambda: (_build_menu(db, branch_id).model_dump_json().encode(), menu_ttl(db)))
+    return Response(content=body, media_type="application/json")
+
+
+def _build_menu(db: Session, branch_id: int) -> MenuResponse:
     categories: dict[int, CategoryOut] = {}
-    for it in get_branch_menu(db, branch_id):
+    for it in cached_branch_menu(db, branch_id):
         cat = categories.setdefault(it.category_id, CategoryOut(id=it.category_id, name=it.category_name, items=[]))
         cat.items.append(
             MenuItemOut(
@@ -72,7 +79,7 @@ async def menu_socket(websocket: WebSocket, branch_id: int, db: Session = Depend
         return b is not None and b.is_active
 
     if not await run_in_threadpool(exists):
-        await websocket.close(code=4404)
+        await reject(websocket, 4404)
         return
     await websocket.accept()
     channel = f"menu:{branch_id}"

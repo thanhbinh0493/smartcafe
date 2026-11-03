@@ -10,7 +10,7 @@ from app.modules.customer.deps import get_optional_customer
 from app.modules.order import service
 from app.modules.order.schemas import CreateOrderRequest, CreateOrderResponse, OrderView, PayRequest, PayResponse
 from app.modules.payment.gateway import PaymentGateway, get_payment_gateway
-from app.ws.hub import hub, make_message
+from app.ws.hub import hub, make_message, reject
 
 router = APIRouter(tags=["public"])
 
@@ -69,7 +69,7 @@ async def order_socket(websocket: WebSocket, order_id: int, token: str = "", db:
 
     data = await run_in_threadpool(snapshot)
     if data is None:
-        await websocket.close(code=4404)  # sai mã đơn hoặc access_token
+        await reject(websocket, 4404)  # sai mã đơn hoặc access_token
         return
     await websocket.accept()
     channel = f"order:{order_id}"

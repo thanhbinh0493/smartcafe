@@ -54,6 +54,8 @@ def test_F7_12_thoi_tiet_la_yeu_to_phu(client, cafe, _mock_weather, temp, first,
     assert r["items"][0]["name"] == first and r["items"][0]["reason"] == reason
     # Có món bán chạy thì bán chạy (45%) thắng thời tiết (10%)
     cafe.sell(cafe.cg, (cafe.croissant, 1), days_ago=1)
+    from app.core import cache
+    cache.invalidate("popular")            # số liệu bán chạy được cache 60 giây (D38): giả lập đã hết hạn
     assert recs(client, cafe.cg)["items"][0]["name"] == "Bánh croissant"
 
 

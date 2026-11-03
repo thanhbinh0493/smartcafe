@@ -57,6 +57,8 @@ Chi tiết từng thay đổi xem trong [biên bản họp](../../4.Tai_lieu_kha
 | D35 | 03/11 | Thời tiết | **Mặc định nhiệt độ giả lập** (`WEATHER_MOCK_TEMP_C`, đổi để demo trời nóng / lạnh); có `WEATHER_API_KEY` thì gọi OpenWeatherMap (cache 30 phút), lỗi thì về giả lập |
 | D36 | 03/11 | Bù báo cáo ngày khi khởi động | Ngoài job 00:05, **mỗi lần backend khởi động tự tính bù các ngày đã kết thúc còn thiếu trong 60 ngày** (ngày đã có báo cáo thì không tính lại). Quản trị viên vẫn có nút "Tính lại hôm qua" |
 | D37 | 03/11 | Số liệu "Tất cả chi nhánh" trên dashboard | Dashboard **chỉ đọc bảng `daily_sales_reports`**: tỉ lệ món từ gợi ý toàn chuỗi = trung bình theo số đơn của các chi nhánh; top 5 món toàn chuỗi gộp từ top 5 từng chi nhánh (chấp nhận gần đúng) |
+| D38 | 03/11 | Hiệu năng API đọc của khách | **Cache trong tiến trình** (backend vẫn 1 tiến trình, WebSocket hub trong bộ nhớ): menu chi nhánh (60 giây, hết hạn sớm đúng lúc KM bắt đầu / kết thúc), kết quả quét QR, tên chi nhánh / số bàn / tên món, số liệu "bán chạy" (60 giây), luật FP-Growth (tới lần học lại). **Xóa ngay** khi quản trị đổi menu / giá / còn hàng / KM / chi nhánh / bàn. Tạo đơn luôn tính giá trực tiếp từ CSDL (NFR-S6) |
+| D39 | 03/11 | Mô hình tải của NFR-P2 / P3 | "50 người dùng đồng thời" = 50 khách cùng mở web, **mỗi khách thao tác 3–5 giây một lần** (≈ 50 request/giây, gấp nhiều lần tải 3 chi nhánh × 60 đơn/giờ). Giữ ngưỡng p95 ≤ 300 ms / ≤ 500 ms. Mức 0,5–1,5 giây/lần (≈ 3,5 lần tải chuẩn) chỉ là kiểm thử quá tải tham khảo: yêu cầu không lỗi |
 
 ## Vấn đề mở (Open Issues) – nơi theo dõi duy nhất
 
@@ -64,6 +66,8 @@ Bảng này là **nơi duy nhất** theo dõi các đề xuất và vấn đề 
 
 | # | Ngày mở | Vấn đề / đề xuất | Phương án thay thế | Người chốt | Trạng thái |
 |:---|:---|:---|:---|:---|:---|
+| P23 | 03/11 | Kiểm thử hệ thống: 50 khách thao tác ~1 giây/lần → p95 ~1 giây, chưa đạt NFR-P2/P3; backend 1 tiến trình dùng hết 1 lõi CPU (~85 request/giây) – xem [biên bản kiểm thử hệ thống](../Kiem_thu/Bien_ban_kiem_thu_He_thong.md) | Nhiều tiến trình + PostgreSQL LISTEN/NOTIFY; chỉnh NFR | A | Đã chốt → D38 (cache API đọc) |
+| P24 | 03/11 | Sau khi cache: thông lượng ~100–140 request/giây, mô hình 1 giây/lần (~180 request/giây) vẫn chưa đạt; mô hình 3–5 giây/lần đạt (p95 ~120 / 150 ms) – xem [biên bản kiểm thử hệ thống](../Kiem_thu/Bien_ban_kiem_thu_He_thong.md) | Nhiều tiến trình + LISTEN/NOTIFY; ghi nhận hạn chế | A | Đã chốt → D39 (mô hình tải thực tế) |
 | P21 | 03/11 | **Bù báo cáo ngày khi backend khởi động**: tự tính các ngày đã kết thúc còn thiếu trong 60 ngày (laptop demo thường tắt lúc 00:05 nên job không chạy, dashboard sẽ trống). Đã cài ở F8 – xem [biên bản kiểm thử F8](../Kiem_thu/Bien_ban_kiem_thu_F8_Bao_cao_Dashboard.md) Mục 7 | Chỉ job 00:05 + quản trị viên bấm "Tính lại" | A | Đã chốt → D36 (tự bù khi khởi động) |
 | P22 | 03/11 | Dashboard "Tất cả chi nhánh" gộp từ bảng theo chi nhánh: tỉ lệ món từ gợi ý lấy trung bình theo số đơn (gần đúng), top 5 món gộp từ top 5 từng chi nhánh. Đã cài ở F8 – xem [biên bản kiểm thử F8](../Kiem_thu/Bien_ban_kiem_thu_F8_Bao_cao_Dashboard.md) Mục 7 | Tính top món toàn chuỗi trực tiếp từ `order_items` | A | Đã chốt → D37 (giữ cách gộp từ bảng báo cáo) |
 | P17 | 03/11 | Cách nạp dữ liệu lịch sử cho AI (seed_orders.py) vào CSDL demo – phát sinh khi bắt đầu F7 | Chạy tay bằng lệnh | A | Đã chốt → D32 (tự nạp khi CSDL trống + SĐT demo) |

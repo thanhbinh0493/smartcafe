@@ -281,3 +281,29 @@ describe('F6-FE-24 W01 – menu khách tự cập nhật khi quản trị thay �
     expect(screen.getByRole('button', { name: 'Thêm Trà đào cam sả' })).toBeInTheDocument()
   })
 })
+
+describe('ST-FE-03 Hồi quy BUG-ST-05 (NFR-R3) – menu khách đồng bộ lại khi WebSocket kết nối lại', () => {
+  it('ST-FE-03 mất kết nối /ws/menu lúc quản lý tắt món → kết nối lại thì tự tải lại menu, món hiện "Tạm hết"', async () => {
+    let menu = MENU
+    const fetchMock = mockFetch((url) => {
+      if (url === '/api/public/tables/good') return { status: 200, body: TABLE }
+      if (url === '/api/public/branches/1/menu') return { status: 200, body: menu }
+      return { status: 404, body: {} }
+    })
+    renderApp('/t/good/menu')
+    await screen.findByRole('button', { name: 'Thêm Trà gừng mật ong' })
+    const menuWs = () => FakeWebSocket.instances.filter((w) => w.url.endsWith('/ws/menu/1'))
+    await waitFor(() => expect(menuWs()).toHaveLength(1))
+    const loads = () => fetchMock.mock.calls.filter(([u]) => u === '/api/public/branches/1/menu').length
+    await waitFor(() => expect(loads()).toBeGreaterThanOrEqual(1))
+    act(() => menuWs()[0].drop())                                   // rớt mạng: lỡ sự kiện MENU_UPDATED
+    menu = {
+      ...MENU,
+      categories: MENU.categories.map((c) => ({ ...c, items: c.items.map((i) => (i.id === 22 ? { ...i, is_available: false } : i)) })),
+    }
+    const before = loads()
+    await waitFor(() => expect(menuWs()).toHaveLength(2), { timeout: 3000 })   // tự kết nối lại sau 1 giây
+    await waitFor(() => expect(loads()).toBe(before + 1))
+    await waitFor(() => expect(screen.queryByRole('button', { name: 'Thêm Trà gừng mật ong' })).not.toBeInTheDocument())
+  })
+})

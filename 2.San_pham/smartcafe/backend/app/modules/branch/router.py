@@ -4,6 +4,7 @@ from pydantic import BaseModel
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
+from app.core import cache
 from app.core.db import get_db
 from app.core.errors import AppError
 from app.models import Branch, DiningTable
@@ -30,6 +31,14 @@ class TableLookupResponse(BaseModel):
 
 @router.get("/tables/{qr_token}", response_model=TableLookupResponse)
 def lookup_table(qr_token: str, db: Session = Depends(get_db)) -> TableLookupResponse:
+    # Chỉ cache kết quả hợp lệ; khóa bàn / ngừng chi nhánh → cache bị xóa (admin.branches, D38)
+    return cache.get("table", qr_token, lambda: (_lookup(db, qr_token), TABLE_TTL))
+
+
+TABLE_TTL = 300.0
+
+
+def _lookup(db: Session, qr_token: str) -> TableLookupResponse:
     row = db.execute(
         select(DiningTable, Branch)
         .join(Branch, Branch.id == DiningTable.branch_id)

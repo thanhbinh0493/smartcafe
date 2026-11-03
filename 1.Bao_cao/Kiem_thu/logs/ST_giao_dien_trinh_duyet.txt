@@ -1,0 +1,16 @@
+[ĐẠT] ST-60 NFR-P1: trang chào sau khi quét QR có FCP ≤ 2 giây trên Fast 4G (5 lần, không cache); không tải mã Web Admin / thư viện biểu đồ (hồi quy BUG-ST-02) FCP 816, 788, 788, 792, 780 ms; bấm 'Xem menu' → menu 610 ms; JS tải về 76 KB (gzip) ['index-DVOpxH6e.js']; tham khảo Slow 4G: FCP 1948, 1952, 1940 ms
+[ĐẠT] ST-61 NFR-U2: khách ẩn danh đặt 1 đơn 2 món, thanh toán xong trong ≤ 6 lần chạm từ màn hình chào 5 lần chạm, đơn CG-0007
+[ĐẠT] ST-62 NFR-U1: 5 màn hình khách (chào, menu, OTP, giỏ, theo dõi đơn) không tràn ngang ở 360 / 390 / 430 px 15/15 màn hình vừa khung
+[ĐẠT] ST-63 NFR-U1: nhân WebKit (Safari iOS) – đặt món, thanh toán, theo dõi đơn hoạt động, không tràn ngang
+[ĐẠT] ST-64 NFR-P4: đơn vừa thanh toán xuất hiện trên hàng đợi Bar ≤ 2 giây (5 lần, không tải lại trang) 102, 45, 46, 41, 41 ms
+[ĐẠT] ST-65 NFR-U3: màn hình Bar – chữ hàng đợi ≥ 18px, món chờ > 10 phút tô đỏ, có âm báo khi có món mới cỡ chữ 18px; món chờ 11 phút tô đỏ: True; âm báo: True
+[ĐẠT] ST-66 NFR-P4: pha chế bấm 'Xong' → điện thoại khách hiện 'Đồ uống đã sẵn sàng' ≤ 2 giây (3 lần) 59, 56, 51 ms
+[ĐẠT] ST-67 NFR-R2: Bar mất WebSocket → cảnh báo 'Mất kết nối' và tự tải lại hàng đợi qua REST (≤ 10 giây) (hồi quy BUG-ST-04) cảnh báo: True; đơn mới hiện sau 8.6 s
+[ĐẠT] ST-68 NFR-R3: điện thoại mất WebSocket (hiện 'Đang kết nối lại…'), có mạng lại thì tự kết nối và đồng bộ trạng thái mới, không cần tải lại trang có lại kết nối → hiện 'sẵn sàng' sau 2.4 s
+[ĐẠT] ST-69 NFR-R1: API gợi ý trả lỗi 500 → menu và giỏ vẫn dùng được, đặt + thanh toán đơn thành công 3 lần gọi gợi ý bị lỗi giả lập
+[ĐẠT] ST-70 NFR-U4: giao diện tiếng Việt (lang=vi, không lẫn chữ tiếng Anh), giá dạng 45.000đ 35 giá đúng định dạng; sai: []; chữ tiếng Anh: {}
+[ĐẠT] ST-71 NFR-P6: dashboard hiển thị ≤ 2 giây (mở trang sau đăng nhập; đổi sang 30 ngày × 3 chi nhánh) mở trang 161 ms; 30 ngày 36 ms
+[ĐẠT] ST-72 NFR-S5: tên món chứa mã HTML/JS (do quản trị nhập) hiển thị như chữ thường, không chạy script script chạy: False; thẻ img chèn vào: 0
+(bàn dùng để thử: 01)
+
+Tổng: 13 | Đạt: 13 | Không đạt: 0

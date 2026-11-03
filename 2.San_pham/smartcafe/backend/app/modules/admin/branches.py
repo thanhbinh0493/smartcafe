@@ -15,6 +15,7 @@ from sqlalchemy import func, select
 from sqlalchemy.dialects.postgresql import insert
 from sqlalchemy.orm import Session
 
+from app.core import cache
 from app.core.config import get_settings
 from app.core.db import get_db
 from app.core.errors import AppError
@@ -195,6 +196,7 @@ def update_table(branch_id: int, table_id: int, body: TableIn, staff: Staff = De
     t.table_number, t.is_active = body.table_number, body.is_active
     flush_unique(db, "table_number", DUP_TABLE)
     db.commit()
+    cache.invalidate_public()   # khóa bàn / đổi số bàn: quét QR thấy ngay (D38)
     return _table_out(t)
 
 

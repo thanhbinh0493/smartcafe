@@ -4,14 +4,28 @@
 KM hiệu lực: is_active AND now() BETWEEN start_at AND end_at AND (toàn chuỗi OR đúng chi nhánh).
 Chỉ coi là "đang khuyến mãi" khi giá KM thấp hơn giá thường; khi đó mới gắn promotion_id.
 
-Hàm này được dùng lại ở F2 (tạo đơn) để server luôn tự tính giá (NFR-S6).
+Hàm này được dùng lại ở F2 (tạo đơn) để server luôn tự tính giá (NFR-S6) – tạo đơn luôn đọc thẳng CSDL.
+Màn hình khách (menu, gợi ý) dùng `cached_branch_menu` (D38): hết hạn sau MENU_TTL giây hoặc đúng lúc một
+khuyến mãi bắt đầu / kết thúc, và bị xóa ngay khi quản trị đổi menu (admin.common.publish_menu_updated).
 """
 from dataclasses import dataclass
 
 from sqlalchemy import text
 from sqlalchemy.orm import Session
 
+from app.core import cache
 from app.core.config import get_settings
+
+MENU_TTL = 60.0
+# Giây tới mốc bắt đầu / kết thúc gần nhất của một KM đang bật (lúc đó giá bán đổi)
+NEXT_PROMO_CHANGE_SQL = text(
+    """
+    SELECT extract(epoch FROM min(t) - now()) FROM (
+        SELECT start_at AS t FROM promotions WHERE is_active AND start_at > now()
+        UNION ALL SELECT end_at FROM promotions WHERE is_active AND end_at > now()
+    ) x
+    """
+)
 
 MENU_SQL = text(
     """
@@ -84,3 +98,13 @@ def get_branch_menu(db: Session, branch_id: int) -> list[PricedItem]:
             )
         )
     return items
+
+
+def menu_ttl(db: Session) -> float:
+    """Thời gian được giữ menu trong cache: MENU_TTL, nhưng không vượt qua mốc đổi giá KM gần nhất."""
+    nxt = db.scalar(NEXT_PROMO_CHANGE_SQL)
+    return MENU_TTL if nxt is None else max(0.0, min(MENU_TTL, float(nxt)))
+
+
+def cached_branch_menu(db: Session, branch_id: int) -> list[PricedItem]:
+    return cache.get("menu", branch_id, lambda: (get_branch_menu(db, branch_id), menu_ttl(db)))
