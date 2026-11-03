@@ -27,6 +27,7 @@ Tuần 07 (02/11/2026 – 08/11/2026). Hình thức: họp nhóm. Thư ký: Thà
 | CR-35 | 03/11/2026 | Chốt P16: **không thu thập tên khách**, thành viên chỉ định danh bằng số điện thoại đã xác thực OTP; bỏ cột `customers.name`, lời chào "Xin chào – X điểm". Duyệt kết quả F4 (84/84 đạt), gộp F4 vào `main` (local) và bắt đầu code F5 – Thu ngân hỗ trợ | Số điện thoại đã đủ để tích điểm và gợi ý món; ít dữ liệu cá nhân hơn (NFR-S7) | README thiết kế (D31, P16), `schema.sql`, IV.1, ERD + sơ đồ data model, SD01, wireframe W01 (`.puml` + PNG), III.1 UC02, III.2, IV.2, IV.3; migration `0003`; module customer, frontend W01; biên bản kiểm thử F4 Mục 7; B, C, E | A |
 | CR-36 | 03/11/2026 | Duyệt kết quả F5 (53/53 đạt), gộp F5 + D31 vào `main` (local, chưa đẩy GitHub) và bắt đầu code F6 – Quản trị (UC09–UC15) | F5 đạt đủ điều kiện theo D25 | Nhánh `main`, `feature/f6-quan-tri`; module admin (backend + 7 màn hình Web Admin), `/ws/menu`; biên bản kiểm thử F6; B, E, D | A |
 | CR-37 | 03/11/2026 | Duyệt kết quả F6 – Quản trị (230/230 đạt), gộp F6 vào `main` (local) và bắt đầu code F7 – AI gợi ý món (2 chế độ + "Thường gọi kèm") | F6 đạt đủ điều kiện theo D25 | Nhánh `main`, `feature/f7-ai-goi-y`; IV.2, IV.3 (API quản trị); biên bản kiểm thử F7; C, B, E, D | A |
+| CR-38 | 03/11/2026 | Chốt P17–P20 cho F7: dữ liệu lịch sử `seed_orders` **tự nạp khi khởi động** + SĐT demo 0901000001 (D32); FP-Growth dùng **mlxtend** (D33); thêm `recommendation_log_id` vào API đặt đơn (D34); thời tiết **giả lập mặc định**, API key tùy chọn (D35) | Theo phương án khuyến nghị: demo được ngay chế độ thành viên, đúng II.2, đo được hiệu quả gợi ý, không phụ thuộc mạng / key khi demo | README thiết kế (D32–D35, P17–P20), II.2 Mục 2.3–2.5, IV.3; `start.sh`, Dockerfile / requirements, `.env.example`; module recommend, API đặt đơn; C, B, E | A |
 
 ## 4. HÌNH ẢNH / VIDEOS
 (Bổ sung ảnh chụp buổi họp nếu có.)
@@ -45,6 +46,7 @@ Tuần 07 (02/11/2026 – 08/11/2026). Hình thức: họp nhóm. Thư ký: Thà
 - Thông qua CR-35: không thu thập tên khách, chỉ dùng SĐT (D31); F4 được duyệt, gộp vào `main`, chuyển sang F5.
 - Thông qua CR-36: F5 được duyệt, gộp vào `main`, chuyển sang F6 – Quản trị.
 - Thông qua CR-37: F6 được duyệt, gộp vào `main`, chuyển sang F7 – AI gợi ý món.
+- Thông qua CR-38: dữ liệu lịch sử tự nạp + SĐT demo (D32), mlxtend (D33), `recommendation_log_id` (D34), thời tiết giả lập mặc định (D35).
 - Code tiếp các luồng F3 → F8 trên máy, chưa đẩy lên GitHub cho tới khi PM yêu cầu.
 - Vấn đề còn mở: P12 (bản demo dự phòng trên cloud).
 
@@ -66,3 +68,4 @@ Tuần 07 (02/11/2026 – 08/11/2026). Hình thức: họp nhóm. Thư ký: Thà
 | Code F5 (thu ngân tra cứu, hủy đơn & hoàn tiền giả lập) kèm test + biên bản kiểm thử – đã xong, duyệt (CR-36) | B, E (D lập biên bản) | 03/11/2026 |
 | Code F6 (quản trị: danh mục, món, chi nhánh, nhân viên, menu chi nhánh, bàn & QR, khuyến mãi) kèm test + biên bản kiểm thử – đã xong, duyệt (CR-37) | B, E (D lập biên bản) | 03/11/2026 |
 | Code F7 (AI gợi ý món 2 chế độ + "Thường gọi kèm") kèm test + biên bản kiểm thử | C, B, E (D lập biên bản) | 08/11/2026 |
+| Review công thức + trọng số gợi ý, tinh chỉnh theo kết quả Hit Rate@5 (biên bản F7 Mục 4.7) | C | 10/11/2026 |

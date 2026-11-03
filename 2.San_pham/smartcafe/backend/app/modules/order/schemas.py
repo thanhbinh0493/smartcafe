@@ -20,6 +20,8 @@ class CreateOrderRequest(BaseModel):
     note: str | None = Field(default=None, max_length=255)
     # Tổng tiền khách đang thấy trên giỏ hàng. Nếu khác tổng server tính lại -> 409 PRICE_CHANGED (UC05 – 3b)
     expected_total: int | None = Field(default=None, ge=0)
+    # Lần gợi ý món khách vừa xem (log_id của API gợi ý) – gắn đơn vào recommendation_logs (D34)
+    recommendation_log_id: int | None = Field(default=None, ge=1)
 
 
 class OrderLineOut(BaseModel):

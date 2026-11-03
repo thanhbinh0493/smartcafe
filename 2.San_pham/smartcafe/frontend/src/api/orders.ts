@@ -20,6 +20,8 @@ export interface CreateOrderInput {
   qr_token: string
   items: { menu_item_id: number; quantity: number; note?: string; is_recommended?: boolean }[]
   expected_total: number
+  /** Lần gợi ý khách vừa xem (D34) */
+  recommendation_log_id?: number
 }
 
 export interface CreatedOrder {

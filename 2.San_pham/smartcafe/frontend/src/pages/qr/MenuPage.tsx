@@ -2,19 +2,24 @@ import { useCallback, useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 import type { ApiError } from '../../api/client'
 import { getMenu, type Menu, type MenuItem } from '../../api/public'
+import { getRecommendations, rememberLog, type RecItem } from '../../api/recommend'
+import { useMember } from '../../auth/MemberContext'
 import { MAX_QTY, useCart } from '../../cart/CartContext'
 import { useSocket } from '../../hooks/useOrderSocket'
 import { formatVND, normalizeText } from '../../lib/format'
 import MemberBar from './MemberBar'
 import QrHeader from './QrHeader'
+import RecCards from './RecCards'
 import { useQr } from './QrLayout'
 
 const ALL = 'all'
 const PROMO = 'promo'
 
-/** W01 – Menu điện tử (UC03) + thêm món vào giỏ (UC04) + dòng thành viên (UC07). Khối gợi ý món sẽ được thêm ở F7. */
+/** W01 – Menu điện tử (UC03) + khối "Gợi ý cho bạn" (F7, 2 chế độ) + thêm món vào giỏ (UC04) + dòng thành viên (UC07). */
 export default function MenuPage() {
-  const { info } = useQr()
+  const { info, qrToken } = useQr()
+  const { member } = useMember()
+  const [recs, setRecs] = useState<RecItem[]>([])
   const cart = useCart()
   const [menu, setMenu] = useState<Menu | null>(null)
   const [error, setError] = useState<ApiError | null>(null)
@@ -30,12 +35,25 @@ export default function MenuPage() {
 
   useEffect(load, [load])
 
+  // Gợi ý theo chế độ: có customer token = thành viên. Lỗi thì ẩn khối, menu vẫn dùng được (UC03 – 2a, NFR-R1)
+  const memberToken = member?.token
+  const loadRecs = useCallback(() => {
+    getRecommendations(info.branch.id, [], memberToken)
+      .then((r) => {
+        setRecs(Array.isArray(r.items) ? r.items : [])
+        rememberLog(qrToken, r.log_id)
+      })
+      .catch(() => setRecs([]))
+  }, [info.branch.id, memberToken, qrToken])
+  useEffect(loadRecs, [loadRecs])
+
   // Quản trị đổi món / giá / tình trạng / khuyến mãi → MENU_UPDATED: tải lại menu, không cần F5 (UC03 – Quy tắc)
   useSocket(`/ws/menu/${info.branch.id}`, (msg) => {
     if (msg.type === 'MENU_UPDATED')
       getMenu(info.branch.id)
         .then(setMenu)
         .catch(() => {})
+    if (msg.type === 'MENU_UPDATED') loadRecs()
   })
 
   const sections = useMemo(() => {
@@ -52,6 +70,7 @@ export default function MenuPage() {
       .filter((c) => c.items.length > 0)
   }, [menu, tab, query])
 
+  const byId = useMemo(() => new Map((menu?.categories ?? []).flatMap((c) => c.items).map((i) => [i.id, i])), [menu])
   const hasPromo = menu?.categories.some((c) => c.items.some((i) => i.is_promo)) ?? false
   const empty = sections.every((s) => s.items.length === 0)
 
@@ -100,6 +119,10 @@ export default function MenuPage() {
           </div>
         )}
         {!menu && !error && <p className="py-6 text-center text-coffee">Đang tải menu...</p>}
+        {menu && tab === ALL && !query && (
+          <RecCards title="Gợi ý cho bạn" testId="rec-block" items={recs.filter((r) => byId.get(r.menu_item_id)?.is_available)}
+            onAdd={(r) => { const it = byId.get(r.menu_item_id); if (it) cart.add(it, true) }} />
+        )}
         {menu && empty && <p className="py-6 text-center text-stone-500">Không tìm thấy món phù hợp.</p>}
         {sections.map((s) =>
           s.items.length === 0 ? null : (

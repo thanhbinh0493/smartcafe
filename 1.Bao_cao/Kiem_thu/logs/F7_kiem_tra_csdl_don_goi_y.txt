@@ -1,0 +1,6 @@
+﻿ order_code | status |       name        | is_recommended | log_mode 
+------------+--------+-------------------+----------------+----------
+ CG-0027    | PAID   | Cà phê sữa đá     | t              | MEMBER
+ CG-0027    | PAID   | Bánh croissant bơ | t              | MEMBER
+(2 rows)
+

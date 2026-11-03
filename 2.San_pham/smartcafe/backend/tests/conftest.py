@@ -10,6 +10,8 @@ TEST_DB_URL = os.environ.get(
     "TEST_DATABASE_URL", "postgresql+psycopg://smartcafe:smartcafe@localhost:5432/smartcafe_test"
 )
 os.environ["DATABASE_URL"] = TEST_DB_URL  # phải đặt trước khi import app (engine tạo lúc import)
+os.environ["SCHEDULER_ENABLED"] = "false"  # không chạy job nền trong test (F7)
+os.environ["WEATHER_API_KEY"] = ""      # test không gọi Weather API thật
 
 from collections.abc import Iterator  # noqa: E402
 from pathlib import Path  # noqa: E402

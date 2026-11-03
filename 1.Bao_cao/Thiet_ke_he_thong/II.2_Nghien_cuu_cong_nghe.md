@@ -65,15 +65,17 @@ score(i) = 0.40 * Personal(i)  # tần suất khách đã gọi món i (có tr�
 - **"Thường gọi kèm"** (giỏ hàng): lấy các luật `antecedent ∈ giỏ`, sắp theo `confidence × lift`, bỏ món đã có trong giỏ, lấy top 2.
 - Lý do hiển thị = thành phần đóng góp nhiều điểm nhất.
 - Trọng số là giá trị khởi đầu, sẽ tinh chỉnh bằng đánh giá offline (Mục 2.5).
+- *Cài đặt (F7):* Popular tính trên đơn đã thanh toán, không hủy, chuẩn hóa theo món bán nhiều nhất; Personal tính trên đơn của khách ở mọi chi nhánh, chu kỳ bán rã 30 ngày; Similar **không so món với chính nó** và nhãn "Giống món bạn thích" chỉ dành cho món khách chưa gọi; không gợi ý món đã có trong giỏ. Luật kết hợp 1 món → 1 món, học riêng từng chi nhánh + toàn chuỗi, luật của chi nhánh được ưu tiên.
 
 ### 2.4. Dữ liệu và huấn luyện
-- **Dữ liệu:** script `seed_orders.py` sinh khoảng 5.000 đơn giả lập trong 60 ngày cho 3 chi nhánh, ~40% đơn thuộc khoảng 300 khách thành viên. Script có cài sẵn quy luật để mô hình học lại được: mỗi khách có 2–3 món "ruột", "cà phê sữa thường đi kèm bánh croissant", "trời nóng bán nhiều trà, đá xay".
-- **Huấn luyện luật kết hợp:** thư viện `mlxtend` (FP-Growth), `min_support = 0.01`, `min_confidence = 0.2`, chỉ giữ luật `lift > 1`. Chạy **hằng đêm** bằng APScheduler, ghi vào bảng `association_rules`.
-- **Thời tiết:** OpenWeatherMap (gói miễn phí), cache 30 phút theo chi nhánh. Nếu API lỗi hoặc không có key thì dùng nhiệt độ **giả lập** trong file cấu hình.
+- **Dữ liệu:** script `seed_orders.py` sinh khoảng 5.000 đơn giả lập trong 60 ngày cho 3 chi nhánh, ~40% đơn thuộc khoảng 300 khách thành viên (SĐT 0901000001…0901000300; **0901000001** là khách demo ở Cầu Giấy). Tự nạp khi backend khởi động lần đầu (D32). Script có cài sẵn quy luật để mô hình học lại được: mỗi khách có 2–3 món "ruột", "cà phê sữa thường đi kèm bánh croissant", "trời nóng bán nhiều trà, đá xay".
+- **Huấn luyện luật kết hợp:** thư viện `mlxtend` (FP-Growth), `min_support = 0.01`, `min_confidence = 0.2`, chỉ giữ luật `lift > 1`. Chạy **hằng đêm lúc 00:30** bằng APScheduler (và ngay sau khi nạp dữ liệu mẫu), ghi vào bảng `association_rules` (D33).
+- **Thời tiết:** mặc định nhiệt độ **giả lập** `WEATHER_MOCK_TEMP_C` (31°C); có `WEATHER_API_KEY` thì gọi OpenWeatherMap (gói miễn phí), cache 30 phút theo chi nhánh, lỗi / chậm quá 2 giây thì về giả lập (D35).
 
 ### 2.5. Đánh giá mô hình (đưa vào báo cáo)
 - **Offline:** chia đơn theo thời gian (80% train / 20% test). Với mỗi đơn test, ẩn 1 món rồi kiểm tra món đó có trong top 5 không. Tính **Hit Rate@5**, so sánh 3 cấu hình: chỉ Popular (baseline), công thức ẩn danh, công thức thành viên (chỉ trên đơn của thành viên).
-- **Online (demo):** dựa vào `order_items.is_recommended` và `recommendation_logs.mode`, tính tỉ lệ món được thêm từ khối gợi ý theo từng chế độ.
+- **Online (demo):** dựa vào `order_items.is_recommended` và `recommendation_logs.mode` (log được gắn với đơn qua `recommendation_log_id` – D34), tính tỉ lệ món được thêm từ khối gợi ý theo từng chế độ.
+- **Kết quả lần đầu (03/11/2026, dữ liệu mô phỏng, script `evaluate_recommender.py`):** Hit Rate@5 – baseline Bán chạy 20,9%, công thức ẩn danh 19,8%, **công thức thành viên 48,9%** (trên đơn thành viên, baseline 20,4%); "Thường gọi kèm" Hit Rate@2 15,1%. Chi tiết: [biên bản kiểm thử F7](../Kiem_thu/Bien_ban_kiem_thu_F7_AI_goi_y.md) Mục 4.7.
 
 ## 3. IoT: đánh giá và quyết định LOẠI BỎ
 

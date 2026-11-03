@@ -1,4 +1,4 @@
-import { screen } from '@testing-library/react'
+import { screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { describe, expect, it } from 'vitest'
 import type { StaffMe } from '../../api/auth'
@@ -45,7 +45,8 @@ describe('F0-FE-01..06 A01 – Đăng nhập nhân viên (UC08)', () => {
     authBackend(role)
     renderApp('/admin/login')
     await fillAndSubmit('dung')
-    expect(await screen.findByTestId('location')).toHaveTextContent(path)
+    // Chuyển trang sau đăng nhập là bất đồng bộ: chờ tới khi URL đổi (trước đây kiểm tra ngay → chập chờn khi máy bận)
+    await waitFor(() => expect(screen.getByTestId('location')).toHaveTextContent(path))
     expect(await screen.findByText(/Nguyễn Văn B/)).toBeInTheDocument()
     expect(loadSession()?.token).toBe('tok')
   })

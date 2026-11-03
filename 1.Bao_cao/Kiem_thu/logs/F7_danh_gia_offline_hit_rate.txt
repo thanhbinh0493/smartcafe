@@ -1,0 +1,8 @@
+﻿Đơn train: 3813 | đơn kiểm tra: 954 | mốc chia: 2026-10-22T13:43+07:00 | luật học từ train: 32
+Cấu hình                              Số đơn  Trúng  Hit Rate
+POPULAR (tất cả đơn)                     954    199    20.9%
+ẨN DANH (tất cả đơn)                     954    189    19.8%
+POPULAR (đơn thành viên)                 378     77    20.4%
+ẨN DANH (đơn thành viên)                 378     78    20.6%
+THÀNH VIÊN (đơn thành viên)              378    185    48.9%
+THƯỜNG GỌI KÈM @2 (đơn ≥ 2 món)          324     49    15.1%
