@@ -42,7 +42,7 @@ else Lựa chọn 2: Nhập SĐT
     FE --> KH : "Mã không đúng hoặc đã hết hạn"
   else Đúng
     BE -> DB : otp.verified_at = now();\ntìm hoặc tạo customers theo SĐT
-    BE --> FE : {customer_token (JWT, 1 giờ),\nname, loyalty_points}
+    BE --> FE : {customer_token (JWT, 1 giờ),\nexpires_at, phone_masked, loyalty_points}
     note right of FE
       Token chỉ giữ trong sessionStorage
       của tab hiện tại, hết hạn sau 1 giờ.
@@ -50,7 +50,7 @@ else Lựa chọn 2: Nhập SĐT
       lần sau (hoặc đổi điện thoại)
       khách nhập lại SĐT + OTP.
     end note
-    FE --> KH : "Xin chào, bạn có 120 điểm (≈ 12.000đ)"\nchuyển sang menu (chế độ thành viên)
+    FE --> KH : "Xin chào – 120 điểm (≈ 12.000đ)"\nchuyển sang menu (chế độ thành viên)
   end
 end
 @enduml

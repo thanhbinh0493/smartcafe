@@ -1,0 +1,39 @@
+﻿[ĐẠT] SM-01 Backend sống qua Nginx 
+[ĐẠT] SM-02 Nginx trả SPA cho /admin/login 
+[ĐẠT] SM-03 Nginx trả SPA cho link QR /t/<token> 
+[ĐẠT] SM-04 Đăng nhập tài khoản mẫu admin 
+[ĐẠT] SM-05 /api/auth/me với token vừa cấp 
+[ĐẠT] SM-06 Sai mật khẩu bị từ chối 
+[ĐẠT] SM-07 Quét QR thật -> chi nhánh + bàn {"branch":{"id":1,"code":"CG","name":"SmartCafe Cầu Giấy","address":"122 Xuân Thủy, Cầu Giấy, Hà Nội"},"table":{"id":1,"
+[ĐẠT] SM-08 Menu chi nhánh có đủ 35 món, 5 danh mục 
+[ĐẠT] SM-09 API menu phản hồi < 300 ms (1 request, tham khảo NFR-P2) 15 ms
+[ĐẠT] SM-10 QR giả -> TABLE_NOT_FOUND 
+[ĐẠT] SM-11 Tạo đơn qua Nginx, server tính đúng tổng tiền CG-0010 tổng 86000
+[ĐẠT] SM-12 WebSocket qua Nginx nhận ảnh chụp đơn 
+[ĐẠT] SM-13 Thanh toán giả lập thành công 
+[ĐẠT] SM-14 Trang theo dõi nhận ORDER_PAID realtime ≤ 2 giây (NFR-P4) 91 ms
+[ĐẠT] SM-15 Xem đơn: PAID, có vị trí hàng đợi vị trí 7
+[ĐẠT] SM-16 Sai access_token -> ORDER_NOT_FOUND 
+[ĐẠT] SM-17 Hàng đợi Bar có 2 món của đơn vừa thanh toán 14 món trong hàng đợi
+[ĐẠT] SM-18 Pha chế bấm Bắt đầu -> khách thấy 'Đang pha chế' ≤ 2 giây 47 ms
+[ĐẠT] SM-19 Màn hình Bar khác nhận ITEM_UPDATED qua WebSocket 
+[ĐẠT] SM-20 Xong món cuối -> khách nhận 'Có thể lấy' ≤ 2 giây (NFR-P4) 29 ms
+[ĐẠT] SM-21 Đơn xuất hiện ở cột 'Có thể lấy' 
+[ĐẠT] SM-22 Thu ngân không được bấm 'Đã giao' (403) 
+[ĐẠT] SM-23 Pha chế bấm 'Đã giao' -> đơn hoàn tất, khách nhận ORDER_COMPLETED 
+[ĐẠT] SM-24 Gửi OTP giả lập: hạn 5 phút, chờ 60 giây, có mã [DEMO] 0948 *** 972
+[ĐẠT] SM-25 Gửi lại ngay -> 429 OTP_RATE_LIMITED Vui lòng đợi 60 giây rồi gửi lại mã
+[ĐẠT] SM-26 Sai mã -> OTP_INVALID, còn 4 lần thử 
+[ĐẠT] SM-27 Nhập đúng mã -> customer token, 0 điểm 
+[ĐẠT] SM-28 Xem điểm /api/public/me 0948 *** 972
+[ĐẠT] SM-29 Customer token không gọi được API nhân viên (403) 
+[ĐẠT] SM-30 Đặt món chế độ thành viên: có expected_points CG-0011 tổng 108000, +10 điểm
+[ĐẠT] SM-31 Đã giao -> cộng điểm, /me có giao dịch của đơn +10 điểm, tổng 10
+[ĐẠT] SM-32 Thu ngân tra cứu đơn theo mã: thấy đơn PAID, được phép hủy CG-0012
+[ĐẠT] SM-33 Pha chế không được hủy đơn (403) 
+[ĐẠT] SM-34 Hủy & hoàn tiền -> khách nhận 'Đơn đã hủy' kèm lý do ≤ 2 giây 70 ms
+[ĐẠT] SM-35 Màn hình Bar nhận ORDER_CANCELLED 
+[ĐẠT] SM-36 Món của đơn đã hủy rời hàng đợi Bar 
+[ĐẠT] SM-37 Hủy lần 2 -> 409 CANNOT_CANCEL 
+
+Tổng: 37 | Đạt: 37 | Không đạt: 0

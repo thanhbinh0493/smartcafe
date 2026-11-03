@@ -10,7 +10,6 @@ export interface OtpRequested {
 export interface OtpVerified {
   customer_token: string
   expires_at: string
-  name: string | null
   phone_masked: string
   loyalty_points: number
 }
@@ -23,7 +22,6 @@ export interface LoyaltyTx {
 }
 
 export interface CustomerMe {
-  name: string | null
   phone_masked: string
   loyalty_points: number
   point_value_vnd: number

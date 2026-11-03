@@ -100,7 +100,6 @@ entity customers {
   * id : SERIAL <<PK>>
   --
   * phone : VARCHAR(15) <<UQ>>
-  name : VARCHAR(100)
   * loyalty_points : INT
   * created_at : TIMESTAMPTZ
   last_verified_at : TIMESTAMPTZ

@@ -81,7 +81,7 @@ def promo(
 
 
 def customer(db: Session, phone: str = "0912345678", points: int = 0) -> Customer:
-    c = Customer(phone=phone, name=None, loyalty_points=points)
+    c = Customer(phone=phone, loyalty_points=points)
     db.add(c)
     db.flush()
     return c

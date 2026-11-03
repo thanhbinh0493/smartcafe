@@ -22,7 +22,7 @@
 - Đồng thời: nhiều request gửi mã / đoán mã / dùng mã cùng lúc (khóa advisory theo SĐT + `FOR UPDATE`).
 - Giao diện **W00a** (nhập SĐT, 6 ô OTP, đếm ngược, gửi lại, khung [DEMO], quay lại); **W01** dòng thành viên "Xin chào – X điểm (≈ Yđ)" + Thoát, tự hết phiên; **W02** "Bạn sẽ nhận +X điểm"; **W03** điểm sẽ nhận / đã cộng.
 
-**Ngoài phạm vi**: gửi SMS thật (D12 – chỉ có interface `SmsSender`), đổi điểm (D11), gợi ý theo sở thích thành viên (F7), nhập tên khách (xem Mục 7 – P16).
+**Ngoài phạm vi**: gửi SMS thật (D12 – chỉ có interface `SmsSender`), đổi điểm (D11), gợi ý theo sở thích thành viên (F7), nhập tên khách (không làm – D31).
 
 ## 3. Môi trường & cách chạy
 Giống [biên bản F2 – Mục 3](Bien_ban_kiem_thu_F2_Dat_mon_Thanh_toan.md#3-môi-trường--cách-chạy). Kiểm thử khói và E2E chạy trên bản `docker compose up -d --build` mới (backend có `OTP_DEMO_MODE=true`), E2E dùng Edge giả lập điện thoại 390×844.
@@ -172,7 +172,7 @@ Log: [logs/F4_e2e_trinh_duyet.txt](logs/F4_e2e_trinh_duyet.txt). Ảnh chụp:
 | BUG-F4-03 | Thấp | Cổng SMS giả lập không ghi mã OTP ra log backend (trái SD01: "mã ghi ra log"), và log nghiệp vụ `smartcafe.*` không hiện trong `docker compose logs` → khi tắt chế độ DEMO không có cách lấy mã | Test F4-13 (log trống) | Bản Mock ban đầu cố ý không ghi mã; logger `smartcafe` chưa được cấu hình handler/level | Mock ghi "tin nhắn" kèm mã, SĐT đã che; cấu hình logger `smartcafe` (INFO, stdout) khi khởi động app | F4-13 đạt; kiểm tra tay `docker compose logs backend` | Đã đóng |
 
 ## 7. Tồn tại / ghi chú
-- **Tên khách:** thiết kế có cột `customers.name` và lời chào "Xin chào <tên>", nhưng không màn hình nào cho khách nhập tên, nên hiện tại lời chào là "Xin chào – X điểm". Đã mở **P16** trong bảng Vấn đề mở (README thiết kế) để PM quyết định có thêm bước nhập tên (tùy chọn) sau lần OTP đầu tiên hay không.
+- **Tên khách – P16 đã chốt → D31 (CR-35, 03/11):** không thu thập tên, thành viên chỉ định danh bằng SĐT. Đã bỏ cột `customers.name` (migration `0003`) và trường `name` khỏi API `/otp/verify`, `/me`; lời chào giữ "Xin chào – X điểm (≈ Yđ)". Đã chạy lại toàn bộ test sau thay đổi (xem Mục 5).
 - **Phiên thành viên hết hạn lúc đặt món:** server trả 401 thay vì âm thầm tạo đơn ẩn danh; giao diện báo cho khách và cho chọn đặt không tích điểm hoặc nhập lại SĐT (theo UC06 – "hết phiên thì về ẩn danh", nhưng không để khách mất điểm mà không biết). Đơn đã đặt khi còn phiên vẫn được cộng điểm (F4-32).
 - **Mã OTP băm bằng HMAC-SHA256** (khóa `JWT_SECRET`, gắn với SĐT) thay vì bcrypt: mã chỉ sống 5 phút và bị khóa sau 5 lần sai nên không cần thuật toán chậm; so sánh bằng `hmac.compare_digest`.
 - **Giới hạn gửi / thử dùng khóa advisory theo SĐT** trong transaction (F4-33…35): nhiều request cùng lúc không vượt giới hạn, không tạo khách trùng.
@@ -180,7 +180,7 @@ Log: [logs/F4_e2e_trinh_duyet.txt](logs/F4_e2e_trinh_duyet.txt). Ảnh chụp:
 - API bổ sung so với IV.3: `phone_masked` (gửi mã, xác thực), `expires_at` (xác thực), cấu trúc `/me`, `details.reason` + `attempts_left` của `OTP_INVALID`, `retry_after` của `OTP_RATE_LIMITED`, `expected_points` trong dữ liệu đơn, 401 khi tạo đơn bằng token hết hạn – đã cập nhật [IV.3](../Thiet_ke_he_thong/IV.3_Kien_truc_va_API.md).
 
 ## 8. Kết luận
-**Luồng F4: ĐẠT.** 84/84 ca kiểm thử đạt, hồi quy F0 → F3 236/236 đạt; 3 lỗi (1 Trung bình, 2 Thấp) đã sửa, đều có test hồi quy. Còn 1 đề xuất chờ PM (P16 – nhập tên khách, không chặn luồng). Đủ điều kiện chuyển sang **F5 – Thu ngân hỗ trợ** khi PM duyệt.
+**Luồng F4: ĐẠT.** 84/84 ca kiểm thử đạt, hồi quy F0 → F3 236/236 đạt; 3 lỗi (1 Trung bình, 2 Thấp) đã sửa, đều có test hồi quy. Đề xuất P16 đã được PM chốt: không thu thập tên (D31). Đủ điều kiện chuyển sang **F5 – Thu ngân hỗ trợ** khi PM duyệt.
 
 | Vai trò | Họ tên | Ngày | Ký xác nhận |
 |:---|:---|:---|:---|

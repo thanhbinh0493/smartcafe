@@ -10,10 +10,10 @@ type Call = { url: string; body: Record<string, unknown> | null; auth: string | 
 const SENT = { expires_in: 300, resend_after: 60, phone_masked: '0912 *** 678', demo_code: '482107' }
 const inHour = () => new Date(Date.now() + 3600_000).toISOString()
 const VERIFIED = () => ({
-  customer_token: 'cust-tok', expires_at: inHour(), name: null, phone_masked: '0912 *** 678', loyalty_points: 120,
+  customer_token: 'cust-tok', expires_at: inHour(), phone_masked: '0912 *** 678', loyalty_points: 120,
 })
 const ME = (points: number) => ({
-  name: null, phone_masked: '0912 *** 678', loyalty_points: points, point_value_vnd: 100,
+  phone_masked: '0912 *** 678', loyalty_points: points, point_value_vnd: 100,
   points_value: points * 100, recent_transactions: [],
 })
 const CREATED = {
@@ -55,7 +55,7 @@ const otpError = (reason: string, message: string, left = 0): Reply => ({
 function saveMember(expiresAt = Date.now() + 3600_000, points = 120) {
   sessionStorage.setItem(
     'smartcafe.member',
-    JSON.stringify({ token: 'cust-tok', name: null, phoneMasked: '0912 *** 678', points, expiresAt }),
+    JSON.stringify({ token: 'cust-tok', phoneMasked: '0912 *** 678', points, expiresAt }),
   )
 }
 

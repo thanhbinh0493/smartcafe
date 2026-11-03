@@ -25,7 +25,7 @@ def test_F4_25_xem_diem_va_lich_su(client, db, clock, shop):
     cust = db.scalar(select(Customer).where(Customer.phone == PHONE))
     r = client.get("/api/public/me", headers=bearer(tok))
     assert r.status_code == 200
-    assert r.json() == {"name": None, "phone_masked": "0912 *** 678", "loyalty_points": 0, "point_value_vnd": 100,
+    assert r.json() == {"phone_masked": "0912 *** 678", "loyalty_points": 0, "point_value_vnd": 100,
                         "points_value": 0, "recent_transactions": []}
 
     # 7 giao dịch: chỉ trả 5 giao dịch gần nhất, mới nhất trước

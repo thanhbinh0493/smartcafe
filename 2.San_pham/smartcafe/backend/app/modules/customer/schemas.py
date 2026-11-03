@@ -22,7 +22,6 @@ class OtpVerifyIn(BaseModel):
 class OtpVerifyOut(BaseModel):
     customer_token: str
     expires_at: datetime         # phiên thành viên hết hạn (1 giờ – D18)
-    name: str | None
     phone_masked: str
     loyalty_points: int
 
@@ -35,7 +34,6 @@ class LoyaltyTxOut(BaseModel):
 
 
 class CustomerMe(BaseModel):
-    name: str | None
     phone_masked: str
     loyalty_points: int
     point_value_vnd: int         # giá trị 1 điểm (100đ)

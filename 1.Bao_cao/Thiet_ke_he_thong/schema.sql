@@ -115,8 +115,7 @@ CREATE TABLE dining_tables (
 -- Khách thành viên: chỉ được tạo sau khi xác thực OTP thành công.
 CREATE TABLE customers (
     id                SERIAL PRIMARY KEY,
-    phone             VARCHAR(15)  NOT NULL UNIQUE,
-    name              VARCHAR(100),
+    phone             VARCHAR(15)  NOT NULL UNIQUE,   -- định danh duy nhất, không thu thập tên (D31)
     loyalty_points    INT          NOT NULL DEFAULT 0 CHECK (loyalty_points >= 0),  -- = SUM(loyalty_transactions.points)
     created_at        TIMESTAMPTZ  NOT NULL DEFAULT now(),
     last_verified_at  TIMESTAMPTZ

@@ -1,0 +1,10 @@
+﻿[ĐẠT] E2E-36 Thu ngân đăng nhập -> W04 có khung 'Hỗ trợ khách' ở trên, đơn mới có trong danh sách CG-0015
+[ĐẠT] E2E-37 Tìm theo mã đơn + bàn -> đúng 1 đơn, trạng thái 'Đang chờ', có nút Hủy đơn 
+[ĐẠT] E2E-38 W04 thu ngân không tràn ngang ở tablet 1024px 
+[ĐẠT] E2E-39 Hộp xác nhận nêu số tiền hoàn; chưa nhập lý do thì không bấm được 
+[ĐẠT] E2E-40 Hủy xong: thông báo hoàn tiền, đơn hiện 'Đã hủy bởi … – Lý do … – đã hoàn tiền' 
+[ĐẠT] E2E-41 Màn hình pha chế: báo đơn bị hủy, món rời hàng đợi (không tải lại trang) 
+[ĐẠT] E2E-42 Điện thoại khách: 'Đơn đã hủy – đã hoàn tiền' + lý do (realtime) 
+[ĐẠT] E2E-43 Đơn 'Có thể lấy' không có nút Hủy đơn CG-0016
+
+Tổng: 8 | Đạt: 8 | Không đạt: 0

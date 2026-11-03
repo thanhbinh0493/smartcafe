@@ -57,7 +57,7 @@ Sau khi đăng nhập, màn hình mặc định theo vai trò: ADMIN → W08, MA
 
 ### W01 – Menu điện tử
 ![W01](diagrams/png/IV_ui_w01_qr_menu.png)
-- Thành viên: dòng "Xin chào <tên> – X điểm (≈ X×100đ)" và nút Thoát (xóa phiên). Phiên tự hết sau 1 giờ. Khách ẩn danh: thay bằng nút "Nhập SĐT tích điểm".
+- Thành viên: dòng "Xin chào – X điểm (≈ X×100đ)" (không thu thập tên – D31) và nút Thoát (xóa phiên). Phiên tự hết sau 1 giờ. Khách ẩn danh: thay bằng nút "Nhập SĐT tích điểm".
 - Khối **"Gợi ý cho bạn"** dạng thẻ cuộn ngang, mỗi thẻ có lý do gợi ý. Lý do khác nhau theo chế độ (xem chú thích trong ảnh). Món thêm từ khối này được gắn `is_recommended = true`.
 - Món KM hiện giá gốc gạch ngang và giá mới. Có tab danh mục **"Khuyến mãi"** để lọc nhanh. Món mới có nhãn [MỚI]. Món hết hàng hiển thị mờ, "Tạm hết".
 
@@ -77,7 +77,7 @@ Sau khi đăng nhập, màn hình mặc định theo vai trò: ADMIN → W08, MA
 ![W04](diagrams/png/IV_ui_w04_man_hinh_bar.png)
 - **Bảng hàng đợi** gồm các cột: số thứ tự, **giờ gọi**, số phút đã chờ, **bàn**, mã đơn, **món**, số lượng, **ghi chú**, thao tác. Món **cũ nhất ở trên cùng**; các món cùng đơn đứng liền nhau.
 - Mỗi dòng có nút **[Bắt đầu]**, bấm xong đổi thành "ĐANG PHA [Xong]". Bấm "Xong" thì dòng biến mất, có nút "Hoàn tác" trong 10 giây.
-- Cột phải **"Có thể lấy"**: các đơn đã xong hết món; **pha chế** giao đồ rồi bấm [Đã giao]. Thu ngân mở màn hình này ở chế độ tra cứu: tìm đơn theo mã/bàn, chỉ có nút [Hủy đơn], không có nút Bắt đầu/Xong/Đã giao.
+- Cột phải **"Có thể lấy"**: các đơn đã xong hết món; **pha chế** giao đồ rồi bấm [Đã giao]. Thu ngân mở màn hình này ở chế độ tra cứu: khung **"Hỗ trợ khách"** ở trên cùng (tìm đơn theo mã/bàn, nút [Hủy đơn] với đơn đang chờ / đang pha, hộp xác nhận có lý do bắt buộc và số tiền hoàn), không có nút Bắt đầu/Xong/Đã giao. Quản lý chi nhánh có cả thao tác pha chế và khung hỗ trợ khách (ở dưới).
 - Món chờ quá 10 phút hiển thị màu đỏ. Có âm báo khi có món mới.
 
 ### W05 – Quản lý món (Quản trị viên)

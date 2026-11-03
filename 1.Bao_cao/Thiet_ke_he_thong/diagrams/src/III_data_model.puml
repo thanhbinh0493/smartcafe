@@ -32,7 +32,7 @@ class "Bàn" as Table {
   số bàn, mã QR
 }
 class "Khách thành viên" as Customer {
-  số điện thoại, tên, điểm
+  số điện thoại, điểm
 }
 class "Mã OTP" as Otp {
   SĐT, mã (băm), hạn, số lần thử
