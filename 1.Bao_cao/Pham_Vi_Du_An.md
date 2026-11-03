@@ -9,7 +9,7 @@
 
 ## 2. Mục tiêu dự án
 *   **Về mặt nghiệp vụ:** Cung cấp giải pháp phần mềm giúp các chuỗi cà phê tự động hóa quy trình gọi món, tối ưu hoá quản lý thực đơn, đơn hàng và ứng dụng AI gợi ý món để nâng cao trải nghiệm khách hàng.
-*   **Về mặt học tập (Đồ án):** Áp dụng chuẩn quy trình quản lý dự án phần mềm (lập kế hoạch, phân tích, thiết kế, lập trình, kiểm thử) trong vòng 12 tuần làm việc nhóm.
+*   **Về mặt học tập (Đồ án):** Áp dụng chuẩn quy trình quản lý dự án phần mềm (lập kế hoạch, phân tích, thiết kế, lập trình, kiểm thử) trong vòng 8 tuần làm việc nhóm (21/09 → 16/11/2026, D41).
 
 ## 3. Phạm vi dự án (Project Scope)
 Để đảm bảo tính khả thi trong 3 tháng, nhóm sẽ giới hạn phạm vi như sau:

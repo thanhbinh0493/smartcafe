@@ -2,8 +2,8 @@
 
 ## Dự án
 **SmartCafe – Phần mềm quản lý chuỗi quán cà phê thông minh (Tích hợp AI và QR)** – đồ án môn Quản lý dự án phần mềm, PTIT.
-- Thời gian: 21/09/2026 → 21/12/2026 (12 tuần + tuần nghiệm thu).
-- Người dùng làm việc với Claude là **Thành viên A – PM / Team Lead**.
+- Thời gian: 21/09/2026 → **16/11/2026** (8 tuần, D41 – CR-45). Kế hoạch chi tiết: `2.San_pham/Nhom_8_Phan_cong.xlsx` = bảng trong `Project_Plan.md`.
+- Người dùng làm việc với Claude là **Thành viên A – Nguyễn Thanh Bình, PM / Team Lead**.
 - Nhân sự: A (PM, BA) · B (Backend: API, DB) · C (AI, hỗ trợ Backend) · D (Tester/QA, tài liệu) · E (Frontend: Web Admin, QR Order).
 
 ## Tài liệu nguồn (đọc trước khi làm)

@@ -9,7 +9,7 @@
 - **Quản trị**: menu chung toàn chuỗi + giá riêng / hết hàng theo chi nhánh, khuyến mãi, nhân viên, bàn & mã QR, **dashboard bán hàng** tự tổng hợp hằng ngày.
 - **Công nghệ**: Python FastAPI · React (Vite) · PostgreSQL 16 · WebSocket · Docker Compose.
 
-Thời gian thực hiện: 21/09/2026 → 21/12/2026. Nhân sự: A (PM, BA) · B (Backend) · C (AI) · D (Tester/QA) · E (Frontend).
+Thời gian thực hiện: 21/09/2026 → 16/11/2026 (D41). Nhân sự: A (PM, BA) · B (Backend) · C (AI) · D (Tester/QA) · E (Frontend).
 
 ## Đang ở giai đoạn nào (cập nhật 03/11/2026)
 | Giai đoạn | Trạng thái |
@@ -32,4 +32,4 @@ Thời gian thực hiện: 21/09/2026 → 21/12/2026. Nhân sự: A (PM, BA) · 
 
 Tiến độ chi tiết từng luồng: [2.San_pham/smartcafe/README.md](2.San_pham/smartcafe/README.md#tiến-độ-theo-luồng-d26--nơi-theo-dõi-chính).
 
-Timeline chi tiết của giai đoạn lập trình đang được PM cập nhật lại.
+Kế hoạch chi tiết: [Project_Plan.md](1.Bao_cao/Project_Plan.md) (sinh từ [Nhom_8_Phan_cong.xlsx](2.San_pham/Nhom_8_Phan_cong.xlsx)).

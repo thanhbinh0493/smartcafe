@@ -98,15 +98,5 @@ Tiền tố: `/api/public/*` dùng cho khách (một số endpoint nhận thêm 
 ```
 Mã lỗi chính: `VALIDATION_ERROR`, `TABLE_NOT_FOUND`, `BRANCH_NOT_FOUND`, `ORDER_NOT_FOUND`, `ITEM_NOT_FOUND`, `UNDO_EXPIRED`, `ITEM_UNAVAILABLE`, `QUANTITY_LIMIT`, `PRICE_CHANGED`, `UNAUTHORIZED`, `TOKEN_EXPIRED`, `ACCOUNT_LOCKED`, `OTP_INVALID`, `OTP_RATE_LIMITED`, `INVALID_CREDENTIALS`, `FORBIDDEN`, `INVALID_STATE_TRANSITION`, `CANNOT_CANCEL`, `PAYMENT_FAILED`, `REFUND_FAILED`, `PROMOTION_INVALID`, `PROMOTION_ENDED`, `DUPLICATE_VALUE` (`details.field`), `CATEGORY_IN_USE`, `CANNOT_MODIFY_SELF`, `INVALID_IMAGE`, `CATEGORY_NOT_FOUND`, `MENU_ITEM_NOT_FOUND`, `STAFF_NOT_FOUND`, `PROMOTION_NOT_FOUND`.
 
-## 3. Mốc tích hợp đề xuất cho giai đoạn V
-| Tuần | Mốc | Người |
-|:---|:---|:---|
-| 02–08/11 | Skeleton backend + Docker Compose + Alembic + seed; skeleton frontend + routing | B, E |
-| 09–13/11 | API Auth, Menu, Chi nhánh, Khuyến mãi; Swagger chia sẻ cho E | B |
-| 09–13/11 | API OTP + tích điểm; script sinh dữ liệu mẫu `seed_data.py`, `seed_orders.py` | C |
-| 09–15/11 | API Đơn hàng, hàng đợi Bar + WebSocket + Payment giả lập; Service gợi ý 2 chế độ + FP-Growth | B, C |
-| 16–18/11 | API báo cáo + job `build_daily_report` | B |
-| 16–20/11 | Hoàn thiện giao diện, ráp API thật thay dữ liệu giả | E |
-| 21–25/11 | Tích hợp toàn hệ thống, chạy thử 2 luồng demo end-to-end (ẩn danh, thành viên) | B, C, E |
-
-> Các mốc trên đã được dời so với kế hoạch gốc (giai đoạn V bắt đầu từ 23/10) vì thiết kế vừa thay đổi ở Tuần 06. Cần PM xác nhận.
+## 3. Mốc lập trình (giai đoạn V)
+Lập trình và tích hợp theo **9 luồng F0 → F8** (D26): mỗi luồng gồm API + giao diện + test tự động + biên bản kiểm thử, tích hợp ngay trong luồng nên không còn bước "tích hợp toàn hệ thống" riêng. Lịch theo kế hoạch đã chốt (D41): **20/10 → 31/10/2026**, chi tiết từng luồng ở [Project_Plan.md](../Project_Plan.md) và [README mã nguồn](../../2.San_pham/smartcafe/README.md#tiến-độ-theo-luồng-d26--nơi-theo-dõi-chính).

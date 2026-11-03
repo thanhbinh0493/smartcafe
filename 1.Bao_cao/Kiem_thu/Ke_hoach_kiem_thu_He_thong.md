@@ -74,7 +74,7 @@
 | Chạy lại toàn bộ (hồi quy) + lập biên bản | D | A | 03/11/2026 |
 | PM duyệt kết thúc giai đoạn VI | A | – | trước 08/11/2026 |
 
-*Giai đoạn VI trong Project_Plan dự kiến 26/11 → 02/12/2026; làm sớm vì giai đoạn V đã xong (timeline do A cập nhật – P11).*
+*Theo kế hoạch đã chốt (D41), giai đoạn VI là 01/11 → 03/11/2026.*
 
 ## 9. Rủi ro kiểm thử
 | Rủi ro | Cách xử lý |
