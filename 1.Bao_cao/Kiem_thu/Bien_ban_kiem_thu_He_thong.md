@@ -8,7 +8,7 @@
 | Phiên bản | 0.9.0 – nhánh `feature/vi-kiem-thu-he-thong` (tách từ `main` sau khi gộp F8, CR-40), mã nguồn `2.San_pham/smartcafe/` |
 | Ngày kiểm thử | 03/11/2026 |
 | Người lập biên bản | Thành viên D (Tester / QA) |
-| Người duyệt | Thành viên A (PM) – *chờ duyệt* |
+| Người duyệt | Thành viên A (PM) – đã duyệt 03/11/2026 (CR-44) |
 | Tài liệu căn cứ | [III.1](../Thiet_ke_he_thong/III.1_Use_Case_Sequence.md) UC01–UC20, [III.2](../Thiet_ke_he_thong/III.2_Yeu_cau_phi_chuc_nang_Data_Model.md) NFR, [IV.1–IV.3](../Thiet_ke_he_thong/IV.3_Kien_truc_va_API.md); quyết định D1–D39 |
 | Tiền đề | F0 → F8 đạt và được duyệt (9 biên bản luồng, 727 ca) |
 
@@ -21,7 +21,7 @@
   - khả dụng U1–U4;
   - bảo trì M1–M5.
 - **Hồi quy** toàn bộ F0 → F8 sau khi sửa lỗi: pytest, Vitest và kiểm thử khói SM-01…55.
-- **Ngoài phạm vi:** điện thoại thật, cổng thanh toán và SMS thật, bản demo trên cloud (P12).
+- **Ngoài phạm vi:** điện thoại thật, cổng thanh toán và SMS thật, bản demo trên cloud (không làm – D40).
 
 ## 3. Môi trường & cách chạy
 - Laptop demo Windows 10, 8 luồng CPU. Docker Desktop chạy `docker compose` gồm 3 dịch vụ: `postgres:16-alpine`, backend (1 tiến trình uvicorn) và frontend/Nginx ở cổng 8080.
@@ -164,7 +164,7 @@ Mô hình tải theo **D39**: 50 người dùng ảo vào lệch nhau. Mỗi lư
 - **`JWT_SECRET` mặc định** trong `.env.example` là `change-me-please…`. Bắt buộc đổi nếu demo trên mạng ngoài máy cá nhân (ghi chú có sẵn trong file).
 - **Port 8000 mở ra host** để xem Swagger. Khi demo trên mạng chung thì chỉ nên mở 8080.
 - **Dữ liệu demo:** các script ST tạo thêm ~230 đơn thử. Trước buổi demo chạy `docker compose down -v` → `up -d`, rồi sao lưu bằng `scripts/backup_db.ps1` (NFR-R5).
-- **P12** (bản demo dự phòng trên cloud) vẫn đang mở.
+- **P12** đã chốt → D40 (CR-44): chỉ demo trên laptop, không làm bản dự phòng trên cloud.
 
 ## 8. Kết luận
 **Giai đoạn VI – Kiểm thử hệ thống: ĐẠT.**
@@ -173,9 +173,9 @@ Mô hình tải theo **D39**: 50 người dùng ảo vào lệch nhau. Mỗi lư
 - 29/29 yêu cầu phi chức năng đạt.
 - Phát hiện 6 lỗi (1 Thấp, 5 Trung bình), tất cả đã sửa và có test hồi quy; không còn lỗi Nghiêm trọng hay Cao.
 - PM đã chốt P23 → D38 (cache API đọc) và P24 → D39 (mô hình tải), ghi ở CR-42, CR-43.
-- Đang chờ PM duyệt để gộp nhánh `feature/vi-kiem-thu-he-thong` vào `main`.
+- PM đã duyệt (CR-44); nhánh `feature/vi-kiem-thu-he-thong` đã gộp vào `main`.
 
 | Vai trò | Họ tên | Ngày | Ký xác nhận |
 |:---|:---|:---|:---|
 | Người lập (Tester / QA) | Thành viên D | 03/11/2026 | |
-| PM duyệt | Thành viên A | | |
+| PM duyệt | Thành viên A | 03/11/2026 | |
