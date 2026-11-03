@@ -130,7 +130,8 @@ entity loyalty_transactions {
 entity orders {
   * id : BIGSERIAL <<PK>>
   --
-  * order_code : VARCHAR(20) <<UQ>>
+  * order_code : VARCHAR(20) <<UQ1>>
+  * order_date : DATE <<UQ1>>
   * access_token : VARCHAR(32) <<UQ>>
   * branch_id : INT <<FK>>
   * table_id : INT <<FK>>

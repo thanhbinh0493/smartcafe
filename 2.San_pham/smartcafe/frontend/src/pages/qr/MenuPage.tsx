@@ -2,6 +2,7 @@ import { useCallback, useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 import type { ApiError } from '../../api/client'
 import { getMenu, type Menu, type MenuItem } from '../../api/public'
+import { MAX_QTY, useCart } from '../../cart/CartContext'
 import { formatVND, normalizeText } from '../../lib/format'
 import QrHeader from './QrHeader'
 import { useQr } from './QrLayout'
@@ -9,9 +10,10 @@ import { useQr } from './QrLayout'
 const ALL = 'all'
 const PROMO = 'promo'
 
-/** W01 – Menu điện tử (UC03). Khối gợi ý món (F7) và giỏ hàng (F2) sẽ được thêm ở các luồng sau. */
+/** W01 – Menu điện tử (UC03) + thêm món vào giỏ (UC04). Khối gợi ý món sẽ được thêm ở F7. */
 export default function MenuPage() {
   const { info } = useQr()
+  const cart = useCart()
   const [menu, setMenu] = useState<Menu | null>(null)
   const [error, setError] = useState<ApiError | null>(null)
   const [tab, setTab] = useState<string>(ALL)
@@ -43,8 +45,10 @@ export default function MenuPage() {
   const hasPromo = menu?.categories.some((c) => c.items.some((i) => i.is_promo)) ?? false
   const empty = sections.every((s) => s.items.length === 0)
 
+  const qtyOf = (id: number) => cart.lines.find((l) => l.menu_item_id === id)?.quantity ?? 0
+
   return (
-    <div className="mx-auto min-h-screen max-w-md pb-8">
+    <div className="mx-auto min-h-screen max-w-md pb-24">
       <QrHeader />
       <div className="flex items-center justify-between gap-2 bg-white px-4 py-2 text-sm">
         <span className="text-stone-600">Khách vãng lai</span>
@@ -98,13 +102,26 @@ export default function MenuPage() {
               <h2 className="mb-2 text-sm font-bold uppercase tracking-wide text-coffee">{s.name}</h2>
               <ul className="space-y-2">
                 {s.items.map((it) => (
-                  <MenuRow key={it.id} item={it} />
+                  <MenuRow key={it.id} item={it} quantity={qtyOf(it.id)} onAdd={() => cart.add(it)} />
                 ))}
               </ul>
             </section>
           ),
         )}
       </main>
+
+      {cart.count > 0 && (
+        <div className="fixed inset-x-0 bottom-0 z-20 mx-auto max-w-md p-3">
+          <Link
+            to="../cart"
+            relative="path"
+            className="flex items-center justify-between rounded-2xl bg-coffee px-5 py-4 font-semibold text-white shadow-lg"
+          >
+            <span>Giỏ hàng ({cart.count})</span>
+            <span>{formatVND(cart.total)} ›</span>
+          </Link>
+        </div>
+      )}
     </div>
   )
 }
@@ -123,7 +140,7 @@ function TabButton({ active, onClick, children }: { active: boolean; onClick: ()
   )
 }
 
-function MenuRow({ item }: { item: MenuItem }) {
+function MenuRow({ item, quantity, onAdd }: { item: MenuItem; quantity: number; onAdd: () => void }) {
   return (
     <li
       data-testid={`menu-item-${item.id}`}
@@ -148,7 +165,26 @@ function MenuRow({ item }: { item: MenuItem }) {
           <span className={item.is_promo ? 'font-semibold text-promo' : 'font-semibold'}>{formatVND(item.sell_price)}</span>
         </p>
       </div>
-      {!item.is_available && <span className="text-sm font-medium text-red-600">Tạm hết</span>}
+      {item.is_available ? (
+        <button
+          onClick={onAdd}
+          disabled={quantity >= MAX_QTY}
+          aria-label={`Thêm ${item.name}`}
+          className="relative flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-coffee text-2xl leading-none text-white active:bg-coffee-dark disabled:opacity-40"
+        >
+          +
+          {quantity > 0 && (
+            <span
+              data-testid={`qty-${item.id}`}
+              className="absolute -right-1 -top-1 rounded-full bg-promo px-1.5 text-xs font-bold"
+            >
+              {quantity}
+            </span>
+          )}
+        </button>
+      ) : (
+        <span className="text-sm font-medium text-red-600">Tạm hết</span>
+      )}
     </li>
   )
 }

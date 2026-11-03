@@ -18,6 +18,7 @@ PREPARING --> CANCELLED : Thu ngân hủy khi\nhỗ trợ khách (hoàn tiền)
 
 READY : Có thể lấy
 READY --> COMPLETED : Pha chế giao đồ,\nbấm "Đã giao"
+READY --> PREPARING : Pha chế "Hoàn tác" món cuối\n(bấm nhầm "Xong", trong 10 giây)
 
 COMPLETED : Hoàn tất\n(cộng điểm nếu là thành viên)
 CANCELLED : Đã hủy

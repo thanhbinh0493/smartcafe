@@ -64,6 +64,44 @@ export const MENU: Menu = {
   ],
 }
 
+/** WebSocket giả: test tự đẩy message (emit) hoặc làm rớt kết nối (drop). */
+export class FakeWebSocket {
+  static instances: FakeWebSocket[] = []
+  onopen: ((ev: unknown) => void) | null = null
+  onmessage: ((ev: { data: string }) => void) | null = null
+  onclose: ((ev: { code: number }) => void) | null = null
+  closed = false
+
+  constructor(public url: string) {
+    FakeWebSocket.instances.push(this)
+    setTimeout(() => !this.closed && this.onopen?.({}), 0)
+  }
+
+  static last(): FakeWebSocket {
+    return FakeWebSocket.instances[FakeWebSocket.instances.length - 1]
+  }
+
+  emit(type: string, data: unknown) {
+    this.onmessage?.({ data: JSON.stringify({ type, data, ts: '2026-11-02T10:00:00Z' }) })
+  }
+
+  drop(code = 1006) {
+    this.closed = true
+    this.onclose?.({ code })
+  }
+
+  send() {}
+
+  close() {
+    if (!this.closed) this.drop(1000)
+  }
+}
+
+export function installFakeWebSocket() {
+  FakeWebSocket.instances = []
+  vi.stubGlobal('WebSocket', FakeWebSocket)
+}
+
 /** Backend giả cho luồng QR: qr_token "good" hợp lệ, còn lại không hợp lệ. */
 export function qrBackend(menu: Menu = MENU) {
   return mockFetch((url) => {

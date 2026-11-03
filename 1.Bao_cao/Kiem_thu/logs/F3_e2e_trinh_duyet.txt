@@ -1,0 +1,14 @@
+[ĐẠT] E2E-12 Pha chế đăng nhập -> vào thẳng màn hình Bar, WebSocket trực tuyến 
+[ĐẠT] E2E-13 Đơn mới tự hiện trên màn hình Bar (không tải lại trang) CG-0003, ~1886 ms sau khi W03 mở
+[ĐẠT] E2E-14 Có thông báo 'Có món mới' + ghi chú món hiển thị 
+[ĐẠT] E2E-23 (hồi quy BUG-F3-02) đơn cùng mã của hôm trước hiện giờ gọi kèm ngày 2 dòng hôm trước
+[ĐẠT] E2E-15 Bắt đầu -> điện thoại khách đổi 'Đang pha' ≤ 2 giây 28 ms
+[ĐẠT] E2E-16 Xong món cuối -> khách nhận 'Có thể lấy' ≤ 2 giây (NFR-P4) 37 ms
+[ĐẠT] E2E-17 Đơn sang cột 'Có thể lấy', có nút Hoàn tác 
+[ĐẠT] E2E-18 Hoàn tác trong 10 giây: món quay lại hàng đợi, khách hết thấy 'Có thể lấy' 
+[ĐẠT] E2E-19 Nút Hoàn tác tự ẩn sau 10 giây 
+[ĐẠT] E2E-20 Đã giao -> đơn rời cột 'Có thể lấy', khách thấy 'Bạn đã nhận đồ' 
+[ĐẠT] E2E-21 Thu ngân: chế độ xem, không có nút Bắt đầu / Xong / Đã giao 
+[ĐẠT] E2E-22 W04 không tràn ngang ở 1024px (tablet quầy) 
+
+Tổng: 12 | Đạt: 12 | Không đạt: 0

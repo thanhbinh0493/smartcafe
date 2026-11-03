@@ -137,7 +137,8 @@ CREATE INDEX idx_otp_phone ON otp_requests(phone, created_at DESC);
 -- ---------- Đơn hàng ----------
 CREATE TABLE orders (
     id             BIGSERIAL PRIMARY KEY,
-    order_code     VARCHAR(20)  NOT NULL UNIQUE,     -- VD: CG-0142
+    order_code     VARCHAR(20)  NOT NULL,            -- VD: CG-0142 (số thứ tự trong ngày, đếm lại mỗi ngày)
+    order_date     DATE         NOT NULL DEFAULT ((now() AT TIME ZONE 'Asia/Ho_Chi_Minh')::date),  -- ngày tạo đơn (giờ VN)
     access_token   VARCHAR(32)  NOT NULL UNIQUE,     -- token ngẫu nhiên cho trang theo dõi đơn của khách
     branch_id      INT          NOT NULL REFERENCES branches(id),
     table_id       INT          NOT NULL REFERENCES dining_tables(id),
@@ -152,8 +153,10 @@ CREATE TABLE orders (
     paid_at        TIMESTAMPTZ,
     ready_at       TIMESTAMPTZ,
     completed_at   TIMESTAMPTZ,
-    cancelled_at   TIMESTAMPTZ
+    cancelled_at   TIMESTAMPTZ,
+    CONSTRAINT uq_orders_code_date UNIQUE (order_code, order_date)   -- mã đơn không trùng trong cùng 1 ngày (D28)
 );
+CREATE INDEX idx_orders_branch_date    ON orders(branch_id, order_date);
 CREATE INDEX idx_orders_branch_status  ON orders(branch_id, status);
 CREATE INDEX idx_orders_branch_created ON orders(branch_id, created_at DESC);
 CREATE INDEX idx_orders_customer       ON orders(customer_id);

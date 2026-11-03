@@ -1,0 +1,13 @@
+﻿[ĐẠT] E2E-01 Giỏ hàng: tổng 61.000đ (25.000 + 36.000) 
+[ĐẠT] E2E-02 W02 không tràn ngang ở 390px 
+[ĐẠT] E2E-03 Sang W03, đơn PAID http://localhost:8080/t/l-xSmgseyPk9sU_IJ3hRGg/orders/3
+[ĐẠT] E2E-04 Số lần chạm từ màn hình chào tới khi đặt xong ≤ 6 (NFR-U2) 5 lần
+[ĐẠT] E2E-05 W03 kết nối WebSocket qua Nginx 
+[ĐẠT] E2E-06 W03 hiện vị trí trong hàng đợi 
+[ĐẠT] E2E-07 W03 không tràn ngang ở 390px 
+[ĐẠT] E2E-08 Tải lại trang theo dõi vẫn xem được đơn 
+[ĐẠT] E2E-09 Giỏ hàng trống sau khi đặt 
+[ĐẠT] E2E-10 Mở link theo dõi ở trình duyệt khác vẫn xem được (có token) 
+[ĐẠT] E2E-11 Link sai token: báo không tìm thấy đơn 
+
+Tổng: 11 | Đạt: 11 | Không đạt: 0
