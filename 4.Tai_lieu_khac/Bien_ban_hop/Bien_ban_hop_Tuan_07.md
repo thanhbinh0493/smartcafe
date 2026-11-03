@@ -26,6 +26,7 @@ Tuần 07 (02/11/2026 – 08/11/2026). Hình thức: họp nhóm. Thư ký: Thà
 | CR-34 | 03/11/2026 | Chốt P15: pha chế "Hoàn tác" món cuối cùng (đơn đã "Có thể lấy") thì **đơn quay lại "Đang pha chế"** (READY → PREPARING, ghi lịch sử, khách thấy lại "Đang pha"). Duyệt kết quả F3, gộp F2 + F3 vào nhánh `main` (local) và bắt đầu code F4 | Bấm nhầm "Xong" là thao tác hay gặp; nếu không cho hoàn tác thì khách được báo "Có thể lấy" khi đồ chưa pha xong | README thiết kế (D30), III.1 UC18, biểu đồ trạng thái đơn (`III_state_don_hang.puml` + PNG), IV.3; biên bản kiểm thử F3 Mục 7; module bar (đã cài ở F3); B, E | A |
 | CR-35 | 03/11/2026 | Chốt P16: **không thu thập tên khách**, thành viên chỉ định danh bằng số điện thoại đã xác thực OTP; bỏ cột `customers.name`, lời chào "Xin chào – X điểm". Duyệt kết quả F4 (84/84 đạt), gộp F4 vào `main` (local) và bắt đầu code F5 – Thu ngân hỗ trợ | Số điện thoại đã đủ để tích điểm và gợi ý món; ít dữ liệu cá nhân hơn (NFR-S7) | README thiết kế (D31, P16), `schema.sql`, IV.1, ERD + sơ đồ data model, SD01, wireframe W01 (`.puml` + PNG), III.1 UC02, III.2, IV.2, IV.3; migration `0003`; module customer, frontend W01; biên bản kiểm thử F4 Mục 7; B, C, E | A |
 | CR-36 | 03/11/2026 | Duyệt kết quả F5 (53/53 đạt), gộp F5 + D31 vào `main` (local, chưa đẩy GitHub) và bắt đầu code F6 – Quản trị (UC09–UC15) | F5 đạt đủ điều kiện theo D25 | Nhánh `main`, `feature/f6-quan-tri`; module admin (backend + 7 màn hình Web Admin), `/ws/menu`; biên bản kiểm thử F6; B, E, D | A |
+| CR-37 | 03/11/2026 | Duyệt kết quả F6 – Quản trị (230/230 đạt), gộp F6 vào `main` (local) và bắt đầu code F7 – AI gợi ý món (2 chế độ + "Thường gọi kèm") | F6 đạt đủ điều kiện theo D25 | Nhánh `main`, `feature/f7-ai-goi-y`; IV.2, IV.3 (API quản trị); biên bản kiểm thử F7; C, B, E, D | A |
 
 ## 4. HÌNH ẢNH / VIDEOS
 (Bổ sung ảnh chụp buổi họp nếu có.)
@@ -43,6 +44,7 @@ Tuần 07 (02/11/2026 – 08/11/2026). Hình thức: họp nhóm. Thư ký: Thà
 - Thông qua CR-34: hoàn tác món cuối đưa đơn từ "Có thể lấy" về "Đang pha chế" (D30); F3 được duyệt, gộp F2 + F3 vào `main`, chuyển sang F4.
 - Thông qua CR-35: không thu thập tên khách, chỉ dùng SĐT (D31); F4 được duyệt, gộp vào `main`, chuyển sang F5.
 - Thông qua CR-36: F5 được duyệt, gộp vào `main`, chuyển sang F6 – Quản trị.
+- Thông qua CR-37: F6 được duyệt, gộp vào `main`, chuyển sang F7 – AI gợi ý món.
 - Code tiếp các luồng F3 → F8 trên máy, chưa đẩy lên GitHub cho tới khi PM yêu cầu.
 - Vấn đề còn mở: P12 (bản demo dự phòng trên cloud).
 
@@ -62,4 +64,5 @@ Tuần 07 (02/11/2026 – 08/11/2026). Hình thức: họp nhóm. Thư ký: Thà
 | Chốt P15 (hoàn tác món cuối) – đã xong (CR-34) | A | 03/11/2026 |
 | Code F4 (OTP giả lập & tích điểm) kèm test + biên bản kiểm thử – đã xong, duyệt (CR-35) | C, B, E (D lập biên bản) | 03/11/2026 |
 | Code F5 (thu ngân tra cứu, hủy đơn & hoàn tiền giả lập) kèm test + biên bản kiểm thử – đã xong, duyệt (CR-36) | B, E (D lập biên bản) | 03/11/2026 |
-| Code F6 (quản trị: danh mục, món, chi nhánh, nhân viên, menu chi nhánh, bàn & QR, khuyến mãi) kèm test + biên bản kiểm thử | B, E (D lập biên bản) | 08/11/2026 |
+| Code F6 (quản trị: danh mục, món, chi nhánh, nhân viên, menu chi nhánh, bàn & QR, khuyến mãi) kèm test + biên bản kiểm thử – đã xong, duyệt (CR-37) | B, E (D lập biên bản) | 03/11/2026 |
+| Code F7 (AI gợi ý món 2 chế độ + "Thường gọi kèm") kèm test + biên bản kiểm thử | C, B, E (D lập biên bản) | 08/11/2026 |
