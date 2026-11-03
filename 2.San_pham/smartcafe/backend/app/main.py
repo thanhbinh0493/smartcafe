@@ -11,6 +11,7 @@ from app.modules.branch.router import router as branch_router
 from app.modules.customer.router import router as customer_router
 from app.modules.menu.router import router as menu_router
 from app.modules.order.router import router as order_router
+from app.modules.support.router import router as support_router
 
 
 def _setup_logging() -> None:
@@ -39,6 +40,7 @@ def create_app() -> FastAPI:
     app.include_router(menu_router)
     app.include_router(order_router)
     app.include_router(bar_router)
+    app.include_router(support_router)
 
     @app.get("/api/health", tags=["system"])
     def health() -> dict:

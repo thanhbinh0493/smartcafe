@@ -94,6 +94,7 @@ def main() -> int:
             check("SM-16", "Sai access_token -> ORDER_NOT_FOUND", v.status_code == 404)
             smoke_bar(c, a, bid, r_table_code(c, a.qr_token), o)
             smoke_member(c, a, bid, r_table_code(c, a.qr_token), lines)
+            smoke_support(c, a, bid, r_table_code(c, a.qr_token), lines)
 
     failed = [x for x in RESULTS if not x[2]]
     print(f"\nTổng: {len(RESULTS)} | Đạt: {len(RESULTS) - len(failed)} | Không đạt: {len(failed)}")
@@ -206,6 +207,43 @@ def smoke_member(c: httpx.Client, a, bid: int, code: str, lines: list[dict]) -> 
     check("SM-31", "Đã giao -> cộng điểm, /me có giao dịch của đơn", r.status_code == 200
           and r.json()["points_earned"] == expected and me["loyalty_points"] == expected
           and tx.get("order_code") == o["order_code"], f"+{expected} điểm, tổng {me['loyalty_points']}")
+
+
+def smoke_support(c: httpx.Client, a, bid: int, code: str, lines: list[dict]) -> None:
+    """F5: thu ngân tra cứu đơn của khách, hủy & hoàn tiền giả lập; khách và màn hình Bar nhận sự kiện realtime."""
+    body = {"qr_token": a.qr_token, "items": [{"menu_item_id": lines[0]["id"], "quantity": 1}]}
+    o = c.post("/api/public/orders", json=body).json()
+    c.post(f"/api/public/orders/{o['order_id']}/pay", json={"access_token": o["access_token"], "method": "MOCK_EWALLET"})
+    r = c.post("/api/auth/login", json={"username": f"tn_{code}", "password": a.password})
+    if r.status_code != 200:
+        check("SM-32", f"Đăng nhập thu ngân tn_{code}", False, str(r.status_code))
+        return
+    h = {"Authorization": f"Bearer {r.json()['access_token']}"}
+    found = c.get("/api/staff/orders/search", params={"code": o["order_code"]}, headers=h).json()
+    check("SM-32", "Thu ngân tra cứu đơn theo mã: thấy đơn PAID, được phép hủy", len(found) == 1
+          and found[0]["status"] == "PAID" and found[0]["can_cancel"], o["order_code"])
+
+    pc = c.post("/api/auth/login", json={"username": f"pc1_{code}", "password": a.password}).json()["access_token"]
+    r = c.post(f"/api/staff/orders/{o['order_id']}/cancel", json={"reason": "Khách đổi ý"},
+               headers={"Authorization": f"Bearer {pc}"})
+    check("SM-33", "Pha chế không được hủy đơn (403)", r.status_code == 403)
+
+    base_ws = a.base_url.replace("http", "ws", 1)
+    with ws_connect(f"{base_ws}/ws/bar/{bid}?token={pc}", open_timeout=5) as bar_ws,             ws_connect(f"{base_ws}/ws/order/{o['order_id']}?token={o['access_token']}", open_timeout=5) as cust_ws:
+        recv_until(cust_ws, "ORDER_SNAPSHOT")
+        t0 = time.perf_counter()
+        r = c.post(f"/api/staff/orders/{o['order_id']}/cancel", json={"reason": "Khách đổi ý"}, headers=h)
+        evt = recv_until(cust_ws, "ORDER_CANCELLED")
+        ms = (time.perf_counter() - t0) * 1000
+        check("SM-34", "Hủy & hoàn tiền -> khách nhận 'Đơn đã hủy' kèm lý do ≤ 2 giây", r.status_code == 200
+              and r.json()["payment"]["status"] == "REFUNDED" and evt["data"]["cancel_reason"] == "Khách đổi ý"
+              and ms <= 2000, f"{ms:.0f} ms")
+        b = recv_until(bar_ws, "ORDER_CANCELLED")
+        check("SM-35", "Màn hình Bar nhận ORDER_CANCELLED", b["data"]["order_id"] == o["order_id"])
+    q = c.get(f"/api/staff/branches/{bid}/queue", headers={"Authorization": f"Bearer {pc}"}).json()["items"]
+    check("SM-36", "Món của đơn đã hủy rời hàng đợi Bar", all(i["order_id"] != o["order_id"] for i in q))
+    r = c.post(f"/api/staff/orders/{o['order_id']}/cancel", json={"reason": "Khách đổi ý"}, headers=h)
+    check("SM-37", "Hủy lần 2 -> 409 CANNOT_CANCEL", r.status_code == 409 and r.json()["error"]["code"] == "CANNOT_CANCEL")
 
 
 if __name__ == "__main__":

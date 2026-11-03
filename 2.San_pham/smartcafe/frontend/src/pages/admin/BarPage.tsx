@@ -15,6 +15,7 @@ import { loadSession } from '../../auth/staffSession'
 import { useSocket, type WsMessage } from '../../hooks/useOrderSocket'
 import { playBeep, unlockAudio } from '../../lib/beep'
 import { formatTime } from '../../lib/format'
+import SupportPanel from './SupportPanel'
 
 export const UNDO_MS = 10_000 // nút "Hoàn tác" hiện 10 giây (UC18 – 3a)
 const LATE_MS = 10 * 60_000 // món chờ quá 10 phút hiển thị màu đỏ
@@ -26,7 +27,7 @@ interface UndoEntry {
 }
 
 /** W04 – Màn hình quầy Bar (UC17–UC19): hàng đợi pha chế + cột "Có thể lấy", cập nhật realtime.
- *  Pha chế / quản lý: Bắt đầu, Xong, Hoàn tác, Đã giao. Thu ngân: chỉ xem (tra cứu & hủy đơn ở F5). */
+ *  Pha chế / quản lý: Bắt đầu, Xong, Hoàn tác, Đã giao. Thu ngân / quản lý: tra cứu & hủy đơn (UC20, F5). */
 export default function BarPage() {
   const staff = useOutletContext<StaffMe>()
   if (!staff.branch) {
@@ -42,6 +43,8 @@ export default function BarPage() {
 function BarScreen({ staff, branchId, branchName }: { staff: StaffMe; branchId: number; branchName: string }) {
   const token = loadSession()?.token ?? ''
   const canAct = staff.role === 'BARISTA' || staff.role === 'MANAGER'
+  const canSupport = staff.role === 'CASHIER' || staff.role === 'MANAGER'
+  const [refreshKey, setRefreshKey] = useState(0)
   const [items, setItems] = useState<QueueItem[] | null>(null)
   const [ready, setReady] = useState<BarOrder[]>([])
   const [error, setError] = useState<string | null>(null)
@@ -76,6 +79,10 @@ function BarScreen({ staff, branchId, branchName }: { staff: StaffMe; branchId: 
         playBeep()
         setNotice(`Có món mới – đơn ${String(msg.data.order_code ?? '')}`)
       }
+      if (msg.type === 'ORDER_CANCELLED') {
+        setNotice(`Đơn ${String(msg.data.order_code ?? '')} đã bị hủy – bỏ các món của đơn này`)
+      }
+      setRefreshKey((k) => k + 1)
       void reload()
     },
     () => void reload(), // kết nối (lại) xong: tải lại để không lỡ sự kiện lúc mất mạng
@@ -136,7 +143,7 @@ function BarScreen({ staff, branchId, branchName }: { staff: StaffMe; branchId: 
       </div>
       {!canAct && (
         <p className="rounded-xl bg-stone-100 p-3 text-sm">
-          Chế độ xem: thu ngân chỉ xem hàng đợi, không thao tác Bắt đầu / Xong / Đã giao.
+          Thu ngân: xem hàng đợi và hỗ trợ khách (tra cứu, hủy đơn & hoàn tiền); không thao tác Bắt đầu / Xong / Đã giao.
         </p>
       )}
       {error && (
@@ -164,6 +171,10 @@ function BarScreen({ staff, branchId, branchName }: { staff: StaffMe; branchId: 
             </li>
           ))}
         </ul>
+      )}
+
+      {canSupport && !canAct && (
+        <SupportPanel token={token} refreshKey={refreshKey} onCancelled={() => void reload()} />
       )}
 
       <div className="grid gap-4 lg:grid-cols-[1fr_20rem]">
@@ -275,6 +286,10 @@ function BarScreen({ staff, branchId, branchName }: { staff: StaffMe; branchId: 
           ))}
         </section>
       </div>
+
+      {canSupport && canAct && (
+        <SupportPanel token={token} refreshKey={refreshKey} onCancelled={() => void reload()} />
+      )}
     </div>
   )
 }

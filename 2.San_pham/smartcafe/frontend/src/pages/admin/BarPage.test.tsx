@@ -189,7 +189,8 @@ describe('F3-FE-01..12 W04 – Màn hình quầy Bar (UC17–UC19)', () => {
 
   it('F3-FE-10 thu ngân: chỉ xem, không có nút Bắt đầu / Xong / Đã giao', async () => {
     await openBar('CASHIER')
-    expect(screen.getByText(/Chế độ xem: thu ngân chỉ xem hàng đợi/)).toBeInTheDocument()
+    // F5: thu ngân xem hàng đợi + hỗ trợ khách (tra cứu, hủy đơn), vẫn không thao tác pha chế
+    expect(screen.getByText(/Thu ngân: xem hàng đợi và hỗ trợ khách/)).toBeInTheDocument()
     expect(screen.queryByRole('button', { name: /^Bắt đầu/ })).not.toBeInTheDocument()
     expect(screen.queryByRole('button', { name: /^Đã giao/ })).not.toBeInTheDocument()
     expect(screen.queryByText('Thao tác')).not.toBeInTheDocument()
