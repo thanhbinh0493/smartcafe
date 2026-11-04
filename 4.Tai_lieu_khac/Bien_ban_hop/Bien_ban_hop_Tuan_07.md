@@ -37,6 +37,8 @@ Tuần 07 (02/11/2026 – 08/11/2026). Hình thức: họp nhóm. Thư ký: Thà
 | CR-45 | 03/11/2026 | Bỏ giai đoạn "Các rủi ro của dự án"; bắt đầu chuẩn hóa tài liệu. Cập nhật bảng phân công `Nhom_8_Phan_cong.xlsx` theo thực tế đã làm (bỏ IoT, giai đoạn V ghi theo 9 luồng F0 → F8, thêm thiết kế kiến trúc & API, kiểm thử hệ thống, HDSD, diễn tập demo; sửa tiêu đề cột G/H bị đảo, ngày dạng dd/mm/yyyy). **Kết thúc dự án 16/11/2026**, dàn đều các giai đoạn từ 21/09 (D41; chốt P11) | Rút ngắn thời gian, kế hoạch phải khớp sản phẩm thực tế | `Nhom_8_Phan_cong.xlsx`, `Project_Plan.md`, README thiết kế (D41, P11), IV.3 Mục 3, CLAUDE.md, README gốc; cả nhóm | A |
 | CR-46 | 04/11/2026 | Chuẩn hóa tài liệu (VIII.1): đồng bộ tài liệu II–VII với mã nguồn và kế hoạch D41 – ngày thực hiện ở đầu các tài liệu II.1–IV.3 theo kế hoạch; III.1 ghi luồng code F0–F8 thay cho "module V.1–V.3", Quản trị viên không dùng màn hình Bar, tự hủy đơn 15 phút chưa cài (D22); IV.2 bỏ phần Figma, thêm bảng đối chiếu wireframe ↔ giao diện thật; IV.3 thêm bảng thông tin + `/api/health`; III.2 sửa danh sách module, script sao lưu; biên bản kiểm thử F0–F8 ghi D lập, A duyệt; HDSD bổ sung bước chọn phương thức thanh toán | Tài liệu phải khớp sản phẩm và kế hoạch trước khi xuất .docx | README thiết kế, II.1, II.2, III.1, III.2, IV.1, IV.2, IV.3; biên bản kiểm thử F0–F8; HDSD; A, D | A |
 | CR-47 | 04/11/2026 | Chốt mẫu tài liệu nộp (VIII.2): bản Word sinh tự động từ Markdown theo định dạng mẫu báo cáo môn học, bìa dùng `Mẫu bìa.docx` (thông tin bìa điền 1 lần ở `thong_tin_bia.json`), gom thành 5 bộ hồ sơ (D42). Phát hiện mẫu báo cáo tổng kết cần phần chi phí, giám sát, rủi ro → mở P25 | Nhóm không có mẫu riêng cho tài liệu thiết kế; giữ một nguồn nội dung, tránh sửa tay 2 nơi | README thiết kế (D42, P25); `1.Bao_cao/Xuat_docx/` (công cụ + 6 tệp .docx); D, A | A |
+| CR-48 | 04/11/2026 | Chốt P25: Phần IV (chi phí), Phần VII (giám sát, theo dõi), Phần VIII (rủi ro) của mẫu báo cáo môn học được viết ngay trong báo cáo tổng kết, không thêm hạng mục kế hoạch (D43) | Mẫu báo cáo tổng kết bắt buộc 10 phần; giữ kế hoạch gọn | README thiết kế (D43, P25); báo cáo tổng kết (IX); A | A |
+| CR-49 | 04/11/2026 | Chốt cách lập dự toán chi phí: công lao động (bán thời gian, theo bảng phân công + review + họp) × đơn giá giả định PM 800.000đ, thành viên khác 600.000đ / ngày công; hạ tầng 0đ; dự phòng 10% → tổng 63,03 triệu đồng (D44). Viết hoàn chỉnh báo cáo tổng kết theo mẫu 10 phần của môn học, giữ ngày lập 10/11/2026 theo kế hoạch | Dự án không có chi phí thật; cần số liệu để trình bày quản lý chi phí | README thiết kế (D44); `1.Bao_cao/Bao_cao_tong_ket.md`; xuất Word; A | A |
 
 ## 4. HÌNH ẢNH / VIDEOS
 (Bổ sung ảnh chụp buổi họp nếu có.)
@@ -66,7 +68,9 @@ Tuần 07 (02/11/2026 – 08/11/2026). Hình thức: họp nhóm. Thư ký: Thà
 - Thông qua CR-45: bỏ giai đoạn rủi ro, kết thúc dự án 16/11/2026, kế hoạch dàn đều 21/09 → 16/11 (D41).
 - Thông qua CR-46: tài liệu II–VII đã đồng bộ với mã nguồn và kế hoạch D41.
 - Thông qua CR-47: mẫu tài liệu nộp và 5 bộ hồ sơ Word (D42).
-- Vấn đề còn mở: P25 (phần chi phí, giám sát, rủi ro trong báo cáo tổng kết).
+- Thông qua CR-48: viết phần chi phí, giám sát, rủi ro ngay trong báo cáo tổng kết (D43).
+- Thông qua CR-49: dự toán chi phí theo công × đơn giá giả định (D44); hoàn thiện báo cáo tổng kết, ngày lập 10/11/2026.
+- Không còn vấn đề mở trong bảng Vấn đề mở.
 
 **Việc cần làm:**
 | Việc | Người phụ trách | Hạn |
@@ -95,7 +99,8 @@ Tuần 07 (02/11/2026 – 08/11/2026). Hình thức: họp nhóm. Thư ký: Thà
 | Chuẩn hóa tài liệu II–VII theo mã nguồn – đã xong (CR-46) | A, D | 04/11/2026 |
 | Xuất tài liệu Markdown sang .docx theo mẫu – đã có công cụ + bản đầu (CR-47); xuất lại sau khi điền thông tin bìa | D | 09/11/2026 |
 | Điền thông tin bìa (khoa, bộ môn, giảng viên, lớp, họ tên + mã SV) vào `thong_tin_bia.json` | A | 06/11/2026 |
-| Chốt P25 (chi phí, giám sát, rủi ro trong báo cáo tổng kết) | A | 09/11/2026 |
+| Chốt P25 (chi phí, giám sát, rủi ro trong báo cáo tổng kết) – đã xong (CR-48) | A | 04/11/2026 |
+| Cả nhóm review báo cáo tổng kết (bản đầy đủ), bổ sung ảnh buổi họp | Cả nhóm | 12/11/2026 |
 | Báo cáo tổng kết (10–12/11), slide (12–14/11), diễn tập demo (14–15/11), biên bản nghiệm thu (16/11) | A, E, D | 16/11/2026 |
 | Sao lưu CSDL bằng `scripts/backup_db.ps1` trước mỗi buổi demo (NFR-R5) | D | Trước mỗi buổi demo |
 | Review công thức + trọng số gợi ý, tinh chỉnh theo kết quả Hit Rate@5 (biên bản F7 Mục 4.7) | C | 10/11/2026 |

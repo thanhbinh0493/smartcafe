@@ -4,6 +4,7 @@ Bản gốc của mọi tài liệu là các tệp Markdown trong kho. Thư mụ
 
 | Tệp | Nội dung | Nguồn |
 |:---|:---|:---|
+| `Nhom_8_Bao_cao_tong_ket.docx` | Báo cáo tổng kết 10 phần theo mẫu môn học (ngày lập 10/11/2026) – `--chi 0` | `1.Bao_cao/Bao_cao_tong_ket.md` |
 | `SmartCafe_1_Phan_tich_Thiet_ke.docx` | Tài liệu phân tích & thiết kế: II.1 → IV.3, Phụ lục A (quyết định D…, vấn đề mở P…), Phụ lục B (`schema.sql`) | `1.Bao_cao/Thiet_ke_he_thong/` |
 | `SmartCafe_2_Ho_so_kiem_thu.docx` | Quy ước kiểm thử, kế hoạch kiểm thử hệ thống, biên bản F0 → F8 và kiểm thử hệ thống | `1.Bao_cao/Kiem_thu/` |
 | `SmartCafe_3_Huong_dan_su_dung.docx` | Hướng dẫn sử dụng (33 ảnh) | `1.Bao_cao/Huong_dan_su_dung/` |

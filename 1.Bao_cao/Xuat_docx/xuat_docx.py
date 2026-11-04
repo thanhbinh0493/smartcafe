@@ -52,6 +52,13 @@ if hasattr(sys.stdout, "reconfigure"):
 # ---------------------------------------------------------------- bộ hồ sơ
 BO = [
     {
+        "so": 0, "file": "Nhom_8_Bao_cao_tong_ket", "tieu_de": "BÁO CÁO TỔNG KẾT DỰ ÁN",
+        "nguoi": "Thành viên A – Nguyễn Thanh Bình (PM) lập; cả nhóm review",
+        "ngay": "10/11/2026",
+        "lich_su": "Bản đầy đủ 10 phần theo mẫu báo cáo môn học (CR-48, CR-49) | Thành viên A",
+        "phan": [(BC / "Bao_cao_tong_ket.md", {"bat_dau_tu": "# PHẦN I"})],
+    },
+    {
         "so": 1, "file": "SmartCafe_1_Phan_tich_Thiet_ke", "tieu_de": "TÀI LIỆU PHÂN TÍCH VÀ THIẾT KẾ HỆ THỐNG",
         "nguoi": "Thành viên A (PM), B (Backend), C (AI), D (Tester / QA), E (Frontend) – người thực hiện từng chương ghi ở đầu chương",
         "phan": [(TK / "II.1_Khao_sat_quy_trinh.md", {}), (TK / "II.2_Nghien_cuu_cong_nghe.md", {}),
@@ -99,6 +106,8 @@ def chuan_bi(p: Path, opt: dict) -> str:
     # bỏ mục "Mục lục" viết tay (đã có mục lục tự động)
     s = re.sub(r"\n## Mục lục\n.*?(?=\n---\n|\n## )", "\n", s, flags=re.S)
     s = re.sub(r"\n---\n", "\n", s)
+    if opt.get("bat_dau_tu"):                     # bỏ phần đầu tệp (tiêu đề + bảng thông tin) – đã có trang thông tin tài liệu
+        s = s[s.index(opt["bat_dau_tu"]):]
     if opt.get("tieu_de"):
         s = re.sub(r"^# .*$", opt["tieu_de"], s, count=1, flags=re.M)
     if opt.get("nang_cap"):                       # HDSD: tiêu đề H1 là tên tài liệu → bỏ; "##" thành chương
@@ -143,16 +152,17 @@ def phu_luc_schema() -> str:
 
 
 def trang_dau(bo: dict, ds: list[str]) -> str:
+    ngay = bo.get("ngay", f"{date.today():%d/%m/%Y}")
     rows = [("Dự án", "SmartCafe – Phần mềm quản lý chuỗi quán cà phê thông minh (tích hợp AI và QR)"),
-            ("Tài liệu", bo["tieu_de"].capitalize() if False else bo["tieu_de"]),
-            ("Phiên bản", f"{PHIEN_BAN} – xuất ngày {date.today():%d/%m/%Y}"),
+            ("Tài liệu", bo["tieu_de"]),
+            ("Phiên bản", f"{PHIEN_BAN} – ngày {ngay}"),
             ("Người lập / duyệt", bo["nguoi"]),
             ("Nội dung gồm", "; ".join(ds)),
             ("Bản gốc", "Các tệp Markdown trong kho mã nguồn của nhóm (thư mục 1.Bao_cao); tài liệu này sinh tự động bằng 1.Bao_cao/Xuat_docx/xuat_docx.py")]
     t = "| Mục | Nội dung |\n|:---|:---|\n" + "\n".join(f"| {a} | {b} |" for a, b in rows)
     lich_su = ("| Phiên bản | Ngày | Nội dung | Người thực hiện |\n|:---|:---|:---|:---|\n"
-               f"| 1.0 | {date.today():%d/%m/%Y} | Bản chuẩn hóa đầu tiên sau khi hoàn thành F0 → F8, kiểm thử hệ thống "
-               "và hướng dẫn sử dụng (CR-46, CR-47) | Thành viên A, D |")
+               f"| 1.0 | {ngay} | " + bo.get("lich_su", "Bản chuẩn hóa đầu tiên sau khi hoàn thành F0 → F8, kiểm thử hệ thống "
+                                              "và hướng dẫn sử dụng (CR-46, CR-47) | Thành viên A, D") + " |")
     return ("%%TRANG_BIA%%\n\n**THÔNG TIN TÀI LIỆU**\n\n" + t + "\n\n**LỊCH SỬ PHIÊN BẢN**\n\n" + lich_su
             + "\n\n%%NGAT_TRANG%%\n\n**MỤC LỤC**\n\n%%MUC_LUC%%\n\n")
 
@@ -315,7 +325,8 @@ def format_table(table, text_width_cm: float) -> None:
                 pf.first_line_indent = None
                 if r == 0:
                     pf.keep_with_next = True          # hàng tiêu đề không nằm lẻ cuối trang
-                p.alignment = WD_ALIGN_PARAGRAPH.LEFT
+                if p.alignment not in (WD_ALIGN_PARAGRAPH.RIGHT, WD_ALIGN_PARAGRAPH.CENTER):   # giữ cột số căn phải
+                    p.alignment = WD_ALIGN_PARAGRAPH.LEFT
                 for run in p.runs:
                     run.font.size = Pt(size)
                     if r == 0:
@@ -686,10 +697,10 @@ def xuat_bien_ban(p: Path, tmp: Path, pdf_dir: Path | None) -> None:
 
 def main() -> None:
     ap = argparse.ArgumentParser()
-    ap.add_argument("--chi", help="chỉ xuất các bộ số (VD 1,3; 5 = biên bản họp)")
+    ap.add_argument("--chi", help="chỉ xuất các bộ số (VD 1,3; 0 = báo cáo tổng kết; 5 = biên bản họp)")
     ap.add_argument("--pdf", help="thư mục ghi thêm bản PDF để xem nhanh")
     a = ap.parse_args()
-    chon = {int(x) for x in a.chi.split(",")} if a.chi else {1, 2, 3, 4, 5}
+    chon = {int(x) for x in a.chi.split(",")} if a.chi else {0, 1, 2, 3, 4, 5}
     cfg = json.load(io.open(HERE / "thong_tin_bia.json", encoding="utf-8"))
     pdf_dir = Path(a.pdf).resolve() if a.pdf else None
     if pdf_dir:
