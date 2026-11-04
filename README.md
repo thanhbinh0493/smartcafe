@@ -28,7 +28,8 @@ Thời gian thực hiện: 21/09/2026 → 16/11/2026 (D41). Nhân sự: A (PM, B
 | └ F8 Báo cáo ngày & dashboard bán hàng | ✔ Xong, đã kiểm thử – Đạt |
 | Kiểm thử hệ thống (VI) – kịch bản xuyên luồng + toàn bộ yêu cầu phi chức năng | ✔ Xong, Đạt (66/66) – [biên bản](1.Bao_cao/Kiem_thu/Bien_ban_kiem_thu_He_thong.md) |
 | Hướng dẫn sử dụng (VII) – cho khách, pha chế, thu ngân, quản lý, quản trị viên | **Bản 1.0 chờ review** – [Huong_dan_su_dung.md](1.Bao_cao/Huong_dan_su_dung/Huong_dan_su_dung.md) |
-| Rủi ro, chuẩn hóa tài liệu, báo cáo tổng kết, slide, nghiệm thu (VIII–XII) | Chưa làm |
+| Chuẩn hóa tài liệu (VIII) – đồng bộ với mã nguồn, xuất 5 bộ hồ sơ Word | **Đang làm** – [1.Bao_cao/Xuat_docx/](1.Bao_cao/Xuat_docx/README.md) |
+| Báo cáo tổng kết, slide, diễn tập demo, nghiệm thu (IX–XI) | Chưa làm |
 
 Tiến độ chi tiết từng luồng: [2.San_pham/smartcafe/README.md](2.San_pham/smartcafe/README.md#tiến-độ-theo-luồng-d26--nơi-theo-dõi-chính).
 

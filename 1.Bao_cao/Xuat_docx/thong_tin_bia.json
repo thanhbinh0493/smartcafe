@@ -1,0 +1,18 @@
+{
+  "_huong_dan": "Điền các ô [ ... ] một lần rồi chạy lại xuat_docx.py – mọi trang bìa tự cập nhật.",
+  "khoa": "KHOA [ĐIỀN TÊN KHOA]",
+  "bo_mon": "BỘ MÔN [ĐIỀN TÊN BỘ MÔN]",
+  "mon_hoc": "QUẢN LÝ DỰ ÁN PHẦN MỀM",
+  "de_tai": "SmartCafe – Phần mềm quản lý chuỗi quán cà phê thông minh (tích hợp AI và QR)",
+  "giang_vien": "[ĐIỀN TÊN GIẢNG VIÊN]",
+  "lop": "[ĐIỀN LỚP]",
+  "nhom": "08",
+  "thanh_vien": [
+    {"ho_ten": "Nguyễn Thanh Bình", "ma_sv": "[mã SV]", "vai_tro": "A – PM / Team Lead"},
+    {"ho_ten": "[Thành viên B]", "ma_sv": "[mã SV]", "vai_tro": "B – Backend"},
+    {"ho_ten": "[Thành viên C]", "ma_sv": "[mã SV]", "vai_tro": "C – AI"},
+    {"ho_ten": "[Thành viên D]", "ma_sv": "[mã SV]", "vai_tro": "D – Tester / QA"},
+    {"ho_ten": "[Thành viên E]", "ma_sv": "[mã SV]", "vai_tro": "E – Frontend"}
+  ],
+  "noi_nam": "Hà Nội – 2026"
+}

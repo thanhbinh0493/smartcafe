@@ -36,6 +36,7 @@ Tuần 07 (02/11/2026 – 08/11/2026). Hình thức: họp nhóm. Thư ký: Thà
 | CR-44 | 03/11/2026 | Duyệt kết quả giai đoạn VI – Kiểm thử hệ thống (66/66 đạt, hồi quy 664/664), gộp vào `main` (local). Chốt P12: **chỉ demo trên laptop, không làm bản dự phòng trên cloud** (D40). Bắt đầu giai đoạn VII – viết Hướng dẫn sử dụng có ảnh chụp màn hình cho từng vai trò; chụp xong thì dừng môi trường demo | Giai đoạn VI đạt điều kiện; giảm việc không cần thiết, dự phòng bằng sao lưu CSDL (NFR-R5) | README thiết kế (D40, P12); biên bản + kế hoạch kiểm thử hệ thống; `1.Bao_cao/Huong_dan_su_dung/`; `system_test/chup_anh_hdsd.py`; README gốc, README mã nguồn; D, A | A |
 | CR-45 | 03/11/2026 | Bỏ giai đoạn "Các rủi ro của dự án"; bắt đầu chuẩn hóa tài liệu. Cập nhật bảng phân công `Nhom_8_Phan_cong.xlsx` theo thực tế đã làm (bỏ IoT, giai đoạn V ghi theo 9 luồng F0 → F8, thêm thiết kế kiến trúc & API, kiểm thử hệ thống, HDSD, diễn tập demo; sửa tiêu đề cột G/H bị đảo, ngày dạng dd/mm/yyyy). **Kết thúc dự án 16/11/2026**, dàn đều các giai đoạn từ 21/09 (D41; chốt P11) | Rút ngắn thời gian, kế hoạch phải khớp sản phẩm thực tế | `Nhom_8_Phan_cong.xlsx`, `Project_Plan.md`, README thiết kế (D41, P11), IV.3 Mục 3, CLAUDE.md, README gốc; cả nhóm | A |
 | CR-46 | 04/11/2026 | Chuẩn hóa tài liệu (VIII.1): đồng bộ tài liệu II–VII với mã nguồn và kế hoạch D41 – ngày thực hiện ở đầu các tài liệu II.1–IV.3 theo kế hoạch; III.1 ghi luồng code F0–F8 thay cho "module V.1–V.3", Quản trị viên không dùng màn hình Bar, tự hủy đơn 15 phút chưa cài (D22); IV.2 bỏ phần Figma, thêm bảng đối chiếu wireframe ↔ giao diện thật; IV.3 thêm bảng thông tin + `/api/health`; III.2 sửa danh sách module, script sao lưu; biên bản kiểm thử F0–F8 ghi D lập, A duyệt; HDSD bổ sung bước chọn phương thức thanh toán | Tài liệu phải khớp sản phẩm và kế hoạch trước khi xuất .docx | README thiết kế, II.1, II.2, III.1, III.2, IV.1, IV.2, IV.3; biên bản kiểm thử F0–F8; HDSD; A, D | A |
+| CR-47 | 04/11/2026 | Chốt mẫu tài liệu nộp (VIII.2): bản Word sinh tự động từ Markdown theo định dạng mẫu báo cáo môn học, bìa dùng `Mẫu bìa.docx` (thông tin bìa điền 1 lần ở `thong_tin_bia.json`), gom thành 5 bộ hồ sơ (D42). Phát hiện mẫu báo cáo tổng kết cần phần chi phí, giám sát, rủi ro → mở P25 | Nhóm không có mẫu riêng cho tài liệu thiết kế; giữ một nguồn nội dung, tránh sửa tay 2 nơi | README thiết kế (D42, P25); `1.Bao_cao/Xuat_docx/` (công cụ + 6 tệp .docx); D, A | A |
 
 ## 4. HÌNH ẢNH / VIDEOS
 (Bổ sung ảnh chụp buổi họp nếu có.)
@@ -64,7 +65,8 @@ Tuần 07 (02/11/2026 – 08/11/2026). Hình thức: họp nhóm. Thư ký: Thà
 - Thông qua CR-44: giai đoạn VI được duyệt, gộp vào `main`; chỉ demo trên laptop, không làm cloud (D40); bắt đầu giai đoạn VII – Hướng dẫn sử dụng.
 - Thông qua CR-45: bỏ giai đoạn rủi ro, kết thúc dự án 16/11/2026, kế hoạch dàn đều 21/09 → 16/11 (D41).
 - Thông qua CR-46: tài liệu II–VII đã đồng bộ với mã nguồn và kế hoạch D41.
-- Không còn vấn đề mở trong bảng Vấn đề mở.
+- Thông qua CR-47: mẫu tài liệu nộp và 5 bộ hồ sơ Word (D42).
+- Vấn đề còn mở: P25 (phần chi phí, giám sát, rủi ro trong báo cáo tổng kết).
 
 **Việc cần làm:**
 | Việc | Người phụ trách | Hạn |
@@ -91,7 +93,9 @@ Tuần 07 (02/11/2026 – 08/11/2026). Hình thức: họp nhóm. Thư ký: Thà
 | Viết Hướng dẫn sử dụng (giai đoạn VII) kèm ảnh chụp màn hình | D | 03/11/2026 |
 | Review Hướng dẫn sử dụng, thử lại các bước trên máy demo | A, cả nhóm | 05/11/2026 |
 | Chuẩn hóa tài liệu II–VII theo mã nguồn – đã xong (CR-46) | A, D | 04/11/2026 |
-| Xuất tài liệu Markdown sang .docx theo mẫu | D | 09/11/2026 |
+| Xuất tài liệu Markdown sang .docx theo mẫu – đã có công cụ + bản đầu (CR-47); xuất lại sau khi điền thông tin bìa | D | 09/11/2026 |
+| Điền thông tin bìa (khoa, bộ môn, giảng viên, lớp, họ tên + mã SV) vào `thong_tin_bia.json` | A | 06/11/2026 |
+| Chốt P25 (chi phí, giám sát, rủi ro trong báo cáo tổng kết) | A | 09/11/2026 |
 | Báo cáo tổng kết (10–12/11), slide (12–14/11), diễn tập demo (14–15/11), biên bản nghiệm thu (16/11) | A, E, D | 16/11/2026 |
 | Sao lưu CSDL bằng `scripts/backup_db.ps1` trước mỗi buổi demo (NFR-R5) | D | Trước mỗi buổi demo |
 | Review công thức + trọng số gợi ý, tinh chỉnh theo kết quả Hit Rate@5 (biên bản F7 Mục 4.7) | C | 10/11/2026 |
