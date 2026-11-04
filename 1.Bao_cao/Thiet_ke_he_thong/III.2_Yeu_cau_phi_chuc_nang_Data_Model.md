@@ -4,8 +4,8 @@
 |:---|:---|
 | Người thực hiện | Thành viên D |
 | Người review | Thành viên C |
-| Thời gian | 08/10/2026 – 11/10/2026 (review 12/10/2026) |
-| Cập nhật | 01/11/2026 – bỏ IoT; thêm OTP, tích điểm, khuyến mãi (CR-09 → CR-14) |
+| Thời gian | 05/10/2026 – 08/10/2026 (review 09/10/2026) |
+| Cập nhật | 01/11/2026 – bỏ IoT; thêm OTP, tích điểm, khuyến mãi (CR-09 → CR-14); 03/11/2026 – mô hình tải NFR-P2/P3 (D39); 04/11/2026 – rà soát, đồng bộ với mã nguồn và kế hoạch D41 (CR-46) |
 
 ## 1. Yêu cầu phi chức năng (Non-functional Requirements)
 
@@ -39,7 +39,7 @@ Mỗi yêu cầu có **cách kiểm chứng** để Thành viên D đưa vào Te
 | NFR-R2 | Màn hình Bar mất kết nối WebSocket thì hiện cảnh báo "Mất kết nối" và tự tải lại hàng đợi qua REST mỗi 10 giây cho đến khi kết nối lại |
 | NFR-R3 | Client WebSocket tự kết nối lại và đồng bộ trạng thái qua REST |
 | NFR-R4 | Đổi trạng thái đơn và cộng điểm chạy trong **cùng transaction**. Thao tác lặp (bấm "Xong" 2 lần, gọi "Đã giao" 2 lần) không làm sai trạng thái và **không cộng điểm 2 lần** (ràng buộc UNIQUE `loyalty_transactions.order_id`) |
-| NFR-R5 | Có script backup CSDL (`pg_dump`) trước mỗi buổi demo |
+| NFR-R5 | Có script backup CSDL (`pg_dump`) trước mỗi buổi demo – `scripts/backup_db.ps1`, khôi phục bằng `scripts/restore_db.ps1` |
 
 ### 1.4. Khả năng sử dụng (Usability)
 | Mã | Yêu cầu |
@@ -52,7 +52,7 @@ Mỗi yêu cầu có **cách kiểm chứng** để Thành viên D đưa vào Te
 ### 1.5. Bảo trì và mở rộng (Maintainability)
 | Mã | Yêu cầu |
 |:---|:---|
-| NFR-M1 | Backend chia module theo nghiệp vụ (auth, customer, menu, branch, promotion, order, payment, recommend). Có tài liệu API tự sinh bằng Swagger tại `/docs` |
+| NFR-M1 | Backend chia module theo nghiệp vụ (auth, customer, menu, branch, order, payment, bar, support, admin – gồm khuyến mãi, recommend, report). Có tài liệu API tự sinh bằng Swagger tại `/docs` |
 | NFR-M2 | Migration CSDL bằng **Alembic**, không sửa schema bằng tay |
 | NFR-M3 | Unit test cho service Order và Recommend đạt độ bao phủ ≥ **60%** (pytest) |
 | NFR-M4 | Payment và SMS dùng interface để có thể thay cổng thanh toán / dịch vụ SMS thật mà không sửa logic nghiệp vụ |

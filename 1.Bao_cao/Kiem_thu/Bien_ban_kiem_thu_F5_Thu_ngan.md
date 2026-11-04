@@ -7,8 +7,8 @@
 | Luồng | **F5 – Thu ngân hỗ trợ khách**: UC20 (tra cứu đơn, hủy đơn & hoàn tiền giả lập) – sơ đồ SD06 (phần hủy đơn), biểu đồ trạng thái đơn (PAID / PREPARING → CANCELLED) |
 | Phiên bản | 0.5.0 – nhánh `feature/f5-thu-ngan` (tách từ `main` sau khi gộp F4, CR-35), mã nguồn `2.San_pham/smartcafe/` |
 | Ngày kiểm thử | 03/11/2026 |
-| Người lập biên bản | Thành viên A (PM) |
-| Người review | Thành viên D (Tester/QA) – *chờ review* |
+| Người lập biên bản | Thành viên D (Tester / QA) |
+| Người duyệt | Thành viên A (PM) – đã duyệt 03/11/2026 (CR-36) |
 | Tài liệu căn cứ | [III.1 UC20, ma trận RBAC, UC06 (đơn bị hủy)](../Thiet_ke_he_thong/III.1_Use_Case_Sequence.md), SD06, [III.2 quy tắc 6 (1 thanh toán / đơn)](../Thiet_ke_he_thong/III.2_Yeu_cau_phi_chuc_nang_Data_Model.md), [IV.2 W04](../Thiet_ke_he_thong/IV.2_Thiet_ke_giao_dien.md), [IV.3 API + WebSocket](../Thiet_ke_he_thong/IV.3_Kien_truc_va_API.md), [IV.1 bảng orders, payments, order_status_history](../Thiet_ke_he_thong/IV.1_Thiet_ke_CSDL.md); quyết định D5, D11, D19 |
 | Tiền đề | F0 → F4 đạt ([F3](Bien_ban_kiem_thu_F3_Man_hinh_Bar.md), [F4](Bien_ban_kiem_thu_F4_OTP_Tich_diem.md)) |
 
@@ -154,5 +154,5 @@ Log: [logs/F5_e2e_trinh_duyet.txt](logs/F5_e2e_trinh_duyet.txt). Ảnh chụp:
 
 | Vai trò | Họ tên | Ngày | Ký xác nhận |
 |:---|:---|:---|:---|
-| Người lập | Thành viên A | 03/11/2026 | |
-| Tester/QA review | Thành viên D | | |
+| Người lập (Tester / QA) | Thành viên D | 03/11/2026 | |
+| PM duyệt | Thành viên A | 03/11/2026 | |

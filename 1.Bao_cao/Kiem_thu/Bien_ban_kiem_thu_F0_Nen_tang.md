@@ -7,8 +7,8 @@
 | Luồng | **F0 – Nền tảng**: hạ tầng Docker Compose, CSDL 18 bảng (Alembic), dữ liệu mẫu, đăng nhập nhân viên, phân quyền RBAC, định dạng lỗi |
 | Phiên bản | 0.1.0 (bản build 02/11/2026) – mã nguồn `2.San_pham/smartcafe/` |
 | Ngày kiểm thử | 02/11/2026 |
-| Người lập biên bản | Thành viên A (PM) |
-| Người review | Thành viên D (Tester/QA) – *chờ review* |
+| Người lập biên bản | Thành viên D (Tester / QA) |
+| Người duyệt | Thành viên A (PM) – đã duyệt 02/11/2026 (trước khi bắt đầu F2) |
 | Tài liệu căn cứ | [IV.1 Thiết kế CSDL](../Thiet_ke_he_thong/IV.1_Thiet_ke_CSDL.md), [IV.3 Kiến trúc & API](../Thiet_ke_he_thong/IV.3_Kien_truc_va_API.md), [III.1 Use case + ma trận RBAC](../Thiet_ke_he_thong/III.1_Use_Case_Sequence.md), [III.2 NFR](../Thiet_ke_he_thong/III.2_Yeu_cau_phi_chuc_nang_Data_Model.md) |
 
 ## 2. Phạm vi
@@ -155,5 +155,5 @@ cd backend;  .\.venv\Scripts\python -m scripts.smoke_test --qr-token <token>
 
 | Vai trò | Họ tên | Ngày | Ký xác nhận |
 |:---|:---|:---|:---|
-| Người lập | Thành viên A | 02/11/2026 | |
-| Tester/QA review | Thành viên D | | |
+| Người lập (Tester / QA) | Thành viên D | 02/11/2026 | |
+| PM duyệt | Thành viên A | 02/11/2026 | |

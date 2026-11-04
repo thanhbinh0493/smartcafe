@@ -98,7 +98,8 @@ Bấm **Giỏ hàng (n)** ở cuối trang.
 - Tăng / giảm số lượng bằng **+ / −**. Mỗi món tối đa 20 ly trong một đơn.
 - Gõ **ghi chú** cho từng món (VD "Ít đá") và ghi chú cho cả đơn.
 - Khối **"Thường gọi kèm"** gợi ý các món khách khác hay gọi cùng món đang có trong giỏ.
-- Bấm **Thanh toán & gửi đơn** để thanh toán giả lập và gửi đơn tới quầy Bar.
+- Chọn **phương thức thanh toán** (giả lập): **Ví điện tử** (mặc định) hoặc **Thẻ ngân hàng**.
+- Bấm **Thanh toán & gửi đơn**: màn hình hiện "Đang xử lý thanh toán..." khoảng 1,5 giây, rồi đơn được gửi tới quầy Bar.
 
 ![Giỏ hàng](img/K04_gio_hang.png)
 

@@ -1,8 +1,13 @@
 # IV.3. KIẾN TRÚC HỆ THỐNG VÀ DANH SÁCH API (bổ sung)
 
-> Mục này không có trong bảng phân công gốc. Nó được bổ sung để làm đầu vào trực tiếp cho giai đoạn V (Lập trình): Thành viên B làm API, Thành viên E gọi API, Thành viên C làm AI. Đề xuất người review: Thành viên A.
->
-> Cập nhật 01/11/2026: bỏ IoT Gateway; thêm OTP, tích điểm, khuyến mãi, API hàng đợi Bar (CR-09 → CR-14).
+| Thông tin | Nội dung |
+|:---|:---|
+| Người thực hiện | Thành viên B |
+| Người review | Thành viên A (PM) |
+| Thời gian | 15/10/2026 – 18/10/2026 (review 19/10/2026) |
+| Cập nhật | 01/11/2026 – bỏ IoT Gateway; thêm OTP, tích điểm, khuyến mãi, API hàng đợi Bar (CR-09 → CR-14); 04/11/2026 – rà soát, đồng bộ với mã nguồn và kế hoạch D41 (CR-46) – danh sách API khớp 50/50 endpoint của mã nguồn |
+
+Đầu vào trực tiếp cho giai đoạn V (Lập trình): Thành viên B làm API, Thành viên E gọi API, Thành viên C làm AI.
 
 ## 1. Kiến trúc tổng thể
 
@@ -46,6 +51,7 @@ Tiền tố: `/api/public/*` dùng cho khách (một số endpoint nhận thêm 
 ### 2.1. Khách hàng (public)
 | Method | Endpoint | Mô tả | UC |
 |:---|:---|:---|:---|
+| GET | `/api/health` | Kiểm tra backend còn sống `{status: "ok"}` (Nginx, kiểm thử khói) | – |
 | GET | `/api/public/tables/{qr_token}` | Lấy chi nhánh và bàn từ mã QR | UC01 |
 | POST | `/api/public/otp/request` | `{phone}` (chấp nhận dấu cách, chấm, +84): gửi OTP giả lập, trả `{expires_in, resend_after, phone_masked, demo_code?}`. SĐT sai → 422 `VALIDATION_ERROR`; gửi lại trước 60 giây / quá 5 mã một giờ → 429 `OTP_RATE_LIMITED` kèm `retry_after` (giây) | UC02 |
 | POST | `/api/public/otp/verify` | `{phone, code}`: trả `{customer_token, expires_at, phone_masked, loyalty_points}`. Sai → 400 `OTP_INVALID`, `details = {reason: WRONG \| LOCKED \| EXPIRED \| NOT_FOUND, attempts_left}` | UC02 |

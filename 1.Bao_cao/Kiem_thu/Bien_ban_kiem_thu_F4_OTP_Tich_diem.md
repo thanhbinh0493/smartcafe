@@ -7,8 +7,8 @@
 | Luồng | **F4 – OTP & tích điểm**: UC02 (xác thực SĐT bằng OTP giả lập), UC07 (xem điểm), phần thành viên của UC05/UC06 (đặt món gắn khách, điểm sẽ nhận / đã cộng) – sơ đồ SD01 |
 | Phiên bản | 0.4.0 – nhánh `feature/f4-otp-tich-diem` (tách từ `main` sau khi gộp F2 + F3, CR-34), mã nguồn `2.San_pham/smartcafe/` |
 | Ngày kiểm thử | 03/11/2026 |
-| Người lập biên bản | Thành viên A (PM) |
-| Người review | Thành viên D (Tester/QA) – *chờ review* |
+| Người lập biên bản | Thành viên D (Tester / QA) |
+| Người duyệt | Thành viên A (PM) – đã duyệt 03/11/2026 (CR-35) |
 | Tài liệu căn cứ | [III.1 UC01 (quy tắc), UC02, UC05, UC06, UC07](../Thiet_ke_he_thong/III.1_Use_Case_Sequence.md), SD01, [III.2 NFR-S2, NFR-S4, NFR-S7, NFR-R4](../Thiet_ke_he_thong/III.2_Yeu_cau_phi_chuc_nang_Data_Model.md), [IV.2 W00a, W01, W02](../Thiet_ke_he_thong/IV.2_Thiet_ke_giao_dien.md), [IV.3 API](../Thiet_ke_he_thong/IV.3_Kien_truc_va_API.md), [IV.1 bảng customers, otp_requests, loyalty_transactions](../Thiet_ke_he_thong/IV.1_Thiet_ke_CSDL.md); quyết định D4, D9, D11, D12, D15, D18 |
 | Tiền đề | F0 → F3 đạt ([F0](Bien_ban_kiem_thu_F0_Nen_tang.md), [F1](Bien_ban_kiem_thu_F1_QR_Menu.md), [F2](Bien_ban_kiem_thu_F2_Dat_mon_Thanh_toan.md), [F3](Bien_ban_kiem_thu_F3_Man_hinh_Bar.md)) |
 
@@ -184,5 +184,5 @@ Log: [logs/F4_e2e_trinh_duyet.txt](logs/F4_e2e_trinh_duyet.txt). Ảnh chụp:
 
 | Vai trò | Họ tên | Ngày | Ký xác nhận |
 |:---|:---|:---|:---|
-| Người lập | Thành viên A | 03/11/2026 | |
-| Tester/QA review | Thành viên D | | |
+| Người lập (Tester / QA) | Thành viên D | 03/11/2026 | |
+| PM duyệt | Thành viên A | 03/11/2026 | |

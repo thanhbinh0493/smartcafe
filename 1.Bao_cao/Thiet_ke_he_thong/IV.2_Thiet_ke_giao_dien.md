@@ -4,16 +4,16 @@
 |:---|:---|
 | Người thực hiện | Thành viên E |
 | Người review | Thành viên D |
-| Thời gian | 15/10/2026 – 20/10/2026 (review 22/10/2026) |
-| Cập nhật | 01/11/2026 – thêm W00, W00a, W07; vẽ lại W04 dạng hàng đợi; bỏ màn hình thiết bị IoT (CR-09 → CR-14) |
-| Công cụ | Wireframe low-fidelity bằng PlantUML Salt (trong tài liệu này). Bản hi-fi do Thành viên E dựng trên **Figma** dựa theo wireframe |
+| Thời gian | 12/10/2026 – 16/10/2026 (review 17/10/2026) |
+| Cập nhật | 01/11/2026 – thêm W00, W00a, W07; vẽ lại W04 dạng hàng đợi; bỏ màn hình thiết bị IoT (CR-09 → CR-14); 04/11/2026 – rà soát, đồng bộ với mã nguồn và kế hoạch D41 (CR-46) |
+| Công cụ | Wireframe low-fidelity bằng PlantUML Salt (trong tài liệu này). Không làm bản Figma: giao diện thật (React + Tailwind) dựng thẳng từ wireframe, ảnh chụp ở Mục 4 |
 
 ## 1. Nguyên tắc thiết kế
 - **QR Order (khách):** mobile-first, một tay thao tác được, nút chính cố định ở đáy màn hình. Luồng: Màn hình chào → (OTP) → Menu → Giỏ hàng/Thanh toán → Theo dõi.
 - **Web Admin:** bố cục sidebar trái và nội dung bên phải. Menu sidebar thay đổi theo vai trò (RBAC).
 - **Màn hình Bar:** chạy toàn màn hình trên tablet/TV. Bên trái là **bảng hàng đợi sắp theo giờ gọi**, bên phải là cột "Có thể lấy". Chữ lớn, có âm báo món mới.
 - **Màu trạng thái thống nhất:** Đang chờ = vàng, Đang pha = xanh dương, Có thể lấy = xanh lá, Đã hủy = đỏ, Hoàn tất = xám. Nhãn "Khuyến mãi" = cam, "Mới" = tím.
-- **Màu thương hiệu (gợi ý):** nâu cà phê `#6F4E37` làm màu chính, kem `#FDF6EC` làm nền.
+- **Màu thương hiệu:** nâu cà phê `#6F4E37` làm màu chính, kem `#FDF6EC` làm nền. Font hệ thống (`system-ui`, Segoe UI / Roboto) – hiển thị tiếng Việt tốt, không phải tải font.
 
 ## 2. Sơ đồ màn hình (Sitemap)
 
@@ -103,8 +103,19 @@ Sau khi đăng nhập, màn hình mặc định theo vai trò: ADMIN → W08, MA
 - Thẻ chỉ số của ngày gần nhất kèm % thay đổi so với ngày trước; biểu đồ đường doanh thu theo ngày (mỗi chi nhánh 1 đường); bảng so sánh chi nhánh; top 5 món.
 - Thư viện biểu đồ: Recharts (React). Màu mỗi chi nhánh cố định; mũi tên thay đổi xanh = tốt hơn, đỏ = xấu hơn (thời gian chờ giảm là tốt). Quản trị viên có nút "Tính lại hôm qua".
 
-## 4. Hướng dẫn chuyển sang Figma (cho Thành viên E)
-1. Frame mobile 390×844 (iPhone 14) cho W00–W03. Frame desktop 1440×900 cho Web Admin. Màn hình Bar dùng 1280×800 (tablet ngang).
-2. Tạo component dùng chung: Button (primary/secondary/danger), Badge trạng thái, Nhãn KM/Mới, Card món, Ô OTP, Dòng hàng đợi (Bar), Table, Modal.
-3. Dựng prototype click-through cho 2 luồng demo: (a) ẩn danh W00 → W01 → W02 → W03; (b) thành viên W00 → W00a → W01 → W02 → W03; và W04.
-4. Font **Be Vietnam Pro** (hỗ trợ tiếng Việt tốt, có sẵn trên Google Fonts).
+## 4. Giao diện đã cài đặt (đối chiếu với wireframe)
+Giao diện thật được dựng từ các wireframe trên (React + Tailwind CSS, mobile-first 360–430px cho QR Order, Web Admin cho laptop / tablet). Ảnh chụp đầy đủ và cách dùng: [Hướng dẫn sử dụng](../Huong_dan_su_dung/Huong_dan_su_dung.md).
+
+| Wireframe | Màn hình thật | Khác so với wireframe |
+|:---|:---|:---|
+| W00 Màn hình chào | [ảnh](../Huong_dan_su_dung/img/K01_man_hinh_chao.png) | – |
+| W00a SĐT + OTP | [SĐT](../Huong_dan_su_dung/img/K08_nhap_so_dien_thoai.png), [OTP](../Huong_dan_su_dung/img/K09_nhap_ma_otp.png) | – |
+| W01 Menu + gợi ý | [ẩn danh](../Huong_dan_su_dung/img/K02_menu_goi_y.png), [thành viên](../Huong_dan_su_dung/img/K10_menu_thanh_vien.png) | Lời chào thành viên không có tên (D31); bỏ popup W01a (D29) |
+| W02 Giỏ hàng | [ảnh](../Huong_dan_su_dung/img/K04_gio_hang.png), [thành viên](../Huong_dan_su_dung/img/K11_gio_hang_thanh_vien.png) | Chọn phương thức thanh toán giả lập (Ví điện tử / Thẻ ngân hàng) ngay trong giỏ |
+| W03 Theo dõi đơn | [đang chờ](../Huong_dan_su_dung/img/K05_theo_doi_don_dang_cho.png), [sẵn sàng](../Huong_dan_su_dung/img/K07_do_uong_san_sang.png), [đã hủy](../Huong_dan_su_dung/img/K13_don_da_huy_hoan_tien.png) | – |
+| W04 Màn hình Bar | [hàng đợi](../Huong_dan_su_dung/img/N02_bar_hang_doi.png), [Hoàn tác](../Huong_dan_su_dung/img/N04_bar_co_the_lay_hoan_tac.png), [thu ngân](../Huong_dan_su_dung/img/N05_thu_ngan_tra_cuu.png) | Chữ 18px, cảnh báo "Mất kết nối" (giai đoạn VI) |
+| W05 Quản lý món | [danh sách](../Huong_dan_su_dung/img/N16_mon.png), [thêm món](../Huong_dan_su_dung/img/N17_them_mon.png) | – |
+| W06 Menu chi nhánh | [ảnh](../Huong_dan_su_dung/img/N08_menu_chi_nhanh.png) | – |
+| W07 Khuyến mãi | [danh sách](../Huong_dan_su_dung/img/N18_khuyen_mai.png), [tạo](../Huong_dan_su_dung/img/N19_tao_khuyen_mai.png) | – |
+| W08 Dashboard | [quản trị](../Huong_dan_su_dung/img/N13_tong_quan_quan_tri.png), [quản lý](../Huong_dan_su_dung/img/N07_tong_quan_quan_ly.png) | – |
+| A01, A03–A06 | [đăng nhập](../Huong_dan_su_dung/img/N01_dang_nhap.png), [chi nhánh](../Huong_dan_su_dung/img/N14_chi_nhanh.png), [nhân viên](../Huong_dan_su_dung/img/N20_nhan_vien_quan_tri.png), [danh mục](../Huong_dan_su_dung/img/N15_danh_muc.png), [bàn & QR](../Huong_dan_su_dung/img/N09_ban_va_ma_qr.png) | – |

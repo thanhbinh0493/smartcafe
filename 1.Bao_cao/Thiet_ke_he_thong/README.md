@@ -7,7 +7,7 @@ Bộ tài liệu cho các giai đoạn **II (Khảo sát) → III (Phân tích) 
 | Mục | Tài liệu | Người thực hiện / Review |
 |:---|:---|:---|
 | II.1 | [Khảo sát quy trình quản lý menu, đặt hàng](II.1_Khao_sat_quy_trinh.md) | D / A |
-| II.2 | [Nghiên cứu công nghệ AI, IoT](II.2_Nghien_cuu_cong_nghe.md) | C / B |
+| II.2 | [Nghiên cứu công nghệ (AI gợi ý món; IoT đã loại bỏ)](II.2_Nghien_cuu_cong_nghe.md) | C / B |
 | III.1 | [Use Case & Sequence Diagram](III.1_Use_Case_Sequence.md) | A / B |
 | III.2 | [Yêu cầu phi chức năng & Data Model](III.2_Yeu_cau_phi_chuc_nang_Data_Model.md) | D / C |
 | IV.1 | [Thiết kế CSDL (ERD, Schema)](IV.1_Thiet_ke_CSDL.md) + [schema.sql](schema.sql) | B / A |
@@ -41,7 +41,7 @@ Chi tiết từng thay đổi xem trong [biên bản họp](../../4.Tai_lieu_kha
 | D19 | 01/11 | Kênh gọi món & vai trò thu ngân | **Chỉ nhận order qua quét QR** (thu ngân nhận order tại quầy sẽ không biết khách ngồi bàn nào). Thu ngân **không nằm trong luồng xử lý đơn**, chỉ hỗ trợ khách: tra cứu đơn, hủy & hoàn tiền |
 | D20 | 01/11 | Xác nhận giao đồ | **Pha chế** giao đồ và bấm "Đã giao" (đơn → Hoàn tất, cộng điểm). Luồng xử lý đơn chỉ còn Khách + Pha chế |
 | D21 | 01/11 | Báo cáo bán hàng | **Tự tổng hợp hằng ngày** (job 00:05) vào bảng `daily_sales_reports`; **dashboard đơn giản** (W08): doanh thu mỗi ngày của từng chi nhánh, số đơn, số đơn hủy, giá trị TB/đơn, thời gian chờ TB, tỉ lệ đơn thành viên, doanh thu KM, tỉ lệ món từ gợi ý AI, top 5 món. Ưu tiên nâng lên **Must** |
-| D22 | 01/11 | Tự hủy đơn chưa thanh toán | Vì không triển khai thanh toán thật, chỉ **mô tả** quy tắc: không nhận được thanh toán sau 15 phút thì tự hủy (cài đặt job ở mức Could) |
+| D22 | 01/11 | Tự hủy đơn chưa thanh toán | Vì không triển khai thanh toán thật, chỉ **mô tả** quy tắc: không nhận được thanh toán sau 15 phút thì tự hủy (chưa cài đặt job) |
 | D23 | 01/11 | Tên sản phẩm | **SmartCafe** |
 | D24 | 02/11 | Môi trường chạy & demo | Chạy **local trên laptop** bằng Docker Desktop (WSL2) + Docker Compose; Docker cài tại `D:\Docker` (chương trình `D:\Docker\DockerDesktop`, dữ liệu `D:\Docker\wsl-data`); WSL2 giới hạn 4 GB RAM / 4 nhân. Điện thoại demo truy cập qua cùng mạng Wi-Fi |
 | D25 | 02/11 | Quy trình code & kiểm thử | Code **theo từng luồng nghiệp vụ cốt lõi**; mỗi luồng phải có **test tự động** và **biên bản kiểm thử** đầy đủ trước khi chuyển sang luồng tiếp theo |

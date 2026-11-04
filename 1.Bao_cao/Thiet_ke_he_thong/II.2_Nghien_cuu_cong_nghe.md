@@ -1,11 +1,11 @@
-# II.2. NGHIÊN CỨU CÔNG NGHỆ AI, IoT ÁP DỤNG CHO BÀI TOÁN
+# II.2. NGHIÊN CỨU CÔNG NGHỆ ÁP DỤNG CHO BÀI TOÁN (AI GỢI Ý MÓN; IoT ĐÃ LOẠI BỎ)
 
 | Thông tin | Nội dung |
 |:---|:---|
 | Người thực hiện | Thành viên C |
 | Người review | Thành viên B |
-| Thời gian | 26/09/2026 – 01/10/2026 (review 02/10/2026) |
-| Cập nhật | 01/11/2026 – bỏ IoT, gợi ý theo 2 chế độ, thêm OTP giả lập (biên bản Tuần 06, CR-09 → CR-14) |
+| Thời gian | 25/09/2026 – 30/09/2026 (review 01/10/2026) |
+| Cập nhật | 01/11/2026 – bỏ IoT, gợi ý theo 2 chế độ, thêm OTP giả lập (biên bản Tuần 06, CR-09 → CR-14); 04/11/2026 – rà soát, đồng bộ với mã nguồn và kế hoạch D41 (CR-46) |
 
 ## 1. Công nghệ nền tảng (đã chốt)
 
@@ -65,7 +65,7 @@ score(i) = 0.40 * Personal(i)  # tần suất khách đã gọi món i (có tr�
 - **"Thường gọi kèm"** (giỏ hàng): lấy các luật `antecedent ∈ giỏ`, sắp theo `confidence × lift`, bỏ món đã có trong giỏ, lấy top 2.
 - Lý do hiển thị = thành phần đóng góp nhiều điểm nhất.
 - Trọng số là giá trị khởi đầu, sẽ tinh chỉnh bằng đánh giá offline (Mục 2.5).
-- *Cài đặt (F7):* Popular tính trên đơn đã thanh toán, không hủy, chuẩn hóa theo món bán nhiều nhất; Personal tính trên đơn của khách ở mọi chi nhánh, chu kỳ bán rã 30 ngày; Similar **không so món với chính nó** và nhãn "Giống món bạn thích" chỉ dành cho món khách chưa gọi; không gợi ý món đã có trong giỏ. Luật kết hợp 1 món → 1 món, học riêng từng chi nhánh + toàn chuỗi, luật của chi nhánh được ưu tiên.
+- *Cài đặt (F7):* Popular tính trên đơn đã thanh toán, không hủy, chuẩn hóa theo món bán nhiều nhất; Personal tính trên đơn của khách ở mọi chi nhánh, chu kỳ bán rã 30 ngày; Similar **không so món với chính nó** và nhãn "Giống món bạn thích" chỉ dành cho món khách chưa gọi; không gợi ý món đã có trong giỏ. Luật kết hợp 1 món → 1 món, học riêng từng chi nhánh + toàn chuỗi, luật của chi nhánh được ưu tiên. Số liệu bán chạy và luật kết hợp được giữ trong cache của backend (bán chạy 60 giây, luật tới lần học lại – D38), nên gợi ý API phản hồi p95 ~90 ms với 50 khách đồng thời ([biên bản kiểm thử hệ thống](../Kiem_thu/Bien_ban_kiem_thu_He_thong.md)).
 
 ### 2.4. Dữ liệu và huấn luyện
 - **Dữ liệu:** script `seed_orders.py` sinh khoảng 5.000 đơn giả lập trong 60 ngày cho 3 chi nhánh, ~40% đơn thuộc khoảng 300 khách thành viên (SĐT 0901000001…0901000300; **0901000001** là khách demo ở Cầu Giấy). Tự nạp khi backend khởi động lần đầu (D32). Script có cài sẵn quy luật để mô hình học lại được: mỗi khách có 2–3 món "ruột", "cà phê sữa thường đi kèm bánh croissant", "trời nóng bán nhiều trà, đá xay".

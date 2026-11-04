@@ -7,8 +7,8 @@
 | Luồng | **F3 – Màn hình Bar**: UC17 (xem hàng đợi), UC18 (Bắt đầu / Xong / Hoàn tác), UC19 (Đã giao, cộng điểm) – sơ đồ SD04, SD06 (phần giao đồ) |
 | Phiên bản | 0.3.0 – nhánh `feature/f2-dat-mon`, đã gộp vào `main` ngày 03/11/2026 (CR-34), mã nguồn `2.San_pham/smartcafe/` |
 | Ngày kiểm thử | 03/11/2026 |
-| Người lập biên bản | Thành viên A (PM) |
-| Người review | Thành viên D (Tester/QA) – *chờ review* |
+| Người lập biên bản | Thành viên D (Tester / QA) |
+| Người duyệt | Thành viên A (PM) – đã duyệt 03/11/2026 (CR-34) |
 | Tài liệu căn cứ | [III.1 UC17–UC19](../Thiet_ke_he_thong/III.1_Use_Case_Sequence.md), SD04, biểu đồ trạng thái đơn, [IV.2 W04](../Thiet_ke_he_thong/IV.2_Thiet_ke_giao_dien.md), [IV.3 API + WebSocket](../Thiet_ke_he_thong/IV.3_Kien_truc_va_API.md), [IV.1 bảng orders, order_items, order_status_history, loyalty_transactions](../Thiet_ke_he_thong/IV.1_Thiet_ke_CSDL.md); NFR-P4, NFR-R3, NFR-S2; quyết định D8, D11, D15, D19, D20, D28 |
 | Tiền đề | F0, F1, F2 đạt ([F0](Bien_ban_kiem_thu_F0_Nen_tang.md), [F1](Bien_ban_kiem_thu_F1_QR_Menu.md), [F2](Bien_ban_kiem_thu_F2_Dat_mon_Thanh_toan.md)) |
 
@@ -176,5 +176,5 @@ Log: [logs/F3_e2e_trinh_duyet.txt](logs/F3_e2e_trinh_duyet.txt). Ảnh chụp:
 
 | Vai trò | Họ tên | Ngày | Ký xác nhận |
 |:---|:---|:---|:---|
-| Người lập | Thành viên A | 03/11/2026 | |
-| Tester/QA review | Thành viên D | | |
+| Người lập (Tester / QA) | Thành viên D | 03/11/2026 | |
+| PM duyệt | Thành viên A | 03/11/2026 | |

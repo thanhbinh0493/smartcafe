@@ -4,8 +4,8 @@
 |:---|:---|
 | Người thực hiện | Thành viên A (PM) |
 | Người review | Thành viên B |
-| Thời gian | 03/10/2026 – 07/10/2026 (review 08/10/2026) |
-| Cập nhật | 01/11/2026 – bỏ IoT; thêm màn hình chào, OTP, tích điểm, khuyến mãi; màn hình Bar dạng hàng đợi (CR-09 → CR-14); chỉ Admin tạo KM, phiên 1 giờ (CR-15 → CR-19); thu ngân chỉ hỗ trợ khách, pha chế giao đồ, dashboard báo cáo ngày (CR-21 → CR-25) |
+| Thời gian | 02/10/2026 – 06/10/2026 (review 07/10/2026) |
+| Cập nhật | 01/11/2026 – bỏ IoT; thêm màn hình chào, OTP, tích điểm, khuyến mãi; màn hình Bar dạng hàng đợi (CR-09 → CR-14); chỉ Admin tạo KM, phiên 1 giờ (CR-15 → CR-19); thu ngân chỉ hỗ trợ khách, pha chế giao đồ, dashboard báo cáo ngày (CR-21 → CR-25); 04/11/2026 – rà soát, đồng bộ với mã nguồn và kế hoạch D41 (CR-46) |
 | Mã nguồn sơ đồ | [diagrams/src/](diagrams/src/) (PlantUML), ảnh PNG trong [diagrams/png/](diagrams/png/) |
 
 ## 1. Tác nhân (Actors)
@@ -39,28 +39,28 @@
 
 Độ ưu tiên: **M** = Must (bắt buộc cho demo), **S** = Should (nên có), **C** = Could (làm nếu còn thời gian).
 
-| Mã | Tên Use Case | Tác nhân | Phân hệ | Ưu tiên | Module lập trình |
+| Mã | Tên Use Case | Tác nhân | Phân hệ | Ưu tiên | Luồng code (D26) |
 |:---|:---|:---|:---|:---:|:---|
-| UC01 | Quét QR & chọn chế độ (màn hình chào) | Khách hàng | QR Order | M | V.1, V.2 |
-| UC02 | Xác thực SĐT bằng OTP (giả lập) | Khách hàng | QR Order | M | V.1, V.2 |
-| UC03 | Xem menu & gợi ý món | Khách hàng, Dịch vụ thời tiết | QR Order + AI | M | V.1, V.2, V.3 |
-| UC04 | Quản lý giỏ hàng | Khách hàng | QR Order | M | V.2 |
-| UC05 | Đặt món & thanh toán giả lập | Khách hàng | QR Order | M | V.1, V.2 |
-| UC06 | Theo dõi trạng thái đơn | Khách hàng | QR Order | M | V.1, V.2 |
-| UC07 | Xem điểm tích lũy | Khách thành viên | QR Order | S | V.1, V.2 |
-| UC08 | Đăng nhập / Đăng xuất | Nhân viên | Quản trị | M | V.1, V.2 |
-| UC09 | Quản lý danh mục món | Quản trị viên | Quản trị | M | V.1, V.2 |
-| UC10 | Quản lý món (menu chung) | Quản trị viên | Quản trị | M | V.1, V.2 |
-| UC11 | Quản lý chi nhánh | Quản trị viên | Quản trị | M | V.1, V.2 |
-| UC12 | Quản lý nhân viên & phân quyền | Quản trị viên, Quản lý CN | Quản trị | M | V.1, V.2 |
-| UC13 | Cấu hình menu chi nhánh | Quản lý CN | Quản trị | M | V.1, V.2 |
-| UC14 | Quản lý bàn & in mã QR | Quản lý CN | Quản trị | M | V.1, V.2 |
-| UC15 | Quản lý chương trình khuyến mãi | Quản trị viên | Quản trị | M | V.1, V.2 |
-| UC16 | Xem dashboard bán hàng (báo cáo tự tổng hợp hằng ngày) | Quản trị viên, Quản lý CN | Quản trị | M | V.1, V.2 |
-| UC17 | Xem hàng đợi pha chế (màn hình Bar) | Pha chế (Thu ngân chỉ tra cứu) | Vận hành | M | V.1, V.2 |
-| UC18 | Cập nhật trạng thái pha (Bắt đầu / Xong) | Pha chế | Vận hành | M | V.1, V.2 |
-| UC19 | Giao đồ, bấm "Đã giao" (cộng điểm) | Pha chế | Vận hành | M | V.1, V.2 |
-| UC20 | Hủy đơn & hoàn tiền giả lập (hỗ trợ khách) | Thu ngân | Hỗ trợ | S | V.1, V.2 |
+| UC01 | Quét QR & chọn chế độ (màn hình chào) | Khách hàng | QR Order | M | F1 |
+| UC02 | Xác thực SĐT bằng OTP (giả lập) | Khách hàng | QR Order | M | F4 |
+| UC03 | Xem menu & gợi ý món | Khách hàng, Dịch vụ thời tiết | QR Order + AI | M | F1, F7 |
+| UC04 | Quản lý giỏ hàng | Khách hàng | QR Order | M | F2 |
+| UC05 | Đặt món & thanh toán giả lập | Khách hàng | QR Order | M | F2 |
+| UC06 | Theo dõi trạng thái đơn | Khách hàng | QR Order | M | F2 |
+| UC07 | Xem điểm tích lũy | Khách thành viên | QR Order | S | F4 |
+| UC08 | Đăng nhập / Đăng xuất | Nhân viên | Quản trị | M | F0 |
+| UC09 | Quản lý danh mục món | Quản trị viên | Quản trị | M | F6 |
+| UC10 | Quản lý món (menu chung) | Quản trị viên | Quản trị | M | F6 |
+| UC11 | Quản lý chi nhánh | Quản trị viên | Quản trị | M | F6 |
+| UC12 | Quản lý nhân viên & phân quyền | Quản trị viên, Quản lý CN | Quản trị | M | F6 |
+| UC13 | Cấu hình menu chi nhánh | Quản lý CN | Quản trị | M | F6 |
+| UC14 | Quản lý bàn & in mã QR | Quản lý CN | Quản trị | M | F6 |
+| UC15 | Quản lý chương trình khuyến mãi | Quản trị viên | Quản trị | M | F6 |
+| UC16 | Xem dashboard bán hàng (báo cáo tự tổng hợp hằng ngày) | Quản trị viên, Quản lý CN | Quản trị | M | F8 |
+| UC17 | Xem hàng đợi pha chế (màn hình Bar) | Pha chế (Thu ngân chỉ tra cứu) | Vận hành | M | F3 |
+| UC18 | Cập nhật trạng thái pha (Bắt đầu / Xong) | Pha chế | Vận hành | M | F3 |
+| UC19 | Giao đồ, bấm "Đã giao" (cộng điểm) | Pha chế | Vận hành | M | F3 |
+| UC20 | Hủy đơn & hoàn tiền giả lập (hỗ trợ khách) | Thu ngân | Hỗ trợ | S | F5 |
 
 **Ma trận phân quyền (RBAC):**
 
@@ -70,7 +70,7 @@
 | Nhân viên | ✔ (tất cả) | ✔ (chi nhánh mình, không tạo ADMIN/MANAGER) | – | – |
 | Menu chi nhánh, bàn & QR | ✔ | ✔ (chi nhánh mình) | – | – |
 | Khuyến mãi | ✔ (toàn chuỗi / mọi chi nhánh) | – | – | – |
-| Màn hình Bar: xem hàng đợi | ✔ | ✔ | ✔ (chỉ tra cứu) | ✔ |
+| Màn hình Bar: xem hàng đợi | – (không thuộc chi nhánh) | ✔ | ✔ (chỉ tra cứu) | ✔ |
 | Bắt đầu / Xong món | – | ✔ | – | ✔ |
 | Hủy đơn & hoàn tiền (hỗ trợ khách) | – | ✔ | ✔ | – |
 | Giao đồ ("Đã giao") | – | ✔ | – | ✔ |
@@ -112,7 +112,7 @@
 | Tiền điều kiện | Giỏ hàng có ít nhất 1 món |
 | Hậu điều kiện | Đơn ở trạng thái PAID, các món xuất hiện ở **cuối hàng đợi** màn hình Bar |
 | Luồng chính | 1. Khách xem giỏ: tạm tính, giảm giá KM, tổng cộng, và **số điểm sẽ nhận** nếu là thành viên. 2. Bấm "Thanh toán & gửi đơn". 3. Hệ thống kiểm tra lại tình trạng còn hàng và **tính lại giá ở server**, tạo đơn PENDING_PAYMENT, chốt `original_price`, `unit_price`, `promotion_id`; gắn `customer_id` nếu có customer token. 4. Khách chọn phương thức (giả lập) và xác nhận. 5. Hệ thống ghi `payments`, chuyển đơn sang PAID, đẩy sự kiện xuống Bar. 6. Chuyển sang UC06. |
-| Ngoại lệ | 3a. Có món vừa hết: báo tên món, yêu cầu bỏ món đó. 3b. Khuyến mãi vừa hết hạn: hiện giá mới và yêu cầu khách xác nhận lại. 5a. Thanh toán thất bại: đơn giữ PENDING_PAYMENT, khách thử lại. 5b. **Không nhận được thanh toán sau 15 phút thì hệ thống tự hủy đơn** (source = SYSTEM). Vì thanh toán là giả lập và trả kết quả ngay, quy tắc này chủ yếu được **mô tả** trong tài liệu; phần cài đặt là một job định kỳ đơn giản, ưu tiên Could. |
+| Ngoại lệ | 3a. Có món vừa hết: báo tên món, yêu cầu bỏ món đó. 3b. Khuyến mãi vừa hết hạn: hiện giá mới và yêu cầu khách xác nhận lại. 5a. Thanh toán thất bại: đơn giữ PENDING_PAYMENT, khách thử lại. 5b. **Không nhận được thanh toán sau 15 phút thì hệ thống tự hủy đơn** (source = SYSTEM). Vì thanh toán là giả lập và trả kết quả ngay, quy tắc này chỉ được **mô tả** trong tài liệu, **chưa cài đặt job** (D22). |
 | Quy tắc | Mỗi món tối đa 20 ly/đơn; ghi chú tối đa 255 ký tự; mã đơn = `{mã chi nhánh}-{số thứ tự trong ngày, 4 chữ số}` |
 
 ### UC06 – Theo dõi trạng thái đơn
@@ -157,7 +157,7 @@
 | Mục | Nội dung |
 |:---|:---|
 | Tác nhân | Thu ngân (Quản lý chi nhánh cũng làm được) |
-| Tiền điều kiện | Đơn ở trạng thái PAID hoặc PREPARING (đơn PENDING_PAYMENT do hệ thống tự hủy sau 15 phút) |
+| Tiền điều kiện | Đơn ở trạng thái PAID hoặc PREPARING (đơn PENDING_PAYMENT chưa vào hàng đợi; quy tắc tự hủy sau 15 phút chỉ mô tả – D22) |
 | Luồng chính | Khi khách cần hỗ trợ (gọi nhầm món, đổi ý, sự cố), thu ngân tra cứu đơn theo mã đơn hoặc bàn, nhập lý do; hệ thống hoàn tiền giả lập, chuyển đơn và các món sang CANCELLED, xóa các món khỏi hàng đợi Bar, thông báo cho khách |
 | Ngoại lệ | Đơn đã READY/COMPLETED: không cho hủy (409) |
 
