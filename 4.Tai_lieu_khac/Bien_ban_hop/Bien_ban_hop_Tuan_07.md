@@ -39,6 +39,7 @@ Tuần 07 (02/11/2026 – 08/11/2026). Hình thức: họp nhóm. Thư ký: Thà
 | CR-47 | 04/11/2026 | Chốt mẫu tài liệu nộp (VIII.2): bản Word sinh tự động từ Markdown theo định dạng mẫu báo cáo môn học, bìa dùng `Mẫu bìa.docx` (thông tin bìa điền 1 lần ở `thong_tin_bia.json`), gom thành 5 bộ hồ sơ (D42). Phát hiện mẫu báo cáo tổng kết cần phần chi phí, giám sát, rủi ro → mở P25 | Nhóm không có mẫu riêng cho tài liệu thiết kế; giữ một nguồn nội dung, tránh sửa tay 2 nơi | README thiết kế (D42, P25); `1.Bao_cao/Xuat_docx/` (công cụ + 6 tệp .docx); D, A | A |
 | CR-48 | 04/11/2026 | Chốt P25: Phần IV (chi phí), Phần VII (giám sát, theo dõi), Phần VIII (rủi ro) của mẫu báo cáo môn học được viết ngay trong báo cáo tổng kết, không thêm hạng mục kế hoạch (D43) | Mẫu báo cáo tổng kết bắt buộc 10 phần; giữ kế hoạch gọn | README thiết kế (D43, P25); báo cáo tổng kết (IX); A | A |
 | CR-49 | 04/11/2026 | Chốt cách lập dự toán chi phí: công lao động (bán thời gian, theo bảng phân công + review + họp) × đơn giá giả định PM 800.000đ, thành viên khác 600.000đ / ngày công; hạ tầng 0đ; dự phòng 10% → tổng 63,03 triệu đồng (D44). Viết hoàn chỉnh báo cáo tổng kết theo mẫu 10 phần của môn học, giữ ngày lập 10/11/2026 theo kế hoạch | Dự án không có chi phí thật; cần số liệu để trình bày quản lý chi phí | README thiết kế (D44); `1.Bao_cao/Bao_cao_tong_ket.md`; xuất Word; A | A |
+| CR-50 | 05/11/2026 | Làm slide thuyết trình bảo vệ (giai đoạn X): 20 slide 16:9 theo đúng thứ tự phần của mẫu `3.Slide/Nhom_X_Slide.pptx` (thêm slide giám sát & rủi ro trong phần triển khai), tông màu cà phê, có ghi chú thuyết trình; sinh tự động bằng `3.Slide/tao_slide/tao_slide.js` từ số liệu báo cáo tổng kết | Mẫu của môn chỉ có tiêu đề các phần; giữ số liệu slide khớp báo cáo | `3.Slide/Nhom_8_Slide.pptx`, `3.Slide/README.md`; E (người trình bày), A | A |
 
 ## 4. HÌNH ẢNH / VIDEOS
 (Bổ sung ảnh chụp buổi họp nếu có.)
@@ -70,6 +71,7 @@ Tuần 07 (02/11/2026 – 08/11/2026). Hình thức: họp nhóm. Thư ký: Thà
 - Thông qua CR-47: mẫu tài liệu nộp và 5 bộ hồ sơ Word (D42).
 - Thông qua CR-48: viết phần chi phí, giám sát, rủi ro ngay trong báo cáo tổng kết (D43).
 - Thông qua CR-49: dự toán chi phí theo công × đơn giá giả định (D44); hoàn thiện báo cáo tổng kết, ngày lập 10/11/2026.
+- Thông qua CR-50: slide bảo vệ 20 slide theo mẫu môn học.
 - Không còn vấn đề mở trong bảng Vấn đề mở.
 
 **Việc cần làm:**
@@ -101,6 +103,7 @@ Tuần 07 (02/11/2026 – 08/11/2026). Hình thức: họp nhóm. Thư ký: Thà
 | Điền thông tin bìa (khoa, bộ môn, giảng viên, lớp, họ tên + mã SV) vào `thong_tin_bia.json` | A | 06/11/2026 |
 | Chốt P25 (chi phí, giám sát, rủi ro trong báo cáo tổng kết) – đã xong (CR-48) | A | 04/11/2026 |
 | Cả nhóm review báo cáo tổng kết (bản đầy đủ), bổ sung ảnh buổi họp | Cả nhóm | 12/11/2026 |
+| Review slide, phân công người trình bày từng phần, diễn tập (kèm demo) | Cả nhóm (E chính) | 15/11/2026 |
 | Báo cáo tổng kết (10–12/11), slide (12–14/11), diễn tập demo (14–15/11), biên bản nghiệm thu (16/11) | A, E, D | 16/11/2026 |
 | Sao lưu CSDL bằng `scripts/backup_db.ps1` trước mỗi buổi demo (NFR-R5) | D | Trước mỗi buổi demo |
 | Review công thức + trọng số gợi ý, tinh chỉnh theo kết quả Hit Rate@5 (biên bản F7 Mục 4.7) | C | 10/11/2026 |
