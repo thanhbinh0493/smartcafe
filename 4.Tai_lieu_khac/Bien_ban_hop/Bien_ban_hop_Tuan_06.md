@@ -3,14 +3,14 @@
 ## 1. THÀNH PHẦN
 | Thành viên | Vai trò | Có mặt |
 |:---|:---|:---:|
-| Thành viên A | PM / Team Lead (chủ trì) | ✔ |
-| Thành viên B | Backend Developer | ✔ |
-| Thành viên C | AI/IoT Specialist | ✔ |
-| Thành viên D | Tester / QA, thư ký | ✔ |
-| Thành viên E | Frontend Developer | ✔ |
+| Nguyễn Thanh Bình (A) | PM / Team Lead (chủ trì) | ✔ |
+| Nguyễn Trường Thiên (B) | Backend Developer | ✔ |
+| Lê Minh Sơn (C) | AI/IoT Specialist | ✔ |
+| Ngô Duy Đô (D) | Tester / QA, thư ký | ✔ |
+| Nguyễn Quang Tú (E) | Frontend Developer | ✔ |
 
 ## 2. NGÀY HỌP
-Tuần 06 (26/10/2026 – 01/11/2026). Hình thức: họp nhóm. Thư ký: Thành viên D.
+Tuần 06 (26/10/2026 – 01/11/2026). Hình thức: họp nhóm. Thư ký: Ngô Duy Đô (D).
 
 ## 3. NỘI DUNG
 | Mã | Ngày | Nội dung thay đổi / thảo luận | Lý do | Ảnh hưởng (tài liệu, module, người) | Người đề xuất |
@@ -32,7 +32,7 @@ Tuần 06 (26/10/2026 – 01/11/2026). Hình thức: họp nhóm. Thư ký: Thà
 | CR-15 | 01/11/2026 | **Chỉ Quản trị viên** được tạo/sửa chương trình khuyến mãi; Quản lý chi nhánh không tạo KM (chốt P6) | Đơn giản hóa luồng vận hành | UC15, RBAC (III.1), SD05, W06, W07, API `/api/staff/promotions` – B, E | A |
 | CR-16 | 01/11/2026 | Tỉ lệ tích điểm **1 điểm / 10.000đ**; **1 điểm = 100đ**, tức hoàn lại 1% cho khách (chốt P7) | Tỉ lệ dễ hiểu, chi phí khuyến khích thấp | UC19, III.2 quy tắc 5, W01 (hiển thị giá trị quy đổi), cấu hình `POINT_VALUE_VND` – C, E | A |
 | CR-17 | 01/11/2026 | "Món mới" = món tạo trong **30 ngày** gần nhất (chốt P8) | Không cần thêm thao tác đánh dấu thủ công | Thuật toán gợi ý (II.2), menu (UC03) – C | A |
-| CR-18 | 01/11/2026 | **Thành viên C** nhận thêm: API OTP, API tích điểm, script sinh dữ liệu mẫu (chốt P9) | C bớt việc sau khi bỏ IoT; cân bằng tải với B | Project_Plan.md (mô tả vai trò C), IV.3 Mục 3 – B, C | A |
+| CR-18 | 01/11/2026 | **Lê Minh Sơn (C)** nhận thêm: API OTP, API tích điểm, script sinh dữ liệu mẫu (chốt P9) | C bớt việc sau khi bỏ IoT; cân bằng tải với B | Project_Plan.md (mô tả vai trò C), IV.3 Mục 3 – B, C | A |
 | CR-19 | 01/11/2026 | Phiên khách thành viên hết hạn sau **1 giờ** (thay vì 4 giờ đề xuất) (chốt P10) | Một lần ngồi quán không cần lâu đến thế để gọi thêm món; giảm rủi ro người khác dùng lại phiên | UC02, UC06, SD01, NFR-S2, IV.3 – B, E | A |
 | CR-20 | 01/11/2026 | Thống nhất **nơi theo dõi vấn đề mở duy nhất**: bảng "Vấn đề mở (Open Issues)" trong `1.Bao_cao/Thiet_ke_he_thong/README.md` | PM cần một nơi theo dõi tập trung | README thiết kế, CLAUDE.md – A | A |
 | CR-21 | 01/11/2026 | **Chỉ nhận order qua quét QR**; thu ngân không nhận order tại quầy, **không nằm trong luồng xử lý đơn**, chỉ hỗ trợ khách (tra cứu đơn, hủy & hoàn tiền) (chốt P2) | Nếu thu ngân nhận order tại quầy sẽ không biết khách ngồi bàn nào để lên đơn | Pham_Vi_Du_An.md, II.1, III.1 (tác nhân, UC17, UC20, RBAC), SD06, W04 (chế độ tra cứu cho thu ngân), API tra cứu đơn – B, E | A |

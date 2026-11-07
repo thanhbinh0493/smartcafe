@@ -36,7 +36,7 @@ Chi tiết từng thay đổi xem trong [biên bản họp](../../4.Tai_lieu_kha
 | D14 | 01/11 | Quyền tạo khuyến mãi | **Chỉ Quản trị viên** tạo/sửa KM (toàn chuỗi hoặc 1 chi nhánh). Quản lý chi nhánh không tạo KM, để đơn giản hóa luồng vận hành |
 | D15 | 01/11 | Tỉ lệ tích điểm | **1 điểm / 10.000đ** (trên số tiền thực trả); **1 điểm = 100đ**, tức tỉ lệ hoàn lại 1% |
 | D16 | 01/11 | Món mới | Món tạo trong **30 ngày** gần nhất |
-| D17 | 01/11 | Phân công | Thành viên C nhận thêm: API OTP + tích điểm, script sinh dữ liệu mẫu |
+| D17 | 01/11 | Phân công | Lê Minh Sơn (C) nhận thêm: API OTP + tích điểm, script sinh dữ liệu mẫu |
 | D18 | 01/11 | Phiên thành viên | Hết hạn sau **1 giờ** hoặc khi đóng tab (đủ cho một lần ngồi quán và gọi thêm món) |
 | D19 | 01/11 | Kênh gọi món & vai trò thu ngân | **Chỉ nhận order qua quét QR** (thu ngân nhận order tại quầy sẽ không biết khách ngồi bàn nào). Thu ngân **không nằm trong luồng xử lý đơn**, chỉ hỗ trợ khách: tra cứu đơn, hủy & hoàn tiền |
 | D20 | 01/11 | Xác nhận giao đồ | **Pha chế** giao đồ và bấm "Đã giao" (đơn → Hoàn tất, cộng điểm). Luồng xử lý đơn chỉ còn Khách + Pha chế |

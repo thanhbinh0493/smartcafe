@@ -7,8 +7,8 @@
 | Giai đoạn | **VI – Kiểm thử hệ thống**, theo [Kế hoạch kiểm thử hệ thống](Ke_hoach_kiem_thu_He_thong.md) (CR-41) |
 | Phiên bản | 0.9.0 – nhánh `feature/vi-kiem-thu-he-thong` (tách từ `main` sau khi gộp F8, CR-40), mã nguồn `2.San_pham/smartcafe/` |
 | Ngày kiểm thử | 03/11/2026 |
-| Người lập biên bản | Thành viên D (Tester / QA) |
-| Người duyệt | Thành viên A (PM) – đã duyệt 03/11/2026 (CR-44) |
+| Người lập biên bản | Ngô Duy Đô (D – Tester / QA) |
+| Người duyệt | Nguyễn Thanh Bình (A – PM) – đã duyệt 03/11/2026 (CR-44) |
 | Tài liệu căn cứ | [III.1](../Thiet_ke_he_thong/III.1_Use_Case_Sequence.md) UC01–UC20, [III.2](../Thiet_ke_he_thong/III.2_Yeu_cau_phi_chuc_nang_Data_Model.md) NFR, [IV.1–IV.3](../Thiet_ke_he_thong/IV.3_Kien_truc_va_API.md); quyết định D1–D39 |
 | Tiền đề | F0 → F8 đạt và được duyệt (9 biên bản luồng, 727 ca) |
 
@@ -177,5 +177,5 @@ Mô hình tải theo **D39**: 50 người dùng ảo vào lệch nhau. Mỗi lư
 
 | Vai trò | Họ tên | Ngày | Ký xác nhận |
 |:---|:---|:---|:---|
-| Người lập (Tester / QA) | Thành viên D | 03/11/2026 | |
-| PM duyệt | Thành viên A | 03/11/2026 | |
+| Người lập (Tester / QA) | Ngô Duy Đô (D) | 03/11/2026 | |
+| PM duyệt | Nguyễn Thanh Bình (A) | 03/11/2026 | |

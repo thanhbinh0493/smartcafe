@@ -2,12 +2,12 @@
 
 | Thông tin | Nội dung |
 |:---|:---|
-| Người thực hiện | Thành viên B |
-| Người review | Thành viên A (PM) |
+| Người thực hiện | Nguyễn Trường Thiên (B) |
+| Người review | Nguyễn Thanh Bình (A – PM) |
 | Thời gian | 15/10/2026 – 18/10/2026 (review 19/10/2026) |
 | Cập nhật | 01/11/2026 – bỏ IoT Gateway; thêm OTP, tích điểm, khuyến mãi, API hàng đợi Bar (CR-09 → CR-14); 04/11/2026 – rà soát, đồng bộ với mã nguồn và kế hoạch D41 (CR-46) – danh sách API khớp 50/50 endpoint của mã nguồn |
 
-Đầu vào trực tiếp cho giai đoạn V (Lập trình): Thành viên B làm API, Thành viên E gọi API, Thành viên C làm AI.
+Đầu vào trực tiếp cho giai đoạn V (Lập trình): Nguyễn Trường Thiên (B) làm API, Nguyễn Quang Tú (E) gọi API, Lê Minh Sơn (C) làm AI.
 
 ## 1. Kiến trúc tổng thể
 

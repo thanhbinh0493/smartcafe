@@ -2,8 +2,8 @@
 
 | Thông tin | Nội dung |
 |:---|:---|
-| Người thực hiện | Thành viên B |
-| Người review | Thành viên A (PM) |
+| Người thực hiện | Nguyễn Trường Thiên (B) |
+| Người review | Nguyễn Thanh Bình (A – PM) |
 | Thời gian | 10/10/2026 – 13/10/2026 (review 14/10/2026) |
 | Cập nhật | 01/11/2026 – bỏ 3 bảng IoT; thêm 4 bảng khuyến mãi, OTP, tích điểm (CR-09 → CR-14); 04/11/2026 – rà soát, đồng bộ với mã nguồn và kế hoạch D41 (CR-46) – `schema.sql` khớp 18/18 bảng của mã nguồn (migration 0001–0003) |
 | Hệ quản trị | PostgreSQL 16 – CSDL `coffee_chain` |

@@ -7,8 +7,8 @@
 | Luồng | **F6 – Quản trị**: UC09 (danh mục), UC10 (món – menu chung), UC11 (chi nhánh), UC12 (nhân viên & phân quyền), UC13 (menu chi nhánh), UC14 (bàn & mã QR), UC15 (khuyến mãi) – sơ đồ SD05; màn hình A03–A06, W05–W07; sự kiện `MENU_UPDATED` (UC03 – Quy tắc) |
 | Phiên bản | 0.6.0 – nhánh `feature/f6-quan-tri` (tách từ `main` sau khi gộp F5, CR-36), mã nguồn `2.San_pham/smartcafe/` |
 | Ngày kiểm thử | 03/11/2026 |
-| Người lập biên bản | Thành viên D (Tester / QA) |
-| Người duyệt | Thành viên A (PM) – đã duyệt 03/11/2026 (CR-37) |
+| Người lập biên bản | Ngô Duy Đô (D – Tester / QA) |
+| Người duyệt | Nguyễn Thanh Bình (A – PM) – đã duyệt 03/11/2026 (CR-37) |
 | Tài liệu căn cứ | [III.1 UC09–UC15, ma trận RBAC, UC03](../Thiet_ke_he_thong/III.1_Use_Case_Sequence.md), SD05, [III.2 NFR-S1, S2, S3, S5; quy tắc dữ liệu 2.2](../Thiet_ke_he_thong/III.2_Yeu_cau_phi_chuc_nang_Data_Model.md), [IV.1 bảng categories, menu_items, branches, staff, branch_menu_items, dining_tables, promotions, promotion_items](../Thiet_ke_he_thong/IV.1_Thiet_ke_CSDL.md), [IV.2 A03–A06, W05–W07](../Thiet_ke_he_thong/IV.2_Thiet_ke_giao_dien.md), [IV.3 API + WebSocket](../Thiet_ke_he_thong/IV.3_Kien_truc_va_API.md); quyết định D3, D10, D14, D16, D27 |
 | Tiền đề | F0 → F5 đạt ([F5](Bien_ban_kiem_thu_F5_Thu_ngan.md)) |
 
@@ -237,5 +237,5 @@ Các chi tiết thiết kế chưa quy định, đã cài theo hướng an toàn
 
 | Vai trò | Họ tên | Ngày | Ký xác nhận |
 |:---|:---|:---|:---|
-| Người lập (Tester / QA) | Thành viên D | 03/11/2026 | |
-| PM duyệt | Thành viên A | 03/11/2026 | |
+| Người lập (Tester / QA) | Ngô Duy Đô (D) | 03/11/2026 | |
+| PM duyệt | Nguyễn Thanh Bình (A) | 03/11/2026 | |

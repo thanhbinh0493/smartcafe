@@ -2,8 +2,8 @@
 
 | Thông tin | Nội dung |
 |:---|:---|
-| Người thực hiện | Thành viên E |
-| Người review | Thành viên D |
+| Người thực hiện | Nguyễn Quang Tú (E) |
+| Người review | Ngô Duy Đô (D) |
 | Thời gian | 12/10/2026 – 16/10/2026 (review 17/10/2026) |
 | Cập nhật | 01/11/2026 – thêm W00, W00a, W07; vẽ lại W04 dạng hàng đợi; bỏ màn hình thiết bị IoT (CR-09 → CR-14); 04/11/2026 – rà soát, đồng bộ với mã nguồn và kế hoạch D41 (CR-46) |
 | Công cụ | Wireframe low-fidelity bằng PlantUML Salt (trong tài liệu này). Không làm bản Figma: giao diện thật (React + Tailwind) dựng thẳng từ wireframe, ảnh chụp ở Mục 4 |

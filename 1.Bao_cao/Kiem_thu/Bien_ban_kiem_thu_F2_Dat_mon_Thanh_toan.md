@@ -7,8 +7,8 @@
 | Luồng | **F2 – Đặt món & thanh toán giả lập** (khách ẩn danh): UC04, UC05, UC06 – sơ đồ SD03 |
 | Phiên bản | 0.2.0 – nhánh `feature/f2-dat-mon`, mã nguồn `2.San_pham/smartcafe/` |
 | Ngày kiểm thử | 02/11/2026 |
-| Người lập biên bản | Thành viên D (Tester / QA) |
-| Người duyệt | Thành viên A (PM) – đã duyệt 03/11/2026 (CR-34) |
+| Người lập biên bản | Ngô Duy Đô (D – Tester / QA) |
+| Người duyệt | Nguyễn Thanh Bình (A – PM) – đã duyệt 03/11/2026 (CR-34) |
 | Tài liệu căn cứ | [III.1 UC04–UC06](../Thiet_ke_he_thong/III.1_Use_Case_Sequence.md), SD03, [IV.2 W02, W03](../Thiet_ke_he_thong/IV.2_Thiet_ke_giao_dien.md), [IV.3 API + WebSocket](../Thiet_ke_he_thong/IV.3_Kien_truc_va_API.md), [II.2 Mock Payment](../Thiet_ke_he_thong/II.2_Nghien_cuu_cong_nghe.md), NFR-S6, NFR-R3, NFR-R4, NFR-P4, NFR-U2, NFR-M4; quyết định D22, D27, **D28** |
 | Tiền đề | F0, F1 đạt ([F0](Bien_ban_kiem_thu_F0_Nen_tang.md), [F1](Bien_ban_kiem_thu_F1_QR_Menu.md)) |
 
@@ -170,5 +170,5 @@ Kịch bản: quét QR bàn CG-05 → "Xem menu ngay" → thêm Cà phê sữa �
 
 | Vai trò | Họ tên | Ngày | Ký xác nhận |
 |:---|:---|:---|:---|
-| Người lập (Tester / QA) | Thành viên D | 02/11/2026 | |
-| PM duyệt | Thành viên A | 03/11/2026 | |
+| Người lập (Tester / QA) | Ngô Duy Đô (D) | 02/11/2026 | |
+| PM duyệt | Nguyễn Thanh Bình (A) | 03/11/2026 | |

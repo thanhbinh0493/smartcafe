@@ -2,8 +2,8 @@
 
 | Thông tin | Nội dung |
 |:---|:---|
-| Người thực hiện | Thành viên A (PM) |
-| Người review | Thành viên B |
+| Người thực hiện | Nguyễn Thanh Bình (A – PM) |
+| Người review | Nguyễn Trường Thiên (B) |
 | Thời gian | 02/10/2026 – 06/10/2026 (review 07/10/2026) |
 | Cập nhật | 01/11/2026 – bỏ IoT; thêm màn hình chào, OTP, tích điểm, khuyến mãi; màn hình Bar dạng hàng đợi (CR-09 → CR-14); chỉ Admin tạo KM, phiên 1 giờ (CR-15 → CR-19); thu ngân chỉ hỗ trợ khách, pha chế giao đồ, dashboard báo cáo ngày (CR-21 → CR-25); 04/11/2026 – rà soát, đồng bộ với mã nguồn và kế hoạch D41 (CR-46) |
 | Mã nguồn sơ đồ | [diagrams/src/](diagrams/src/) (PlantUML), ảnh PNG trong [diagrams/png/](diagrams/png/) |

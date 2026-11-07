@@ -4,7 +4,7 @@
 **SmartCafe – Phần mềm quản lý chuỗi quán cà phê thông minh (Tích hợp AI và QR)** – đồ án môn Quản lý dự án phần mềm, PTIT.
 - Thời gian: 21/09/2026 → **16/11/2026** (8 tuần, D41 – CR-45). Kế hoạch chi tiết: `2.San_pham/Nhom_8_Phan_cong.xlsx` = bảng trong `Project_Plan.md`.
 - Người dùng làm việc với Claude là **Thành viên A – Nguyễn Thanh Bình, PM / Team Lead**.
-- Nhân sự: A (PM, BA) · B (Backend: API, DB) · C (AI, hỗ trợ Backend) · D (Tester/QA, tài liệu) · E (Frontend: Web Admin, QR Order).
+- Nhân sự: A – Nguyễn Thanh Bình (PM, BA) · B – Nguyễn Trường Thiên (Backend: API, DB) · C – Lê Minh Sơn (AI, hỗ trợ Backend) · D – Ngô Duy Đô (Tester/QA, tài liệu) · E – Nguyễn Quang Tú (Frontend: Web Admin, QR Order). Trong tài liệu ghi "Họ tên (ký hiệu)", VD "Ngô Duy Đô (D)"; bảng phân công Excel chỉ ghi họ tên (CR-51).
 
 ## Tài liệu nguồn (đọc trước khi làm)
 | File | Nội dung |
@@ -56,7 +56,7 @@ Số tuần = `(ngày − 21/09/2026) // 7 + 1`. Ví dụ: 26/10–01/11/2026 = 
 4. Cuối câu trả lời, báo ngắn: "Đã ghi vào biên bản Tuần XX (CR-YY)."
 - Câu hỏi thuần túy, giải thích, hoặc việc thực hiện theo quyết định đã có **không** phải yêu cầu thay đổi → không ghi.
 - Không chắc một yêu cầu có phải thay đổi không → hỏi người dùng.
-- Mục "Thành phần" dùng ký hiệu A–E như Project_Plan.md (người dùng có thể bổ sung tên thật sau).
+- Mục "Thành phần" ghi họ tên kèm ký hiệu A–E như Project_Plan.md, VD "Nguyễn Thanh Bình (A)".
 
 **Mẫu biên bản** (theo mẫu `4.Tai_lieu_khac/Group_X_Bien_ban_hop_Lan1.docx`):
 ```markdown

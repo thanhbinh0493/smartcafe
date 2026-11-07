@@ -8,7 +8,7 @@
 | Căn cứ | Use case & sequence (III.1), yêu cầu phi chức năng NFR (III.2), thiết kế CSDL / giao diện / API (IV.1–IV.3), quyết định D1–D39 |
 | Đầu vào | 9 luồng F0 → F8 đã "Đạt" và được duyệt (biên bản kiểm thử từng luồng, tổng 727 ca) |
 | Quyết định liên quan | CR-41 (bắt đầu giai đoạn VI, test case dạng Markdown), CR-42 / D38 (cache API đọc), CR-43 / D39 (mô hình tải NFR-P2/P3) |
-| Người lập | Thành viên D (Tester / QA) – duyệt: Thành viên A (PM) |
+| Người lập | Ngô Duy Đô (D – Tester / QA) – duyệt: Nguyễn Thanh Bình (A – PM) |
 
 ## 2. Mục tiêu
 1. Chứng minh **các luồng phối hợp đúng với nhau** trên hệ thống thật (không chỉ từng luồng riêng lẻ): dữ liệu do quản trị đổi hiện ngay ở điện thoại khách; đơn của khách đi qua Bar, thu ngân, tích điểm và vào báo cáo ngày đúng số liệu.

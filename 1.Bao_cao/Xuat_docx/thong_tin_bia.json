@@ -8,11 +8,31 @@
   "lop": "[ĐIỀN LỚP]",
   "nhom": "08",
   "thanh_vien": [
-    {"ho_ten": "Nguyễn Thanh Bình", "ma_sv": "[mã SV]", "vai_tro": "A – PM / Team Lead"},
-    {"ho_ten": "[Thành viên B]", "ma_sv": "[mã SV]", "vai_tro": "B – Backend"},
-    {"ho_ten": "[Thành viên C]", "ma_sv": "[mã SV]", "vai_tro": "C – AI"},
-    {"ho_ten": "[Thành viên D]", "ma_sv": "[mã SV]", "vai_tro": "D – Tester / QA"},
-    {"ho_ten": "[Thành viên E]", "ma_sv": "[mã SV]", "vai_tro": "E – Frontend"}
+    {
+      "ho_ten": "Nguyễn Thanh Bình",
+      "ma_sv": "[mã SV]",
+      "vai_tro": "A – PM / Team Lead"
+    },
+    {
+      "ho_ten": "Nguyễn Trường Thiên",
+      "ma_sv": "[mã SV]",
+      "vai_tro": "B – Backend"
+    },
+    {
+      "ho_ten": "Lê Minh Sơn",
+      "ma_sv": "[mã SV]",
+      "vai_tro": "C – AI"
+    },
+    {
+      "ho_ten": "Ngô Duy Đô",
+      "ma_sv": "[mã SV]",
+      "vai_tro": "D – Tester / QA"
+    },
+    {
+      "ho_ten": "Nguyễn Quang Tú",
+      "ma_sv": "[mã SV]",
+      "vai_tro": "E – Frontend"
+    }
   ],
   "noi_nam": "Hà Nội – 2026"
 }

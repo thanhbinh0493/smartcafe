@@ -2,8 +2,8 @@
 
 | Thông tin | Nội dung |
 |:---|:---|
-| Người thực hiện | Thành viên C |
-| Người review | Thành viên B |
+| Người thực hiện | Lê Minh Sơn (C) |
+| Người review | Nguyễn Trường Thiên (B) |
 | Thời gian | 25/09/2026 – 30/09/2026 (review 01/10/2026) |
 | Cập nhật | 01/11/2026 – bỏ IoT, gợi ý theo 2 chế độ, thêm OTP giả lập (biên bản Tuần 06, CR-09 → CR-14); 04/11/2026 – rà soát, đồng bộ với mã nguồn và kế hoạch D41 (CR-46) |
 

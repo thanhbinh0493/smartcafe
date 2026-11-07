@@ -7,8 +7,8 @@
 | Luồng | **F7 – AI gợi ý món**: UC03 (phần gợi ý), sơ đồ SD02; công thức chấm điểm 2 chế độ, FP-Growth "thường gọi kèm", thời tiết, đánh giá offline (II.2 Mục 2.3–2.5); khối gợi ý trên W01, W02 |
 | Phiên bản | 0.7.0 – nhánh `feature/f7-ai-goi-y` (tách từ `main` sau khi gộp F6, CR-37), mã nguồn `2.San_pham/smartcafe/` |
 | Ngày kiểm thử | 03/11/2026 |
-| Người lập biên bản | Thành viên D (Tester / QA) |
-| Người duyệt | Thành viên A (PM) – đã duyệt 03/11/2026 (CR-39); review mô hình AI: Thành viên C |
+| Người lập biên bản | Ngô Duy Đô (D – Tester / QA) |
+| Người duyệt | Nguyễn Thanh Bình (A – PM) – đã duyệt 03/11/2026 (CR-39); review mô hình AI: Lê Minh Sơn (C) |
 | Tài liệu căn cứ | [II.2 Mục 2](../Thiet_ke_he_thong/II.2_Nghien_cuu_cong_nghe.md), [III.1 UC03, SD02](../Thiet_ke_he_thong/III.1_Use_Case_Sequence.md), [III.2 NFR-P3, NFR-R1, NFR-S7, NFR-M3](../Thiet_ke_he_thong/III.2_Yeu_cau_phi_chuc_nang_Data_Model.md), [IV.1 bảng recommendation_logs, association_rules](../Thiet_ke_he_thong/IV.1_Thiet_ke_CSDL.md), [IV.2 W01, W02](../Thiet_ke_he_thong/IV.2_Thiet_ke_giao_dien.md), [IV.3](../Thiet_ke_he_thong/IV.3_Kien_truc_va_API.md); quyết định D1, D9, D13, D16, D27, **D32–D35** (CR-38) |
 | Tiền đề | F0 → F6 đạt ([F6](Bien_ban_kiem_thu_F6_Quan_tri.md)) |
 
@@ -177,6 +177,6 @@ Diễn giải chi tiết mà II.2 chưa quy định (cần C – AI review):
 
 | Vai trò | Họ tên | Ngày | Ký xác nhận |
 |:---|:---|:---|:---|
-| Người lập (Tester / QA) | Thành viên D | 03/11/2026 | |
-| PM duyệt | Thành viên A | 03/11/2026 | |
-| Review mô hình AI | Thành viên C | | |
+| Người lập (Tester / QA) | Ngô Duy Đô (D) | 03/11/2026 | |
+| PM duyệt | Nguyễn Thanh Bình (A) | 03/11/2026 | |
+| Review mô hình AI | Lê Minh Sơn (C) | | |

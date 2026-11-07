@@ -6,7 +6,7 @@
 | Môn học | Quản lý dự án phần mềm – Nhóm 8 |
 | Thời gian dự án | 21/09/2026 → 16/11/2026 (8 tuần, D41) |
 | Ngày lập báo cáo | 10/11/2026 (giai đoạn IX – Báo cáo tổng thể dự án) |
-| Người lập | Thành viên A – Nguyễn Thanh Bình (PM); cả nhóm review |
+| Người lập | Nguyễn Thanh Bình (A – PM); cả nhóm review |
 | Cấu trúc | Theo mẫu báo cáo môn học `Nhom_X_Bao_cao.docx` (10 phần). Phần IV, VII, VIII viết theo quyết định D43 (CR-48) |
 
 # PHẦN I: GIỚI THIỆU CHUNG VỀ NHÓM
@@ -16,22 +16,22 @@
 | Ký hiệu | Họ và tên | Mã sinh viên | Vai trò trong dự án |
 |:---|:---|:---|:---|
 | A | Nguyễn Thanh Bình | [mã SV] | Project Manager / Team Lead, phân tích nghiệp vụ (BA) |
-| B | [Thành viên B] | [mã SV] | Backend Developer: API, cơ sở dữ liệu |
-| C | [Thành viên C] | [mã SV] | AI Specialist: gợi ý món, OTP & tích điểm, dữ liệu mẫu; hỗ trợ backend |
-| D | [Thành viên D] | [mã SV] | Tester / QA, thư ký các buổi họp, tài liệu |
-| E | [Thành viên E] | [mã SV] | Frontend Developer: Web Admin, giao diện QR Order |
+| B | Nguyễn Trường Thiên | [mã SV] | Backend Developer: API, cơ sở dữ liệu |
+| C | Lê Minh Sơn | [mã SV] | AI Specialist: gợi ý món, OTP & tích điểm, dữ liệu mẫu; hỗ trợ backend |
+| D | Ngô Duy Đô | [mã SV] | Tester / QA, thư ký các buổi họp, tài liệu |
+| E | Nguyễn Quang Tú | [mã SV] | Frontend Developer: Web Admin, giao diện QR Order |
 
-*Họ tên và mã sinh viên của các thành viên B–E điền theo `1.Bao_cao/Xuat_docx/thong_tin_bia.json`.*
+*Mã sinh viên điền theo `1.Bao_cao/Xuat_docx/thong_tin_bia.json` (dùng chung cho trang bìa và slide).*
 
 ## 2. Phân công các thành viên
 
 | Thành viên | Công việc chính (theo bảng phân công `Nhom_8_Phan_cong.xlsx`) | Review / duyệt |
 |:---|:---|:---|
-| A | Phạm vi, WBS, kế hoạch; Use Case + Sequence (III.1); chủ trì họp, chốt 44 quyết định (D1–D44) và 49 yêu cầu thay đổi (CR-01 → CR-49); duyệt kết quả từng luồng; chuẩn hóa tài liệu; báo cáo tổng kết; diễn tập demo | Review thiết kế CSDL, kiến trúc & API, khảo sát; duyệt mọi biên bản kiểm thử |
-| B | Thiết kế CSDL 18 bảng (IV.1), kiến trúc & API (IV.3); backend các luồng F0 → F8; sửa lỗi kiểm thử hệ thống (cache API đọc, WebSocket) | Review nghiên cứu công nghệ, Use Case |
-| C | Nghiên cứu công nghệ (II.2); AI gợi ý món 2 chế độ + FP-Growth (F7); OTP giả lập, tích điểm (F4); script sinh dữ liệu lịch sử `seed_orders.py`, đánh giá Hit Rate@5 | Review NFR & data model (III.2) |
-| D | Khảo sát quy trình (II.1); NFR & data model (III.2); lập 10 biên bản kiểm thử, kế hoạch + kiểm thử hệ thống; Hướng dẫn sử dụng; thư ký biên bản họp; xuất tài liệu Word; biên bản nghiệm thu | Review thiết kế giao diện (IV.2) |
-| E | Thiết kế giao diện, wireframe W00–W08 (IV.2); frontend QR Order + Web Admin các luồng F1 → F8; slide bảo vệ; diễn tập demo | Review chung các hạng mục "Cả nhóm" |
+| A – Nguyễn Thanh Bình | Phạm vi, WBS, kế hoạch; Use Case + Sequence (III.1); chủ trì họp, chốt 44 quyết định (D1–D44) và 49 yêu cầu thay đổi (CR-01 → CR-49); duyệt kết quả từng luồng; chuẩn hóa tài liệu; báo cáo tổng kết; diễn tập demo | Review thiết kế CSDL, kiến trúc & API, khảo sát; duyệt mọi biên bản kiểm thử |
+| B – Nguyễn Trường Thiên | Thiết kế CSDL 18 bảng (IV.1), kiến trúc & API (IV.3); backend các luồng F0 → F8; sửa lỗi kiểm thử hệ thống (cache API đọc, WebSocket) | Review nghiên cứu công nghệ, Use Case |
+| C – Lê Minh Sơn | Nghiên cứu công nghệ (II.2); AI gợi ý món 2 chế độ + FP-Growth (F7); OTP giả lập, tích điểm (F4); script sinh dữ liệu lịch sử `seed_orders.py`, đánh giá Hit Rate@5 | Review NFR & data model (III.2) |
+| D – Ngô Duy Đô | Khảo sát quy trình (II.1); NFR & data model (III.2); lập 10 biên bản kiểm thử, kế hoạch + kiểm thử hệ thống; Hướng dẫn sử dụng; thư ký biên bản họp; xuất tài liệu Word; biên bản nghiệm thu | Review thiết kế giao diện (IV.2) |
+| E – Nguyễn Quang Tú | Thiết kế giao diện, wireframe W00–W08 (IV.2); frontend QR Order + Web Admin các luồng F1 → F8; slide bảo vệ; diễn tập demo | Review chung các hạng mục "Cả nhóm" |
 
 Không có thành viên nào vắng họp hay không nộp phần việc được giao: mọi buổi họp trong biên bản đều ghi đủ 5 thành viên có mặt; mọi hạng mục trong bảng phân công đến 10/11/2026 đều "Hoàn thành" hoặc đang làm đúng hạn.
 
@@ -133,11 +133,11 @@ Dự án là đồ án môn học nên **không phát sinh chi phí tiền mặt
 ## 3. Chi tiết dự toán theo nhân sự
 | Thành viên | Công trực tiếp | Review | Họp + biên bản | Tổng ngày công | Đơn giá (đ) | Thành tiền (đ) |
 |:---|---:|---:|---:|---:|---:|---:|
-| A – PM | 9,50 | 5,25 | 1,00 | 15,75 | 800.000 | 12.600.000 |
-| B – Backend | 21,50 | 1,25 | 1,00 | 23,75 | 600.000 | 14.250.000 |
-| C – AI | 10,00 | 1,00 | 1,00 | 12,00 | 600.000 | 7.200.000 |
-| D – Tester / QA | 11,50 | 1,00 | 3,00 | 15,50 | 600.000 | 9.300.000 |
-| E – Frontend | 21,50 | 0,75 | 1,00 | 23,25 | 600.000 | 13.950.000 |
+| Nguyễn Thanh Bình (A – PM) | 9,50 | 5,25 | 1,00 | 15,75 | 800.000 | 12.600.000 |
+| Nguyễn Trường Thiên (B – Backend) | 21,50 | 1,25 | 1,00 | 23,75 | 600.000 | 14.250.000 |
+| Lê Minh Sơn (C – AI) | 10,00 | 1,00 | 1,00 | 12,00 | 600.000 | 7.200.000 |
+| Ngô Duy Đô (D – Tester / QA) | 11,50 | 1,00 | 3,00 | 15,50 | 600.000 | 9.300.000 |
+| Nguyễn Quang Tú (E – Frontend) | 21,50 | 0,75 | 1,00 | 23,25 | 600.000 | 13.950.000 |
 | **Tổng** | **74,00** | **9,25** | **7,00** | **90,25** | | **57.300.000** |
 
 ## 4. Phân bổ công trực tiếp theo giai đoạn
@@ -168,11 +168,11 @@ Xem Phần I.1. Cơ cấu: 1 PM / BA, 1 Backend, 1 AI (kiêm hỗ trợ backend)
 ## 2. Thông tin, kỹ năng và trách nhiệm từng nhân sự
 | Thành viên | Kỹ năng sử dụng trong dự án | Trách nhiệm | Sản phẩm bàn giao |
 |:---|:---|:---|:---|
-| A | Phân tích nghiệp vụ, UML (PlantUML), lập kế hoạch, kiểm soát thay đổi | Ra quyết định phạm vi / thiết kế, điều phối, duyệt từng luồng | Phạm vi, kế hoạch, III.1, biên bản duyệt, báo cáo tổng kết |
-| B | Python, FastAPI, SQLAlchemy, Alembic, PostgreSQL, WebSocket, Docker | Thiết kế CSDL, API, backend; hiệu năng | IV.1, IV.3, `backend/` (~4.300 dòng mã + ~4.700 dòng test) |
-| C | Hệ gợi ý, khai phá luật kết hợp (FP-Growth, mlxtend), pandas | Mô hình gợi ý, dữ liệu mẫu, đánh giá mô hình; OTP, tích điểm | II.2, `recommend/`, `seed_orders.py`, `evaluate_recommender.py` |
-| D | Kiểm thử (pytest, Vitest, Playwright), viết tài liệu | Kế hoạch & biên bản kiểm thử, kiểm thử hệ thống, HDSD, biên bản họp | II.1, III.2, 10 biên bản kiểm thử, `system_test/`, HDSD |
-| E | React, TypeScript, Tailwind CSS, Vite, thiết kế giao diện | Wireframe, giao diện QR Order + Web Admin, slide | IV.2, `frontend/` (~4.800 dòng mã + ~2.200 dòng test) |
+| A – Nguyễn Thanh Bình | Phân tích nghiệp vụ, UML (PlantUML), lập kế hoạch, kiểm soát thay đổi | Ra quyết định phạm vi / thiết kế, điều phối, duyệt từng luồng | Phạm vi, kế hoạch, III.1, biên bản duyệt, báo cáo tổng kết |
+| B – Nguyễn Trường Thiên | Python, FastAPI, SQLAlchemy, Alembic, PostgreSQL, WebSocket, Docker | Thiết kế CSDL, API, backend; hiệu năng | IV.1, IV.3, `backend/` (~4.300 dòng mã + ~4.700 dòng test) |
+| C – Lê Minh Sơn | Hệ gợi ý, khai phá luật kết hợp (FP-Growth, mlxtend), pandas | Mô hình gợi ý, dữ liệu mẫu, đánh giá mô hình; OTP, tích điểm | II.2, `recommend/`, `seed_orders.py`, `evaluate_recommender.py` |
+| D – Ngô Duy Đô | Kiểm thử (pytest, Vitest, Playwright), viết tài liệu | Kế hoạch & biên bản kiểm thử, kiểm thử hệ thống, HDSD, biên bản họp | II.1, III.2, 10 biên bản kiểm thử, `system_test/`, HDSD |
+| E – Nguyễn Quang Tú | React, TypeScript, Tailwind CSS, Vite, thiết kế giao diện | Wireframe, giao diện QR Order + Web Admin, slide | IV.2, `frontend/` (~4.800 dòng mã + ~2.200 dòng test) |
 
 ## 3. Ma trận trách nhiệm (RACI) các hạng mục chính
 R = thực hiện, A = chịu trách nhiệm phê duyệt, C = tham vấn, I = được thông báo.
@@ -252,7 +252,7 @@ Nhật ký dựa trên biên bản họp (49 CR) và lịch sử commit của kh
 | 10/11 → 16/11 | Báo cáo tổng kết, slide, diễn tập demo, nghiệm thu | Kế hoạch |
 
 ## 2. Nhật ký giám sát chất lượng
-Mỗi luồng / giai đoạn đi qua một **cổng kiểm soát**: test tự động 100% đạt → biên bản kiểm thử (Thành viên D lập) → PM duyệt (ghi CR) → gộp vào nhánh `main`.
+Mỗi luồng / giai đoạn đi qua một **cổng kiểm soát**: test tự động 100% đạt → biên bản kiểm thử (Ngô Duy Đô – D lập) → PM duyệt (ghi CR) → gộp vào nhánh `main`.
 
 | Cổng | Ngày duyệt | Kết quả kiểm thử | Hồi quy các luồng trước | Quyết định |
 |:---|:---|:---|:---|:---|
@@ -321,7 +321,7 @@ Thang đánh giá: Xác suất (Thấp / Trung bình / Cao) × Ảnh hưởng (T
 - **Hồ sơ 3 – Hướng dẫn sử dụng** – `SmartCafe_3_Huong_dan_su_dung.docx`.
 
 ## 2. Slide thuyết trình
-`3.Slide/` – slide bảo vệ cuối kỳ (Thành viên E, 12–14/11).
+`3.Slide/` – slide bảo vệ cuối kỳ (Nguyễn Quang Tú – E, 12–14/11).
 
 ## 3. Căn cứ, tài liệu liên quan (kèm theo)
 - **Mã nguồn** `2.San_pham/smartcafe/` (kho GitHub `thanhbinh0493/smartcafe`): backend, frontend, test tự động, script kiểm thử hệ thống, `docker-compose.yml`.
