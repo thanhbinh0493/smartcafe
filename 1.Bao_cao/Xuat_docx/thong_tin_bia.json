@@ -1,11 +1,11 @@
 {
-  "_huong_dan": "Điền các ô [ ... ] một lần rồi chạy lại xuat_docx.py – mọi trang bìa tự cập nhật. Để trống bo_mon thì bìa bỏ dòng bộ môn.",
+  "_huong_dan": "Điền các ô [ ... ] một lần rồi chạy lại xuat_docx.py – mọi trang bìa tự cập nhật. Để trống bo_mon / lop thì bìa bỏ dòng tương ứng.",
   "khoa": "KHOA CÔNG NGHỆ THÔNG TIN",
   "bo_mon": "",
   "mon_hoc": "QUẢN LÝ DỰ ÁN PHẦN MỀM",
   "de_tai": "SmartCafe – Phần mềm quản lý chuỗi quán cà phê thông minh (tích hợp AI và QR)",
   "giang_vien": "Mai Ngọc Lương",
-  "lop": "[ĐIỀN LỚP]",
+  "lop": "",
   "nhom": "08",
   "thanh_vien": [
     {

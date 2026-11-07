@@ -558,11 +558,16 @@ def tao_bia(tieu_de: str, out: Path, cfg: dict) -> None:
     t = doc.tables[0]
     rows = t.rows
     labels = [("Giảng viên hướng dẫn", ": " + cfg["giang_vien"]), ("Nhóm", ": " + cfg["nhom"]),
-              ("Lớp", ": " + cfg["lop"]), ("Thành viên", ":")]
+              ("Lớp", ": " + cfg.get("lop", "")), ("Thành viên", ":")]
     for row, (a, b) in zip(rows[:4], labels):
         set_text(row.cells[0].paragraphs[0], a)
         set_text(row.cells[1].paragraphs[0], b)
     tmpl = rows[4]._tr
+    dau = 4                                             # chỉ số dòng thành viên đầu tiên
+    if not cfg.get("lop", "").strip():                  # môn quản lý theo nhóm → không ghi lớp
+        tr_lop = rows[2]._tr
+        tr_lop.getparent().remove(tr_lop)
+        dau = 3
     members = cfg["thanh_vien"]
     prev = tmpl
     for k, m in enumerate(members):
@@ -571,7 +576,7 @@ def tao_bia(tieu_de: str, out: Path, cfg: dict) -> None:
             prev.addnext(tr)
         prev = tr
     for k, m in enumerate(members):
-        row = t.rows[4 + k]
+        row = t.rows[dau + k]
         set_text(row.cells[0].paragraphs[0], "   " + m["ho_ten"])
         set_text(row.cells[1].paragraphs[0], ": " + m["ma_sv"])
         for c in row.cells:
