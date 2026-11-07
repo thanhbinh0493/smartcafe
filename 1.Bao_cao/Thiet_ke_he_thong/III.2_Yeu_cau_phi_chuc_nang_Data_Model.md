@@ -5,7 +5,7 @@
 | Người thực hiện | Ngô Duy Đô (D) |
 | Người review | Lê Minh Sơn (C) |
 | Thời gian | 05/10/2026 – 08/10/2026 (review 09/10/2026) |
-| Cập nhật | 01/11/2026 – bỏ IoT; thêm OTP, tích điểm, khuyến mãi (CR-09 → CR-14); 03/11/2026 – mô hình tải NFR-P2/P3 (D39); 04/11/2026 – rà soát, đồng bộ với mã nguồn và kế hoạch D41 (CR-46) |
+| Cập nhật | 05/10/2026 – bỏ IoT; thêm OTP, tích điểm, khuyến mãi (CR-09 → CR-14); 03/11/2026 – mô hình tải NFR-P2/P3 (D39); 06/11/2026 – rà soát, đồng bộ với mã nguồn và kế hoạch D41 (CR-46) |
 
 ## 1. Yêu cầu phi chức năng (Non-functional Requirements)
 

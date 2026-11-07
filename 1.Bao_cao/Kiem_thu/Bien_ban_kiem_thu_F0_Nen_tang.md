@@ -5,10 +5,10 @@
 |:---|:---|
 | Dự án | SmartCafe – Phần mềm quản lý chuỗi quán cà phê thông minh (Nhóm 8) |
 | Luồng | **F0 – Nền tảng**: hạ tầng Docker Compose, CSDL 18 bảng (Alembic), dữ liệu mẫu, đăng nhập nhân viên, phân quyền RBAC, định dạng lỗi |
-| Phiên bản | 0.1.0 (bản build 02/11/2026) – mã nguồn `2.San_pham/smartcafe/` |
-| Ngày kiểm thử | 02/11/2026 |
+| Phiên bản | 0.1.0 (bản build 21/10/2026) – mã nguồn `2.San_pham/smartcafe/` |
+| Ngày kiểm thử | 21/10/2026 |
 | Người lập biên bản | Ngô Duy Đô (D – Tester / QA) |
-| Người duyệt | Nguyễn Thanh Bình (A – PM) – đã duyệt 02/11/2026 (trước khi bắt đầu F2) |
+| Người duyệt | Nguyễn Thanh Bình (A – PM) – đã duyệt 22/10/2026 (trước khi bắt đầu F2) |
 | Tài liệu căn cứ | [IV.1 Thiết kế CSDL](../Thiet_ke_he_thong/IV.1_Thiet_ke_CSDL.md), [IV.3 Kiến trúc & API](../Thiet_ke_he_thong/IV.3_Kien_truc_va_API.md), [III.1 Use case + ma trận RBAC](../Thiet_ke_he_thong/III.1_Use_Case_Sequence.md), [III.2 NFR](../Thiet_ke_he_thong/III.2_Yeu_cau_phi_chuc_nang_Data_Model.md) |
 
 ## 2. Phạm vi
@@ -148,12 +148,12 @@ cd backend;  .\.venv\Scripts\python -m scripts.smoke_test --qr-token <token>
 - Cảnh báo (mức Thấp) khi chạy test: Starlette khuyến nghị thay `httpx` bằng `httpx2` cho TestClient. Không ảnh hưởng kết quả; theo dõi khi nâng cấp thư viện.
 - Phân quyền mới được kiểm qua endpoint giả trong test; các API nhân viên thật sẽ dùng chung dependency này và được kiểm lại ở F3, F5, F6, F8.
 - Chưa có giới hạn số lần đăng nhập sai (chống dò mật khẩu) – thiết kế chưa yêu cầu; đề xuất xem xét ở F6.
-- `schema.sql` (IV.1) **đã chạy thành công trên PostgreSQL 16 thật** qua migration `0001` – đóng việc "chạy thử schema.sql" trong biên bản Tuần 06.
+- `schema.sql` (IV.1) **đã chạy thành công trên PostgreSQL 16 thật** qua migration `0001` – đóng việc "chạy thử schema.sql" của giai đoạn IV (thiết kế CSDL).
 
 ## 8. Kết luận
 **Luồng F0: ĐẠT.** 48/48 ca kiểm thử đạt, 2 lỗi mức Cao đã sửa và kiểm tra lại. Đủ điều kiện làm nền cho các luồng tiếp theo.
 
 | Vai trò | Họ tên | Ngày | Ký xác nhận |
 |:---|:---|:---|:---|
-| Người lập (Tester / QA) | Ngô Duy Đô (D) | 02/11/2026 | |
-| PM duyệt | Nguyễn Thanh Bình (A) | 02/11/2026 | |
+| Người lập (Tester / QA) | Ngô Duy Đô (D) | 21/10/2026 | |
+| PM duyệt | Nguyễn Thanh Bình (A) | 22/10/2026 | |

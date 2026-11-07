@@ -5,10 +5,10 @@
 |:---|:---|
 | Dự án | SmartCafe – Phần mềm quản lý chuỗi quán cà phê thông minh (Nhóm 8) |
 | Luồng | **F3 – Màn hình Bar**: UC17 (xem hàng đợi), UC18 (Bắt đầu / Xong / Hoàn tác), UC19 (Đã giao, cộng điểm) – sơ đồ SD04, SD06 (phần giao đồ) |
-| Phiên bản | 0.3.0 – nhánh `feature/f2-dat-mon`, đã gộp vào `main` ngày 03/11/2026 (CR-34), mã nguồn `2.San_pham/smartcafe/` |
-| Ngày kiểm thử | 03/11/2026 |
+| Phiên bản | 0.3.0 – nhánh `feature/f2-dat-mon`, đã gộp vào `main` ngày 28/10/2026 (CR-34), mã nguồn `2.San_pham/smartcafe/` |
+| Ngày kiểm thử | 27/10/2026 |
 | Người lập biên bản | Ngô Duy Đô (D – Tester / QA) |
-| Người duyệt | Nguyễn Thanh Bình (A – PM) – đã duyệt 03/11/2026 (CR-34) |
+| Người duyệt | Nguyễn Thanh Bình (A – PM) – đã duyệt 28/10/2026 (CR-34) |
 | Tài liệu căn cứ | [III.1 UC17–UC19](../Thiet_ke_he_thong/III.1_Use_Case_Sequence.md), SD04, biểu đồ trạng thái đơn, [IV.2 W04](../Thiet_ke_he_thong/IV.2_Thiet_ke_giao_dien.md), [IV.3 API + WebSocket](../Thiet_ke_he_thong/IV.3_Kien_truc_va_API.md), [IV.1 bảng orders, order_items, order_status_history, loyalty_transactions](../Thiet_ke_he_thong/IV.1_Thiet_ke_CSDL.md); NFR-P4, NFR-R3, NFR-S2; quyết định D8, D11, D15, D19, D20, D28 |
 | Tiền đề | F0, F1, F2 đạt ([F0](Bien_ban_kiem_thu_F0_Nen_tang.md), [F1](Bien_ban_kiem_thu_F1_QR_Menu.md), [F2](Bien_ban_kiem_thu_F2_Dat_mon_Thanh_toan.md)) |
 
@@ -97,7 +97,7 @@ cd backend;  .\.venv\Scripts\python -m scripts.smoke_test --qr-token <token bàn
 | F3-FE-13 | UC06 | W03 nhận `QUEUE_POSITION` | Vị trí cập nhật ngay, không gọi lại REST | Đạt | `OrderPage.test.tsx` |
 | F3-FE-14 | UC19, D11 | W03 nhận `ORDER_COMPLETED` có / không có điểm | "Bạn đã nhận đồ. Cảm ơn bạn!" + "Bạn được cộng 9 điểm tích lũy."; khách ẩn danh không hiện dòng điểm | Đạt | 〃 |
 | F3-FE-15 | UC17 quy tắc | Âm báo Web Audio | Bíp 880 Hz, 0,25 giây; dùng chung 1 AudioContext; trình duyệt không hỗ trợ / chặn âm thanh thì bỏ qua, không lỗi | Đạt | `beep.test.ts` |
-| F3-FE-16 | Hồi quy BUG-F3-02 | Hàng đợi có đơn CG-0002 của hôm trước và đơn hôm nay | Đơn hôm trước hiện "02/11 08:00", đơn hôm nay chỉ hiện "08:10" | Đạt | `BarPage.test.tsx` |
+| F3-FE-16 | Hồi quy BUG-F3-02 | Hàng đợi có đơn CG-0002 của hôm trước và đơn hôm nay | Đơn hôm trước hiện "26/10 08:00", đơn hôm nay chỉ hiện "08:10" | Đạt | `BarPage.test.tsx` |
 
 ### 4.6. Kiểm thử khói trên hệ thống chạy thật (qua Nginx, `docker compose`)
 | Mã TC | Mô tả | Kết quả thực tế | KQ |
@@ -160,10 +160,10 @@ Log: [logs/F3_e2e_trinh_duyet.txt](logs/F3_e2e_trinh_duyet.txt). Ảnh chụp:
 | Mã lỗi | Mức độ | Mô tả | Phát hiện bởi | Nguyên nhân | Cách sửa | Kiểm tra lại | Trạng thái |
 |:---|:---|:---|:---|:---|:---|:---|:---|
 | BUG-F3-01 | Thấp | Bấm "Xong" khi món chưa "Bắt đầu" (đơn còn PAID) báo sai "Đơn không còn trong hàng đợi" thay vì "Cần bấm Bắt đầu trước" | Test F3-09b | `done_item` chỉ chấp nhận đơn PREPARING nên kiểm tra trạng thái đơn chặn trước kiểm tra trạng thái món | Kiểm tra đơn còn trong hàng đợi (PAID/PREPARING) trước, rồi mới kiểm tra món | F3-09a…e đạt | Đã đóng |
-| BUG-F3-02 | Trung bình | Màn hình Bar hiện **2 đơn cùng mã CG-0002** (một đơn tối 02/11 còn tồn, một đơn sáng 03/11), pha chế không phân biệt được vì cột giờ gọi chỉ có giờ:phút | E2E-13 (locator tìm thấy 4 dòng thay vì 2) | Mã đơn đếm lại mỗi ngày (D28) nên đơn tồn từ hôm trước có thể trùng mã đơn hôm nay | Đơn không thuộc ngày hiện tại (theo giờ server, múi giờ VN) hiện giờ gọi kèm ngày "dd/MM HH:mm" | F3-FE-16, E2E-23 đạt | Đã đóng |
+| BUG-F3-02 | Trung bình | Màn hình Bar hiện **2 đơn cùng mã CG-0002** (một đơn tối 26/10 còn tồn, một đơn sáng 27/10), pha chế không phân biệt được vì cột giờ gọi chỉ có giờ:phút | E2E-13 (locator tìm thấy 4 dòng thay vì 2) | Mã đơn đếm lại mỗi ngày (D28) nên đơn tồn từ hôm trước có thể trùng mã đơn hôm nay | Đơn không thuộc ngày hiện tại (theo giờ server, múi giờ VN) hiện giờ gọi kèm ngày "dd/MM HH:mm" | F3-FE-16, E2E-23 đạt | Đã đóng |
 
 ## 7. Tồn tại / ghi chú
-- **P15 – đã chốt → D30 (CR-34, 03/11):** "Hoàn tác" món cuối cùng (đã làm đơn chuyển "Có thể lấy") thì **đơn quay lại "Đang pha chế"** (READY → PREPARING, có ghi lịch sử, khách thấy lại "Đang pha"). Đã bổ sung chuyển READY → PREPARING vào biểu đồ trạng thái đơn. Đã cài theo phương án này (F3-12, E2E-18). Phương án thay thế: không cho hoàn tác khi đơn đã "Có thể lấy".
+- **P15 – đã chốt → D30 (CR-34, 28/10):** "Hoàn tác" món cuối cùng (đã làm đơn chuyển "Có thể lấy") thì **đơn quay lại "Đang pha chế"** (READY → PREPARING, có ghi lịch sử, khách thấy lại "Đang pha"). Đã bổ sung chuyển READY → PREPARING vào biểu đồ trạng thái đơn. Đã cài theo phương án này (F3-12, E2E-18). Phương án thay thế: không cho hoàn tác khi đơn đã "Có thể lấy".
 - Thời gian hoàn tác: nút hiện **10 giây** đúng UC18 – 3a; server chấp nhận tới 15 giây để bù trễ mạng (chi tiết kỹ thuật, không đổi quy tắc nghiệp vụ).
 - **Đơn tồn từ hôm trước** (đã thanh toán nhưng chưa pha) vẫn nằm trong hàng đợi và tô đỏ. Thực tế quán cần hủy & hoàn tiền các đơn này (UC20 – làm ở F5); hiện đã hiển thị kèm ngày để không nhầm (BUG-F3-02).
 - **Âm báo** dùng Web Audio; trình duyệt chỉ cho phát âm thanh sau lần bấm đầu tiên vào trang. Khi mở ca, pha chế cần bấm vào màn hình 1 lần (bấm bất kỳ nút nào cũng được); thông báo chữ "Có món mới" luôn hiện.
@@ -176,5 +176,5 @@ Log: [logs/F3_e2e_trinh_duyet.txt](logs/F3_e2e_trinh_duyet.txt). Ảnh chụp:
 
 | Vai trò | Họ tên | Ngày | Ký xác nhận |
 |:---|:---|:---|:---|
-| Người lập (Tester / QA) | Ngô Duy Đô (D) | 03/11/2026 | |
-| PM duyệt | Nguyễn Thanh Bình (A) | 03/11/2026 | |
+| Người lập (Tester / QA) | Ngô Duy Đô (D) | 27/10/2026 | |
+| PM duyệt | Nguyễn Thanh Bình (A) | 28/10/2026 | |

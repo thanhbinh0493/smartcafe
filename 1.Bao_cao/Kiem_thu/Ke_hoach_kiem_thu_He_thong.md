@@ -7,7 +7,7 @@
 | Giai đoạn | VI – Kiểm thử (Project_Plan: Lập test case, Test ứng dụng / log bug / fix bug) |
 | Căn cứ | Use case & sequence (III.1), yêu cầu phi chức năng NFR (III.2), thiết kế CSDL / giao diện / API (IV.1–IV.3), quyết định D1–D39 |
 | Đầu vào | 9 luồng F0 → F8 đã "Đạt" và được duyệt (biên bản kiểm thử từng luồng, tổng 727 ca) |
-| Quyết định liên quan | CR-41 (bắt đầu giai đoạn VI, test case dạng Markdown), CR-42 / D38 (cache API đọc), CR-43 / D39 (mô hình tải NFR-P2/P3) |
+| Quyết định liên quan | CR-41 (bắt đầu giai đoạn VI), CR-42 / D38 (cache API đọc), CR-43 / D39 (mô hình tải NFR-P2/P3) |
 | Người lập | Ngô Duy Đô (D – Tester / QA) – duyệt: Nguyễn Thanh Bình (A – PM) |
 
 ## 2. Mục tiêu
@@ -68,7 +68,7 @@
 ## 8. Phân công & lịch
 | Việc | Người thực hiện | Review | Thời gian |
 |:---|:---|:---|:---|
-| Lập kế hoạch + test case, viết script | D | A | 03/11/2026 |
+| Lập kế hoạch + test case, viết script | D | A | 02/11/2026 |
 | Chạy kiểm thử, ghi lỗi | D | A | 03/11/2026 |
 | Sửa lỗi backend / frontend + test hồi quy | B, E (C: phần gợi ý) | D | 03/11/2026 |
 | Chạy lại toàn bộ (hồi quy) + lập biên bản | D | A | 03/11/2026 |

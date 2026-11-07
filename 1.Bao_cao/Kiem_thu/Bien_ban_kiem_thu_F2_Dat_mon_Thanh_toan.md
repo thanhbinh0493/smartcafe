@@ -6,9 +6,9 @@
 | Dự án | SmartCafe – Phần mềm quản lý chuỗi quán cà phê thông minh (Nhóm 8) |
 | Luồng | **F2 – Đặt món & thanh toán giả lập** (khách ẩn danh): UC04, UC05, UC06 – sơ đồ SD03 |
 | Phiên bản | 0.2.0 – nhánh `feature/f2-dat-mon`, mã nguồn `2.San_pham/smartcafe/` |
-| Ngày kiểm thử | 02/11/2026 |
+| Ngày kiểm thử | 25/10/2026 |
 | Người lập biên bản | Ngô Duy Đô (D – Tester / QA) |
-| Người duyệt | Nguyễn Thanh Bình (A – PM) – đã duyệt 03/11/2026 (CR-34) |
+| Người duyệt | Nguyễn Thanh Bình (A – PM) – đã duyệt 28/10/2026 (CR-34) |
 | Tài liệu căn cứ | [III.1 UC04–UC06](../Thiet_ke_he_thong/III.1_Use_Case_Sequence.md), SD03, [IV.2 W02, W03](../Thiet_ke_he_thong/IV.2_Thiet_ke_giao_dien.md), [IV.3 API + WebSocket](../Thiet_ke_he_thong/IV.3_Kien_truc_va_API.md), [II.2 Mock Payment](../Thiet_ke_he_thong/II.2_Nghien_cuu_cong_nghe.md), NFR-S6, NFR-R3, NFR-R4, NFR-P4, NFR-U2, NFR-M4; quyết định D22, D27, **D28** |
 | Tiền đề | F0, F1 đạt ([F0](Bien_ban_kiem_thu_F0_Nen_tang.md), [F1](Bien_ban_kiem_thu_F1_QR_Menu.md)) |
 
@@ -158,7 +158,7 @@ Kịch bản: quét QR bàn CG-05 → "Xem menu ngay" → thêm Cà phê sữa �
 | BUG-F2-01 | Thấp | Số bàn hiện 2 lần trên W03 (thanh tiêu đề + cạnh mã đơn) và W02 ("Giỏ hàng – Bàn 05") | Test F2-FE-10 báo "Found multiple elements"; ảnh chụp W02 | Tiêu đề trang lặp lại thông tin đã có trên thanh tiêu đề chung | Bỏ số bàn khỏi tiêu đề W02, W03 | Thêm kiểm tra "số bàn chỉ hiện 1 lần" vào F2-FE-03…09 và F2-FE-10; 47/47 đạt | Đã đóng |
 
 ## 7. Tồn tại / ghi chú
-- **P14 – PM đã chốt ngày 03/11/2026 (D29, CR-33):** màn hình W01a (popup chi tiết món: số lượng, ghi chú) trong thiết kế **được gộp vào W02**: bấm "+" trên menu là thêm ngay, số lượng và ghi chú chỉnh ở giỏ hàng. Lý do: đạt NFR-U2 với 5 lần chạm (nếu có popup thì cần ≥ 7 lần).
+- **P14 – PM đã chốt ngày 25/10/2026 (D29, CR-33):** màn hình W01a (popup chi tiết món: số lượng, ghi chú) trong thiết kế **được gộp vào W02**: bấm "+" trên menu là thêm ngay, số lượng và ghi chú chỉnh ở giỏ hàng. Lý do: đạt NFR-U2 với 5 lần chạm (nếu có popup thì cần ≥ 7 lần).
 - **Demo luồng thanh toán thất bại:** quy tắc "số tiền tận cùng 999" không xảy ra với dữ liệu mẫu (giá chẵn trăm). Đã kiểm bằng test tự động (F2-16, F2-17, F2-FE-08). Muốn demo trực tiếp cần một món giá dạng 29.999đ (tạo ở F6 hoặc thêm vào dữ liệu mẫu).
 - Đơn PENDING_PAYMENT bị bỏ dở hiện vẫn nằm trong CSDL; quy tắc tự hủy sau 15 phút chỉ **mô tả** (D22), không ảnh hưởng hàng đợi Bar (chỉ tính đơn đã thanh toán).
 - API `POST /api/public/orders` nhận thêm `expected_total` để phát hiện giá thay đổi và trả thêm `subtotal`, `discount`, `items`; bổ sung mã lỗi `QUANTITY_LIMIT`, `ORDER_NOT_FOUND`; WebSocket bổ sung sự kiện `ORDER_SNAPSHOT`, `ORDER_PAID` – đã cập nhật [IV.3](../Thiet_ke_he_thong/IV.3_Kien_truc_va_API.md).
@@ -170,5 +170,5 @@ Kịch bản: quét QR bàn CG-05 → "Xem menu ngay" → thêm Cà phê sữa �
 
 | Vai trò | Họ tên | Ngày | Ký xác nhận |
 |:---|:---|:---|:---|
-| Người lập (Tester / QA) | Ngô Duy Đô (D) | 02/11/2026 | |
-| PM duyệt | Nguyễn Thanh Bình (A) | 03/11/2026 | |
+| Người lập (Tester / QA) | Ngô Duy Đô (D) | 25/10/2026 | |
+| PM duyệt | Nguyễn Thanh Bình (A) | 28/10/2026 | |

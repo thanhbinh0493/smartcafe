@@ -5,7 +5,7 @@
 | Người thực hiện | Ngô Duy Đô (D) |
 | Người review | Nguyễn Thanh Bình (A – PM) |
 | Thời gian | 25/09/2026 – 29/09/2026 (review 30/09/2026) |
-| Cập nhật | 04/11/2026 – rà soát, đồng bộ với mã nguồn và kế hoạch D41 (CR-46) |
+| Cập nhật | 06/11/2026 – rà soát, đồng bộ với mã nguồn và kế hoạch D41 (CR-46) |
 | Hình thức | Khảo sát giả định dựa trên mô hình chuỗi cà phê điển hình tại Việt Nam (3–10 chi nhánh, bán mang đi + ngồi tại chỗ), kèm bộ câu hỏi để nhóm đối chiếu với quán thực tế |
 
 > **Lưu ý:** Số liệu trong tài liệu này là giả định mang tính điển hình, phục vụ phân tích. Nếu nhóm đi khảo sát được một quán thật, cập nhật Mục 5 và ghi nguồn ở Mục 6.

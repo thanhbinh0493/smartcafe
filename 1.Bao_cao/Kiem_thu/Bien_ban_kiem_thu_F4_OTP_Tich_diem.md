@@ -6,9 +6,9 @@
 | Dự án | SmartCafe – Phần mềm quản lý chuỗi quán cà phê thông minh (Nhóm 8) |
 | Luồng | **F4 – OTP & tích điểm**: UC02 (xác thực SĐT bằng OTP giả lập), UC07 (xem điểm), phần thành viên của UC05/UC06 (đặt món gắn khách, điểm sẽ nhận / đã cộng) – sơ đồ SD01 |
 | Phiên bản | 0.4.0 – nhánh `feature/f4-otp-tich-diem` (tách từ `main` sau khi gộp F2 + F3, CR-34), mã nguồn `2.San_pham/smartcafe/` |
-| Ngày kiểm thử | 03/11/2026 |
+| Ngày kiểm thử | 28/10/2026 |
 | Người lập biên bản | Ngô Duy Đô (D – Tester / QA) |
-| Người duyệt | Nguyễn Thanh Bình (A – PM) – đã duyệt 03/11/2026 (CR-35) |
+| Người duyệt | Nguyễn Thanh Bình (A – PM) – đã duyệt 29/10/2026 (CR-35) |
 | Tài liệu căn cứ | [III.1 UC01 (quy tắc), UC02, UC05, UC06, UC07](../Thiet_ke_he_thong/III.1_Use_Case_Sequence.md), SD01, [III.2 NFR-S2, NFR-S4, NFR-S7, NFR-R4](../Thiet_ke_he_thong/III.2_Yeu_cau_phi_chuc_nang_Data_Model.md), [IV.2 W00a, W01, W02](../Thiet_ke_he_thong/IV.2_Thiet_ke_giao_dien.md), [IV.3 API](../Thiet_ke_he_thong/IV.3_Kien_truc_va_API.md), [IV.1 bảng customers, otp_requests, loyalty_transactions](../Thiet_ke_he_thong/IV.1_Thiet_ke_CSDL.md); quyết định D4, D9, D11, D12, D15, D18 |
 | Tiền đề | F0 → F3 đạt ([F0](Bien_ban_kiem_thu_F0_Nen_tang.md), [F1](Bien_ban_kiem_thu_F1_QR_Menu.md), [F2](Bien_ban_kiem_thu_F2_Dat_mon_Thanh_toan.md), [F3](Bien_ban_kiem_thu_F3_Man_hinh_Bar.md)) |
 
@@ -172,7 +172,7 @@ Log: [logs/F4_e2e_trinh_duyet.txt](logs/F4_e2e_trinh_duyet.txt). Ảnh chụp:
 | BUG-F4-03 | Thấp | Cổng SMS giả lập không ghi mã OTP ra log backend (trái SD01: "mã ghi ra log"), và log nghiệp vụ `smartcafe.*` không hiện trong `docker compose logs` → khi tắt chế độ DEMO không có cách lấy mã | Test F4-13 (log trống) | Bản Mock ban đầu cố ý không ghi mã; logger `smartcafe` chưa được cấu hình handler/level | Mock ghi "tin nhắn" kèm mã, SĐT đã che; cấu hình logger `smartcafe` (INFO, stdout) khi khởi động app | F4-13 đạt; kiểm tra tay `docker compose logs backend` | Đã đóng |
 
 ## 7. Tồn tại / ghi chú
-- **Tên khách – P16 đã chốt → D31 (CR-35, 03/11):** không thu thập tên, thành viên chỉ định danh bằng SĐT. Đã bỏ cột `customers.name` (migration `0003`) và trường `name` khỏi API `/otp/verify`, `/me`; lời chào giữ "Xin chào – X điểm (≈ Yđ)". Đã chạy lại toàn bộ test sau thay đổi (xem Mục 5).
+- **Tên khách – P16 đã chốt → D31 (CR-35, 29/10):** không thu thập tên, thành viên chỉ định danh bằng SĐT. Đã bỏ cột `customers.name` (migration `0003`) và trường `name` khỏi API `/otp/verify`, `/me`; lời chào giữ "Xin chào – X điểm (≈ Yđ)". Đã chạy lại toàn bộ test sau thay đổi (xem Mục 5).
 - **Phiên thành viên hết hạn lúc đặt món:** server trả 401 thay vì âm thầm tạo đơn ẩn danh; giao diện báo cho khách và cho chọn đặt không tích điểm hoặc nhập lại SĐT (theo UC06 – "hết phiên thì về ẩn danh", nhưng không để khách mất điểm mà không biết). Đơn đã đặt khi còn phiên vẫn được cộng điểm (F4-32).
 - **Mã OTP băm bằng HMAC-SHA256** (khóa `JWT_SECRET`, gắn với SĐT) thay vì bcrypt: mã chỉ sống 5 phút và bị khóa sau 5 lần sai nên không cần thuật toán chậm; so sánh bằng `hmac.compare_digest`.
 - **Giới hạn gửi / thử dùng khóa advisory theo SĐT** trong transaction (F4-33…35): nhiều request cùng lúc không vượt giới hạn, không tạo khách trùng.
@@ -184,5 +184,5 @@ Log: [logs/F4_e2e_trinh_duyet.txt](logs/F4_e2e_trinh_duyet.txt). Ảnh chụp:
 
 | Vai trò | Họ tên | Ngày | Ký xác nhận |
 |:---|:---|:---|:---|
-| Người lập (Tester / QA) | Ngô Duy Đô (D) | 03/11/2026 | |
-| PM duyệt | Nguyễn Thanh Bình (A) | 03/11/2026 | |
+| Người lập (Tester / QA) | Ngô Duy Đô (D) | 28/10/2026 | |
+| PM duyệt | Nguyễn Thanh Bình (A) | 29/10/2026 | |

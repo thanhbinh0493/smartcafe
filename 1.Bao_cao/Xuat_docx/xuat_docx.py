@@ -53,14 +53,14 @@ if hasattr(sys.stdout, "reconfigure"):
 BO = [
     {
         "so": 0, "file": "Nhom_8_Bao_cao_tong_ket", "tieu_de": "BÁO CÁO TỔNG KẾT DỰ ÁN",
-        "nguoi": "Thành viên A – Nguyễn Thanh Bình (PM) lập; cả nhóm review",
+        "nguoi": "Nguyễn Thanh Bình (A – PM) lập; cả nhóm review",
         "ngay": "10/11/2026",
-        "lich_su": "Bản đầy đủ 10 phần theo mẫu báo cáo môn học (CR-48, CR-49) | Thành viên A",
+        "lich_su": "Bản đầy đủ 10 phần theo mẫu báo cáo môn học (CR-48, CR-49) | Nguyễn Thanh Bình (A)",
         "phan": [(BC / "Bao_cao_tong_ket.md", {"bat_dau_tu": "# PHẦN I"})],
     },
     {
         "so": 1, "file": "SmartCafe_1_Phan_tich_Thiet_ke", "tieu_de": "TÀI LIỆU PHÂN TÍCH VÀ THIẾT KẾ HỆ THỐNG",
-        "nguoi": "Thành viên A (PM), B (Backend), C (AI), D (Tester / QA), E (Frontend) – người thực hiện từng chương ghi ở đầu chương",
+        "nguoi": "Nguyễn Thanh Bình (A), Nguyễn Trường Thiên (B), Lê Minh Sơn (C), Ngô Duy Đô (D), Nguyễn Quang Tú (E) – người thực hiện từng chương ghi ở đầu chương",
         "phan": [(TK / "II.1_Khao_sat_quy_trinh.md", {}), (TK / "II.2_Nghien_cuu_cong_nghe.md", {}),
                  (TK / "III.1_Use_Case_Sequence.md", {}), (TK / "III.2_Yeu_cau_phi_chuc_nang_Data_Model.md", {}),
                  (TK / "IV.1_Thiet_ke_CSDL.md", {}), (TK / "IV.2_Thiet_ke_giao_dien.md", {}),
@@ -69,7 +69,7 @@ BO = [
     },
     {
         "so": 2, "file": "SmartCafe_2_Ho_so_kiem_thu", "tieu_de": "HỒ SƠ KIỂM THỬ",
-        "nguoi": "Thành viên D (Tester / QA) lập; Thành viên A (PM) duyệt",
+        "nguoi": "Ngô Duy Đô (D – Tester / QA) lập; Nguyễn Thanh Bình (A – PM) duyệt",
         "phan": [(KT / "README.md", {"tieu_de": "# QUY ƯỚC VÀ DANH SÁCH BIÊN BẢN KIỂM THỬ"}),
                  (KT / "Ke_hoach_kiem_thu_He_thong.md", {})]
                 + [(p, {}) for p in sorted(KT.glob("Bien_ban_kiem_thu_F*.md"))]
@@ -77,12 +77,12 @@ BO = [
     },
     {
         "so": 3, "file": "SmartCafe_3_Huong_dan_su_dung", "tieu_de": "HƯỚNG DẪN SỬ DỤNG",
-        "nguoi": "Thành viên D (Tester / QA) lập; Thành viên A (PM) duyệt",
+        "nguoi": "Ngô Duy Đô (D – Tester / QA) lập; Nguyễn Thanh Bình (A – PM) duyệt",
         "phan": [(BC / "Huong_dan_su_dung" / "Huong_dan_su_dung.md", {"nang_cap": True})],
     },
     {
         "so": 4, "file": "SmartCafe_4_Ke_hoach_Pham_vi", "tieu_de": "PHẠM VI VÀ KẾ HOẠCH DỰ ÁN",
-        "nguoi": "Thành viên A (PM) lập; cả nhóm review",
+        "nguoi": "Nguyễn Thanh Bình (A – PM) lập; cả nhóm review",
         "phan": [(BC / "Pham_Vi_Du_An.md", {}),
                  (BC / "Project_Plan.md", {"bang_ngang": "## Bảng Phân công và Tiến độ chi tiết"})],
     },
@@ -157,12 +157,11 @@ def trang_dau(bo: dict, ds: list[str]) -> str:
             ("Tài liệu", bo["tieu_de"]),
             ("Phiên bản", f"{PHIEN_BAN} – ngày {ngay}"),
             ("Người lập / duyệt", bo["nguoi"]),
-            ("Nội dung gồm", "; ".join(ds)),
-            ("Bản gốc", "Các tệp Markdown trong kho mã nguồn của nhóm (thư mục 1.Bao_cao); tài liệu này sinh tự động bằng 1.Bao_cao/Xuat_docx/xuat_docx.py")]
+            ("Nội dung gồm", "; ".join(ds))]
     t = "| Mục | Nội dung |\n|:---|:---|\n" + "\n".join(f"| {a} | {b} |" for a, b in rows)
     lich_su = ("| Phiên bản | Ngày | Nội dung | Người thực hiện |\n|:---|:---|:---|:---|\n"
                f"| 1.0 | {ngay} | " + bo.get("lich_su", "Bản chuẩn hóa đầu tiên sau khi hoàn thành F0 → F8, kiểm thử hệ thống "
-                                              "và hướng dẫn sử dụng (CR-46, CR-47) | Thành viên A, D") + " |")
+                                              "và hướng dẫn sử dụng (CR-46, CR-47) | Nguyễn Thanh Bình (A), Ngô Duy Đô (D)") + " |")
     return ("%%TRANG_BIA%%\n\n**THÔNG TIN TÀI LIỆU**\n\n" + t + "\n\n**LỊCH SỬ PHIÊN BẢN**\n\n" + lich_su
             + "\n\n%%NGAT_TRANG%%\n\n**MỤC LỤC**\n\n%%MUC_LUC%%\n\n")
 
@@ -527,7 +526,10 @@ def tao_bia(tieu_de: str, out: Path, cfg: dict) -> None:
         if t.startswith("KHOA "):
             set_text(p, cfg["khoa"])
         elif t.startswith("BỘ MÔN"):
-            set_text(p, cfg["bo_mon"])
+            if cfg.get("bo_mon", "").strip():
+                set_text(p, cfg["bo_mon"])
+            else:                                    # không ghi bộ môn → bỏ hẳn dòng này
+                p._p.getparent().remove(p._p)
         elif t == "THỰC HÀNH TIN HỌC CƠ SỞ":
             set_text(p, cfg["mon_hoc"])
             mon = p

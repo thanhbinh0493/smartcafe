@@ -1,6 +1,6 @@
 # TÀI LIỆU THỐNG NHẤT ĐỀ TÀI VÀ PHẠM VI DỰ ÁN
 
-> **Cập nhật 01/11/2026** (biên bản họp Tuần 06, CR-09 → CR-14): bỏ IoT; bổ sung màn hình chào 2 lựa chọn, xác thực SĐT bằng OTP giả lập, tích điểm, chương trình khuyến mãi đơn giản.
+> **Cập nhật 05/10/2026** (biên bản họp Tuần 03, CR-09 → CR-14): bỏ IoT; bổ sung màn hình chào 2 lựa chọn, xác thực SĐT bằng OTP giả lập, tích điểm, chương trình khuyến mãi đơn giản.
 
 ## 1. Tên đề tài
 **Xây dựng phần mềm quản lý chuỗi quán cà phê thông minh (Tích hợp AI và QR)**

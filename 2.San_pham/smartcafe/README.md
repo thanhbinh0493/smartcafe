@@ -15,15 +15,15 @@ Cập nhật mỗi khi một luồng xong. Kết quả kiểm thử chi tiết �
 
 | Luồng | Nội dung | Use case / màn hình | Trạng thái | Biên bản kiểm thử |
 |:---|:---|:---|:---|:---|
-| F0 | Nền tảng: Docker Compose, CSDL (Alembic), dữ liệu mẫu, đăng nhập nhân viên + RBAC | UC08 · A01 | ✔ Đạt (02/11) | [F0](../../1.Bao_cao/Kiem_thu/Bien_ban_kiem_thu_F0_Nen_tang.md) – 48/48 |
-| F1 | Quét QR → màn hình chào → menu chi nhánh | UC01, UC03 · W00, W01 | ✔ Đạt (02/11) | [F1](../../1.Bao_cao/Kiem_thu/Bien_ban_kiem_thu_F1_QR_Menu.md) – 57/57 |
-| F2 | Giỏ hàng → đặt món → thanh toán giả lập → theo dõi đơn (realtime) | UC04–UC06 · W02, W03 | ✔ Đạt (02/11) | [F2](../../1.Bao_cao/Kiem_thu/Bien_ban_kiem_thu_F2_Dat_mon_Thanh_toan.md) – 67/67 |
-| F3 | Màn hình Bar: hàng đợi pha chế, Bắt đầu / Xong / Hoàn tác / Đã giao (cộng điểm) | UC17–UC19 · W04 | ✔ Đạt (03/11) | [F3](../../1.Bao_cao/Kiem_thu/Bien_ban_kiem_thu_F3_Man_hinh_Bar.md) – 76/76 |
-| F4 | Khách thành viên: OTP giả lập, tích điểm, xem điểm | UC02, UC07 · W00a | ✔ Đạt (03/11) | [F4](../../1.Bao_cao/Kiem_thu/Bien_ban_kiem_thu_F4_OTP_Tich_diem.md) – 84/84 |
-| F5 | Thu ngân hỗ trợ: tra cứu, hủy đơn & hoàn tiền | UC20 · W04 (tra cứu) | ✔ Đạt (03/11) | [F5](../../1.Bao_cao/Kiem_thu/Bien_ban_kiem_thu_F5_Thu_ngan.md) – 53/53 |
-| F6 | Quản trị: danh mục, món, chi nhánh, nhân viên, menu chi nhánh, bàn & QR, khuyến mãi | UC09–UC15 · W05–W07, A03–A06 | ✔ Đạt (03/11) | [F6](../../1.Bao_cao/Kiem_thu/Bien_ban_kiem_thu_F6_Quan_tri.md) – 230/230 |
-| F7 | AI gợi ý món (2 chế độ) + "Thường gọi kèm" | UC03 (phần gợi ý) | ✔ Đạt (03/11) | [F7](../../1.Bao_cao/Kiem_thu/Bien_ban_kiem_thu_F7_AI_goi_y.md) – 71/71 |
-| F8 | Báo cáo ngày (job 00:05) + dashboard | UC16 · W08 | ✔ Đạt (03/11) | [F8](../../1.Bao_cao/Kiem_thu/Bien_ban_kiem_thu_F8_Bao_cao_Dashboard.md) – 41/41 |
+| F0 | Nền tảng: Docker Compose, CSDL (Alembic), dữ liệu mẫu, đăng nhập nhân viên + RBAC | UC08 · A01 | ✔ Đạt (22/10) | [F0](../../1.Bao_cao/Kiem_thu/Bien_ban_kiem_thu_F0_Nen_tang.md) – 48/48 |
+| F1 | Quét QR → màn hình chào → menu chi nhánh | UC01, UC03 · W00, W01 | ✔ Đạt (24/10) | [F1](../../1.Bao_cao/Kiem_thu/Bien_ban_kiem_thu_F1_QR_Menu.md) – 57/57 |
+| F2 | Giỏ hàng → đặt món → thanh toán giả lập → theo dõi đơn (realtime) | UC04–UC06 · W02, W03 | ✔ Đạt (28/10) | [F2](../../1.Bao_cao/Kiem_thu/Bien_ban_kiem_thu_F2_Dat_mon_Thanh_toan.md) – 67/67 |
+| F3 | Màn hình Bar: hàng đợi pha chế, Bắt đầu / Xong / Hoàn tác / Đã giao (cộng điểm) | UC17–UC19 · W04 | ✔ Đạt (28/10) | [F3](../../1.Bao_cao/Kiem_thu/Bien_ban_kiem_thu_F3_Man_hinh_Bar.md) – 76/76 |
+| F4 | Khách thành viên: OTP giả lập, tích điểm, xem điểm | UC02, UC07 · W00a | ✔ Đạt (29/10) | [F4](../../1.Bao_cao/Kiem_thu/Bien_ban_kiem_thu_F4_OTP_Tich_diem.md) – 84/84 |
+| F5 | Thu ngân hỗ trợ: tra cứu, hủy đơn & hoàn tiền | UC20 · W04 (tra cứu) | ✔ Đạt (30/10) | [F5](../../1.Bao_cao/Kiem_thu/Bien_ban_kiem_thu_F5_Thu_ngan.md) – 53/53 |
+| F6 | Quản trị: danh mục, món, chi nhánh, nhân viên, menu chi nhánh, bàn & QR, khuyến mãi | UC09–UC15 · W05–W07, A03–A06 | ✔ Đạt (31/10) | [F6](../../1.Bao_cao/Kiem_thu/Bien_ban_kiem_thu_F6_Quan_tri.md) – 230/230 |
+| F7 | AI gợi ý món (2 chế độ) + "Thường gọi kèm" | UC03 (phần gợi ý) | ✔ Đạt (31/10) | [F7](../../1.Bao_cao/Kiem_thu/Bien_ban_kiem_thu_F7_AI_goi_y.md) – 71/71 |
+| F8 | Báo cáo ngày (job 00:05) + dashboard | UC16 · W08 | ✔ Đạt (01/11) | [F8](../../1.Bao_cao/Kiem_thu/Bien_ban_kiem_thu_F8_Bao_cao_Dashboard.md) – 41/41 |
 | VI | Kiểm thử hệ thống: kịch bản xuyên luồng, hiệu năng, bảo mật, giao diện & độ tin cậy, vận hành | Toàn hệ thống · NFR | ✔ Đạt (03/11) | [Hệ thống](../../1.Bao_cao/Kiem_thu/Bien_ban_kiem_thu_He_thong.md) |
 
 ## 1. Chạy toàn bộ hệ thống (demo)

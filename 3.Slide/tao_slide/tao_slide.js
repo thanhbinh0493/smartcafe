@@ -1,6 +1,6 @@
 // Tạo slide thuyết trình bảo vệ – SmartCafe, Nhóm 8 (giai đoạn X).
 //   cd 3.Slide/tao_slide && npm install && node tao_slide.js
-// Thứ tự phần theo mẫu môn học 3.Slide/Nhom_X_Slide.pptx (16:9). Số liệu lấy từ 1.Bao_cao/Bao_cao_tong_ket.md.
+// Thứ tự phần theo mẫu slide của môn học (16:9). Số liệu lấy từ 1.Bao_cao/Bao_cao_tong_ket.md.
 // Họ tên thành viên đọc từ 1.Bao_cao/Xuat_docx/thong_tin_bia.json (điền một lần, chạy lại là cập nhật).
 const fs = require("fs");
 const path = require("path");
@@ -146,7 +146,7 @@ const T = (text, o) => ({ text, options: o || {} });
   s = content("Phân công công việc", "02 · PHÂN CÔNG CÔNG VIỆC CÁC THÀNH VIÊN", "Ai làm gì – và ai review");
   const hdr = (t) => T(t, { bold: true, color: HEX.lt1, fill: { color: HEX.accent1 } });
   const rowsPC = [
-    ["A", "Phạm vi, WBS, kế hoạch; Use Case + Sequence; chủ trì họp, chốt 44 quyết định / 49 CR; báo cáo tổng kết", "Duyệt mọi biên bản kiểm thử"],
+    ["A", "Phạm vi, WBS, kế hoạch; Use Case + Sequence; chủ trì họp, chốt 44 quyết định / 52 CR; báo cáo tổng kết", "Duyệt mọi biên bản kiểm thử"],
     ["B", "CSDL 18 bảng, kiến trúc & 50 API; backend 9 luồng F0 → F8; tối ưu hiệu năng (cache)", "Review II.2, Use Case"],
     ["C", "Nghiên cứu công nghệ; AI gợi ý 2 chế độ + FP-Growth; OTP, tích điểm; dữ liệu 5.000 đơn", "Review NFR & data model"],
     ["D", "Khảo sát, NFR; 10 biên bản kiểm thử + kiểm thử hệ thống; Hướng dẫn sử dụng; biên bản họp", "Review thiết kế giao diện"],
@@ -226,10 +226,10 @@ const T = (text, o) => ({ text, options: o || {} });
     { x: 0.5, y: 4.6, w: 5, h: 0.3, fontSize: 11, color: C.text2, margin: 0, isTextBox: true });
   s.addText("Mốc: M1 thiết kế 19/10 · M2 9 luồng đạt 31/10 · M3 kiểm thử HT 03/11 · M4 hồ sơ 09/11 · M5 nghiệm thu 16/11",
     { x: 0.5, y: 4.88, w: 9, h: 0.3, fontSize: 11, color: C.accent5, margin: 0, isTextBox: true, italic: true });
-  s.addNotes("Kế hoạch dàn đều 8 tuần (D41). Giai đoạn V–VII thực tế xong sớm (02–03/11) nhờ làm theo luồng có test tự động.");
+  s.addNotes("Kế hoạch dàn đều 8 tuần (D41). Các giai đoạn V–VII hoàn thành đúng mốc kế hoạch nhờ làm theo luồng có test tự động.");
 
   s = content("Kế hoạch triển khai dự án", "04 · KẾ HOẠCH TRIỂN KHAI DỰ ÁN", "Kiểm soát thay đổi: mọi quyết định đều có biên bản");
-  [["49", "yêu cầu thay đổi (CR)"], ["44", "quyết định đã chốt (D)"], ["0", "vấn đề mở còn tồn (P1–P25)"]].forEach(([n, l], i) => {
+  [["52", "yêu cầu thay đổi (CR)"], ["44", "quyết định đã chốt (D)"], ["0", "vấn đề mở còn tồn (P1–P25)"]].forEach(([n, l], i) => {
     const x = 0.5 + i * 3.05;
     card(s, x, 1.3, 2.85, 1.35, `so lieu ${i}`);
     s.addText(n, { x, y: 1.36, w: 2.85, h: 0.75, fontSize: 40, bold: true, color: i === 2 ? C.accent3 : C.accent1, align: "center", margin: 0, isTextBox: true, fontFace: THEME.headFontFace });
@@ -241,7 +241,7 @@ const T = (text, o) => ({ text, options: o || {} });
     s.addText(t, { shape: pres.shapes.CHEVRON, x, y: 3.15, w: 1.8, h: 0.95, fill: { color: i % 2 ? HEX.accent5 : HEX.accent1 }, line: { color: HEX.lt1 },
       fontSize: 10.5, bold: true, color: C.background1, align: "center", valign: "middle", margin: [2, 10, 2, 24], objectName: `buoc ${i + 1}` });
   });
-  s.addText("Thay đổi lớn: bỏ IoT, thêm khuyến mãi / OTP / tích điểm (01/11); kết thúc dự án dời về 16/11 (CR-45)",
+  s.addText("Thay đổi lớn: bỏ IoT, thêm khuyến mãi / OTP / tích điểm (đầu tháng 10); kết thúc dự án dời về 16/11 (CR-45)",
     { x: 0.5, y: 4.4, w: 9, h: 0.5, fontSize: 12, color: C.text2, margin: 0, isTextBox: true, italic: true });
   s.addNotes("Quy tắc CR-08: mọi thay đổi ghi ngay vào biên bản tuần. Bảng vấn đề mở là nơi theo dõi duy nhất; khi chốt chuyển thành quyết định và cập nhật mọi tài liệu liên quan.");
 
@@ -456,7 +456,7 @@ const T = (text, o) => ({ text, options: o || {} });
   const prods = [
     [I.file, "Báo cáo tổng kết", "10 phần theo mẫu môn học"], [I.db, "Phân tích & thiết kế", "II.1 → IV.3, schema.sql"],
     [I.vial, "Hồ sơ kiểm thử", "11 biên bản, kế hoạch"], [I.book, "Hướng dẫn sử dụng", "5 vai trò, 33 ảnh"],
-    [I.cal, "Phạm vi & kế hoạch", "Bảng phân công Excel"], [I.comments, "Biên bản họp", "49 yêu cầu thay đổi"],
+    [I.cal, "Phạm vi & kế hoạch", "Bảng phân công Excel"], [I.comments, "Biên bản họp", "52 yêu cầu thay đổi"],
     [I.github, "Mã nguồn", "GitHub, chạy bằng Docker"], [I.slides, "Slide + demo", "Bản trình bày này"],
   ];
   prods.forEach(([ic, n, l], i) => {
@@ -466,7 +466,7 @@ const T = (text, o) => ({ text, options: o || {} });
     s.addText([T(n, { bold: true, fontSize: 13, color: HEX.dk1, breakLine: true }), T(l, { fontSize: 11, color: HEX.accent5 })],
       { x: x + 0.1, y: y + 0.82, w: 1.9, h: 0.75, align: "center", valign: "top", margin: 0, isTextBox: true });
   });
-  s.addNotes("Toàn bộ tài liệu Word sinh tự động từ một nguồn Markdown trong kho, theo định dạng mẫu báo cáo môn học.");
+  s.addNotes("Toàn bộ tài liệu nộp theo định dạng mẫu báo cáo môn học.");
 
   // ============================================================ 20. Cảm ơn
   pres.addSection({ title: "Kết thúc" });

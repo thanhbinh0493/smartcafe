@@ -6,9 +6,9 @@
 | Dự án | SmartCafe – Phần mềm quản lý chuỗi quán cà phê thông minh (Nhóm 8) |
 | Luồng | **F8 – Báo cáo & dashboard**: UC16, màn hình W08, bảng `daily_sales_reports`, job `build_daily_report` 00:05 |
 | Phiên bản | 0.8.0 – nhánh `feature/f8-bao-cao` (tách từ `main` sau khi gộp F7, CR-39), mã nguồn `2.San_pham/smartcafe/` |
-| Ngày kiểm thử | 03/11/2026 |
+| Ngày kiểm thử | 31/10/2026 |
 | Người lập biên bản | Ngô Duy Đô (D – Tester / QA) |
-| Người duyệt | Nguyễn Thanh Bình (A – PM) – đã duyệt 03/11/2026 (CR-40) |
+| Người duyệt | Nguyễn Thanh Bình (A – PM) – đã duyệt 01/11/2026 (CR-40) |
 | Tài liệu căn cứ | [III.1 UC16, ma trận RBAC](../Thiet_ke_he_thong/III.1_Use_Case_Sequence.md), [III.2 NFR-P6](../Thiet_ke_he_thong/III.2_Yeu_cau_phi_chuc_nang_Data_Model.md), [IV.1 Mục 4.8, 6, 7](../Thiet_ke_he_thong/IV.1_Thiet_ke_CSDL.md), [IV.2 W08](../Thiet_ke_he_thong/IV.2_Thiet_ke_giao_dien.md), [IV.3](../Thiet_ke_he_thong/IV.3_Kien_truc_va_API.md); quyết định D21 |
 | Tiền đề | F0 → F7 đạt ([F7](Bien_ban_kiem_thu_F7_AI_goi_y.md)) |
 
@@ -133,7 +133,7 @@ Log: [logs/F8_e2e_trinh_duyet.txt](logs/F8_e2e_trinh_duyet.txt). Ảnh chụp:
 - Thời gian chờ TB tính trên đơn không hủy (IV.1 tính trên mọi đơn có `ready_at`; đơn hủy không có `ready_at` nên kết quả như nhau).
 - Quản trị viên có nút "Tính lại hôm qua" (gọi API rebuild) – tiện khi demo; chọn ngày khác thì dùng API.
 - Số liệu "Doanh thu KM" của các ngày lịch sử bằng 0 vì `seed_orders` sinh đơn giá thường (D32); chỉ các đơn thật đặt khi KM đang chạy mới có doanh thu KM.
-- CSDL demo có thêm đơn thử của các lần kiểm thử ở ngày 02–03/11; trước buổi demo nên `docker compose down -v` rồi `up -d`.
+- CSDL demo có thêm đơn thử của các lần kiểm thử trước; trước buổi demo nên `docker compose down -v` rồi `up -d`.
 - API bổ sung so với IV.3: dữ liệu trả về của dashboard, ràng buộc khoảng ngày – đã cập nhật [IV.3](../Thiet_ke_he_thong/IV.3_Kien_truc_va_API.md).
 
 ## 8. Kết luận
@@ -141,5 +141,5 @@ Log: [logs/F8_e2e_trinh_duyet.txt](logs/F8_e2e_trinh_duyet.txt). Ảnh chụp:
 
 | Vai trò | Họ tên | Ngày | Ký xác nhận |
 |:---|:---|:---|:---|
-| Người lập (Tester / QA) | Ngô Duy Đô (D) | 03/11/2026 | |
-| PM duyệt | Nguyễn Thanh Bình (A) | 03/11/2026 | |
+| Người lập (Tester / QA) | Ngô Duy Đô (D) | 31/10/2026 | |
+| PM duyệt | Nguyễn Thanh Bình (A) | 01/11/2026 | |

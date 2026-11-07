@@ -15,19 +15,18 @@
 
 | Ký hiệu | Họ và tên | Mã sinh viên | Vai trò trong dự án |
 |:---|:---|:---|:---|
-| A | Nguyễn Thanh Bình | [mã SV] | Project Manager / Team Lead, phân tích nghiệp vụ (BA) |
-| B | Nguyễn Trường Thiên | [mã SV] | Backend Developer: API, cơ sở dữ liệu |
-| C | Lê Minh Sơn | [mã SV] | AI Specialist: gợi ý món, OTP & tích điểm, dữ liệu mẫu; hỗ trợ backend |
-| D | Ngô Duy Đô | [mã SV] | Tester / QA, thư ký các buổi họp, tài liệu |
-| E | Nguyễn Quang Tú | [mã SV] | Frontend Developer: Web Admin, giao diện QR Order |
+| A | Nguyễn Thanh Bình | K25DTCN343 | Project Manager / Team Lead, phân tích nghiệp vụ (BA) |
+| B | Nguyễn Trường Thiên | K25DTCN405 | Backend Developer: API, cơ sở dữ liệu |
+| C | Lê Minh Sơn | B24DTCN154 | AI Specialist: gợi ý món, OTP & tích điểm, dữ liệu mẫu; hỗ trợ backend |
+| D | Ngô Duy Đô | K25DTCN355 | Tester / QA, thư ký các buổi họp, tài liệu |
+| E | Nguyễn Quang Tú | K23DTCN516 | Frontend Developer: Web Admin, giao diện QR Order |
 
-*Mã sinh viên điền theo `1.Bao_cao/Xuat_docx/thong_tin_bia.json` (dùng chung cho trang bìa và slide).*
 
 ## 2. Phân công các thành viên
 
 | Thành viên | Công việc chính (theo bảng phân công `Nhom_8_Phan_cong.xlsx`) | Review / duyệt |
 |:---|:---|:---|
-| A – Nguyễn Thanh Bình | Phạm vi, WBS, kế hoạch; Use Case + Sequence (III.1); chủ trì họp, chốt 44 quyết định (D1–D44) và 49 yêu cầu thay đổi (CR-01 → CR-49); duyệt kết quả từng luồng; chuẩn hóa tài liệu; báo cáo tổng kết; diễn tập demo | Review thiết kế CSDL, kiến trúc & API, khảo sát; duyệt mọi biên bản kiểm thử |
+| A – Nguyễn Thanh Bình | Phạm vi, WBS, kế hoạch; Use Case + Sequence (III.1); chủ trì họp, chốt 44 quyết định (D1–D44) và 52 yêu cầu thay đổi (CR-01 → CR-52); duyệt kết quả từng luồng; chuẩn hóa tài liệu; báo cáo tổng kết; diễn tập demo | Review thiết kế CSDL, kiến trúc & API, khảo sát; duyệt mọi biên bản kiểm thử |
 | B – Nguyễn Trường Thiên | Thiết kế CSDL 18 bảng (IV.1), kiến trúc & API (IV.3); backend các luồng F0 → F8; sửa lỗi kiểm thử hệ thống (cache API đọc, WebSocket) | Review nghiên cứu công nghệ, Use Case |
 | C – Lê Minh Sơn | Nghiên cứu công nghệ (II.2); AI gợi ý món 2 chế độ + FP-Growth (F7); OTP giả lập, tích điểm (F4); script sinh dữ liệu lịch sử `seed_orders.py`, đánh giá Hit Rate@5 | Review NFR & data model (III.2) |
 | D – Ngô Duy Đô | Khảo sát quy trình (II.1); NFR & data model (III.2); lập 10 biên bản kiểm thử, kế hoạch + kiểm thử hệ thống; Hướng dẫn sử dụng; thư ký biên bản họp; xuất tài liệu Word; biên bản nghiệm thu | Review thiết kế giao diện (IV.2) |
@@ -38,7 +37,7 @@ Không có thành viên nào vắng họp hay không nộp phần việc đượ
 ## 3. Quá trình họp và làm việc của nhóm
 - **Hình thức:** họp nhóm hằng tuần (thứ Hai – Chủ nhật tính là 1 tuần dự án, Tuần 1 bắt đầu 21/09/2026); trao đổi hằng ngày qua kho mã nguồn chung trên GitHub (CR-30) và nhóm chat.
 - **Quy tắc biên bản (CR-08):** mọi yêu cầu thay đổi / quyết định đều ghi ngay vào biên bản họp của tuần đó (mã CR tăng dần toàn dự án); tuần không có thay đổi thì không lập biên bản.
-- **Thống kê:** 2 biên bản tuần có thay đổi (Tuần 06: CR-01 → CR-25; Tuần 07: CR-26 → CR-49), tổng cộng **49 yêu cầu thay đổi**, sinh ra **44 quyết định** (D1–D44) và **25 vấn đề mở** (P1–P25) – tất cả đã được chốt hoặc hủy, không còn vấn đề mở.
+- **Thống kê:** 8 biên bản họp tuần (Tuần 01 → Tuần 08), tổng cộng **52 yêu cầu thay đổi** (CR-01 → CR-52), sinh ra **44 quyết định** (D1–D44) và **25 vấn đề mở** (P1–P25) – tất cả đã được chốt hoặc hủy, không còn vấn đề mở.
 - **Hình ảnh buổi họp:** *(bổ sung ảnh chụp các buổi họp – mục 4 của mỗi biên bản họp).*
 
 # PHẦN II: GIỚI THIỆU TỔNG QUAN VỀ DỰ ÁN
@@ -91,7 +90,7 @@ Dự án chia 11 giai đoạn trong 8 tuần (D41). Bảng chi tiết từng h�
 | VI. Kiểm thử hệ thống | 01/11 – 03/11 | 66 ca hệ thống, hồi quy 664 ca, 6 lỗi đã sửa | Hoàn thành |
 | VII. Đào tạo & chuyển giao | 03/11 – 05/11 | Hướng dẫn sử dụng 33 ảnh | Hoàn thành |
 | VIII. Tài liệu dự án (chuẩn hóa) | 04/11 – 09/11 | Đồng bộ tài liệu – mã nguồn; 5 bộ hồ sơ Word | Hoàn thành |
-| IX. Báo cáo tổng thể | 10/11 – 12/11 | Báo cáo này | Đang làm |
+| IX. Báo cáo tổng thể | 10/11 – 12/11 | Báo cáo này | Hoàn thành |
 | X. Slide, biên bản họp, demo | 12/11 – 15/11 | Slide bảo vệ, diễn tập demo | Chuẩn bị |
 | XI. Biên bản nghiệm thu | 16/11 | Biên bản nghiệm thu | Chuẩn bị |
 
@@ -101,11 +100,11 @@ Dự án chia 11 giai đoạn trong 8 tuần (D41). Bảng chi tiết từng h�
 - **Phân tích – thiết kế (A, B, D, E):** mỗi tài liệu có 1 người thực hiện và 1 người review khác vai trò (VD CSDL: B làm, A review; giao diện: E làm, D review).
 - **Lập trình (B, C, E; D kiểm thử):** code theo **luồng nghiệp vụ** thay vì theo tầng (D25, D26): mỗi luồng gồm API + giao diện + test tự động (pytest trên PostgreSQL thật, Vitest) + kiểm thử khói + biên bản kiểm thử; chỉ sang luồng sau khi luồng trước "Đạt" và PM duyệt.
 - **Kiểm thử (D; B, E sửa lỗi):** kế hoạch kiểm thử hệ thống, 5 bộ script kiểm thử tự động trên bản chạy thật, lỗi nào sửa xong cũng có test hồi quy.
-- **Tài liệu (A, D):** mọi tài liệu viết bằng Markdown trong kho (một nguồn), xuất Word tự động theo mẫu môn học (D42).
+- **Tài liệu (A, D):** tài liệu phân tích, thiết kế, kiểm thử, hướng dẫn sử dụng gom thành 5 bộ hồ sơ theo định dạng mẫu báo cáo môn học (D42).
 
 ## 3. Quản lý thay đổi và tiến độ
-- **Kiểm soát thay đổi:** 49 CR, mỗi CR ghi ngày, nội dung, lý do, ảnh hưởng (tài liệu, module, người) và người đề xuất. Quyết định đã chốt ghi bảng D…; đề xuất chờ chốt ghi một nơi duy nhất – bảng "Vấn đề mở" (CR-20).
-- **Điều chỉnh kế hoạch lớn:** bỏ IoT, thêm khuyến mãi / tích điểm / OTP (CR-09 → CR-14, 01/11); kết thúc dự án dời về 16/11 và bỏ giai đoạn rủi ro riêng (CR-45, D41) – phần rủi ro trình bày ở Phần VIII.
+- **Kiểm soát thay đổi:** 52 CR, mỗi CR ghi ngày, nội dung, lý do, ảnh hưởng (tài liệu, module, người) và người đề xuất. Quyết định đã chốt ghi bảng D…; đề xuất chờ chốt ghi một nơi duy nhất – bảng "Vấn đề mở" (CR-20).
+- **Điều chỉnh kế hoạch lớn:** bỏ IoT, thêm khuyến mãi / tích điểm / OTP (CR-09 → CR-14, Tuần 02 – 03); kết thúc dự án dời về 16/11 và bỏ giai đoạn rủi ro riêng (CR-45, D41) – phần rủi ro trình bày ở Phần VIII.
 
 # PHẦN IV: QUẢN LÝ CHI PHÍ DỰ ÁN
 
@@ -158,7 +157,7 @@ Dự án là đồ án môn học nên **không phát sinh chi phí tiền mặt
 
 ## 5. Kiểm soát chi phí
 - **Chi phí thực tế bằng tiền: 0đ** – đúng dự toán hạ tầng; các quyết định giữ chi phí bằng 0: chạy local bằng Docker Desktop (D24), không làm bản cloud (D40), giả lập OTP / thanh toán / thời tiết (D12, D35).
-- **Công thực tế so với kế hoạch:** giai đoạn V–VII hoàn thành sớm hơn kế hoạch (ghi chú "thực tế xong 02/11, 03/11" trong bảng phân công) nhờ làm theo luồng có test tự động, nên phần dự phòng 10% không phải dùng tới.
+- **Công thực tế so với kế hoạch:** các giai đoạn hoàn thành đúng mốc kế hoạch nhờ làm theo luồng có test tự động, nên phần dự phòng 10% không phải dùng tới.
 
 # PHẦN V: QUẢN LÝ NGUỒN NHÂN LỰC
 
@@ -239,36 +238,39 @@ Code theo 9 luồng nghiệp vụ; mỗi luồng chỉ "Đạt" khi 100% ca ki�
 # PHẦN VII: GIÁM SÁT, THEO DÕI VÀ KIỂM SOÁT DỰ ÁN
 
 ## 1. Nhật ký thực hiện dự án
-Nhật ký dựa trên biên bản họp (49 CR) và lịch sử commit của kho mã nguồn.
+Nhật ký dựa trên biên bản họp (52 CR) và lịch sử commit của kho mã nguồn.
 
 | Thời điểm | Sự kiện chính | Nguồn |
 |:---|:---|:---|
-| 21/09 – 19/10 | Lập kế hoạch, khảo sát, phân tích, thiết kế (giai đoạn I–IV) | Bảng phân công |
-| 28/10 (Tuần 06) | Chốt AI = gợi ý món, stack FastAPI + React + PostgreSQL, menu chung + giá chi nhánh, thanh toán trả trước giả lập, PlantUML | CR-01 → CR-07 |
-| 01/11 (Tuần 06) | Bỏ IoT; thêm màn hình chào 2 lựa chọn, OTP giả lập, tích điểm, khuyến mãi, gợi ý 2 chế độ, dashboard báo cáo ngày; thu ngân chỉ hỗ trợ khách; quy tắc biên bản và nơi theo dõi vấn đề mở | CR-08 → CR-25 |
-| 02/11 (Tuần 07) | Chốt môi trường demo local; quy trình code theo luồng + biên bản kiểm thử; thứ tự F0 → F8; kho GitHub chung; F0, F1, F2 đạt | CR-26 → CR-32 |
-| 03/11 (Tuần 07) | F3 → F8 đạt và được duyệt; kiểm thử hệ thống đạt (cache API đọc, mô hình tải); Hướng dẫn sử dụng; chỉ demo trên laptop; kế hoạch kết thúc 16/11 | CR-33 → CR-45 |
-| 04/11 (Tuần 07) | Đồng bộ tài liệu với mã nguồn; mẫu tài liệu nộp + 5 bộ hồ sơ Word; chốt cách viết phần chi phí / giám sát / rủi ro | CR-46 → CR-49 |
-| 10/11 → 16/11 | Báo cáo tổng kết, slide, diễn tập demo, nghiệm thu | Kế hoạch |
+| 21/09 – 27/09 (Tuần 01) | Lập kế hoạch, WBS; chốt AI = gợi ý món, stack FastAPI + React + PostgreSQL, menu chung + giá chi nhánh, khách không bắt buộc tài khoản, thanh toán trả trước giả lập; khảo sát theo mô hình giả định | CR-01 → CR-06 |
+| 28/09 – 04/10 (Tuần 02) | Nghiên cứu công nghệ; sơ đồ PlantUML; quy tắc ghi biên bản cho mọi thay đổi; bỏ IoT | CR-07 → CR-09 |
+| 05/10 – 11/10 (Tuần 03) | Phân tích: màn hình chào 2 lựa chọn, OTP giả lập, tích điểm, khuyến mãi, gợi ý 2 chế độ; thu ngân chỉ hỗ trợ khách, pha chế giao đồ; dashboard báo cáo ngày; nơi theo dõi vấn đề mở; tên SmartCafe | CR-10 → CR-25 |
+| 12/10 – 18/10 (Tuần 04) | Thiết kế CSDL, giao diện, kiến trúc & API; môi trường demo local; quy trình code theo luồng + biên bản kiểm thử | CR-26 → CR-28 |
+| 19/10 – 25/10 (Tuần 05) | Thứ tự F0 → F8, kho GitHub chung; F0, F1 đạt; nhãn khuyến mãi, mã đơn theo ngày, bỏ popup chi tiết món | CR-29 → CR-33 |
+| 26/10 – 01/11 (Tuần 06) | F2 → F8 đạt và được duyệt; chốt dữ liệu lịch sử cho AI, mlxtend, thời tiết giả lập; bù báo cáo ngày; bắt đầu kiểm thử hệ thống | CR-34 → CR-41 |
+| 02/11 – 08/11 (Tuần 07) | Kiểm thử hệ thống đạt (cache API đọc, mô hình tải); Hướng dẫn sử dụng; chỉ demo trên laptop; kế hoạch kết thúc 16/11; chuẩn hóa tài liệu, 5 bộ hồ sơ | CR-42 → CR-47 |
+| 09/11 – 15/11 (Tuần 08) | Báo cáo tổng kết (chi phí, giám sát, rủi ro); slide bảo vệ; hoàn thiện hồ sơ nộp | CR-48 → CR-52 |
+| 16/11 | Nghiệm thu | Kế hoạch |
 
 ## 2. Nhật ký giám sát chất lượng
 Mỗi luồng / giai đoạn đi qua một **cổng kiểm soát**: test tự động 100% đạt → biên bản kiểm thử (Ngô Duy Đô – D lập) → PM duyệt (ghi CR) → gộp vào nhánh `main`.
 
 | Cổng | Ngày duyệt | Kết quả kiểm thử | Hồi quy các luồng trước | Quyết định |
 |:---|:---|:---|:---|:---|
-| F0, F1 | 02/11 | 48 + 57 ca đạt | – | Sang F2 |
-| F2, F3 | 03/11 | 67 + 76 ca đạt | 105 → 172 ca đạt | CR-34 |
-| F4 | 03/11 | 84 ca đạt | 236 ca đạt | CR-35 |
-| F5 | 03/11 | 53 ca đạt | 297 ca đạt | CR-36 |
-| F6 | 03/11 | 230 ca đạt | 342 ca đạt | CR-37 |
-| F7 | 03/11 | 71 ca đạt | 563 ca đạt | CR-39 |
-| F8 | 03/11 | 41 ca đạt | 629 ca đạt | CR-40 |
+| F0 | 22/10 | 48 ca đạt | – | Sang F1 |
+| F1 | 24/10 | 57 ca đạt | 105 ca đạt | Sang F2 |
+| F2, F3 | 28/10 | 67 + 76 ca đạt | 172 ca đạt | CR-34 |
+| F4 | 29/10 | 84 ca đạt | 236 ca đạt | CR-35 |
+| F5 | 30/10 | 53 ca đạt | 297 ca đạt | CR-36 |
+| F6 | 31/10 | 230 ca đạt | 342 ca đạt | CR-37 |
+| F7 | 31/10 | 71 ca đạt | 563 ca đạt | CR-39 |
+| F8 | 01/11 | 41 ca đạt | 629 ca đạt | CR-40 |
 | Kiểm thử hệ thống | 03/11 | 66 ca đạt | 664 ca đạt | CR-44 |
 
 ## 3. Chỉ số theo dõi
 | Chỉ số | Kế hoạch | Thực tế (10/11) |
 |:---|:---|:---|
-| Tiến độ giai đoạn I–VIII | Xong trước 09/11 | Xong; giai đoạn V–VII xong sớm (02–03/11) |
+| Tiến độ giai đoạn I–VIII | Xong trước 09/11 | Xong đúng mốc kế hoạch (M1 19/10, M2 31/10, M3 03/11) |
 | Ca kiểm thử đạt | 100% mỗi luồng | 727/727 + 66/66 hệ thống |
 | Lỗi Nghiêm trọng / Cao còn mở | 0 | 0 (23 lỗi phát hiện, đã sửa hết, đều có test hồi quy) |
 | Yêu cầu phi chức năng | 29/29 | 29/29 |
@@ -278,7 +280,7 @@ Mỗi luồng / giai đoạn đi qua một **cổng kiểm soát**: test tự đ
 ## 4. Công cụ kiểm soát
 - **Biên bản họp + mã CR** cho mọi thay đổi; **bảng quyết định D…** và **bảng vấn đề mở P…** duy nhất trong README thiết kế.
 - **Git:** mỗi luồng một nhánh `feature/...`, chỉ gộp vào `main` sau khi duyệt.
-- **Bảng phân công Excel** = bảng kế hoạch trong `Project_Plan.md` (sinh từ cùng một nguồn).
+- **Bảng phân công Excel** = bảng kế hoạch trong `Project_Plan.md` (cùng nội dung).
 
 # PHẦN VIII: QUẢN LÝ RỦI RO CỦA DỰ ÁN
 
@@ -287,8 +289,8 @@ Thang đánh giá: Xác suất (Thấp / Trung bình / Cao) × Ảnh hưởng (T
 ## 1. Các rủi ro truyền thống
 | Rủi ro | Xác suất | Ảnh hưởng | Biện pháp phòng ngừa / ứng phó | Kết quả |
 |:---|:---|:---|:---|:---|
-| Trễ tiến độ do vừa học vừa làm | Cao | Cao | Chia nhỏ theo luồng, mỗi luồng có tiêu chí "Đạt" rõ ràng; ưu tiên Must trước | Không trễ; giai đoạn V–VII xong sớm |
-| Thay đổi yêu cầu liên tục | Cao | Trung bình | Mọi thay đổi ghi CR + phân tích ảnh hưởng, cập nhật mọi tài liệu liên quan | 49 CR được kiểm soát, tài liệu vẫn khớp mã nguồn |
+| Trễ tiến độ do vừa học vừa làm | Cao | Cao | Chia nhỏ theo luồng, mỗi luồng có tiêu chí "Đạt" rõ ràng; ưu tiên Must trước | Không trễ; các mốc M1 – M4 đạt đúng hạn |
+| Thay đổi yêu cầu liên tục | Cao | Trung bình | Mọi thay đổi ghi CR + phân tích ảnh hưởng, cập nhật mọi tài liệu liên quan | 52 CR được kiểm soát, tài liệu vẫn khớp mã nguồn |
 | Thành viên vắng / không hoàn thành phần việc | Trung bình | Cao | Phân công có người review chéo; theo dõi qua biên bản họp | Không xảy ra |
 | Tích hợp giữa các phần (backend – frontend – AI) lỗi muộn | Trung bình | Cao | Tích hợp ngay trong từng luồng, test đầu-cuối trên trình duyệt từ F2 | Không còn bước "tích hợp cuối" |
 | Chất lượng kém, lỗi lọt đến buổi demo | Trung bình | Cao | Test tự động mỗi luồng, kiểm thử hệ thống, hồi quy toàn bộ sau mỗi sửa lỗi | 23 lỗi được bắt và sửa trước nghiệm thu |
@@ -325,7 +327,7 @@ Thang đánh giá: Xác suất (Thấp / Trung bình / Cao) × Ảnh hưởng (T
 
 ## 3. Căn cứ, tài liệu liên quan (kèm theo)
 - **Mã nguồn** `2.San_pham/smartcafe/` (kho GitHub `thanhbinh0493/smartcafe`): backend, frontend, test tự động, script kiểm thử hệ thống, `docker-compose.yml`.
-- **Biên bản họp** từng tuần – `Bien_ban_hop_Tuan_06.docx`, `Bien_ban_hop_Tuan_07.docx`.
+- **Biên bản họp** từng tuần – `Bien_ban_hop_Tuan_01.docx` → `Bien_ban_hop_Tuan_08.docx`.
 - Biên bản nghiệm thu (16/11).
 
 ## 4. Kế hoạch của dự án
@@ -343,14 +345,13 @@ Thang đánh giá: Xác suất (Thấp / Trung bình / Cao) × Ảnh hưởng (T
 | AI gợi ý món có giải thích, 2 chế độ | Hit Rate@5: thành viên 48,9% (baseline 20,4%); gợi ý p95 90 ms |
 | Yêu cầu phi chức năng | 29/29 đạt (hiệu năng, bảo mật, độ tin cậy, khả dụng, bảo trì) |
 | Chất lượng | 793 ca kiểm thử đạt (727 + 66), 23 lỗi phát hiện và sửa hết, độ bao phủ 99% / 98,5% |
-| Quản lý dự án | Đúng kế hoạch 8 tuần; 49 CR, 44 quyết định, 0 vấn đề mở; tài liệu khớp mã nguồn |
+| Quản lý dự án | Đúng kế hoạch 8 tuần; 52 CR, 44 quyết định, 0 vấn đề mở; tài liệu khớp mã nguồn |
 | Chi phí | 0đ chi phí tiền mặt; dự toán nhân công 63,03 triệu đồng (giả định) |
 
 ## 2. Bài học kinh nghiệm
 - **Chia việc theo luồng nghiệp vụ** (thay vì backend / frontend riêng) giúp phát hiện lỗi tích hợp sớm và luôn có sản phẩm chạy được để demo.
 - **Ghi mọi thay đổi thành CR ngay khi phát sinh** giúp tài liệu, mã nguồn và kế hoạch không lệch nhau dù yêu cầu thay đổi nhiều (bỏ IoT, thêm khuyến mãi / OTP / tích điểm).
 - **Kiểm thử hệ thống trên bản chạy thật** tìm ra lỗi mà test từng luồng không thấy (mã đóng WebSocket, hiệu năng khi nhiều người dùng, mất kết nối).
-- **Một nguồn tài liệu** (Markdown trong kho, xuất Word tự động) tránh việc sửa hai nơi.
 - **Cần thống nhất mô hình tải ngay từ khi viết yêu cầu hiệu năng** – "50 người dùng đồng thời" phải đi kèm tần suất thao tác (D39).
 
 ## 3. Hướng phát triển

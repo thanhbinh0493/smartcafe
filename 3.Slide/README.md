@@ -2,7 +2,6 @@
 
 | Tệp | Nội dung |
 |:---|:---|
-| `Nhom_X_Slide.pptx` | Mẫu của môn học (10 slide tiêu đề – thứ tự phần trình bày) |
 | `Nhom_8_Slide.pptx` | **Slide bảo vệ của nhóm** – 20 slide, 16:9, theo đúng thứ tự phần của mẫu; có ghi chú cho người thuyết trình (speaker notes) ở từng slide |
 | `tao_slide/` | Công cụ sinh slide (`tao_slide.js`, pptxgenjs) – số liệu lấy từ báo cáo tổng kết, họ tên thành viên lấy từ `1.Bao_cao/Xuat_docx/thong_tin_bia.json` |
 

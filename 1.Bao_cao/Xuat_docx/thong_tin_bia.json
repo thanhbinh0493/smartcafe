@@ -1,36 +1,36 @@
 {
-  "_huong_dan": "Điền các ô [ ... ] một lần rồi chạy lại xuat_docx.py – mọi trang bìa tự cập nhật.",
-  "khoa": "KHOA [ĐIỀN TÊN KHOA]",
-  "bo_mon": "BỘ MÔN [ĐIỀN TÊN BỘ MÔN]",
+  "_huong_dan": "Điền các ô [ ... ] một lần rồi chạy lại xuat_docx.py – mọi trang bìa tự cập nhật. Để trống bo_mon thì bìa bỏ dòng bộ môn.",
+  "khoa": "KHOA CÔNG NGHỆ THÔNG TIN",
+  "bo_mon": "",
   "mon_hoc": "QUẢN LÝ DỰ ÁN PHẦN MỀM",
   "de_tai": "SmartCafe – Phần mềm quản lý chuỗi quán cà phê thông minh (tích hợp AI và QR)",
-  "giang_vien": "[ĐIỀN TÊN GIẢNG VIÊN]",
+  "giang_vien": "Mai Ngọc Lương",
   "lop": "[ĐIỀN LỚP]",
   "nhom": "08",
   "thanh_vien": [
     {
       "ho_ten": "Nguyễn Thanh Bình",
-      "ma_sv": "[mã SV]",
+      "ma_sv": "K25DTCN343",
       "vai_tro": "A – PM / Team Lead"
     },
     {
       "ho_ten": "Nguyễn Trường Thiên",
-      "ma_sv": "[mã SV]",
+      "ma_sv": "K25DTCN405",
       "vai_tro": "B – Backend"
     },
     {
       "ho_ten": "Lê Minh Sơn",
-      "ma_sv": "[mã SV]",
+      "ma_sv": "B24DTCN154",
       "vai_tro": "C – AI"
     },
     {
       "ho_ten": "Ngô Duy Đô",
-      "ma_sv": "[mã SV]",
+      "ma_sv": "K25DTCN355",
       "vai_tro": "D – Tester / QA"
     },
     {
       "ho_ten": "Nguyễn Quang Tú",
-      "ma_sv": "[mã SV]",
+      "ma_sv": "K23DTCN516",
       "vai_tro": "E – Frontend"
     }
   ],

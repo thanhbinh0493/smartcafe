@@ -5,10 +5,10 @@
 |:---|:---|
 | Dự án | SmartCafe – Phần mềm quản lý chuỗi quán cà phê thông minh (Nhóm 8) |
 | Luồng | **F1 – Quét QR & xem menu (khách ẩn danh)**: UC01, UC03 (chưa gồm khối gợi ý món – F7) |
-| Phiên bản | 0.1.0 (bản build 02/11/2026) – mã nguồn `2.San_pham/smartcafe/` |
-| Ngày kiểm thử | 02/11/2026 |
+| Phiên bản | 0.1.0 (bản build 23/10/2026) – mã nguồn `2.San_pham/smartcafe/` |
+| Ngày kiểm thử | 23/10/2026 |
 | Người lập biên bản | Ngô Duy Đô (D – Tester / QA) |
-| Người duyệt | Nguyễn Thanh Bình (A – PM) – đã duyệt 02/11/2026 (trước khi bắt đầu F2) |
+| Người duyệt | Nguyễn Thanh Bình (A – PM) – đã duyệt 24/10/2026 (trước khi bắt đầu F2) |
 | Tài liệu căn cứ | [III.1 UC01, UC03](../Thiet_ke_he_thong/III.1_Use_Case_Sequence.md), [IV.1 truy vấn menu](../Thiet_ke_he_thong/IV.1_Thiet_ke_CSDL.md), [IV.2 W00, W01](../Thiet_ke_he_thong/IV.2_Thiet_ke_giao_dien.md), [IV.3 API public](../Thiet_ke_he_thong/IV.3_Kien_truc_va_API.md), quyết định D3, D10, D14, D16 |
 | Tiền đề | Luồng F0 đạt ([biên bản F0](Bien_ban_kiem_thu_F0_Nen_tang.md)) |
 
@@ -134,5 +134,5 @@ cd frontend; npx vitest run src/lib src/pages/qr
 
 | Vai trò | Họ tên | Ngày | Ký xác nhận |
 |:---|:---|:---|:---|
-| Người lập (Tester / QA) | Ngô Duy Đô (D) | 02/11/2026 | |
-| PM duyệt | Nguyễn Thanh Bình (A) | 02/11/2026 | |
+| Người lập (Tester / QA) | Ngô Duy Đô (D) | 23/10/2026 | |
+| PM duyệt | Nguyễn Thanh Bình (A) | 24/10/2026 | |

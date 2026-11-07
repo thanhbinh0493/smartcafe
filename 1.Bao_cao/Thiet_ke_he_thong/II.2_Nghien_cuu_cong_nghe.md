@@ -5,7 +5,7 @@
 | Người thực hiện | Lê Minh Sơn (C) |
 | Người review | Nguyễn Trường Thiên (B) |
 | Thời gian | 25/09/2026 – 30/09/2026 (review 01/10/2026) |
-| Cập nhật | 01/11/2026 – bỏ IoT, gợi ý theo 2 chế độ, thêm OTP giả lập (biên bản Tuần 06, CR-09 → CR-14); 04/11/2026 – rà soát, đồng bộ với mã nguồn và kế hoạch D41 (CR-46) |
+| Cập nhật | 05/10/2026 – bỏ IoT, gợi ý theo 2 chế độ, thêm OTP giả lập (biên bản Tuần 03, CR-09 → CR-14); 06/11/2026 – rà soát, đồng bộ với mã nguồn và kế hoạch D41 (CR-46) |
 
 ## 1. Công nghệ nền tảng (đã chốt)
 
@@ -82,7 +82,7 @@ score(i) = 0.40 * Personal(i)  # tần suất khách đã gọi món i (có tr�
 ### 3.1. Phương án đã cân nhắc
 Máy pha chế kết nối mạng tự gửi tín hiệu "pha xong" để đổi trạng thái đơn, nhân viên không cần bấm nút (bản đầu: giả lập bằng script Python giao tiếp HTTP).
 
-### 3.2. Lý do loại bỏ (biên bản Tuần 06, CR-09)
+### 3.2. Lý do loại bỏ (biên bản Tuần 02, CR-09)
 | # | Lý do |
 |:---|:---|
 | 1 | **Phần lớn menu được pha tay** (trà, đá xay, matcha, bánh). Máy chỉ báo được cho vài món espresso, nên không giải quyết được vấn đề P7 cho cả đơn |
