@@ -16,7 +16,7 @@
 | Ký hiệu | Họ và tên | Mã sinh viên | Vai trò trong dự án |
 |:---|:---|:---|:---|
 | A | Nguyễn Thanh Bình | K25DTCN343 | Project Manager / Team Lead, phân tích nghiệp vụ (BA) |
-| B | Nguyễn Trường Thiên | K25DTCN405 | Backend Developer: API, cơ sở dữ liệu |
+| B | Hoàng Văn Hiệp | K25DTCN405 | Backend Developer: API, cơ sở dữ liệu |
 | C | Lê Minh Sơn | B24DTCN154 | AI Specialist: gợi ý món, OTP & tích điểm, dữ liệu mẫu; hỗ trợ backend |
 | D | Ngô Duy Đô | K25DTCN355 | Tester / QA, thư ký các buổi họp, tài liệu |
 | E | Nguyễn Quang Tú | K23DTCN516 | Frontend Developer: Web Admin, giao diện QR Order |
